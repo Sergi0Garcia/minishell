@@ -3,16 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: richard <richard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2022/11/23 14:36:56 by segarcia         ###   ########.fr        #
+#    Updated: 2022/11/23 16:34:56 by richard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= 	minishell
 SRC			= 	minishell.c			\
-				./builtins/pwd.c
+				./builtins/pwd.c 
+				./externs/utils/init.c ./externs/utils/ops.c ./externs/utils/handler.c \
+				./externs/utils/parsing.c ./externs/utils/pipe.c ./externs/utils/redirection.c \
+				./externs/utils/wildcard.c
 
 OBJS		= $(SRC:.c=.o)
 
