@@ -6,7 +6,7 @@
 #    By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2022/11/23 14:26:20 by segarcia         ###   ########.fr        #
+#    Updated: 2022/11/23 14:36:56 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ LIBFT		= ./libft/libft.a
 LIBFT_PATH	= ./libft
 PRINTF		= ./libft/ft_printf/libftprintf.a
 PRINTF_PATH	= ./libft/ft_printf
+GNL			= ./gnl/get_next_line.a
+GNL_PATH	= ./gnl
 
 CC			= gcc
 RM			= rm -f
@@ -34,17 +36,22 @@ $(LIBFT):
 $(PRINTF):
 	@make -C $(PRINTF_PATH)
 
-$(NAME): $(LIBFT) $(PRINTF) $(SRC)
-	$(CC) $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) -o $(NAME)
+$(GNL):
+	@make -C $(GNL_PATH)
+
+$(NAME): $(LIBFT) $(PRINTF) $(GNL) $(SRC)
+	$(CC) $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
 
 clean:
 	@make clean -C $(LIBFT_PATH)
 	@make clean -C $(PRINTF_PATH)
+	@make clean -C $(GNL_PATH)
 	@$(RM) *.o
 
 fclean: clean
 	@make fclean -C $(LIBFT_PATH)
 	@make fclean -C $(PRINTF_PATH)
+	@make fclean -C $(GNL_PATH)
 	rm -f $(NAME)
 
 re: fclean all
