@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/23 14:22:18 by segarcia         ###   ########.fr       */
+/*   Created: 2022/04/20 12:49:25 by segarcia          #+#    #+#             */
+/*   Updated: 2022/04/20 12:49:27 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int	ft_pwd(void)
+int	ft_toupper(int c)
 {
-	char	buffer[PATH_MAX];
-
-	if (getcwd(buffer, PATH_MAX))
-	{
-		printf("%s\n", buffer);
-		return (EXIT_FAILURE);
-	}
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
 	else
-		return (EXIT_FAILURE);
+		return (c);
 }

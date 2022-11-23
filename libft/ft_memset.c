@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/23 14:22:18 by segarcia         ###   ########.fr       */
+/*   Created: 2021/11/17 21:00:40 by segarcia          #+#    #+#             */
+/*   Updated: 2022/05/05 14:01:41 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int	ft_pwd(void)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	char	buffer[PATH_MAX];
+	size_t	i;
 
-	if (getcwd(buffer, PATH_MAX))
+	i = 0;
+	while (i < len)
 	{
-		printf("%s\n", buffer);
-		return (EXIT_FAILURE);
+		*(unsigned char *)(b + i) = (unsigned char)c;
+		i++;
 	}
-	else
-		return (EXIT_FAILURE);
+	return (b);
 }

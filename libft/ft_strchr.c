@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/23 14:22:18 by segarcia         ###   ########.fr       */
+/*   Created: 2022/04/20 12:48:05 by segarcia          #+#    #+#             */
+/*   Updated: 2022/05/20 14:08:07 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int	ft_pwd(void)
+char	*ft_strchr(const char *s, int c)
 {
-	char	buffer[PATH_MAX];
+	size_t	i;
 
-	if (getcwd(buffer, PATH_MAX))
+	i = 0;
+	while (s[i])
 	{
-		printf("%s\n", buffer);
-		return (EXIT_FAILURE);
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
+		i++;
 	}
-	else
-		return (EXIT_FAILURE);
+	if (s[i] == (char)c)
+		return ((char *)(s + i));
+	return (NULL);
 }

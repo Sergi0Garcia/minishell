@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_printf_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/23 14:22:18 by segarcia         ###   ########.fr       */
+/*   Created: 2022/05/27 11:18:57 by segarcia          #+#    #+#             */
+/*   Updated: 2022/06/09 14:50:09 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../include/ft_printf.h"
 
-int	ft_pwd(void)
+int	ft_printf_char(int c)
 {
-	char	buffer[PATH_MAX];
-
-	if (getcwd(buffer, PATH_MAX))
-	{
-		printf("%s\n", buffer);
-		return (EXIT_FAILURE);
-	}
-	else
-		return (EXIT_FAILURE);
+	write(1, &c, 1);
+	return (1);
 }

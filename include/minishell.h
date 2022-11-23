@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/23 14:22:18 by segarcia         ###   ########.fr       */
+/*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
+/*   Updated: 2022/11/23 14:21:20 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-int	ft_pwd(void)
-{
-	char	buffer[PATH_MAX];
+# include "../libft/libft.h"
+# include "../libft/ft_printf/include/ft_printf.h"
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
 
-	if (getcwd(buffer, PATH_MAX))
-	{
-		printf("%s\n", buffer);
-		return (EXIT_FAILURE);
-	}
-	else
-		return (EXIT_FAILURE);
-}
+int	ft_pwd(void);
+
+#endif

@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/23 14:22:18 by segarcia         ###   ########.fr       */
+/*   Created: 2022/04/20 12:44:49 by segarcia          #+#    #+#             */
+/*   Updated: 2022/05/06 11:57:25 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int	ft_pwd(void)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	buffer[PATH_MAX];
+	size_t	i;
+	size_t	len;
+	char	*str;
 
-	if (getcwd(buffer, PATH_MAX))
+	if (!s || !f)
+		return (NULL);
+	len = ft_strlen(s);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s[i])
 	{
-		printf("%s\n", buffer);
-		return (EXIT_FAILURE);
+		str[i] = f(i, s[i]);
+		i++;
 	}
-	else
-		return (EXIT_FAILURE);
+	str[i] = 0;
+	return (str);
 }

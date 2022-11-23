@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/23 14:22:18 by segarcia         ###   ########.fr       */
+/*   Created: 2022/04/20 11:30:28 by segarcia          #+#    #+#             */
+/*   Updated: 2022/05/05 14:02:44 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int	ft_pwd(void)
+void	ft_bzero(void *s, size_t n)
 {
-	char	buffer[PATH_MAX];
+	size_t	i;
 
-	if (getcwd(buffer, PATH_MAX))
+	i = 0;
+	while (i < n)
 	{
-		printf("%s\n", buffer);
-		return (EXIT_FAILURE);
+		*(unsigned char *)(s + i) = 0;
+		i++;
 	}
-	else
-		return (EXIT_FAILURE);
 }

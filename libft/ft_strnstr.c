@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/23 14:22:18 by segarcia         ###   ########.fr       */
+/*   Created: 2022/04/20 12:45:33 by segarcia          #+#    #+#             */
+/*   Updated: 2022/05/06 11:02:52 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int	ft_pwd(void)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	char	buffer[PATH_MAX];
+	size_t	i;
+	size_t	j;
 
-	if (getcwd(buffer, PATH_MAX))
+	if (!needle[0])
+		return ((char *)haystack);
+	i = 0;
+	while (haystack[i] && i < len)
 	{
-		printf("%s\n", buffer);
-		return (EXIT_FAILURE);
+		j = 0;
+		while (needle[j] && haystack[i + j]
+			&& i + j < len && haystack[i + j] == needle[j])
+			j++;
+		if (!needle[j])
+			return ((char *)(haystack + i));
+		i++;
 	}
-	else
-		return (EXIT_FAILURE);
+	return (NULL);
 }

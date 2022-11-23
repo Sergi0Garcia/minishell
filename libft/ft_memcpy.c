@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/23 14:22:18 by segarcia         ###   ########.fr       */
+/*   Created: 2022/04/20 11:41:49 by segarcia          #+#    #+#             */
+/*   Updated: 2022/05/05 14:07:35 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int	ft_pwd(void)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	char	buffer[PATH_MAX];
+	size_t	i;
 
-	if (getcwd(buffer, PATH_MAX))
+	if (!dst && !src)
+		return (NULL);
+	i = 0;
+	while (i < n)
 	{
-		printf("%s\n", buffer);
-		return (EXIT_FAILURE);
+		*(char *)(dst + i) = *(char *)(src + i);
+		i++;
 	}
-	else
-		return (EXIT_FAILURE);
+	return (dst);
 }

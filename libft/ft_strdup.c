@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/23 14:22:18 by segarcia         ###   ########.fr       */
+/*   Created: 2022/04/20 12:43:49 by segarcia          #+#    #+#             */
+/*   Updated: 2022/05/20 13:43:53 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int	ft_pwd(void)
+char	*ft_strdup(const char *s1)
 {
-	char	buffer[PATH_MAX];
+	char	*cpy;
+	size_t	size;
+	size_t	i;
 
-	if (getcwd(buffer, PATH_MAX))
+	size = ft_strlen((char *)s1);
+	cpy = (char *)malloc(sizeof(char) * (size + 1));
+	if (!cpy)
+		return (NULL);
+	i = 0;
+	while (s1[i])
 	{
-		printf("%s\n", buffer);
-		return (EXIT_FAILURE);
+		cpy[i] = s1[i];
+		i++;
 	}
-	else
-		return (EXIT_FAILURE);
+	cpy[i] = '\0';
+	return (cpy);
 }

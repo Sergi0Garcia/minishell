@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/23 14:22:18 by segarcia         ###   ########.fr       */
+/*   Created: 2022/04/20 12:47:21 by segarcia          #+#    #+#             */
+/*   Updated: 2022/05/20 13:30:22 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int	ft_pwd(void)
+void	ft_putnbr_fd(int n, int fd)
 {
-	char	buffer[PATH_MAX];
-
-	if (getcwd(buffer, PATH_MAX))
+	if (n == -2147483648)
 	{
-		printf("%s\n", buffer);
-		return (EXIT_FAILURE);
+		ft_putstr_fd("-", fd);
+		ft_putstr_fd("2", fd);
+		ft_putnbr_fd(147483648, fd);
+	}
+	else if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		ft_putnbr_fd(-n, fd);
+	}
+	else if (n >= 10)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putchar_fd(n % 10 + '0', fd);
 	}
 	else
-		return (EXIT_FAILURE);
+	{
+		ft_putchar_fd(n + '0', fd);
+	}
 }

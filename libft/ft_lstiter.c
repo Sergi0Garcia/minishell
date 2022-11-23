@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/23 14:22:18 by segarcia         ###   ########.fr       */
+/*   Created: 2022/04/20 11:39:34 by segarcia          #+#    #+#             */
+/*   Updated: 2022/05/20 11:17:54 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int	ft_pwd(void)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	char	buffer[PATH_MAX];
-
-	if (getcwd(buffer, PATH_MAX))
+	if (!f)
+		return ;
+	while (lst)
 	{
-		printf("%s\n", buffer);
-		return (EXIT_FAILURE);
+		(*f)(lst->content);
+		lst = lst->next;
 	}
-	else
-		return (EXIT_FAILURE);
 }

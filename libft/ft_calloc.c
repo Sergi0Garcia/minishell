@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/23 14:22:18 by segarcia         ###   ########.fr       */
+/*   Created: 2022/04/20 11:30:40 by segarcia          #+#    #+#             */
+/*   Updated: 2022/05/26 11:07:24 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int	ft_pwd(void)
+void	*ft_calloc(size_t count, size_t size)
 {
-	char	buffer[PATH_MAX];
+	void	*ptr;
 
-	if (getcwd(buffer, PATH_MAX))
-	{
-		printf("%s\n", buffer);
-		return (EXIT_FAILURE);
-	}
-	else
-		return (EXIT_FAILURE);
+	if (count == 0 || size == 0)
+		return (malloc(0));
+	if (count > 16711568)
+		return (NULL);
+	ptr = malloc(count * size);
+	if (ptr == NULL)
+		return (ptr);
+	ft_bzero(ptr, count * size);
+	return (ptr);
 }

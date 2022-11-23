@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_printf_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/23 14:22:18 by segarcia         ###   ########.fr       */
+/*   Created: 2022/06/08 10:00:58 by segarcia          #+#    #+#             */
+/*   Updated: 2022/06/09 14:50:05 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../include/ft_printf.h"
 
-int	ft_pwd(void)
+int	ft_printf_str(const char *str)
 {
-	char	buffer[PATH_MAX];
+	int	i;
 
-	if (getcwd(buffer, PATH_MAX))
+	i = 0;
+	if (!str)
 	{
-		printf("%s\n", buffer);
-		return (EXIT_FAILURE);
+		ft_printf_char('(');
+		ft_printf_char('n');
+		ft_printf_char('u');
+		ft_printf_char('l');
+		ft_printf_char('l');
+		ft_printf_char(')');
+		return (6);
 	}
-	else
-		return (EXIT_FAILURE);
+	while (str[i])
+	{
+		ft_printf_char(str[i]);
+		i++;
+	}
+	return (i);
 }
