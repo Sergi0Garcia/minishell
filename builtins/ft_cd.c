@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/24 13:20:52 by segarcia         ###   ########.fr       */
+/*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
+/*   Updated: 2022/11/24 13:21:01 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/minishell.h"
+#include "../include/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+void	ft_cd(char *str)
 {
-	char **env_vars;
+	int res;
 
-	(void) argc;
-	(void) argv;
-	(void) envp;
-	ft_pwd();
-	env_vars = set_env(envp);
-	ft_cd("..");
-	ft_pwd();
-	return (1);
+	// We need to handle following cases
+	// cd - (Search for $LASTPWD)
+	// cd ~ (append $HOME)
+
+	res = chdir(str);
+	if (res == -1)
+		 perror("Error: ");
+	printf("%i\n", res);
 }

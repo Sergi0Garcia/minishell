@@ -9,6 +9,7 @@ void init(t_minish *sh, char **argv, char **env)
     i = 0;
     sh->argv = argv;
     pid = getpid();
+    // Handle errors for pid
     str = ft_itoa(pid);
     sh->pid = str;
     while (env[i++] != NULL)
