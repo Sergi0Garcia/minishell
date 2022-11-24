@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/24 16:46:58 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/24 16:55:49 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,13 @@ void	ft_error(char *str);
 /* externs/utils/init.c */
 void	init(t_minish *sh, char **argv, char **env);
 
-/* externs/utils/ops.c */
-void	ft_unshift(t_sb *stack, t_si info);
-void	ft_push(t_sb *stack, t_si info);
-t_si	ft_pop(t_sb *stack);
-t_si	ft_shift(t_sb *stack);
+/* externs/utils/line_ops.c */
+void	ft_unshift_line(t_lsb *stack, t_sli info);
+void	ft_push_line(t_lsb *stack, t_sli info);
+t_sli	ft_pop_line(t_lsb *stack);
+t_sli	ft_shift_line(t_lsb *stack);
+
+/* extern/utils/read */
+void	parse(t_minish *sh);
 
 #endif

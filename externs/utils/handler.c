@@ -6,13 +6,13 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:14:59 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/24 14:24:54 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/24 17:19:29 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void handler()
+void	handler(t_minish *sh)
 {
-
+	return ;
 }

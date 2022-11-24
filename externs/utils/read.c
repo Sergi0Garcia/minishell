@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 13:53:33 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/24 16:42:56 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/24 17:19:42 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ void	read(t_minish *sh)
 		if (sh->line == NULL)
 			break;
 		add_history(sh->line);
+		parse(sh);
 	}
 }
