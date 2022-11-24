@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/24 16:42:01 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/24 16:46:58 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_minishell
 int		ft_pwd(void);
 char	**set_env(char **envp);
 void	ft_cd(char *str);
+void	ft_echo(char **arg);
 
 /* zxterns/utils/error.c */
 void	ft_error(char *str);

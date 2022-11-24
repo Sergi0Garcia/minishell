@@ -6,7 +6,7 @@
 #    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2022/11/24 16:42:38 by rkanmado         ###   ########.fr        #
+#    Updated: 2022/11/24 16:47:29 by rkanmado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME 		= 	minishell
 SRC			= 	minishell.c						\
 				./builtins/pwd.c				\
 				./builtins/env.c				\
-				./builtins/ft_cd.c				\
+				./builtins/ft_cd.c    			\
+				./builtins/echo.c 				\
 				./externs/utils/error.c 		\
 				./externs/utils/init.c			\
 				./externs/utils/line_ops.c		\
