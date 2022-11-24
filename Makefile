@@ -6,13 +6,14 @@
 #    By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2022/11/24 09:50:43 by segarcia         ###   ########.fr        #
+#    Updated: 2022/11/24 09:56:20 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= 	minishell
 SRC			= 	minishell.c						\
 				./builtins/pwd.c				\
+				./builtins/env.c				\
 				./externs/utils/error.c 		\
 				./externs/utils/init.c 			\
 				./externs/utils/ops.c   		\

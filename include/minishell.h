@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/24 09:49:41 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/24 10:12:03 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_minishell
 } t_minish;
 
 int	    ft_pwd(void);
+char	**set_env(char **envp);
 
 /* zxterns/utils/error.c */
 void ft_error(char *str);
