@@ -1,14 +1,18 @@
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void init(t_minish *sh, char **argv, char **env)
 {
     int i;
-    
+    pid_t	pid;
+    char    *str;
+
     i = 0;
     sh->argv = argv;
-    sh->pid = ft_atoi(getpid());
+    pid = getpid();
+    str = ft_itoa(pid);
+    sh->pid = str;
     while (env[i++] != NULL)
-    sh->env = (char **) malloc((i + 1) * sizeof(char *))
+    sh->env = (char **) malloc((i + 1) * sizeof(char *));
     i = 0;
     while (env[i] != NULL)
     {

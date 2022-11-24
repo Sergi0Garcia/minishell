@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: richard <richard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/23 16:41:38 by richard          ###   ########.fr       */
+/*   Updated: 2022/11/24 09:49:41 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+# include <signal.h>
 
 typedef struct s_info
 {
@@ -51,18 +50,17 @@ typedef struct s_minishell
 } t_minish;
 
 int	    ft_pwd(void);
+
+/* zxterns/utils/error.c */
+void ft_error(char *str);
+
 /* externs/utils/init.c */
 void    init(t_minish *sh, char **argv, char **env);
 
 /* externs/utils/ops.c */
-void ft_unshift(t_sb * stack, t_si info);
-void ft_push(t_sb * stack, t_si info);
-t_si ft_pop(t_sb * stack);
-t_si ft_shift(t_sb * stack);
-
-
-
-/* zxterns/utils/error.c */
-void ft_error(char *str);
+void ft_unshift(t_sb *stack, t_si info);
+void ft_push(t_sb *stack, t_si info);
+t_si ft_pop(t_sb *stack);
+t_si ft_shift(t_sb *stack);
 
 #endif

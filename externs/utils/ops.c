@@ -1,7 +1,4 @@
-
-
 #include "../../include/minishell.h"
-
 
 /* Function that will insert element at the end of stack */
 void ft_unshift(t_sb *stack, t_si info)
