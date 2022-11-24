@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2022/11/24 12:06:10 by segarcia         ###   ########.fr        #
+#    Updated: 2022/11/24 16:42:38 by rkanmado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ NAME 		= 	minishell
 SRC			= 	minishell.c						\
 				./builtins/pwd.c				\
 				./builtins/env.c				\
-				./builtins/ft_cd.c    			\
+				./builtins/ft_cd.c				\
 				./externs/utils/error.c 		\
-				./externs/utils/init.c 			\
-				./externs/utils/ops.c   		\
+				./externs/utils/init.c			\
+				./externs/utils/line_ops.c		\
 				./externs/utils/handler.c 		\
 				./externs/utils/parsing.c 		\
 				./externs/utils/pipe.c 			\

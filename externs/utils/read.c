@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 14:14:47 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/24 14:14:52 by rkanmado         ###   ########.fr       */
+/*   Created: 2022/11/24 13:53:33 by rkanmado          #+#    #+#             */
+/*   Updated: 2022/11/24 16:42:56 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_error(char *str)
+void	read(t_minish *sh)
 {
-	write(1, str, ft_strlen(str));
-	return ;
+	while (1)
+	{
+		sh->line = readline("---sh--- !");
+		if (sh->line == NULL)
+			break;
+		add_history(sh->line);
+	}
 }
