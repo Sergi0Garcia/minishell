@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 11:39:04 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/26 14:20:00 by segarcia         ###   ########.fr       */
+/*   Created: 2022/11/26 10:57:53 by segarcia          #+#    #+#             */
+/*   Updated: 2022/11/26 15:44:50 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/minishell.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+t_env_node	*ft_new_env_node(char *name, char *value)
 {
-	t_list	*last;
+	t_env_node	*new;
 
-	if (lst)
-	{
-		if (*lst)
-		{
-			last = ft_lstlast(*lst);
-			last->next = new;
-		}
-		else
-			*lst = new;
-	}
+	new = (t_env_node *)malloc(sizeof(t_env_node));
+	if (!new)
+		return (NULL);
+	new->name = name;
+	new->value = value;
+	new->next = NULL;
+	return (new);
 }

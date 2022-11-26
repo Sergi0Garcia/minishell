@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:26:26 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/24 17:19:17 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:28:13 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	parse(t_minish *sh)
 
 	i = 0;
 	concat = NULL;
-	split = ft_split(sh->line, " ");
+	split = ft_split(sh->line, ' ');
 	while (split[i] != NULL)
 	{
 		if (is_sep(split[i]) != 0)

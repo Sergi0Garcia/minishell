@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/24 16:55:49 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/26 18:23:26 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,27 @@ typedef struct s_minishell
 	char	*line;
 }	t_minish;
 
+typedef struct s_env_node
+{
+	char				*name;
+	char				*value;
+	struct s_env_node 	*next;
+}	t_env_node;
+
 int		ft_pwd(void);
-char	**set_env(char **envp);
+void	set_env(char **envp, t_env_node **env_lst);
 void	ft_cd(char *str);
 void	ft_echo(char **arg);
 
+/* lst/env */
+t_env_node	*ft_env_last(t_env_node *lst);
+t_env_node	*ft_new_env_node(char *name, char *value);
+void		new_env(t_env_node **env_lst, char *str);
+void		unset_env(t_env_node **env_lst, char *str);
+
 /* zxterns/utils/error.c */
 void	ft_error(char *str);
+void	env_add_back(t_env_node **lst, t_env_node *new);
 
 /* externs/utils/init.c */
 void	init(t_minish *sh, char **argv, char **env);

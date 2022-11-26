@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 11:39:04 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/26 14:20:00 by segarcia         ###   ########.fr       */
+/*   Created: 2022/11/26 14:14:35 by segarcia          #+#    #+#             */
+/*   Updated: 2022/11/26 14:20:09 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/minishell.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+t_env_node	*ft_env_last(t_env_node *lst)
 {
-	t_list	*last;
-
-	if (lst)
+	while (lst)
 	{
-		if (*lst)
-		{
-			last = ft_lstlast(*lst);
-			last->next = new;
-		}
-		else
-			*lst = new;
+		if (!lst->next)
+			return (lst);
+		lst = lst->next;
 	}
+	return (lst);
 }

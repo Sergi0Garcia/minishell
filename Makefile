@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
+#    By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2022/11/24 16:47:29 by rkanmado         ###   ########.fr        #
+#    Updated: 2022/11/26 18:37:56 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,9 @@ SRC			= 	minishell.c						\
 				./builtins/env.c				\
 				./builtins/ft_cd.c    			\
 				./builtins/echo.c 				\
+				./lst_env/add_back.c			\
+				./lst_env/init.c 				\
+				./lst_env/utils.c  				\
 				./externs/utils/error.c 		\
 				./externs/utils/init.c			\
 				./externs/utils/line_ops.c		\
@@ -51,7 +54,7 @@ $(GNL):
 	@make -C $(GNL_PATH)
 
 $(NAME): $(LIBFT) $(PRINTF) $(GNL) $(SRC)
-	$(CC) $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
+	$(CC) $(DEBUGFLAG) $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
 
 clean:
 	@make clean -C $(LIBFT_PATH)

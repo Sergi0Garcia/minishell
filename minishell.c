@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/24 14:27:57 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/26 18:38:56 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,22 @@ int	main(int argc, char **argv, char **envp)
 	(void) argc;
 	(void) argv;
 	(void) envp;
+	t_env_node *env_lst;
+
 	// ft_pwd();
 	// char **env_vars;
-	// env_vars = set_env(envp);
 	// ft_cd("..");
 	// ft_pwd();
+
+	env_lst = NULL;
+	set_env(envp, &env_lst);
 	ft_echo(parsing_argv(argv));
+	new_env(&env_lst, "TEST=123");
+	unset_env(&env_lst, "LESS");
+	while (env_lst)
+	{
+		printf("%s\n", env_lst->name);
+		env_lst = env_lst->next;
+	}
 	return (1);
 }
