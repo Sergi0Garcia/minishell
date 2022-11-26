@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/24 16:55:49 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/26 19:00:27 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,22 @@ typedef struct s_minishell
 	char	**argv;
 	char	*pid;
 	char	*line;
+	int		interactive;
+	int		status;
 }	t_minish;
+
+void	interactive(t_minish *sh);
+void	non_interactive(t_minish *sh);
 
 int		ft_pwd(void);
 char	**set_env(char **envp);
 void	ft_cd(char *str);
 void	ft_echo(char **arg);
 
-/* zxterns/utils/error.c */
-void	ft_error(char *str);
+/* externs/utils/error.c */
+void	error(char *str);
+void	check_usage(int argc, char **argv, t_minish *sh);
+void	usage(void);
 
 /* externs/utils/init.c */
 void	init(t_minish *sh, char **argv, char **env);
@@ -90,5 +97,6 @@ t_sli	ft_shift_line(t_lsb *stack);
 
 /* extern/utils/read */
 void	parse(t_minish *sh);
+void	read_line(t_minish *sh);
 
 #endif

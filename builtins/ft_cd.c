@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/24 13:21:01 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/26 20:28:56 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 void	ft_cd(char *str)
 {
-	int res;
-
-	// We need to handle following cases
-	// cd - (Search for $LASTPWD)
-	// cd ~ (append $HOME)
+	int	res;
 
 	res = chdir(str);
 	if (res == -1)
-		 perror("Error: ");
+		perror("Error: ");
 	printf("%i\n", res);
 }

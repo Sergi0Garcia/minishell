@@ -6,11 +6,12 @@
 #    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2022/11/24 16:47:29 by rkanmado         ###   ########.fr        #
+#    Updated: 2022/11/26 20:28:23 by rkanmado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= 	minishell
+
 SRC			= 	minishell.c						\
 				./builtins/pwd.c				\
 				./builtins/env.c				\
@@ -20,10 +21,9 @@ SRC			= 	minishell.c						\
 				./externs/utils/init.c			\
 				./externs/utils/line_ops.c		\
 				./externs/utils/handler.c 		\
-				./externs/utils/parsing.c 		\
-				./externs/utils/pipe.c 			\
-				./externs/utils/redirection.c 	\
-				./externs/utils/wildcard.c
+				./externs/utils/read.c 			\
+				./externs/utils/check.c			\
+				./externs/utils/parsing.c
 
 OBJS		= $(SRC:.c=.o)
 
@@ -36,8 +36,11 @@ GNL_PATH	= ./gnl
 
 CC			= gcc
 RM			= rm -f
-CFLAGS		= -Wall -Werror -Wextra
+STDFLAG	?=	-ansi
+WFLAGS	?=	-Wall -Wextra -Werror
+CFLAGS	=	$(WFLAGS) $(STDFLAG)
 DEBUGFLAG	= -fsanitize=address
+INC			= /include/minishell.h
 
 all: $(NAME)
 

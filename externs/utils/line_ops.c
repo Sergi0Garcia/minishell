@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:03:36 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/24 16:38:16 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/26 17:22:51 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_unshift_line(t_lsb *stack, t_sli info)
 
 	new = (t_ls *)malloc(sizeof(t_ls));
 	if (new == NULL)
-		ft_error("Error \n");
+		error("Error \n");
 	new->li = info;
 	if (stack->tail == NULL)
 	{
@@ -46,7 +46,7 @@ void	ft_push_line(t_lsb *stack, t_sli info)
 
 	new = (t_ls *)malloc(sizeof(t_ls));
 	if (new == NULL)
-		ft_error("Error \n");
+		error("Error \n");
 	new->li = info;
 	new->next = stack->head;
 	new->prev = NULL;
@@ -71,7 +71,7 @@ t_sli	ft_pop_line(t_lsb *stack)
 	t_ls	*tmp;
 
 	if (stack->head == NULL)
-		ft_error("Error \n");
+		error("Error \n");
 	info = stack->head->li;
 	tmp = stack->head;
 	if (stack->head->next == NULL)
@@ -98,7 +98,7 @@ t_sli	ft_shift_line(t_lsb *stack)
 	t_ls	*tmp;
 
 	if (stack->tail == NULL)
-		ft_error("Error \n");
+		error("Error \n");
 	li = stack->tail->li;
 	tmp = stack->tail;
 	if (stack->tail->prev != NULL)
