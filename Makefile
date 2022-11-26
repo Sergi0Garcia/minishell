@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 NAME 		= 	minishell
+
 SRC			= 	minishell.c						\
 				./builtins/ft_pwd.c				\
 				./builtins/ft_env.c				\
@@ -23,10 +24,9 @@ SRC			= 	minishell.c						\
 				./externs/utils/init.c			\
 				./externs/utils/line_ops.c		\
 				./externs/utils/handler.c 		\
-				./externs/utils/parsing.c 		\
-				./externs/utils/pipe.c 			\
-				./externs/utils/redirection.c 	\
-				./externs/utils/wildcard.c
+				./externs/utils/read.c 			\
+				./externs/utils/check.c			\
+				./externs/utils/parsing.c
 
 OBJS		= $(SRC:.c=.o)
 
@@ -42,6 +42,7 @@ RM			= rm -f
 CFLAGS		= -Wall -Werror -Wextra
 RL_FLAG		= -lreadline
 DEBUGFLAG	= -fsanitize=address
+INC			= /include/minishell.h
 
 all: $(NAME)
 

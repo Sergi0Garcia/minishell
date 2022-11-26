@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
 /*   Updated: 2022/11/29 03:36:09 by segarcia         ###   ########.fr       */
@@ -18,6 +18,12 @@
 // 	int	i;
 // 	int j;
 // 	char **res;
+void	interactive(t_minish *sh)
+{
+	read_line(sh);
+	parse(sh);
+	return ;
+}
 
 // 	len = -1;
 // 	i = 0;
@@ -41,9 +47,16 @@
 // 	res[i] = NULL;
 // 	return (res);
 // }
+void	non_interactive(t_minish *sh)
+{
+	parse(sh);
+	return ;
+}
 
 int	main(int argc, char **argv, char **envp)
 {
+	t_minish	sh;
+
 	(void) argc;
 	(void) argv;
 	(void) envp;
@@ -143,5 +156,8 @@ int	main(int argc, char **argv, char **envp)
 	// unset_env(&env_lst, "PWD");
 	// ft_echo(parsing_argv(argv));
 	// ----------------------
+	check_usage(argc, argv, &sh);
+	init(&sh, argv, envp);
+	read_line(&sh);
 	return (1);
 }

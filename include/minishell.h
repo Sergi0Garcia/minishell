@@ -70,8 +70,12 @@ typedef struct s_minishell
 	char	**argv;
 	char	*pid;
 	char	*line;
+	int		interactive;
+	int		status;
 }	t_minish;
 
+void	interactive(t_minish *sh);
+void	non_interactive(t_minish *sh);
 typedef struct s_env_node
 {
 	char				*name;
@@ -98,6 +102,10 @@ void		free_env_node(t_env_node **env);
 /* zxterns/utils/error.c */
 void	ft_error(char *str);
 void	env_add_back(t_env_node **lst, t_env_node *new);
+/* externs/utils/error.c */
+void	error(char *str);
+void	check_usage(int argc, char **argv, t_minish *sh);
+void	usage(void);
 
 /* externs/utils/init.c */
 void	init(t_minish *sh, char **argv, char **env);
@@ -110,5 +118,6 @@ t_sli	ft_shift_line(t_lsb *stack);
 
 /* extern/utils/read */
 void	parse(t_minish *sh);
+void	read_line(t_minish *sh);
 
 #endif

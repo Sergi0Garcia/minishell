@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read.c                                             :+:      :+:    :+:   */
+/*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 13:53:33 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/26 20:24:23 by rkanmado         ###   ########.fr       */
+/*   Created: 2022/11/26 16:37:53 by rkanmado          #+#    #+#             */
+/*   Updated: 2022/11/26 18:52:02 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	read_line(t_minish *sh)
+void	check_usage(int argc, char **argv, t_minish *sh)
 {
-	int	loop;
-
-	loop = 1;
-	while (loop == 1)
-	{
-		sh->line = readline("---sh--- !");
-		if (sh->line == NULL)
-			break ;
-		printf("%s", sh->line);
-		add_history(sh->line);
-		parse(sh);
-	}
+	if (argc < 1 || argc > 3)
+		usage();
+	if ((ft_strncmp(argv[1], "-i", ft_strlen("-i")) == 0 && argc == 2) \
+		&& argc == 1)
+		sh->interactive = 1;
+	else if (ft_strncmp(argv[1], "-c", ft_strlen("-i")) == 0 && argc == 2)
+		usage();
 	return ;
 }
