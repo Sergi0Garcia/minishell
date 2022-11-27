@@ -6,11 +6,12 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/27 02:00:16 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/27 04:47:31 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/minishell.h"
+#include <sys/wait.h>
 
 static char	**parsing_argv(char **argv)
 {
@@ -60,13 +61,36 @@ int	main(int argc, char **argv, char **envp)
 	char *tmp = "c\nb\na";
 	printf("%s\n", tmp);
 
-	char	*arg[2];
-	arg[0] = "/bin/bash ls";
-	// arg[1] = "ls -lh";
-	printf("execve ...\n");
-	execve(arg[0], arg, NULL);
-	printf("end ...\n");
+	pid_t parent = getpid();
+	pid_t pid = fork();
+
+	printf("parent pid: %i\n", parent);
+	printf("pid: %i\n", pid);
+
+	if (pid > 0)
+	{
+		int status;
+		status = 0;
+   		waitpid(pid, &status, 0);
+		printf("status: %i\n", status);
+		printf("end ...\n");
+	}
+	else
+	{
+		char	*arg[3];
+		arg[0] = "/bin/ls";
+		arg[1] = "-lh";
+		arg[2] = NULL;
+		printf("execve...\n");
+		execve(arg[0], arg, NULL);
+	}
+	printf("end2 ...\n");
 	exit(0);
+// 	args[0] = "ls";
+// 	args[1] = "-la";
+// 	args[2] = "/Users/segarcia/Documents/42/minishell";
+// 	args[3] = NULL;
+// 	res = execve("/bin/ls", args, NULL);
 
 	env_lst = NULL;
 	set_env(envp, &env_lst);
