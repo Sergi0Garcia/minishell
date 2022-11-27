@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/26 18:23:26 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/27 01:11:18 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_env_node
 	struct s_env_node 	*next;
 }	t_env_node;
 
-int		ft_pwd(void);
+char	*ft_pwd(char *buffer, int buff_size);
 void	set_env(char **envp, t_env_node **env_lst);
 void	ft_cd(char *str);
 void	ft_echo(char **arg);
@@ -88,6 +88,7 @@ t_env_node	*ft_env_last(t_env_node *lst);
 t_env_node	*ft_new_env_node(char *name, char *value);
 void		new_env(t_env_node **env_lst, char *str);
 void		unset_env(t_env_node **env_lst, char *str);
+int			ft_env_lst_size(t_env_node *lst);
 
 /* zxterns/utils/error.c */
 void	ft_error(char *str);

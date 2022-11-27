@@ -6,7 +6,7 @@
 #    By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2022/11/26 18:37:56 by segarcia         ###   ########.fr        #
+#    Updated: 2022/11/26 20:47:50 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ GNL_PATH	= ./gnl
 CC			= gcc
 RM			= rm -f
 CFLAGS		= -Wall -Werror -Wextra
+RL_FLAG		= -lreadline
 DEBUGFLAG	= -fsanitize=address
 
 all: $(NAME)
@@ -54,7 +55,7 @@ $(GNL):
 	@make -C $(GNL_PATH)
 
 $(NAME): $(LIBFT) $(PRINTF) $(GNL) $(SRC)
-	$(CC) $(DEBUGFLAG) $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
+	$(CC) ${RL_FLAG} $(DEBUGFLAG) $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
 
 clean:
 	@make clean -C $(LIBFT_PATH)

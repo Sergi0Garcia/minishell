@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 09:33:02 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/26 18:52:31 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/27 01:22:49 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,45 @@ int	is_same_str(char *str1, char *str2)
 
 void	unset_env(t_env_node **env_lst, char *str)
 {
-	t_env_node *tmp;
+	t_env_node	*tmp;
+	t_env_node	*last;
+	t_env_node	*to_delete;
+	int			i;
+	int			len;
 
 	tmp = *env_lst;
+	last = ft_env_last(tmp);
+	i = 0;
+	len = 0;
+	// first occurrence
+	if (is_same_str((tmp)->name, str))
+	{
+		to_delete = tmp;
+		tmp = tmp->next;
+		*env_lst = tmp;
+		return ;
+	}
+	if (last && is_same_str(last->name, str))
+	{
+		len = ft_env_lst_size(tmp);
+		while(tmp)
+		{
+			if (len == 1)
+			{
+				// free initial;
+				*env_lst = NULL;
+				return ;
+			}
+			i++;
+			if (i == len - 1)
+			{
+				tmp->next = tmp->next->next;
+				env_lst = &tmp;
+				return ;
+			}
+			tmp = tmp->next;
+		}
+	}
 	while (tmp)
 	{
 		if (tmp->next && is_same_str((tmp)->next->name, str))

@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/26 18:38:56 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/27 01:35:30 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,33 @@ int	main(int argc, char **argv, char **envp)
 	(void) envp;
 	t_env_node *env_lst;
 
-	// ft_pwd();
-	// char **env_vars;
+	// char	pathname[PATH_MAX];
+	// ft_pwd(pathname, PATH_MAX);
+	// printf("pathname: %s\n", pathname);
+
 	// ft_cd("..");
-	// ft_pwd();
+	// ft_pwd(pathname, PATH_MAX);
+	// printf("pathname: %s\n", pathname);
+
+	char *tmp = "c\nb\na";
+	printf("%s\n", tmp);
+	exit(0);
 
 	env_lst = NULL;
 	set_env(envp, &env_lst);
-	ft_echo(parsing_argv(argv));
+
 	new_env(&env_lst, "TEST=123");
-	unset_env(&env_lst, "LESS");
+	unset_env(&env_lst, "SECURITYSESSIONID");
+	unset_env(&env_lst, "HOMEBREW_TEMP");
+	unset_env(&env_lst, "HOMEBREW_CACHE");
+	unset_env(&env_lst, "PWD");
+	unset_env(&env_lst, "TEST");
+	new_env(&env_lst, "SERGIO00=123");
 	while (env_lst)
 	{
-		printf("%s\n", env_lst->name);
+		printf("~%s=%s\n", env_lst->name, env_lst->value);
 		env_lst = env_lst->next;
 	}
+	ft_echo(parsing_argv(argv));
 	return (1);
 }

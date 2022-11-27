@@ -6,21 +6,18 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/24 09:32:50 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/27 01:11:44 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ft_pwd(void)
+char	*ft_pwd(char *buffer, int buff_size)
 {
-	char	buffer[PATH_MAX];
+	char	*ptr;
 
-	if (getcwd(buffer, PATH_MAX))
-	{
-		printf("%s\n", buffer);
-		return (EXIT_SUCCESS);
-	}
-	else
-		return (EXIT_FAILURE);
+	ptr = NULL;
+	ptr = getcwd(buffer, buff_size);
+	// if error; path = NULL;
+	return (ptr);
 }
