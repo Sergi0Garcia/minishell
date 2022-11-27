@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/27 01:35:30 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/27 02:00:16 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,17 @@ int	main(int argc, char **argv, char **envp)
 
 	char *tmp = "c\nb\na";
 	printf("%s\n", tmp);
+
+	char	*arg[2];
+	arg[0] = "/bin/bash ls";
+	// arg[1] = "ls -lh";
+	printf("execve ...\n");
+	execve(arg[0], arg, NULL);
+	printf("end ...\n");
 	exit(0);
 
 	env_lst = NULL;
 	set_env(envp, &env_lst);
-
 	new_env(&env_lst, "TEST=123");
 	unset_env(&env_lst, "SECURITYSESSIONID");
 	unset_env(&env_lst, "HOMEBREW_TEMP");
