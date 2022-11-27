@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/26 19:00:27 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:55:39 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,23 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <stdbool.h>
+
+typedef struct s_redirect
+{
+	char	**s_filout;
+	char	**s_filin;
+	char	**d_filout;
+	char	**d_filin;
+}	t_redirect;
 
 typedef struct s_line_stack_info
 {
-	char	*command;
-	int		*sep;
-	char	*args;
+	char				*command;
+	int					*sep;
+	char				*opts;
+	char				*args;
+	struct s_redirect	*red;
 }	t_sli;
 
 typedef struct s_line_stack
@@ -69,12 +80,21 @@ typedef struct s_minishell
 	char	**argv;
 	char	*pid;
 	char	*line;
-	int		interactive;
+	bool	interactive;
 	int		status;
 }	t_minish;
 
-void	interactive(t_minish *sh);
-void	non_interactive(t_minish *sh);
+/* extern/utils/parsing */
+int		is_sep(char *s1);
+int		is_heredoc(char *s1);
+void	p_interactive_mode(t_minish *sh);
+void	p_noninteractive_mode(t_minish *sh);
+void	parse(t_minish *sh);
+
+/* extern/utils/handler.c */
+void	h_interactive_mode(t_minish *sh);
+void	h_noninteractive_mode(t_minish *sh);
+void	handler(t_minish *sh);
 
 int		ft_pwd(void);
 char	**set_env(char **envp);
@@ -98,5 +118,20 @@ t_sli	ft_shift_line(t_lsb *stack);
 /* extern/utils/read */
 void	parse(t_minish *sh);
 void	read_line(t_minish *sh);
+
+/* extern/utils/utils */
+int		ft_strcmp(char *s1, char *s2);
+
+/* extern/utils/handling */
+void	handler(t_minish *sh);
+void	interactive(t_minish *sh);
+void	non_interactive(t_minish *sh);
+
+/* extern/signals/signals */
+void	h_quit(void);
+void	sigreset(int sig, siginfo_t *info, void *context);
+void	quit(int sig, siginfo_t *info, void *context);
+void	interactive_mode_sig(void);
+void	no_interactive_mode_sig(void);
 
 #endif

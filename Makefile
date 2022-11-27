@@ -6,7 +6,7 @@
 #    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2022/11/26 20:28:23 by rkanmado         ###   ########.fr        #
+#    Updated: 2022/11/27 18:51:35 by rkanmado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,9 @@ SRC			= 	minishell.c						\
 				./externs/utils/handler.c 		\
 				./externs/utils/read.c 			\
 				./externs/utils/check.c			\
-				./externs/utils/parsing.c
+				./externs/utils/utils.c			\
+				./externs/utils/parsing.c		\
+				./externs/signals/signals.c		\
 
 OBJS		= $(SRC:.c=.o)
 
@@ -37,7 +39,7 @@ GNL_PATH	= ./gnl
 CC			= gcc
 RM			= rm -f
 STDFLAG	?=	-ansi
-WFLAGS	?=	-Wall -Wextra -Werror
+WFLAGS	?=	-Wall -Wextra -Werror -lreadline -g
 CFLAGS	=	$(WFLAGS) $(STDFLAG)
 DEBUGFLAG	= -fsanitize=address
 INC			= /include/minishell.h
