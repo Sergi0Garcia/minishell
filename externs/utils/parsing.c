@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:26:26 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/26 14:23:58 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/27 11:47:25 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@ int	is_heredoc(char *s1)
 	if (strcmp(s1, "<<") == 0)
 		return (1);
 	return (0);
+}
+
+void	p_interactive_mode(t_minish *sh)
+{
+	(void) sh;
+	return ;
+}
+
+void	p_noninteractive_mode(t_minish *sh)
+{
+	(void) sh;
+	return ;
 }
 
 void	parse(t_minish *sh)

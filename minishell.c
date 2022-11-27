@@ -158,6 +158,7 @@ int	main(int argc, char **argv, char **envp)
 	// ----------------------
 	check_usage(argc, argv, &sh);
 	init(&sh, argv, envp);
-	read_line(&sh);
+	check_usage(argc, argv, &sh);
+	handler(&sh);
 	return (1);
 }

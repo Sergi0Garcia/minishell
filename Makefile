@@ -26,7 +26,9 @@ SRC			= 	minishell.c						\
 				./externs/utils/handler.c 		\
 				./externs/utils/read.c 			\
 				./externs/utils/check.c			\
-				./externs/utils/parsing.c
+				./externs/utils/utils.c			\
+				./externs/utils/parsing.c		\
+				./externs/signals/signals.c		\
 
 OBJS		= $(SRC:.c=.o)
 
