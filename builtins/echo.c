@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:59:06 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/27 11:31:08 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/27 17:13:22 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,25 @@ static int valid_flag(char *str)
 	return (1);
 }
 
-void	ft_echo(char **arg)
+void	ft_echo(char **opt, char **arg)
 {
 	int nl_req;
 	int	i;
 
-	i = 0;
 	nl_req = 1;
-	if (ft_strlen(arg[0]) > 1 && arg[0][0] == '-' && arg[0][1] == 'n')
-		if (valid_flag(arg[0]) == 1)
+	if (opt[0] && ft_strlen(opt[0]) > 1
+		&& opt[0][0] == '-'
+		&& opt[0][1] == 'n'
+		&& valid_flag(opt[0]) == 1)
 			nl_req = 0;
-	if (!nl_req)
-		i++;
+	i = 0;
 	while (arg[i])
 	{
-		printf("%s", arg[i]);
+		ft_printf("%s", arg[i]);
 		if (arg[i + 1])
-			printf(" ");
+			ft_printf(" ");
 		i++;
 	}
 	if (nl_req)
-		printf("\n");
+		ft_printf("\n");
 }

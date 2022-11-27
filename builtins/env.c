@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 09:33:02 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/27 15:44:41 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/27 20:09:36 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	update_env(t_env_node **env_lst, char *name, char *value)
 		{
 			free(tmp->value);
 			tmp->value = value;
-			*env_lst = tmp;
+			env_lst = &tmp;
 			return ;
 		}
 		tmp = tmp->next;
@@ -176,4 +176,21 @@ void	print_env(t_env_node **env_lst, int	with_declare)
 			ft_printf("%s=%s\n", tmp->name, tmp->value);
 		tmp = tmp->next;
 	}
+}
+
+char	*env_value(t_env_node **env_lst,char *name)
+{
+	t_env_node	*tmp;
+
+	tmp = *env_lst;
+	if (exists_env(env_lst, name))
+	{
+		while (tmp)
+		{
+			if (is_same_str(tmp->name, name))
+				return(tmp->value);
+			tmp = tmp->next;
+		}
+	}
+	return (NULL);
 }
