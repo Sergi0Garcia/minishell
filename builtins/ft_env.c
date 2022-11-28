@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 09:33:02 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/27 20:09:36 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/28 15:31:13 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_same_str(char *str1, char *str2)
 {
-	int i;
+	int	i;
 
 	if (!str1 || !str2)
 		return (0);
@@ -30,12 +30,12 @@ int	is_same_str(char *str1, char *str2)
 	return (1);
 }
 
-int get_idx_equal_sign(char *str)
+int	get_idx_separator(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		if (str[i] == '=')
 			return (i);
@@ -51,7 +51,6 @@ int	exists_env(t_env_node **env_lst, char *str)
 
 	found = 0;
 	tmp = *env_lst;
-
 	while (tmp)
 	{
 		if (is_same_str(tmp->name, str))
@@ -61,7 +60,7 @@ int	exists_env(t_env_node **env_lst, char *str)
 	return (0);
 }
 
-void set_env(char **envp, t_env_node **env_lst)
+void	set_env(char **envp, t_env_node **env_lst)
 {
 	int			i;
 	int			brk_idx;
@@ -72,7 +71,7 @@ void set_env(char **envp, t_env_node **env_lst)
 	i = 0;
 	while (envp[i])
 	{
-		brk_idx = get_idx_equal_sign(envp[i]);
+		brk_idx = get_idx_separator(envp[i]);
 		name = ft_substr(envp[i], 0, brk_idx);
 		value = ft_substr(envp[i], brk_idx + 1, ft_strlen(envp[i]) - brk_idx - 1);
 		new = ft_new_env_node(name, value);
@@ -107,25 +106,16 @@ void	new_env(t_env_node **env_lst, char *str)
 	char		*value;
 	t_env_node	*new;
 
-	brk_idx = get_idx_equal_sign(str);
+	brk_idx = get_idx_separator(str);
 	if (!brk_idx)
 		return ;
 	name = ft_substr(str, 0, brk_idx);
 	value = ft_substr(str, brk_idx + 1, ft_strlen(str) - brk_idx - 1);
 	if (exists_env(env_lst, name))
-		return(update_env(env_lst, name, value));
+		return (update_env(env_lst, name, value));
 	new = ft_new_env_node(name, value);
 	env_add_back(env_lst, new);
 	return ;
-}
-
-static void	free_env_node(t_env_node **env)
-{
-	(*env)->next = NULL;
-	free((*env)->name);
-	free((*env)->value);
-	free(*env);
-	*env = NULL;
 }
 
 void	unset_env(t_env_node **env_lst, char *str)
@@ -160,7 +150,7 @@ void	unset_env(t_env_node **env_lst, char *str)
 	}
 }
 
-void	print_env(t_env_node **env_lst, int	with_declare)
+void	print_env(t_env_node **env_lst, int with_declare)
 {
 	t_env_node	*tmp;
 
@@ -178,7 +168,7 @@ void	print_env(t_env_node **env_lst, int	with_declare)
 	}
 }
 
-char	*env_value(t_env_node **env_lst,char *name)
+char	*env_value(t_env_node **env_lst, char *name)
 {
 	t_env_node	*tmp;
 
@@ -188,7 +178,7 @@ char	*env_value(t_env_node **env_lst,char *name)
 		while (tmp)
 		{
 			if (is_same_str(tmp->name, name))
-				return(tmp->value);
+				return (tmp->value);
 			tmp = tmp->next;
 		}
 	}

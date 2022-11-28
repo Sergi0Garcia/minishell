@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:59:06 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/27 17:13:22 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/28 15:20:06 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int valid_flag(char *str)
+static int	valid_flag(char *str)
 {
 	int	i;
 
@@ -26,13 +26,20 @@ static int valid_flag(char *str)
 	return (1);
 }
 
+/**
+ * Function to handle echo command
+ * By default we always print newline
+ * Flag -n prevents printing newline
+ * @param opt
+ * @param arg
+ */
 void	ft_echo(char **opt, char **arg)
 {
-	int nl_req;
+	int	nl_req;
 	int	i;
 
 	nl_req = 1;
-	if (opt[0] && ft_strlen(opt[0]) > 1
+	if (opt && opt[0] && ft_strlen(opt[0]) > 1
 		&& opt[0][0] == '-'
 		&& opt[0][1] == 'n'
 		&& valid_flag(opt[0]) == 1)

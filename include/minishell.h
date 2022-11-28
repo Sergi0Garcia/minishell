@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/27 18:15:40 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/28 15:33:01 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/wait.h>
 
 typedef struct s_line_stack_info
 {
@@ -90,9 +91,9 @@ t_env_node	*ft_new_env_node(char *name, char *value);
 void		new_env(t_env_node **env_lst, char *str);
 void		unset_env(t_env_node **env_lst, char *str);
 int			ft_env_lst_size(t_env_node *lst);
-t_env_node	*ft_env_find(t_env_node *lst, char *str);
 void		print_env(t_env_node **env_lst, int	with_declare);
 char		*env_value(t_env_node **env_lst,char *name);
+void		free_env_node(t_env_node **env);
 
 /* zxterns/utils/error.c */
 void	ft_error(char *str);

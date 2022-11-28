@@ -6,12 +6,11 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/27 20:12:22 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/28 15:32:53 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/minishell.h"
-#include <sys/wait.h>
 
 // static char	**parsing_argv(char **argv)
 // {
@@ -59,22 +58,34 @@ int	main(int argc, char **argv, char **envp)
 	// ----------------------
 	// ECHO
 	// ----------------------
+	// ft_printf("------- ECHO -------\n\n");
 	// char	**opt;
 	// opt = malloc(sizeof(char *) * (1 + 1));
+	// ft_echo(NULL, argv);
 	// opt[0] = ft_substr("-nnnn", 0, 5);
 	// opt[1] = NULL;
 	// ft_echo(opt, argv);
+	// opt[0] = ft_substr("-", 0, 5);
+	// ft_echo(opt, argv);
+	// opt[0] = ft_substr("-nana", 0, 5);
+	// ft_echo(opt, argv);
+	// ft_printf("\n\n");
 	// ----------------------
 
 	// ----------------------
 	// PATHNAME && CD
 	// ----------------------
-	char	pathname[PATH_MAX];
-	ft_pwd(pathname, PATH_MAX);
-	printf("pathname: %s\n", pathname);
-	ft_cd("~/Pictures/", &env_lst);
-	ft_pwd(pathname, PATH_MAX);
-	printf("pathname: %s\n", pathname);
+	// ft_printf("------- PATHNAME & CD -------\n\n");
+	// char	pathname[PATH_MAX];
+
+	// ft_pwd(pathname, PATH_MAX);
+	// printf("pathname: %s\n", pathname);
+	// ft_cd("~/Desktop", &env_lst);
+	// ft_pwd(pathname, PATH_MAX);
+	// printf("pathname: %s\n", pathname);
+	// ft_cd("-", &env_lst);
+	// ft_pwd(pathname, PATH_MAX);
+	// printf("pathname: %s\n", pathname);
 	// ----------------------
 
 	// ----------------------
@@ -108,8 +119,15 @@ int	main(int argc, char **argv, char **envp)
 	// ----------------------
 
 	// ----------------------
-	// FORK PLAYGROUND
+	// ENV PLAYGROUND
 	// ----------------------
+	// ft_printf("------- ENV -------\n\n");
+	// char *home;
+	// home = env_value(&env_lst, "HOME");
+	// printf("Home env var: %s\n", home);
+	// print_env(&env_lst, 0);
+	// unset_env(&env_lst, "HOME");
+	// printf("Home env var: %s\n", home);
 	// unset_env(&env_lst, "SECURITYSESSIONID");
 	// unset_env(&env_lst, "USER");
 	// unset_env(&env_lst, "HOMEBREW_TEMP");
@@ -117,7 +135,7 @@ int	main(int argc, char **argv, char **envp)
 	// unset_env(&env_lst, "COLORTERM");
 	// unset_env(&env_lst, NULL);
 	// new_env(&env_lst, "USER=modified");
-	print_env(&env_lst, 0);
+	// print_env(&env_lst, 0);
 	// print_env(&env_lst, 1);
 	// unset_env(&env_lst, "SECURITYSESSIONID");
 	// unset_env(&env_lst, "HOMEBREW_TEMP");
@@ -125,6 +143,5 @@ int	main(int argc, char **argv, char **envp)
 	// unset_env(&env_lst, "PWD");
 	// ft_echo(parsing_argv(argv));
 	// ----------------------
-
 	return (1);
 }

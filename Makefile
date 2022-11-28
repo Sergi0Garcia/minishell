@@ -6,16 +6,16 @@
 #    By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2022/11/27 14:52:46 by segarcia         ###   ########.fr        #
+#    Updated: 2022/11/28 15:04:14 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= 	minishell
 SRC			= 	minishell.c						\
-				./builtins/pwd.c				\
-				./builtins/env.c				\
+				./builtins/ft_pwd.c				\
+				./builtins/ft_env.c				\
 				./builtins/ft_cd.c    			\
-				./builtins/echo.c 				\
+				./builtins/ft_echo.c 			\
 				./lst_env/add_back.c			\
 				./lst_env/init.c 				\
 				./lst_env/utils.c  				\
