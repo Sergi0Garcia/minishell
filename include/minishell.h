@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/29 02:21:40 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/29 03:51:29 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,6 @@ int		is_same_str(char *str1, char *str2);
 void	h_interactive_mode(t_minish *sh);
 void	h_noninteractive_mode(t_minish *sh);
 void	handler(t_minish *sh);
-
-int		ft_pwd(void);
-char	**set_env(char **envp);
-void	ft_cd(char *str);
-void	ft_echo(char **arg);
 
 /* lst/env */
 t_env_node	*ft_env_last(t_env_node *lst);
