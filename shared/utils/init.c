@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 13:58:41 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/27 05:18:13 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/29 23:56:17 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	init(t_minish *sh, char **argv, char **env)
 	str = ft_itoa(pid);
 	sh->pid = str;
 	sh->line = NULL;
+
 	while (env[i] != NULL)
 		i++;
 	sh->env = (char **) malloc((i + 1) * sizeof(char *));
@@ -34,5 +35,13 @@ void	init(t_minish *sh, char **argv, char **env)
 		sh->env[i] = ft_strdup(env[i]);
 		i++;
 	}
+	return ;
+}
+
+void	init_twsb(t_wsb *wsb)
+{
+	wsb->head = NULL;
+	wsb->tail = NULL;
+	wsb->size = 0;
 	return ;
 }

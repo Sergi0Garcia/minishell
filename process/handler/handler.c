@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:14:59 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/29 12:27:46 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/29 23:35:56 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	h_interactive_mode(t_minish *sh)
 void	h_noninteractive_mode(t_minish *sh)
 {
 	no_interactive_mode_sig();
-	parse(sh);
+	sh->line = ft_strtrim(sh->argv[2], " ");
+	lexing(sh);
+	// parse(sh);
 	return ;
 }

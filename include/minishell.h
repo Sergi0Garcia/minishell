@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/29 12:09:39 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/30 00:20:34 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ typedef struct s_separator
 
 typedef enum s_bool
 {
+	false,
 	true,
-	false
 }	t_b;
 
 typedef struct s_wordinfo
@@ -113,6 +113,7 @@ typedef struct s_minishell
 	char	*pid;
 	char	*line;
 	t_b		interactive;
+	t_wsb	wsb;
 	int		status;
 }	t_minish;
 
@@ -206,5 +207,6 @@ void		lexing(t_minish *sh);
 
 /* shared/display/display.c */
 void		display_words(t_w *w);
+void		init_twsb(t_wsb *wsb);
 
 #endif

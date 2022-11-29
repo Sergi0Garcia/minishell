@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 20:45:57 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/29 12:36:21 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/29 23:48:06 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strcmp(char *s1, char *s2)
 
 int	end_of_sep(char *str, int start)
 {
-	while (is_sep(str[start]) != NEIN)
+	while (is_sep(str[start]) == NEIN)
 		start++;
 	return (start);
 }
@@ -53,6 +53,8 @@ t_wt	is_which_sep(char *s1)
 		return (DIREDIRECT);
 	else if (strcmp(s1, "&") == 0)
 		return (AND);
+	else if (ft_strlen(s1) > 2)
+		return (WORD);
 	else
 		return (NEIN);
 }

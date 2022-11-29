@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:37:53 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/29 09:58:55 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/29 23:38:17 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	check_usage(int argc, char **argv, t_minish *sh)
 		sh->interactive = true;
 	else if ((ft_strcmp(argv[1], "-i") == 0 && argc == 2))
 		sh->interactive = true;
-	else if (ft_strcmp(argv[1], "-c") == 0 && (argc == 2 || argc == 3))
+	else if (ft_strcmp(argv[1], "-c") != 0 && (argc == 2 || argc == 3))
 		usage();
 	return ;
 }
