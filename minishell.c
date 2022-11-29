@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/28 15:32:53 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/29 02:25:59 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,18 @@ int	main(int argc, char **argv, char **envp)
 	// ----------------------
 	// ECHO
 	// ----------------------
-	// ft_printf("------- ECHO -------\n\n");
-	// char	**opt;
-	// opt = malloc(sizeof(char *) * (1 + 1));
-	// ft_echo(NULL, argv);
-	// opt[0] = ft_substr("-nnnn", 0, 5);
-	// opt[1] = NULL;
-	// ft_echo(opt, argv);
-	// opt[0] = ft_substr("-", 0, 5);
-	// ft_echo(opt, argv);
-	// opt[0] = ft_substr("-nana", 0, 5);
-	// ft_echo(opt, argv);
-	// ft_printf("\n\n");
+	ft_printf("------- ECHO -------\n\n");
+	char	**opt;
+	opt = malloc(sizeof(char *) * (1 + 1));
+	ft_echo(NULL, argv);
+	opt[0] = ft_substr("-nnnn", 0, 5);
+	opt[1] = NULL;
+	ft_echo(opt, argv);
+	opt[0] = ft_substr("-", 0, 5);
+	ft_echo(opt, argv);
+	opt[0] = ft_substr("-nana", 0, 5);
+	ft_echo(opt, argv);
+	ft_printf("\n\n");
 	// ----------------------
 
 	// ----------------------

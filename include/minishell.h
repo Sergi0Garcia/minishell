@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/28 15:33:01 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/29 02:21:40 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_env_node
 {
 	char				*name;
 	char				*value;
-	struct s_env_node 	*next;
+	struct s_env_node	*next;
 }	t_env_node;
 
 char	*ft_pwd(char *buffer, int buff_size);
