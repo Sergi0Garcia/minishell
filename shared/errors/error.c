@@ -6,13 +6,13 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 11:01:44 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/27 16:59:19 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/29 10:19:06 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-bool	can_add_backtic(char *command)
+t_b	can_add_backtic(char *command)
 {
 	if (ft_strcmp(command, "export") == 0 \
 		|| ft_strcmp(command, "unset") == 0)
@@ -39,7 +39,7 @@ void	errormsg(char *command, char *text)
 	return ;
 }
 
-void	joinstrs(char *s1, char *s2)
+char	*joinstrs(char *s1, char *s2)
 {
 	char	*result;
 	int		len;
@@ -57,8 +57,17 @@ void	joinstrs(char *s1, char *s2)
 	result = malloc(len * sizeof(char));
 	if (result == NULL)
 		return (NULL);
-	result = ft_strlcpy(result, s1, ft_strlen(s1));
-	result = ft_strlcat(result, s2, ft_strlen(s2));
+	ft_strlcpy(result, s1, ft_strlen(s1));
+	ft_strlcat(result, s2, ft_strlen(s2));
 	free(s1);
 	return (result);
+}
+
+
+
+void	error(char *str)
+{
+	write(2, str, ft_strlen(str));
+	exit(EXIT_FAILURE);
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 07:27:49 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/29 09:41:07 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/29 10:16:02 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_sep	next_sep(char *str, int start)
 	next.end = start;
 	while (str[next.end])
 	{
-		if (is_sep(str[next.end]) != -1)
+		if (is_sep(str[next.end]) != NEIN)
 		{
 			next.end = end_of_sep(str, next.end);
 			sub = ft_substr(str, start, next.end);

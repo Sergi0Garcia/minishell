@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2022/11/28 15:04:14 by segarcia         ###   ########.fr        #
+#    Updated: 2022/11/29 10:09:52 by rkanmado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,15 +20,15 @@ SRC			= 	minishell.c						\
 				./lst_env/add_back.c			\
 				./lst_env/init.c 				\
 				./lst_env/utils.c  				\
-				./externs/utils/error.c 		\
-				./externs/utils/init.c			\
-				./externs/utils/line_ops.c		\
-				./externs/utils/handler.c 		\
-				./externs/utils/read.c 			\
-				./externs/utils/check.c			\
-				./externs/utils/utils.c			\
-				./externs/utils/parsing.c		\
-				./externs/signals/signals.c		\
+				./shared/errors/error.c 		\
+				./shared/utils/init.c			\
+				./shared/utils/s_word_ops.c		\
+				./process/handler/handler.c 		\
+				./shared/utils/read.c 			\
+				./shared/checks/check.c			\
+				./shared/utils/utils.c			\
+				./shared/utils/parsing.c		\
+				./process/signals/signals.c		\
 
 OBJS		= $(SRC:.c=.o)
 

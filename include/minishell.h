@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/29 09:34:11 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/29 10:18:33 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <stdbool.h>
 # include <sys/wait.h>
 
 typedef struct s_redirect
@@ -33,12 +32,6 @@ typedef struct s_redirect
 	char	**d_filin;
 }	t_redirect;
 
-typedef struct s_separator
-{
-	int		end;
-	t_wt	word_type;
-	char	*word;
-}	t_sep;
 typedef enum s_word_type
 {
 	COMMAND,
@@ -50,7 +43,16 @@ typedef enum s_word_type
 	SPACE,
 	PIPE,
 	AND,
+	NEIN
 }	t_wt;
+
+typedef struct s_separator
+{
+	int		end;
+	t_wt	word_type;
+	char	*word;
+}	t_sep;
+
 
 typedef enum s_bool
 {
@@ -96,6 +98,13 @@ typedef struct s_stack_bundle
 	struct s_stack	*tail;
 }	t_sb;
 
+typedef struct s_env_node
+{
+	char				*name;
+	char				*value;
+	struct s_env_node	*next;
+}	t_env_node;
+
 typedef struct s_minishell
 {
 	t_line	st;
@@ -107,30 +116,27 @@ typedef struct s_minishell
 	int		status;
 }	t_minish;
 
-void	interactive(t_minish *sh);
-void	non_interactive(t_minish *sh);
-typedef struct s_env_node
-{
-	char				*name;
-	char				*value;
-	struct s_env_node	*next;
-}	t_env_node;
-/* extern/utils/parsing */
-t_b		is_sep_type(t_wt wt);
-int		is_heredoc(char *s1);
-void	p_interactive_mode(t_minish *sh);
-void	p_noninteractive_mode(t_minish *sh);
-void	parse(t_minish *sh);
+void		interactive(t_minish *sh);
+void		non_interactive(t_minish *sh);
 
-char	*ft_pwd(char *buffer, int buff_size);
-void	set_env(char **envp, t_env_node **env_lst);
-void	ft_cd(char *str, t_env_node **env_lst);
-void	ft_echo(char **opt, char **arg);
-int		is_same_str(char *str1, char *str2);
+/* extern/utils/parsing */
+t_b			is_sep_type(t_wt wt);
+t_wt		is_sep(char s1);
+int			is_heredoc(char *s1);
+void		p_interactive_mode(t_minish *sh);
+void		p_noninteractive_mode(t_minish *sh);
+void		parse(t_minish *sh);
+
+char		*ft_pwd(char *buffer, int buff_size);
+void		set_env(char **envp, t_env_node **env_lst);
+void		ft_cd(char *str, t_env_node **env_lst);
+void		ft_echo(char **opt, char **arg);
+int			is_same_str(char *str1, char *str2);
+
 /* extern/utils/handler.c */
-void	h_interactive_mode(t_minish *sh);
-void	h_noninteractive_mode(t_minish *sh);
-void	handler(t_minish *sh);
+void		h_interactive_mode(t_minish *sh);
+void		h_noninteractive_mode(t_minish *sh);
+void		handler(t_minish *sh);
 
 /* lst/env */
 t_env_node	*ft_env_last(t_env_node *lst);
@@ -142,40 +148,55 @@ void		print_env(t_env_node **env_lst, int	with_declare);
 char		*env_value(t_env_node **env_lst,char *name);
 void		free_env_node(t_env_node **env);
 
-/* zxterns/utils/error.c */
-void	ft_error(char *str);
-void	env_add_back(t_env_node **lst, t_env_node *new);
-/* externs/utils/error.c */
-void	error(char *str);
-void	check_usage(int argc, char **argv, t_minish *sh);
-void	usage(void);
+/* shared/utils/error.c */
+void		ft_error(char *str);
+void		env_add_back(t_env_node **lst, t_env_node *new);
 
-/* externs/utils/init.c */
-void	init(t_minish *sh, char **argv, char **env);
+/* shared/utils/error.c */
+void		error(char *str);
+t_b			can_add_backtic(char *command);
+void		errormsg(char *command, char *text);
+char		*joinstrs(char *s1, char *s2);
+void		error(char *str);
 
-/* externs/utils/word_ops.c */
-void	ft_wunshift(t_wsb *stack, t_wi info);
-void	ft_wpush(t_wsb *stack, t_wi info);
-t_wi	ft_wpop(t_wsb *stack);
-t_wi	ft_wshift(t_wsb *stack);
+
+/* shared/check/check.c */
+void		check_usage(int argc, char **argv, t_minish *sh);
+void		usage(void);
+
+/* shared/utils/init.c */
+void		init(t_minish *sh, char **argv, char **env);
+
+/* shared/utils/word_ops.c */
+void		ft_wunshift(t_wsb *stack, t_wi info);
+void		ft_wpush(t_wsb *stack, t_wi info);
+t_wi		ft_wpop(t_wsb *stack);
+t_wi		ft_wshift(t_wsb *stack);
 
 /* extern/utils/read */
-void	parse(t_minish *sh);
-void	read_line(t_minish *sh);
+void		parse(t_minish *sh);
+void		read_line(t_minish *sh);
 
 /* extern/utils/utils */
-int		ft_strcmp(char *s1, char *s2);
+int			ft_strcmp(char *s1, char *s2);
 
 /* extern/utils/handling */
-void	handler(t_minish *sh);
-void	interactive(t_minish *sh);
-void	non_interactive(t_minish *sh);
+void		handler(t_minish *sh);
+void		interactive(t_minish *sh);
+void		non_interactive(t_minish *sh);
 
-/* extern/signals/signals */
-void	h_quit(void);
-void	sigreset(int sig, siginfo_t *info, void *context);
-void	quit(int sig, siginfo_t *info, void *context);
-void	interactive_mode_sig(void);
-void	no_interactive_mode_sig(void);
+/* process/signals/signals.c */
+void		h_quit(void);
+void		sigreset(int sig, siginfo_t *info, void *context);
+void		quit(int sig, siginfo_t *info, void *context);
+void		interactive_mode_sig(void);
+void		no_interactive_mode_sig(void);
+
+/* process/lexer/lexer.c */
+t_b			can_hspace(int start, char *str, t_sep *next);
+t_b			can_switch(char *substr, t_sep *next);
+t_sep		next_sep(char *str, int start);
+t_wi		set_winfo(t_sep sep);
+void		lexer(t_minish *sh);
 
 #endif
