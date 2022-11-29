@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/29 07:27:11 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/29 10:45:28 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	main(int argc, char **argv, char **envp)
 	(void) argc;
 	(void) argv;
 	(void) envp;
-	t_env_node	*env_lst;
+	// t_env_node	*env_lst;
 
 	check_usage(argc, argv, &sh);
 	init(&sh, argv, envp);
@@ -70,8 +70,8 @@ int	main(int argc, char **argv, char **envp)
 	// ----------------------
 	// REQUIRED
 	// ----------------------
-	env_lst = NULL;
-	set_env(envp, &env_lst);
+	// env_lst = NULL;
+	// set_env(envp, &env_lst);
 
 	// ----------------------
 	// ECHO

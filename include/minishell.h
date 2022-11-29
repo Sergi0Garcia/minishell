@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/29 10:25:28 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/29 12:09:39 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ typedef struct s_separator
 
 typedef enum s_bool
 {
-	false,
-	true
+	true,
+	false
 }	t_b;
 
 typedef struct s_wordinfo
 {
 	char				*word;
-	t_wt				*sep;
+	t_wt				sep;
 }	t_wi;
 
 typedef struct s_word
@@ -184,7 +184,6 @@ t_b			is_sep_type(t_wt wt);
 t_wt		is_which_sep(char *s1);
 t_wt		is_sep(char s1);
 
-
 /* shared/utils/handling */
 void		handler(t_minish *sh);
 void		interactive(t_minish *sh);
@@ -202,6 +201,10 @@ t_b			can_hspace(int start, char *str, t_sep *next);
 t_b			can_switch(char *substr, t_sep *next);
 t_sep		next_sep(char *str, int start);
 t_wi		set_winfo(t_sep sep);
-void		lexer(t_minish *sh);
+void		lexing(t_minish *sh);
+
+
+/* shared/display/display.c */
+void		display_words(t_w *w);
 
 #endif

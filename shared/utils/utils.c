@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 20:45:57 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/29 10:17:35 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/29 12:36:21 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ t_wt	is_sep(char s1)
 	else if (s1 == ' ')
 		return (SPACE);
 	else
-		return (-1);
+		return (NEIN);
 }

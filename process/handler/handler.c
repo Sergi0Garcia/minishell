@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:14:59 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/29 08:54:55 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/29 12:27:46 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,10 @@ void	handler(t_minish *sh)
 
 void	h_interactive_mode(t_minish *sh)
 {
-	while (1)
-	{
-		printf("Good\n");
-		interactive_mode_sig();
-		sh->line = readline("---sh---");
-		sh->line = ft_strtrim(sh->line, " ");
-	}
+	interactive_mode_sig();
+	sh->line = readline("---sh---");
+	sh->line = ft_strtrim(sh->line, " ");
+	lexing(sh);
 	return ;
 }
 
