@@ -1,0 +1,13 @@
+Makefile
+README.md
+builtins
+externs
+gnl
+gsdhv.txt
+include
+libft
+lst_env
+minishell
+minishell.c
+minishell.dSYM
+output.txt

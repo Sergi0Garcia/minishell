@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/29 03:51:29 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/11/29 09:34:11 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,33 +33,55 @@ typedef struct s_redirect
 	char	**d_filin;
 }	t_redirect;
 
-typedef struct s_line_stack_info
+typedef struct s_separator
 {
-	char				*command;
-	int					*sep;
-	char				*opts;
-	char				*args;
-	struct s_redirect	*red;
-}	t_sli;
+	int		end;
+	t_wt	word_type;
+	char	*word;
+}	t_sep;
+typedef enum s_word_type
+{
+	COMMAND,
+	WORD,
+	DIREDIRECT,
+	SIREDIRECT,
+	SOREDIRECT,
+	DOREDIRECT,
+	SPACE,
+	PIPE,
+	AND,
+}	t_wt;
 
-typedef struct s_line_stack
+typedef enum s_bool
 {
-	t_sli				li;
-	struct s_line_stack	*next;
-	struct s_line_stack	*prev;
-}	t_ls;
+	false,
+	true
+}	t_b;
 
-typedef struct s_line_stack_bundle
+typedef struct s_wordinfo
 {
-	int					size;
-	struct s_line_stack	*head;
-	struct s_line_stack	*tail;
-}	t_lsb;
+	char				*word;
+	t_wt				*sep;
+}	t_wi;
+
+typedef struct s_word
+{
+	t_wi			wi;
+	struct s_word	*next;
+	struct s_word	*prev;
+}	t_w;
+
+typedef struct s_word_stack_bundle
+{
+	int				size;
+	struct s_word	*head;
+	struct s_word	*tail;
+}	t_wsb;
 
 typedef struct s_stack_info
 {
 	char		*raw;
-	t_lsb		lsb;
+	t_wsb		lsb;
 }	t_si;
 
 typedef struct s_line
@@ -81,7 +103,7 @@ typedef struct s_minishell
 	char	**argv;
 	char	*pid;
 	char	*line;
-	bool	interactive;
+	t_b		interactive;
 	int		status;
 }	t_minish;
 
@@ -94,7 +116,7 @@ typedef struct s_env_node
 	struct s_env_node	*next;
 }	t_env_node;
 /* extern/utils/parsing */
-int		is_sep(char *s1);
+t_b		is_sep_type(t_wt wt);
 int		is_heredoc(char *s1);
 void	p_interactive_mode(t_minish *sh);
 void	p_noninteractive_mode(t_minish *sh);
@@ -131,11 +153,11 @@ void	usage(void);
 /* externs/utils/init.c */
 void	init(t_minish *sh, char **argv, char **env);
 
-/* externs/utils/line_ops.c */
-void	ft_unshift_line(t_lsb *stack, t_sli info);
-void	ft_push_line(t_lsb *stack, t_sli info);
-t_sli	ft_pop_line(t_lsb *stack);
-t_sli	ft_shift_line(t_lsb *stack);
+/* externs/utils/word_ops.c */
+void	ft_wunshift(t_wsb *stack, t_wi info);
+void	ft_wpush(t_wsb *stack, t_wi info);
+t_wi	ft_wpop(t_wsb *stack);
+t_wi	ft_wshift(t_wsb *stack);
 
 /* extern/utils/read */
 void	parse(t_minish *sh);

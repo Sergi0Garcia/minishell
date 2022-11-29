@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_ops.c                                         :+:      :+:    :+:   */
+/*   s_owps.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:03:36 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/26 17:22:51 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/29 09:29:37 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 /* Function that will insert element at the end of stack */
-void	ft_unshift_line(t_lsb *stack, t_sli info)
+void	ft_wunshift(t_wsb *stack, t_wi info)
 {
-	t_ls	*new;
+	t_w	*new;
 
-	new = (t_ls *)malloc(sizeof(t_ls));
+	new = (t_w *)malloc(sizeof(t_w));
 	if (new == NULL)
 		error("Error \n");
-	new->li = info;
+	new->wi = info;
 	if (stack->tail == NULL)
 	{
 		new->next = NULL;
@@ -40,14 +40,14 @@ void	ft_unshift_line(t_lsb *stack, t_sli info)
 }
 
 /* Add a new node at the top into existing double link list */
-void	ft_push_line(t_lsb *stack, t_sli info)
+void	ft_wpush(t_wsb *stack, t_wi info)
 {
-	t_ls	*new;
+	t_w	*new;
 
-	new = (t_ls *)malloc(sizeof(t_ls));
+	new = (t_w *)malloc(sizeof(t_w));
 	if (new == NULL)
 		error("Error \n");
-	new->li = info;
+	new->wi = info;
 	new->next = stack->head;
 	new->prev = NULL;
 	if (stack->tail == NULL)
@@ -65,14 +65,14 @@ void	ft_push_line(t_lsb *stack, t_sli info)
 }
 
 /* pop top element of a stack into doubly linked list */
-t_sli	ft_pop_line(t_lsb *stack)
+t_wi	ft_wpop(t_wsb *stack)
 {
-	t_sli	info;
-	t_ls	*tmp;
+	t_wi	info;
+	t_w		*tmp;
 
 	if (stack->head == NULL)
 		error("Error \n");
-	info = stack->head->li;
+	info = stack->head->wi;
 	tmp = stack->head;
 	if (stack->head->next == NULL)
 	{
@@ -92,14 +92,14 @@ t_sli	ft_pop_line(t_lsb *stack)
 }
 
 /* shift removes the last item into the stack  */
-t_sli	ft_shift_line(t_lsb *stack)
+t_wi	ft_wshift(t_wsb *stack)
 {
-	t_sli	li;
-	t_ls	*tmp;
+	t_wi	li;
+	t_w		*tmp;
 
 	if (stack->tail == NULL)
 		error("Error \n");
-	li = stack->tail->li;
+	li = stack->tail->wi;
 	tmp = stack->tail;
 	if (stack->tail->prev != NULL)
 		stack->tail = stack->tail->prev;

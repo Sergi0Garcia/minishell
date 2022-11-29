@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:26:26 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/27 11:47:25 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/29 09:01:18 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-int	is_sep(char *s1)
-{
-	if (strcmp(s1, "|") == 0)
-		return (1);
-	else if (strcmp(s1, ">") == 0)
-		return (2);
-	else if (strcmp(s1, ">>") == 0)
-		return (3);
-	else if (strcmp(s1, "<") == 0)
-		return (4);
-	else if (strcmp(s1, "<<") == 0)
-		return (5);
-	else
-		return (0);
-}
 
 int	is_heredoc(char *s1)
 {

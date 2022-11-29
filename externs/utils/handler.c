@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:14:59 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/27 19:02:57 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/29 08:54:55 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	h_interactive_mode(t_minish *sh)
 		printf("Good\n");
 		interactive_mode_sig();
 		sh->line = readline("---sh---");
+		sh->line = ft_strtrim(sh->line, " ");
 	}
 	return ;
 }
