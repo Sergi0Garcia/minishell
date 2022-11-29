@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/29 10:18:33 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/29 10:25:28 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ typedef struct s_minishell
 void		interactive(t_minish *sh);
 void		non_interactive(t_minish *sh);
 
-/* extern/utils/parsing */
+/* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);
 t_wt		is_sep(char s1);
 int			is_heredoc(char *s1);
@@ -133,7 +133,7 @@ void		ft_cd(char *str, t_env_node **env_lst);
 void		ft_echo(char **opt, char **arg);
 int			is_same_str(char *str1, char *str2);
 
-/* extern/utils/handler.c */
+/* shared/utils/handler.c */
 void		h_interactive_mode(t_minish *sh);
 void		h_noninteractive_mode(t_minish *sh);
 void		handler(t_minish *sh);
@@ -144,8 +144,8 @@ t_env_node	*ft_new_env_node(char *name, char *value);
 void		new_env(t_env_node **env_lst, char *str);
 void		unset_env(t_env_node **env_lst, char *str);
 int			ft_env_lst_size(t_env_node *lst);
-void		print_env(t_env_node **env_lst, int	with_declare);
-char		*env_value(t_env_node **env_lst,char *name);
+void		print_env(t_env_node **env_lst, int with_declare);
+char		*env_value(t_env_node **env_lst, char *name);
 void		free_env_node(t_env_node **env);
 
 /* shared/utils/error.c */
@@ -173,14 +173,19 @@ void		ft_wpush(t_wsb *stack, t_wi info);
 t_wi		ft_wpop(t_wsb *stack);
 t_wi		ft_wshift(t_wsb *stack);
 
-/* extern/utils/read */
+/* shared/utils/read */
 void		parse(t_minish *sh);
 void		read_line(t_minish *sh);
 
-/* extern/utils/utils */
+/* shared/utils/utils */
 int			ft_strcmp(char *s1, char *s2);
+int			end_of_sep(char * str, int start);
+t_b			is_sep_type(t_wt wt);
+t_wt		is_which_sep(char *s1);
+t_wt		is_sep(char s1);
 
-/* extern/utils/handling */
+
+/* shared/utils/handling */
 void		handler(t_minish *sh);
 void		interactive(t_minish *sh);
 void		non_interactive(t_minish *sh);
