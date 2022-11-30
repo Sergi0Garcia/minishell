@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/30 00:20:34 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:27:54 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,16 @@ typedef enum s_word_type
 
 typedef struct s_separator
 {
-	int		end;
-	t_wt	word_type;
+	t_wt	type;
 	char	*word;
 }	t_sep;
+
+typedef struct s_command
+{
+	char	*name;
+	char	**args;
+	char	**opts;
+}	t_c;
 
 
 typedef enum s_bool
@@ -200,7 +206,6 @@ void		no_interactive_mode_sig(void);
 /* process/lexer/lexer.c */
 t_b			can_hspace(int start, char *str, t_sep *next);
 t_b			can_switch(char *substr, t_sep *next);
-t_sep		next_sep(char *str, int start);
 t_wi		set_winfo(t_sep sep);
 void		lexing(t_minish *sh);
 
@@ -208,5 +213,9 @@ void		lexing(t_minish *sh);
 /* shared/display/display.c */
 void		display_words(t_w *w);
 void		init_twsb(t_wsb *wsb);
+
+/* process/lexer/handle_cases */
+int			h_bestcase(int start, char *str, t_sep *next);
+t_b			is_multi(char *str, char c, t_sep *next);
 
 #endif

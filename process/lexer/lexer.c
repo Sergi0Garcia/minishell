@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 07:27:49 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/30 00:25:57 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:53:39 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,87 +19,51 @@
  * echo "Hello Word"
  */
 
-t_b	can_hspace(int start, char *str, t_sep *next)
+typedef struct s_lexing
 {
-	int	index;
+	int			start;
+	int			end;
+	t_wt		last;
+	t_wt		new;
+	t_sep		sep;
+}	t_lex;
 
-	index = start;
-	while (str[index] && str[index] == ' ')
-		index++;
-	if (index > start)
-	{
-		next->end = index;
-		next->word_type = SPACE;
-		next->word = " ";
-	}
-	return (1);
-}
-
-t_b	can_switch(char *substr, t_sep *next)
+static void	increment(t_lex *lex, t_minish *sh)
 {
-	t_wt	wt;
-
-	wt = is_which_sep(substr);
-	if (wt != NEIN)
-	{
-		next->word = substr;
-		next->word_type = wt;
-		return (true);
-	}
-	return (false);
-}
-
-t_sep	next_sep(char *str, int start)
-{
-	t_sep	next;
-	char	*sub;
-
-	next.end = start;
-	while (str[next.end])
-	{
-		next.end = end_of_sep(str, next.end);
-		if (next.end - start == 0)
-			sub = ft_substr(str, start, 1);
-		else
-			sub = ft_substr(str, start, next.end - start);
-		next.word_type = is_which_sep(sub);
-		if (can_hspace(start, str, &next))
-			return (next);
-		else if (can_switch(sub, &next))
-			return (next);
-		else
-		{
-			next.word = sub;
-			next.word_type = WORD;
-			return (next);
-		}
-		next.end += 1;
-	}
-	return (next);
+	lex->sep.type = lex->last;
+	lex->sep.word = ft_substr(sh->line, lex->start, lex->end - lex->start);
+	ft_wunshift(&sh->wsb, set_winfo(lex->sep));
+	lex->start = lex->end;
+	lex->last = lex->new;
+	return ;
 }
 
 t_wi	set_winfo(t_sep sep)
 {
 	t_wi	tw;
 
-	tw.sep = sep.word_type;
+	tw.sep = sep.type;
 	tw.word = sep.word;
 	return (tw);
 }
 
 void	lexing(t_minish *sh)
 {
-	int		start;
-	t_sep	sep;
+	t_lex	lex;
 
 	init_twsb(&sh->wsb);
-	start = 0;
-	while (sh->line[start] != '\0')
+	lex.last = is_sep(sh->line[0]);
+	lex.end = 0;
+	lex.start = 0;
+	while (sh->line[lex.end] != '\0')
 	{
-		sep = next_sep(sh->line, start);
-		ft_wunshift(&sh->wsb, set_winfo(sep));
-		start = sep.end;
-		printf("lexing is the line %s, %d\n", sh->line, start);
+		lex.new = is_sep(sh->line[lex.end]);
+		if (lex.new != lex.last)
+			increment(&lex, sh);
+		else
+			lex.end++;
 	}
+	if (lex.start != lex.end)
+		increment(&lex, sh);
 	return ;
 }
