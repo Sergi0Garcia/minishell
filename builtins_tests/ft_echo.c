@@ -6,14 +6,15 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 04:15:21 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/30 05:47:26 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/12/03 21:17:30 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../include/minishell.h"
 
-void echo_test()
+void echo_test(t_env_node *env_lst)
 {
+	(void) 	env_lst;
 	char	name[256];
 	char	options[256];
 	char	arguments[256];
@@ -93,6 +94,10 @@ void echo_test()
 	}
 	printf(KMAG "---------------------- \n");
 	printf(KRED "---------------------- \n");
-	ft_echo(command);
+	// ft_echo(command);
+	// ft_cd(command, &env_lst);
+	char	*ptr;
+	ptr = ft_pwd(command);
+	printf("pathname: %s\n", ptr);
 	printf(KRED "---------------------- \n");
 }

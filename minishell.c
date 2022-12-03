@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/03 03:00:25 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/12/03 19:50:52 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ int	main(int argc, char **argv, char **envp)
 	t_env_node	*env_lst;
 	env_lst = NULL;
 	set_env(envp, &env_lst);
-	echo_test();
-
+	echo_test(env_lst);
 	// echo -n functio
 
 	// ----------------------
@@ -97,20 +96,20 @@ int	main(int argc, char **argv, char **envp)
 	// ----------------------
 	// PATHNAME && CD
 	// ----------------------
-	ft_printf("------- PATHNAME & CD -------\n\n");
-	char	pathname[PATH_MAX];
+	// ft_printf("------- PATHNAME & CD -------\n\n");
+	// char	pathname[PATH_MAX];
 
-	ft_pwd(pathname, PATH_MAX);
-	printf("pathname: %s\n", pathname);
-	ft_cd("~/Desktop", &env_lst);
-	ft_pwd(pathname, PATH_MAX);
-	printf("pathname: %s\n", pathname);
-	ft_cd("-", &env_lst);
-	ft_pwd(pathname, PATH_MAX);
-	printf("pathname: %s\n", pathname);
-	ft_cd("-LPLPLPLPDSDWJWQ Hello", &env_lst);
-	ft_pwd(pathname, PATH_MAX);
-	printf("pathname: %s\n", pathname);
+	// ft_pwd(pathname, PATH_MAX);
+	// printf("pathname: %s\n", pathname);
+	// ft_cd("~/Desktop", &env_lst);
+	// ft_pwd(pathname, PATH_MAX);
+	// printf("pathname: %s\n", pathname);
+	// ft_cd("-", &env_lst);
+	// ft_pwd(pathname, PATH_MAX);
+	// printf("pathname: %s\n", pathname);
+	// ft_cd("-LPLPLPLPDSDWJWQ Hello", &env_lst);
+	// ft_pwd(pathname, PATH_MAX);
+	// printf("pathname: %s\n", pathname);
 	// ----------------------
 
 	// ----------------------

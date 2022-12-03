@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/30 04:36:07 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/12/03 20:13:46 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,11 @@ typedef struct s_minishell
 void		interactive(t_minish *sh);
 void		non_interactive(t_minish *sh);
 
+/** Built ins */
+void	exit_free_all(void);
+
 /** testing builtins */
-void		echo_test();
+void 		echo_test(t_env_node *env_lst);
 
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);
@@ -147,9 +150,9 @@ void		p_interactive_mode(t_minish *sh);
 void		p_noninteractive_mode(t_minish *sh);
 void		parse(t_minish *sh);
 
-char		*ft_pwd(char *buffer, int buff_size);
+char		*ft_pwd(t_c *cmd);
 void		set_env(char **envp, t_env_node **env_lst);
-void		ft_cd(char *str, t_env_node **env_lst);
+void		ft_cd(t_c *cmd, t_env_node **env_lst);
 void		ft_echo(t_c *cmd);
 int			is_same_str(char *str1, char *str2);
 
