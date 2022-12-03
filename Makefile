@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
+#    By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2022/11/29 12:18:05 by rkanmado         ###   ########.fr        #
+#    Updated: 2022/11/30 04:25:35 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRC			= 	minishell.c						\
 				./builtins/ft_env.c				\
 				./builtins/ft_cd.c    			\
 				./builtins/ft_echo.c 			\
+				./builtins_tests/ft_echo.c		\
 				./lst_env/add_back.c			\
 				./lst_env/init.c 				\
 				./lst_env/utils.c  				\

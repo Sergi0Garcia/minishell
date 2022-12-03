@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/29 10:45:28 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/12/03 03:00:25 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,24 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_minish	sh;
 
+	(void) sh;
 	(void) argc;
 	(void) argv;
 	(void) envp;
-	// t_env_node	*env_lst;
 
-	check_usage(argc, argv, &sh);
-	init(&sh, argv, envp);
 	// check_usage(argc, argv, &sh);
-	handler(&sh);
+	// init(&sh, argv, envp);
+	// check_usage(argc, argv, &sh);
+	// handler(&sh);
 	// ----------------------
 	// REQUIRED
 	// ----------------------
-	// env_lst = NULL;
-	// set_env(envp, &env_lst);
+	t_env_node	*env_lst;
+	env_lst = NULL;
+	set_env(envp, &env_lst);
+	echo_test();
+
+	// echo -n functio
 
 	// ----------------------
 	// ECHO
@@ -93,17 +97,20 @@ int	main(int argc, char **argv, char **envp)
 	// ----------------------
 	// PATHNAME && CD
 	// ----------------------
-	// ft_printf("------- PATHNAME & CD -------\n\n");
-	// char	pathname[PATH_MAX];
+	ft_printf("------- PATHNAME & CD -------\n\n");
+	char	pathname[PATH_MAX];
 
-	// ft_pwd(pathname, PATH_MAX);
-	// printf("pathname: %s\n", pathname);
-	// ft_cd("~/Desktop", &env_lst);
-	// ft_pwd(pathname, PATH_MAX);
-	// printf("pathname: %s\n", pathname);
-	// ft_cd("-", &env_lst);
-	// ft_pwd(pathname, PATH_MAX);
-	// printf("pathname: %s\n", pathname);
+	ft_pwd(pathname, PATH_MAX);
+	printf("pathname: %s\n", pathname);
+	ft_cd("~/Desktop", &env_lst);
+	ft_pwd(pathname, PATH_MAX);
+	printf("pathname: %s\n", pathname);
+	ft_cd("-", &env_lst);
+	ft_pwd(pathname, PATH_MAX);
+	printf("pathname: %s\n", pathname);
+	ft_cd("-LPLPLPLPDSDWJWQ Hello", &env_lst);
+	ft_pwd(pathname, PATH_MAX);
+	printf("pathname: %s\n", pathname);
 	// ----------------------
 
 	// ----------------------
@@ -161,5 +168,14 @@ int	main(int argc, char **argv, char **envp)
 	// unset_env(&env_lst, "PWD");
 	// ft_echo(parsing_argv(argv));
 	// ----------------------
+
+	// char *res;
+
+	// res = env_value(&env_lst, "HOME8472349872843289");
+	// printf("%s\n", res);
+	// new_env(&env_lst, "HOME=modified");
+	// res = env_value(&env_lst, "HOME");
+	// printf("%s\n", res);
+
 	return (1);
 }

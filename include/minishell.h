@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/29 12:09:39 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/11/30 04:36:07 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,16 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/wait.h>
+
+# define KNRM  "\x1B[0m"
+# define KRED  "\x1B[31m"
+# define KGRN  "\x1B[32m"
+# define KYEL  "\x1B[33m"
+# define KBLU  "\x1B[34m"
+# define KMAG  "\x1B[35m"
+# define KCYN  "\x1B[36m"
+# define KWHT  "\x1B[37m"
+# define RESET "\x1B[0m"
 
 typedef struct s_redirect
 {
@@ -86,6 +96,13 @@ typedef struct s_stack_info
 	t_wsb		lsb;
 }	t_si;
 
+typedef struct s_command
+{
+    char    *name;
+    char    **opts;
+    char    **args;
+}   t_c;
+
 typedef struct s_line
 {
 	t_si			si;
@@ -119,6 +136,9 @@ typedef struct s_minishell
 void		interactive(t_minish *sh);
 void		non_interactive(t_minish *sh);
 
+/** testing builtins */
+void		echo_test();
+
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);
 t_wt		is_sep(char s1);
@@ -130,7 +150,7 @@ void		parse(t_minish *sh);
 char		*ft_pwd(char *buffer, int buff_size);
 void		set_env(char **envp, t_env_node **env_lst);
 void		ft_cd(char *str, t_env_node **env_lst);
-void		ft_echo(char **opt, char **arg);
+void		ft_echo(t_c *cmd);
 int			is_same_str(char *str1, char *str2);
 
 /* shared/utils/handler.c */
