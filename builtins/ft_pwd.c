@@ -6,16 +6,34 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/03 22:51:31 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/12/04 02:35:43 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+static int	vaild_option(char *opt)
+{
+	int	i;
+
+	i = 0;
+	while (opt[i])
+	{
+		if (i < 2 && opt[i] == '-')
+			i++;
+		else
+		{
+			if (opt[i] != 'L' && opt[i] != 'P')
+				return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 static int	valid_flag(t_c *cmd)
 {
 	int		i;
-	int		j;
 	char	*option;
 
 	if (!cmd || !cmd->opts)
@@ -23,19 +41,9 @@ static int	valid_flag(t_c *cmd)
 	i = 0;
 	while (cmd->opts[i])
 	{
-		j = 0;
 		option = cmd->opts[i];
-		while (option[j])
-		{
-			if (j < 2 && option[j] == '-')
-				j++;
-			else
-			{
-				if (option[j] != 'L' && option[j] != 'P')
-					return (0);
-			}
-			j++;
-		}
+		if (!vaild_option(option))
+			return (0);
 		i++;
 	}
 	return (1);
@@ -43,8 +51,10 @@ static int	valid_flag(t_c *cmd)
 
 static int	handle_error(void)
 {
-	ft_printf("invalid option\n");
-	ft_printf("pwd: usage: pwd [-LP]\n");
+	ft_printf("invalid option");
+	ft_printf("\n");
+	ft_printf("pwd: usage: pwd [-LP]");
+	ft_printf("\n");
 	return (EXIT_FAILURE);
 }
 

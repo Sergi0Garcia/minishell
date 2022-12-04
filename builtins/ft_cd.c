@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/03 20:16:06 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/12/04 01:58:33 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,34 +55,58 @@ static char	*get_home_address(t_env_node **env_lst)
 	return (res);
 }
 
-static int	valid_options(t_c *cmd)
+static int	valid_options(char *opt)
 {
-	char	*option;
-	char	len;
-	int		i;
-	char	c;
+	int	i;
+	int	back_flag;
 
-	if (!cmd->opts)
-		return (2);
-	option = cmd->opts[0];
-	len = ft_strlen(option);
-	if (len == 1 && option[0] == '-')
-		return (1);
-	if (len == 2 && option[0] == '-' && option[1] == '-')
-		return (2);
-	i = 1;
-	while (option[i])
+	i = 0;
+	back_flag = 0;
+	while (opt[i])
 	{
-		c = option[i];
-		if (c != 'L' && c != 'P')
+		if (i < 2 && opt[i] == '-')
 		{
-			ft_printf("invalid option: %c\n", c);
-			ft_printf("cd: usage: cd [-L|-P] [dir]\n");
-			return (0);
+			back_flag = 1;
+			if (i == 1)
+				back_flag = 0;
+			i++;
+		}
+		else
+		{
+			if (opt[i] != 'L' && opt[i] != 'P')
+				return (0);
 		}
 		i++;
 	}
-	return (2);
+	if (back_flag)
+		return (1);
+	return (1);
+}
+
+static int	valid_flag(t_c *cmd)
+{
+	int		i;
+	char	*option;
+
+	if (!cmd || !cmd ->opts)
+		return (1);
+	i = 0;
+	while (cmd->opts[i])
+	{
+		option[i] = cmd->opts[i];
+		return (handle_error());
+		i++;
+	}
+	return (1);
+}
+
+static int	handle_error(void)
+{
+	ft_printf("invalid option");
+	ft_printf("\n");
+	ft_printf("cd: usage: cd [-L|-P] [dir]");
+	ft_printf("\n");
+	return (0);
 }
 
 void	ft_cd(t_c *cmd, t_env_node **env_lst)
@@ -95,7 +119,7 @@ void	ft_cd(t_c *cmd, t_env_node **env_lst)
 	path = NULL;
 	str = NULL;
 
-	valid = valid_options(cmd);
+	valid = valid_flag(cmd);
 	ft_printf("valid: %i\n", valid);
 	if (valid == 0)
 		exit(EXIT_FAILURE);

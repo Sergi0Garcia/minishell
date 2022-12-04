@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/03 20:13:46 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/12/04 00:28:22 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,6 @@ typedef struct s_minishell
 
 void		interactive(t_minish *sh);
 void		non_interactive(t_minish *sh);
-
-/** Built ins */
-void	exit_free_all(void);
 
 /** testing builtins */
 void 		echo_test(t_env_node *env_lst);
