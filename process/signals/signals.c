@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 05:28:08 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/27 19:03:05 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/12/04 09:41:47 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	h_quit(void)
 /* interactive mode signal handling */
 void	interactive_mode_sig(void)
 {
-	printf("Good\n");
 	struct sigaction	sa;
 
 	sa.sa_flags = SIGINFO;

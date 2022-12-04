@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/30 13:27:54 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/12/04 18:12:01 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,18 @@ typedef enum s_word_type
 	NEIN
 }	t_wt;
 
+typedef enum s_quote
+{
+	SQUOTE,
+	DQUOTE,
+	NONE,
+}	t_q;
+
 typedef struct s_separator
 {
 	t_wt	type;
 	char	*word;
+	t_q		qtype;
 }	t_sep;
 
 typedef struct s_command
@@ -58,7 +66,6 @@ typedef struct s_command
 	char	**args;
 	char	**opts;
 }	t_c;
-
 
 typedef enum s_bool
 {
