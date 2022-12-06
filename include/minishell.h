@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/04 18:12:01 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/12/06 21:05:32 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ void		check_usage(int argc, char **argv, t_minish *sh);
 void		usage(void);
 
 /* shared/utils/init.c */
-void		init(t_minish *sh, char **argv, char **env);
+void		init(t_minish *sh, char **argv);
 
 /* shared/utils/word_ops.c */
 void		ft_wunshift(t_wsb *stack, t_wi info);

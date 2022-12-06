@@ -6,13 +6,13 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 13:58:41 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/29 23:56:17 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/12/06 21:05:39 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	init(t_minish *sh, char **argv, char **env)
+void	init(t_minish *sh, char **argv)
 {
 	int		i;
 	pid_t	pid;
@@ -25,16 +25,6 @@ void	init(t_minish *sh, char **argv, char **env)
 	str = ft_itoa(pid);
 	sh->pid = str;
 	sh->line = NULL;
-
-	while (env[i] != NULL)
-		i++;
-	sh->env = (char **) malloc((i + 1) * sizeof(char *));
-	i = 0;
-	while (env[i] != NULL)
-	{
-		sh->env[i] = ft_strdup(env[i]);
-		i++;
-	}
 	return ;
 }
 
