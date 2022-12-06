@@ -6,39 +6,28 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/04 01:58:33 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/12/06 04:23:49 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	update_paths(t_env_node **env_lst, char *path, char	*pathname)
-{
-	new_env(env_lst, ft_strjoin("PWD=", path));
-	new_env(env_lst, ft_strjoin("OLDPWD=", pathname));
-}
-
 static void	cd_back(t_env_node **env_lst)
 {
-	int		res_chdir;
+	char	*path;
 	char	*old_path;
-	char	*old_path_cp;
-	char	pathname[PATH_MAX];
 
-	old_path_cp = NULL;
+	path = ft_pwd(NULL);
 	old_path = env_value(env_lst, "OLDPWD");
 	if (!old_path)
 	{
 		ft_printf("cd: OLDPWD not set\n");
 		return ;
 	}
-	// ft_pwd(NULL, pathname, PATH_MAX);
-	res_chdir = chdir(old_path);
-	if (res_chdir == -1)
-		perror("Error: ");
-	old_path_cp = ft_strdup(old_path);
-	update_paths(env_lst, old_path, pathname);
-	ft_printf("%s\n", old_path_cp);
+	if (chdir(old_path) == -1)
+		perror("");
+	new_env(env_lst, ft_strjoin("PWD=", old_path));
+	new_env(env_lst, ft_strjoin("OLDPWD=", path));
 }
 
 static char	*get_home_address(t_env_node **env_lst)
@@ -55,91 +44,56 @@ static char	*get_home_address(t_env_node **env_lst)
 	return (res);
 }
 
-static int	valid_options(char *opt)
-{
-	int	i;
-	int	back_flag;
-
-	i = 0;
-	back_flag = 0;
-	while (opt[i])
-	{
-		if (i < 2 && opt[i] == '-')
-		{
-			back_flag = 1;
-			if (i == 1)
-				back_flag = 0;
-			i++;
-		}
-		else
-		{
-			if (opt[i] != 'L' && opt[i] != 'P')
-				return (0);
-		}
-		i++;
-	}
-	if (back_flag)
-		return (1);
-	return (1);
-}
-
-static int	valid_flag(t_c *cmd)
+static char	*parse_home_dir(char *home_path, t_c *cmd)
 {
 	int		i;
-	char	*option;
+	char	*res;
+	char	*sub_str;
 
-	if (!cmd || !cmd ->opts)
-		return (1);
 	i = 0;
-	while (cmd->opts[i])
+	if (cmd && cmd->args && cmd->args[0])
 	{
-		option[i] = cmd->opts[i];
-		return (handle_error());
-		i++;
+		if (cmd->args[0][0] && cmd->args[0][1]
+			&& cmd->args[0][0] == '~' && cmd->args[0][1] == '/')
+		{
+			sub_str = ft_substr(cmd->args[0], 1, ft_strlen(cmd->args[0]));
+			res = ft_strjoin(home_path, sub_str);
+			return (res);
+		}
 	}
-	return (1);
+	return (home_path);
 }
 
-static int	handle_error(void)
-{
-	ft_printf("invalid option");
-	ft_printf("\n");
-	ft_printf("cd: usage: cd [-L|-P] [dir]");
-	ft_printf("\n");
-	return (0);
-}
-
-void	ft_cd(t_c *cmd, t_env_node **env_lst)
+static void	cd_default(t_env_node **env_lst, t_c *cmd)
 {
 	char	*path;
-	char	*str;
-	char	pathname[PATH_MAX];
+	char	*new_path;
+	char	*home_path;
+
+	path = ft_pwd(NULL);
+	home_path = get_home_address(env_lst);
+	new_path = parse_home_dir(home_path, cmd);
+	if (chdir(new_path) == -1)
+		perror("");
+	new_env(env_lst, ft_strjoin("PWD=", new_path));
+	new_env(env_lst, ft_strjoin("OLDPWD=", path));
+}
+
+/**
+ * Function to handle command cd
+ * @param cmd
+ * @param env_lst
+ */
+void	ft_cd(t_c *cmd, t_env_node **env_lst)
+{
 	int		valid;
 
-	path = NULL;
-	str = NULL;
-
-	valid = valid_flag(cmd);
-	ft_printf("valid: %i\n", valid);
+	valid = cd_valid_flag(cmd);
 	if (valid == 0)
-		exit(EXIT_FAILURE);
-	if (valid == 1)
-		return (cd_back(env_lst));
+		return (cd_handle_error());
 	if (valid == 2)
-	{
-		path = get_home_address(env_lst);
-		if (cmd->args && cmd->args[0][0] == '~')
-		{
-			str = ft_substr(str, 1, ft_strlen(str) - 1);
-			path = ft_strjoin(path, str);
-		}
-		else
-			path = cmd->args[0];
-		// ft_pwd(NULL, pathname, PATH_MAX);
-		ft_printf("Changing to path: %s\n", path);
-		if (chdir(path) == -1)
-			perror("Error: ");
-		update_paths(env_lst, path, pathname);
-	}
+		return (cd_back(env_lst));
+	if (valid == 1)
+		return (cd_default(env_lst, cmd));
 	return ;
 }

@@ -1,18 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_cd_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/06 04:23:58 by segarcia         ###   ########.fr       */
+/*   Created: 2022/12/06 02:35:07 by segarcia          #+#    #+#             */
+/*   Updated: 2022/12/06 04:18:24 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	vaild_option(char *opt)
+static int	back_flag(char *opt)
+{
+	int	len;
+
+	len = ft_strlen(opt);
+	if (len == 1 && opt[0] == '-')
+		return (1);
+	return (0);
+}
+
+static int	db_back_flag(char *opt)
+{
+	int	len;
+
+	len = ft_strlen(opt);
+	if (len == 2 && opt[0] == '-' && opt[1] == '-')
+		return (1);
+	return (0);
+}
+
+static int	valid_options(char *opt)
 {
 	int	i;
 
@@ -31,42 +51,38 @@ static int	vaild_option(char *opt)
 	return (1);
 }
 
-static int	valid_flag(t_c *cmd)
+int	cd_valid_flag(t_c *cmd)
 {
 	int		i;
-	char	*option;
 
-	if (!cmd || !cmd->opts)
+	if (!cmd || !cmd ->opts)
 		return (1);
 	i = 0;
 	while (cmd->opts[i])
 	{
-		option = cmd->opts[i];
-		if (!vaild_option(option))
+		if (db_back_flag(cmd->opts[i]))
+		{
+			ft_printf("LLEGUE\n");
+			ft_printf("%s\n", cmd->opts[i + 1]);
+			if (back_flag(cmd->opts[i + 1]))
+				return (2);
+			else
+				return (1);
+		}
+		if (back_flag(cmd->opts[i]))
+			return (2);
+		if (!valid_options(cmd->opts[i]))
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-static int	handle_error(void)
+void	cd_handle_error(void)
 {
 	ft_printf("invalid option");
 	ft_printf("\n");
-	ft_printf("pwd: usage: pwd [-LP]");
+	ft_printf("cd: usage: cd [-L|-P] [dir]");
 	ft_printf("\n");
-	return (EXIT_FAILURE);
-}
-
-char	*ft_pwd(t_c *cmd)
-{
-	char	*res;
-
-	if (!valid_flag(cmd))
-	{
-		handle_error();
-		return (NULL);
-	}
-	res = getcwd(NULL, PATH_MAX);
-	return (res);
+	return ;
 }

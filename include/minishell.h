@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/04 00:28:22 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/12/06 02:42:12 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,10 @@ void		non_interactive(t_minish *sh);
 
 /** testing builtins */
 void 		echo_test(t_env_node *env_lst);
+
+/** built in functions */
+int		cd_valid_flag(t_c *cmd);
+void	cd_handle_error(void);
 
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);
