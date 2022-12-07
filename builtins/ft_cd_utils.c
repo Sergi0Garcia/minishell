@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 02:35:07 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/06 04:18:24 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/12/06 04:28:57 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ int	cd_valid_flag(t_c *cmd)
 	{
 		if (db_back_flag(cmd->opts[i]))
 		{
-			ft_printf("LLEGUE\n");
-			ft_printf("%s\n", cmd->opts[i + 1]);
 			if (back_flag(cmd->opts[i + 1]))
 				return (2);
 			else
