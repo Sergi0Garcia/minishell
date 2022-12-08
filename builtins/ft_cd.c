@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/08 12:50:17 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/12/08 13:23:20 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	cd_back(t_env_node **env_lst)
 		perror("");
 	new_env(env_lst, ft_strjoin("PWD=", old_path));
 	new_env(env_lst, ft_strjoin("OLDPWD=", path));
+	ft_printf("%s\n", old_path);
 }
 
 static char	*get_home_address(t_env_node **env_lst)
@@ -60,6 +61,7 @@ static char	*parse_home_dir(char *home_path, t_c *cmd)
 			res = ft_strjoin(home_path, sub_str);
 			return (res);
 		}
+		return (cmd->args[0]);
 	}
 	return (home_path);
 }

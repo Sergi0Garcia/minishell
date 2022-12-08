@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/08 04:06:58 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/12/08 14:10:08 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@
 // 	return (res);
 // }
 
-void	interactive(t_minish *sh)
-{
-	read_line(sh);
-	parse(sh);
-	return ;
-}
+// void	interactive(t_minish *sh)
+// {
+// 	read_line(sh);
+// 	parse(sh);
+// 	return ;
+// }
 
-void	non_interactive(t_minish *sh)
-{
-	parse(sh);
-	return ;
-}
+// void	non_interactive(t_minish *sh)
+// {
+// 	parse(sh);
+// 	return ;
+// }
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -73,7 +73,7 @@ int	main(int argc, char **argv, char **envp)
 	t_env_node	*env_lst;
 	env_lst = NULL;
 	set_env(envp, &env_lst);
-	// echo_test(env_lst);
+	echo_test(env_lst);
 	// echo -n functio
 
 	// ----------------------

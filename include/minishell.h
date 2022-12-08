@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/06 02:42:12 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/12/08 14:09:59 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,9 @@ void 		echo_test(t_env_node *env_lst);
 /** built in functions */
 int		cd_valid_flag(t_c *cmd);
 void	cd_handle_error(void);
+void	ft_export(t_c *cmd, t_env_node **env_lst);
+void	ft_unset(t_c *cmd, t_env_node **env_lst);
+void	ft_env(t_c *cmd, t_env_node **env_lst);
 
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);

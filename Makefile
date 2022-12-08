@@ -6,7 +6,7 @@
 #    By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2022/12/06 02:37:59 by segarcia         ###   ########.fr        #
+#    Updated: 2022/12/08 14:08:05 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,12 @@ NAME 		= 	minishell
 SRC			= 	minishell.c						\
 				./builtins/ft_pwd.c				\
 				./builtins/ft_env.c				\
+				./builtins/ft_env_utils.c		\
 				./builtins/ft_cd.c    			\
 				./builtins/ft_echo.c 			\
 				./builtins/ft_cd_utils.c 		\
+				./builtins/ft_export.c  		\
+				./builtins/ft_unset.c  			\
 				./builtins_tests/ft_echo.c		\
 				./lst_env/add_back.c			\
 				./lst_env/init.c 				\
@@ -62,7 +65,7 @@ $(GNL):
 	@make -C $(GNL_PATH)
 
 $(NAME): $(LIBFT) $(PRINTF) $(GNL) $(SRC)
-	$(CC) ${RL_FLAG} $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
+	$(CC) ${DEBUGFLAG} ${RL_FLAG} $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
 
 clean:
 	@make clean -C $(LIBFT_PATH)
