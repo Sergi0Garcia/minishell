@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:25:31 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/08 14:01:52 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/12/09 11:33:00 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_export(t_c *cmd, t_env_node **env_lst)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!cmd || !cmd->args || !cmd->args[0])
@@ -22,7 +22,7 @@ void	ft_export(t_c *cmd, t_env_node **env_lst)
 		print_env(env_lst, 1);
 		return ;
 	}
-	while(cmd->args[i])
+	while (cmd->args[i])
 	{
 		new_env(env_lst, cmd->args[i]);
 		i++;

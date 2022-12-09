@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:59:06 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/04 00:48:00 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/12/09 11:13:59 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ static void	handle_space(t_c *cmd, int nl_req)
 {
 	int	args_len;
 	int	opts_len;
-	int i;
+	int	i;
 
 	i = -1;
-	while (cmd->args && cmd->args[++i]);
+	while (cmd->args && cmd->args[++i])
 	args_len = i;
 	i = -1;
-	while (cmd->opts && cmd->opts[++i]);
+	while (cmd->opts && cmd->opts[++i])
 	opts_len = i - !nl_req;
 	if (opts_len > 0 && args_len > 0)
 		ft_printf(" ");

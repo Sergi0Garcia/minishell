@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 04:15:21 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/08 14:12:34 by segarcia         ###   ########.fr       */
+/*   Updated: 2022/12/09 11:56:20 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,11 @@ void echo_test(t_env_node *env_lst)
 	ft_env(NULL, &env_lst);
 	printf(KGRN "---------------------- \n");
 	ft_export(NULL, &env_lst);
+	// ft_export(command, &env_lst);
+	// printf(KMAG "---------------------- \n");
+	// ft_env(NULL, &env_lst);
+	// printf(KGRN "---------------------- \n");
+	// ft_export(NULL, &env_lst);
 	// ft_echo(command);
 	// ft_cd(command, &env_lst);
 	// char	*ptr;
