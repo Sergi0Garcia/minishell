@@ -6,7 +6,7 @@
 #    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2022/11/30 13:29:45 by rkanmado         ###   ########.fr        #
+#    Updated: 2023/01/06 02:43:42 by rkanmado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC			= 	minishell.c						\
 				./shared/utils/init.c			\
 				./shared/utils/s_word_ops.c		\
 				./process/handler/handler.c 	\
+				./process/quoting/check.c 		\
 				./shared/utils/read.c 			\
 				./shared/checks/check.c			\
 				./shared/utils/utils.c			\

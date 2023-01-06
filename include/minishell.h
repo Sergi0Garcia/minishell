@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/06 21:05:32 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/06 03:49:13 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,21 @@ typedef enum s_bool
 	true,
 }	t_b;
 
+typedef struct s_lexing
+{
+	int			start;
+	int			end;
+	t_wt		last;
+	t_wt		new;
+	t_sep		sep;
+}	t_lex;
+
 typedef struct s_wordinfo
 {
-	char				*word;
-	t_wt				sep;
+	char	*word;
+	t_wt	sep;
+	t_b		quoted;
+	t_b		expandable;
 }	t_wi;
 
 typedef struct s_word
@@ -173,7 +184,6 @@ void		errormsg(char *command, char *text);
 char		*joinstrs(char *s1, char *s2);
 void		error(char *str);
 
-
 /* shared/check/check.c */
 void		check_usage(int argc, char **argv, t_minish *sh);
 void		usage(void);
@@ -215,7 +225,8 @@ t_b			can_hspace(int start, char *str, t_sep *next);
 t_b			can_switch(char *substr, t_sep *next);
 t_wi		set_winfo(t_sep sep);
 void		lexing(t_minish *sh);
-
+void		lexing_with_quote(t_minish *sh, t_lex *lex);
+void		add_new_word(t_lex *lex, t_minish *sh);
 
 /* shared/display/display.c */
 void		display_words(t_w *w);
@@ -224,5 +235,11 @@ void		init_twsb(t_wsb *wsb);
 /* process/lexer/handle_cases */
 int			h_bestcase(int start, char *str, t_sep *next);
 t_b			is_multi(char *str, char c, t_sep *next);
+
+/* process/quoting/check */
+t_b			contain_quote(char *str);
+int			end_quote_delimiter(char *str, int i, t_q qtype);
+t_b			is_begin_with_quote(char *str);
+t_q			is_which_quote(char *str);
 
 #endif

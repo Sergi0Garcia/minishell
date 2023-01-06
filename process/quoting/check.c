@@ -6,45 +6,59 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 22:03:31 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/12/07 22:54:39 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/06 03:33:57 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	is_quote(char *str)
+t_q	is_which_quote(char *str)
 {
 	if (*str == '\'')
-		return (1);
+		return (SQUOTE);
 	else if (*str == '\"')
-		return (2);
+		return (DQUOTE);
 	else
-		return (0);
+		return (-1);
 }
 
-void	end_quote(char *str, int type, t_minish *sh)
+t_b	is_begin_with_quote(char *str)
 {
-	if (str == "\'")
-		endquote(str, sh);
-	else if (str == "\"")
-		enddquote(str, sh);
+	if (*str == '\'' || *str == '\"')
+		return (true);
 	else
-		return ;
+		return (false);
 }
 
-void	endquote(char *str, t_minish *sh)
+/* Check if the string contains quotes */
+t_b	contain_quote(char *str)
 {
-	int	quote;
-	int	dquote;
-
-	quote = 0;
-	dquote = 0;
 	while (*str)
 	{
 		if (*str == '\'')
-			quote++;
+			return (true);
 		else if (*str == '\"')
-			dquote++;
+			return (true);
 	}
-	return ;
+	return (false);
+}
+
+int	end_quote_delimiter(char *str, int i, t_q qtype)
+{
+	int	end;
+
+	end = i;
+	if (qtype == DQUOTE)
+	{
+		while (str[end] != '\"')
+			end++;
+	}
+	else if (qtype == SQUOTE)
+	{
+		while (str[end] != '\'')
+			end++;
+	}
+	else
+		return (-1);
+	return (end - i);
 }

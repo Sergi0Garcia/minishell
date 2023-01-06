@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 07:27:49 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/30 20:58:33 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/06 05:09:44 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,8 @@
  * echo "Hello Word"
  */
 
-typedef struct s_lexing
-{
-	int			start;
-	int			end;
-	t_wt		last;
-	t_wt		new;
-	t_sep		sep;
-}	t_lex;
-
-static void	increment(t_lex *lex, t_minish *sh)
+/* Adding new data into the stack */
+void	add_new_word(t_lex *lex, t_minish *sh)
 {
 	lex->sep.type = lex->last;
 	lex->sep.word = ft_substr(sh->line, lex->start, lex->end - lex->start);
@@ -38,6 +30,7 @@ static void	increment(t_lex *lex, t_minish *sh)
 	return ;
 }
 
+/* Set word informations */
 t_wi	set_winfo(t_sep sep)
 {
 	t_wi	tw;
@@ -47,23 +40,47 @@ t_wi	set_winfo(t_sep sep)
 	return (tw);
 }
 
+/* separate string by word */
 void	lexing(t_minish *sh)
 {
 	t_lex	lex;
+	t_b		quote;
 
 	init_twsb(&sh->wsb);
+	quote = NONE;
 	lex.last = is_sep(sh->line[0]);
 	lex.end = 0;
 	lex.start = 0;
 	while (sh->line[lex.end] != '\0')
 	{
-		lex.new = is_sep(sh->line[lex.end]);
-		if (lex.new != lex.last)
-			increment(&lex, sh);
+		if (is_begin_with_quote(&sh->line[lex.start]))
+		{
+			quote = is_which_quote(&sh->line[lex.start]);
+			lex.end = end_quote_delimiter(&sh->line[lex.start], \
+						lex.start, quote);
+			if (lex.new != lex.last)
+				add_new_word(&lex, sh);
+		}
 		else
-			lex.end++;
+		{
+			lex.new = is_sep(sh->line[lex.end]);
+			if (lex.new != lex.last)
+				add_new_word(&lex, sh);
+			else
+				lex.end++;
+		}
 	}
 	if (lex.start != lex.end)
-		increment(&lex, sh);
+		add_new_word(&lex, sh);
+	return ;
+}
+
+void	lexing_with_quote(t_minish *sh, t_lex *lex)
+{
+	return ;
+}
+
+void	lexing_without_quote(t_minish *sh, t_lex *lex)
+{
 	return ;
 }
