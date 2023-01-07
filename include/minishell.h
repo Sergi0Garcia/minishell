@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/06 03:49:13 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/07 05:04:40 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ t_b			can_hspace(int start, char *str, t_sep *next);
 t_b			can_switch(char *substr, t_sep *next);
 t_wi		set_winfo(t_sep sep);
 void		lexing(t_minish *sh);
-void		lexing_with_quote(t_minish *sh, t_lex *lex);
+void		lexing_with_quote(t_minish *sh, t_lex *lex, t_q *quote);
 void		add_new_word(t_lex *lex, t_minish *sh);
 
 /* shared/display/display.c */
