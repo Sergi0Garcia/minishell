@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/07 05:04:40 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/07 09:28:01 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,14 @@ typedef enum s_word_type
 	DOREDIRECT,
 	SPACE,
 	PIPE,
-	AND,
+	ANDIF,
+	ORIF,
+	OPRARENTHESIS,
+	CPARENTHESIS,
 	NEIN
 }	t_wt;
+
+
 
 typedef enum s_quote
 {
