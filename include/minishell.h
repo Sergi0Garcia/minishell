@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: richard <richard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/07 09:28:01 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:58:01 by richard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,33 @@ typedef struct s_redirect
 
 typedef enum s_word_type
 {
-	COMMAND,
+	BEGINING,
 	WORD,
-	DIREDIRECT,
-	SIREDIRECT,
-	SOREDIRECT,
-	DOREDIRECT,
+	DLESS,
+	LESS,
+	DGREAT,
+	GREAT,
 	SPACE,
 	PIPE,
 	ANDIF,
 	ORIF,
 	OPRARENTHESIS,
 	CPARENTHESIS,
+	END,
 	NEIN
 }	t_wt;
 
-
-
-typedef enum s_quote
+typedef struct s_key_value_pair
 {
+	t_wt key;
+	t_wt *values;
+} t_kvp;
+
+typedef enum s_quote {
 	SQUOTE,
 	DQUOTE,
 	NONE,
-}	t_q;
+} t_q;
 
 typedef struct s_separator
 {
@@ -247,4 +251,7 @@ int			end_quote_delimiter(char *str, int i, t_q qtype);
 t_b			is_begin_with_quote(char *str);
 t_q			is_which_quote(char *str);
 
+/* process/parser/check.c */
+t_b     is_wt_between_values(t_wt word_type, t_wt *list);
+t_wt    is_which_wt(char *s1);
 #endif

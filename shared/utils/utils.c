@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: richard <richard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 20:45:57 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/30 13:31:13 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/09 09:39:59 by richard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	end_of_sep(char *str, int start)
 
 t_b	is_sep_type(t_wt wt)
 {
-	if (wt == WORD || wt == DIREDIRECT || wt == SIREDIRECT || wt == SOREDIRECT \
-		|| wt == DOREDIRECT || wt == SPACE || wt == PIPE)
+	if (wt == WORD || wt == DLESS || wt == LESS || wt == GREAT \
+		|| wt == DGREAT || wt == SPACE || wt == PIPE)
 		return (true);
 	return (false);
 }
@@ -42,17 +42,17 @@ t_wt	is_which_sep(char *s1)
 	if (strcmp(s1, "|") == 0)
 		return (PIPE);
 	else if (strcmp(s1, ">") == 0)
-		return (SOREDIRECT);
+		return (GREAT);
 	else if (strcmp(s1, ">>") == 0)
-		return (DOREDIRECT);
+		return (DGREAT);
 	else if (strcmp(s1, " ") == 0)
 		return (SPACE);
 	else if (strcmp(s1, "<") == 0)
-		return (SIREDIRECT);
+		return (LESS);
 	else if (strcmp(s1, "<<") == 0)
-		return (DIREDIRECT);
+		return (LESS);
 	else if (strcmp(s1, "&") == 0)
-		return (AND);
+		return (ANDIF);
 	else if (ft_strlen(s1) > 2)
 		return (WORD);
 	else
@@ -64,9 +64,9 @@ t_wt	is_sep(char s1)
 	if (s1 == '|')
 		return (PIPE);
 	else if (s1 == '>')
-		return (SOREDIRECT);
+		return (GREAT);
 	else if (s1 == '<')
-		return (SIREDIRECT);
+		return (LESS);
 	else if (s1 == ' ')
 		return (SPACE);
 	else
