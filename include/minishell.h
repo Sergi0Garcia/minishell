@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: richard <richard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/09 20:29:54 by richard          ###   ########.fr       */
+/*   Updated: 2023/01/10 06:47:39 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,23 @@ typedef enum s_word_type
 	NEIN
 }	t_wt;
 
+typedef struct s_current_and_next_probable_word_type
+{
+	t_wt	*curr;
+	t_wt	*next;
+}	t_cn;
+
 typedef struct s_key_value_pair
 {
-	t_wt key;
-	t_wt *values;
-} t_kvp;
+	t_wt	key;
+	t_cn	values;
+}	t_kvp;
 
 typedef enum s_quote {
 	SQUOTE,
 	DQUOTE,
 	NONE,
-} t_q;
+}	t_q;
 
 typedef struct s_separator
 {
@@ -252,16 +258,18 @@ t_b			is_begin_with_quote(char *str);
 t_q			is_which_quote(char *str);
 
 /* process/parser/check.c */
-t_b         is_wt_between_values(t_wt word_type, t_wt *list);
-t_wt        is_which_wt(char *s1);
+t_b			is_wt_between_values(t_wt word_type, t_wt *list);
+t_wt		is_which_wt(char *s1);
 
 /* process/parser/parser.c */
-void        parser(t_minish *sh);
-t_b         is_edges_good(t_w *word);
-t_b         is_between_good(t_w *word);
-void        check_single_wt(t_wsb wsb);
+void		parser(t_minish *sh);
+t_b			is_edges_good(t_w *word, t_kvp *kvp, int begin);
+t_b			is_between_good(t_w *word, t_kvp *kvp);
 
-/* process/shared/utils/utils.c */
-t_wt        *get_according_values(t_wt key);
-t_kvp       *get_kv_pairs(void);
+/* process/shared/utils/constants.c */
+t_cn		get_according_values(t_wt key);
+t_kvp		*get_kv_pairs(void);
+
+/* process/shared/utils/alloc.c */
+t_wt		*alloc(t_wt	**wt, int mem_nbr);
 #endif
