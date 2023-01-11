@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 00:50:29 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/11 08:16:26 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:28:15 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	parser(t_minish *sh)
 		if (word->wi.sep != SPACE)
 		{
 			if (i == 0)
-				is_edges_good(word, kvp, 1);
+				is_edges_good(word, BEGINING, kvp, 1);
 			else if (i == sh->wsb.size - 1)
-				is_edges_good(word, kvp, 0);
+				is_edges_good(word, END, kvp, 0);
 			else
 				is_between_good(word, kvp);
 		}
@@ -37,7 +37,7 @@ void	parser(t_minish *sh)
 	}
 }
 
-t_b	is_edges_good(t_w *word, t_kvp *kvp, int begin)
+t_b	is_edges_good(t_w *word, t_wt key, t_kvp *kvp, int begin)
 {
 	t_b		is_curr_exist;
 	t_b		is_next_exist;
@@ -45,7 +45,7 @@ t_b	is_edges_good(t_w *word, t_kvp *kvp, int begin)
 
 	cn = get_values_of_index(word->wi.sep, kvp);
 	is_next_exist = is_wt_between_values(word->next->wi.sep, cn.curr);
-	is_curr_exist = is_wt_between_values(word->wi.sep, cn.next);
+	is_curr_exist = is_wt_between_values(key, cn.next);
 	if (is_curr_exist && begin)
 		return (true);
 	else if (is_next_exist && !begin)

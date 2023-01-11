@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/11 08:17:37 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:24:19 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,7 +267,7 @@ t_wt		is_which_wt(char *s1);
 
 /* process/parser/parser.c */
 void		parser(t_minish *sh);
-t_b			is_edges_good(t_w *word, t_kvp *kvp, int begin);
+t_b			is_edges_good(t_w *word, t_wt key, t_kvp *kvp, int begin);
 t_b			is_between_good(t_w *word, t_kvp *kvp);
 
 /* process/parser/error.c */
