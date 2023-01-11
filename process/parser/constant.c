@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 00:55:13 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/10 06:41:57 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/11 07:27:01 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,22 @@ typedef struct s_word_type_constant
 t_wtc	get_next_word_type_consts(t_wtc *wtc)
 {
 	wtc->begining = alloc(&wtc->begining, 8);
-	ft_memcpy((void *)wtc->begining, (const void *){DLESS, LESS, \
-		GREAT, DGREAT, WORD, OPRARENTHESIS, END, NULL}, 8);
-	wtc->greatorless = alloc(&wtc->greatorless, 2);
-	ft_memcpy((void *)wtc->greatorless, (const void *){WORD, NULL}, 2);
-	wtc->word = alloc(&wtc->word, 10);
-	t_memcpy((void *)wtc->word, (const void *){DLESS, LESS, GREAT, \
-		DGREAT, WORD, PIPE, ORIF, ANDIF, END, NULL}, 10);
-	wtc->pipeorif = alloc(&wtc->pipeorif, 7);
-	t_memcpy((void *)wtc->pipeorif, (const void *){DLESS, LESS, \
-	GREAT, DGREAT, WORD, OPRARENTHESIS, NULL}, 7);
-	wtc->oparenthesis = alloc(&wtc->oparenthesis, 8);
-	t_memcpy((void *)wtc->oparenthesis, (const void *){DLESS, LESS, \
-	GREAT, DGREAT, WORD, OPRARENTHESIS, CPARENTHESIS, NULL}, 8);
-	wtc->cparenthesis = alloc(&wtc->cparenthesis, 11);
-	t_memcpy((void *)wtc->cparenthesis, (const void *){DLESS, LESS, \
-	GREAT, DGREAT, WORD, PIPE, ORIF, ANDIF, CPARENTHESIS, END, NULL}, 11);
+	ft_cpywt((void *)wtc->begining, (const void *)(t_wt[]){DLESS, LESS, \
+		GREAT, DGREAT, WORD, OPRARENTHESIS, END}, 7);
+	wtc->greatorless = alloc(&wtc->greatorless, 1);
+	ft_cpywt((void *)wtc->greatorless, (const void *)(t_wt[]){WORD}, 1);
+	wtc->word = alloc(&wtc->word, 9);
+	ft_cpywt((void *)wtc->word, (const void *)(t_wt[]){DLESS, LESS, GREAT, \
+		DGREAT, WORD, PIPE, ORIF, ANDIF, END}, 9);
+	wtc->pipeorif = alloc(&wtc->pipeorif, 6);
+	ft_cpywt((void *)wtc->pipeorif, (const void *)(t_wt[]){DLESS, LESS, \
+	GREAT, DGREAT, WORD, OPRARENTHESIS}, 6);
+	wtc->oparenthesis = alloc(&wtc->oparenthesis, 7);
+	ft_cpywt((void *)wtc->oparenthesis, (const void *)(t_wt[]){DLESS, LESS, \
+	GREAT, DGREAT, WORD, OPRARENTHESIS, CPARENTHESIS}, 7);
+	wtc->cparenthesis = alloc(&wtc->cparenthesis, 10);
+	ft_cpywt((void *)wtc->cparenthesis, (const void *)(t_wt[]){DLESS, LESS, \
+	GREAT, DGREAT, WORD, PIPE, ORIF, ANDIF, CPARENTHESIS, END}, 10);
 	wtc->end = NULL;
 	return (*wtc);
 }
@@ -49,24 +49,25 @@ t_wtc	get_next_word_type_consts(t_wtc *wtc)
 t_wtc	get_curr_word_type_consts(t_wtc *wtc)
 {
 	wtc->begining = NULL;
-	wtc->greatorless = alloc(&wtc->greatorless, 8);
-	ft_memcpy((void *)wtc->greatorless, (const void *){WORD, PIPE, ORIF, \
-		ANDIF, BEGINING, OPRARENTHESIS, CPARENTHESIS, NULL}, 8);
-	wtc->word = alloc(&wtc->word, 12);
-	t_memcpy((void *)wtc->word, (const void *){DLESS, LESS, GREAT, DGREAT, \
-		WORD, PIPE, ORIF, ANDIF,OPRARENTHESIS, CPARENTHESIS, END, NULL}, 12);
-	wtc->pipeorif = alloc(&wtc->pipeorif, 3);
-	t_memcpy((void *)wtc->pipeorif, (const void *){WORD, \
-		CPARENTHESIS, NULL}, 3);
-	wtc->oparenthesis = alloc(&wtc->oparenthesis, 6);
-	t_memcpy((void *)wtc->oparenthesis, (const void *){PIPE, ORIF, \
-	ANDIF, OPRARENTHESIS, BEGINING, NULL}, 6);
-	wtc->cparenthesis = alloc(&wtc->cparenthesis, 3);
-	t_memcpy((void *)wtc->cparenthesis, (const void *){OPRARENTHESIS, \
-		CPARENTHESIS, NULL}, 3);
-	wtc->end = alloc(&wtc->end, 4);
-	t_memcpy((void *)wtc->end, (const void *){WORD, \
-	CPARENTHESIS, BEGINING, NULL}, 4);
+	wtc->greatorless = alloc(&wtc->greatorless, 7);
+	ft_cpywt((void *)wtc->greatorless, (const void *)(t_wt[]){WORD, \
+	PIPE, ORIF, ANDIF, BEGINING, OPRARENTHESIS, CPARENTHESIS}, 7);
+	wtc->word = alloc(&wtc->word, 11);
+	ft_cpywt((void *)wtc->word, (const void *)(t_wt[]){DLESS, LESS, \
+	GREAT, DGREAT, WORD, PIPE, ORIF, ANDIF, OPRARENTHESIS, CPARENTHESIS, \
+	END}, 11);
+	wtc->pipeorif = alloc(&wtc->pipeorif, 2);
+	ft_cpywt((void *)wtc->pipeorif, (const void *)(t_wt[]){WORD, \
+		CPARENTHESIS}, 2);
+	wtc->oparenthesis = alloc(&wtc->oparenthesis, 5);
+	ft_cpywt((void *)wtc->oparenthesis, (const void *)(t_wt[]){PIPE, ORIF, \
+	ANDIF, OPRARENTHESIS, BEGINING}, 5);
+	wtc->cparenthesis = alloc(&wtc->cparenthesis, 2);
+	ft_cpywt((void *)wtc->cparenthesis, (const void *)(t_wt[]){OPRARENTHESIS, \
+		CPARENTHESIS}, 2);
+	wtc->end = alloc(&wtc->end, 3);
+	ft_cpywt((void *)wtc->end, (const void *)(t_wt[]){WORD, \
+	CPARENTHESIS, BEGINING}, 3);
 	return (*wtc);
 }
 
@@ -98,15 +99,22 @@ t_cn	get_according_values(t_wt key)
 
 t_cn	get_values_of_index(t_wt key, t_kvp *key_values)
 {
-	int	i;
+	int		i;
+	t_cn	cn;
 
 	i = 0;
-	while (key_values[i] != NULL)
+	cn.curr = NULL;
+	cn.next = NULL;
+	while (i < 12)
 	{
 		if (key == key_values[i].key)
-			return (key_values->values);
+		{
+			cn = (key_values->values);
+			break ;
+		}
 		i++;
 	}
+	return (cn);
 }
 
 t_kvp	*get_kv_pairs(void)
@@ -115,19 +123,19 @@ t_kvp	*get_kv_pairs(void)
 	t_wt	*keys;
 	int		i;
 
-	keys = alloc(&keys, 13);
+	alloc(&keys, 12);
 	i = 0;
-	ft_memcpy(keys, (const void *){BEGINING, DLESS, LESS, \
+	ft_cpywt((void *)keys, (const void *)(t_wt[]){BEGINING, DLESS, LESS, \
 	GREAT, DGREAT, WORD, PIPE, ORIF, ANDIF, OPRARENTHESIS, \
-	CPARENTHESIS, END, NULL}, 13);
-	keys_values = malloc(sizeof(t_kvp) * 13);
+	CPARENTHESIS, END}, 12);
+	keys_values = malloc(sizeof(t_kvp) * 12);
 	if (keys_values == NULL)
 		return (NULL);
 	while (i < 12)
 	{
 		keys_values[i].key = keys[i];
 		keys_values[i].values = get_according_values(keys[i]);
+		i++;
 	}
-	keys_values[i] = NULL;
 	return (keys_values);
 }

@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/10 06:47:39 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/11 08:17:37 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,9 +218,9 @@ void		read_line(t_minish *sh);
 
 /* shared/utils/utils */
 int			ft_strcmp(char *s1, char *s2);
-int			end_of_sep(char * str, int start);
+int			end_of_sep(char *str, int start);
 t_b			is_sep_type(t_wt wt);
-t_wt		is_which_sep(char *s1);
+char		*char_of_sep(t_wt wt);
 t_wt		is_sep(char s1);
 
 /* shared/utils/handling */
@@ -241,7 +241,11 @@ t_b			can_switch(char *substr, t_sep *next);
 t_wi		set_winfo(t_sep sep);
 void		lexing(t_minish *sh);
 void		lexing_with_quote(t_minish *sh, t_lex *lex, t_q *quote);
+void		lexing_without_quote(t_minish *sh, t_lex *lex, t_b *is_quoted);
 void		add_new_word(t_lex *lex, t_minish *sh);
+
+/* process/lexer/utils */
+void		remove_spaces(t_minish *sh);
 
 /* shared/display/display.c */
 void		display_words(t_w *w);
@@ -266,10 +270,18 @@ void		parser(t_minish *sh);
 t_b			is_edges_good(t_w *word, t_kvp *kvp, int begin);
 t_b			is_between_good(t_w *word, t_kvp *kvp);
 
+/* process/parser/error.c */
+void		parser_error(char *c);
+
 /* process/shared/utils/constants.c */
 t_cn		get_according_values(t_wt key);
 t_kvp		*get_kv_pairs(void);
+t_cn		set_wt_values(t_wt *curr, t_wt *next, t_cn *cn);
+t_cn		get_values_of_index(t_wt key, t_kvp *key_values);
 
 /* process/shared/utils/alloc.c */
 t_wt		*alloc(t_wt	**wt, int mem_nbr);
+void		*ft_cpywt(void *dst, const void *src, size_t n);
+void		ft_free_stack(t_w **head, t_w **tail);
+
 #endif

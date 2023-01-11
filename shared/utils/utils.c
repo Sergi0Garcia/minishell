@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: richard <richard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 20:45:57 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/09 09:39:59 by richard          ###   ########.fr       */
+/*   Updated: 2023/01/11 08:17:50 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,24 @@ t_b	is_sep_type(t_wt wt)
 	return (false);
 }
 
-t_wt	is_which_sep(char *s1)
+char	*char_of_sep(t_wt wt)
 {
-	if (strcmp(s1, "|") == 0)
-		return (PIPE);
-	else if (strcmp(s1, ">") == 0)
-		return (GREAT);
-	else if (strcmp(s1, ">>") == 0)
-		return (DGREAT);
-	else if (strcmp(s1, " ") == 0)
-		return (SPACE);
-	else if (strcmp(s1, "<") == 0)
-		return (LESS);
-	else if (strcmp(s1, "<<") == 0)
-		return (LESS);
-	else if (strcmp(s1, "&") == 0)
-		return (ANDIF);
-	else if (ft_strlen(s1) > 2)
-		return (WORD);
+	if (wt == PIPE)
+		return ("|");
+	else if (wt == GREAT)
+		return (">");
+	else if (wt == DGREAT)
+		return (">>");
+	else if (wt == SPACE)
+		return (" ");
+	else if (wt == LESS)
+		return ("<");
+	else if (wt == DLESS)
+		return ("<<");
+	else if (wt == ANDIF)
+		return ("&");
 	else
-		return (NEIN);
+		return (" ");
 }
 
 t_wt	is_sep(char s1)

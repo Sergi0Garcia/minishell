@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 07:27:49 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/07 05:09:58 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/11 07:54:33 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	lexing(t_minish *sh)
 	}
 	if (lex.start != lex.end)
 		add_new_word(&lex, sh);
+	remove_spaces(sh);
 	return ;
 }
 
@@ -81,7 +82,7 @@ void	lexing_without_quote(t_minish *sh, t_lex *lex, t_b *is_quoted)
 	lex->new = is_sep(sh->line[lex->end]);
 	if (lex->new != lex->last)
 	{
-		add_new_word(&lex, sh);
+		add_new_word(lex, sh);
 		*is_quoted = 1;
 	}
 	else

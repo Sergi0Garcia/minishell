@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:26:26 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/10 06:12:26 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/11 08:16:30 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void	parse(t_minish *sh)
 	split = ft_split(sh->line, ';');
 	while (split[i] != NULL)
 	{
-		// if (is_sep(split[i]) != NEIN)
-		// {
-		// 	concat = ft_strjoin(concat, split[i]);
-		// 	concat = ft_strjoin(concat, " ");
-		// 	i++;
-		// }
+		if (is_which_wt(split[i]) != NEIN)
+		{
+			concat = ft_strjoin(concat, split[i]);
+			concat = ft_strjoin(concat, " ");
+			i++;
+		}
 	}
 }

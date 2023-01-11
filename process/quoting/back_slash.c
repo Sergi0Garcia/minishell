@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 09:40:30 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/12/10 15:37:44 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/11 00:34:19 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,4 @@ t_slash	is_backslash(char *str)
 			slash.exist = true;
 	}
 	return (slash);
-}
-
-void	quoting(t_sep *ws)
-{
-	t_slash	slash;
-
-	slash = is_backslash(ws->word);
-	if (slash.exist)
-	{
-		if (slash.quoted)
-		{
-
-		}
-	}
 }

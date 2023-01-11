@@ -6,7 +6,7 @@
 #    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/01/06 02:43:42 by rkanmado         ###   ########.fr        #
+#    Updated: 2023/01/11 08:17:02 by rkanmado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,15 +23,21 @@ SRC			= 	minishell.c						\
 				./shared/errors/error.c 		\
 				./shared/utils/init.c			\
 				./shared/utils/s_word_ops.c		\
-				./process/handler/handler.c 	\
-				./process/quoting/check.c 		\
 				./shared/utils/read.c 			\
 				./shared/checks/check.c			\
 				./shared/utils/utils.c			\
 				./shared/utils/parsing.c		\
+				./shared/utils/alloc.c			\
+				./shared/display/display.c		\
+				./process/handler/handler.c 	\
 				./process/signals/signals.c		\
+				./process/quoting/quoting.c		\
+				./process/parser/parser.c		\
+				./process/parser/constant.c		\
+				./process/parser/check.c		\
+				./process/parser/error.c		\
 				./process/lexer/lexer.c			\
-				./shared/display/display.c
+				./process/lexer/utils.c
 
 OBJS		= $(SRC:.c=.o)
 

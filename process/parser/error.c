@@ -1,12 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   double_quoting.c                                   :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/04 09:41:27 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/12/04 09:41:28 by rkanmado         ###   ########.fr       */
+/*   Created: 2023/01/11 08:02:46 by rkanmado          #+#    #+#             */
+/*   Updated: 2023/01/11 08:18:31 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../include/minishell.h"
+
+void	parser_error(char *c)
+{
+	printf("Error: Syntax error near unexcepted token %% %s", c);
+	exit(EXIT_FAILURE);
+}
