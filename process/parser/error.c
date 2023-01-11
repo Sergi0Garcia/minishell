@@ -12,8 +12,8 @@
 
 #include "../../include/minishell.h"
 
-void	parser_error(char *c)
+void	parser_error(char *str)
 {
-	printf("Error: Syntax error near unexcepted token %% %s", c);
+	printf("Error: Syntax error near unexcepted token %% %s", str);
 	exit(EXIT_FAILURE);
 }

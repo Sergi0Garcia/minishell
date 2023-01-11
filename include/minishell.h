@@ -271,7 +271,7 @@ t_b			is_edges_good(t_w *word, t_kvp *kvp, int begin);
 t_b			is_between_good(t_w *word, t_kvp *kvp);
 
 /* process/parser/error.c */
-void		parser_error(char *c);
+void		parser_error(char *str);
 
 /* process/shared/utils/constants.c */
 t_cn		get_according_values(t_wt key);
