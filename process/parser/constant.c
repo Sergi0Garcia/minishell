@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 00:55:13 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/11 07:27:01 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/12 22:18:46 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ t_cn	get_values_of_index(t_wt key, t_kvp *key_values)
 	{
 		if (key == key_values[i].key)
 		{
-			cn = (key_values->values);
+			cn = (key_values[i].values);
 			break ;
 		}
 		i++;

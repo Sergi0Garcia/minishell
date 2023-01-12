@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/11 21:24:19 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/12 23:00:37 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,8 @@ void		add_new_word(t_lex *lex, t_minish *sh);
 
 /* process/lexer/utils */
 void		remove_spaces(t_minish *sh);
+void		check_greatorless(t_wt *last, char *str);
+
 
 /* shared/display/display.c */
 void		display_words(t_w *w);

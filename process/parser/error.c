@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:02:46 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/11 08:18:31 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/12 22:49:50 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	parser_error(char *str)
 {
-	printf("Error: Syntax error near unexcepted token %% %s", str);
+	printf("syntax error near unexpected token `%s'", str);
 	exit(EXIT_FAILURE);
 }
