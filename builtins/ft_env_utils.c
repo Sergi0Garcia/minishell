@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:22:12 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/15 12:22:15 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/16 10:51:19 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,15 +92,10 @@ void	new_env(t_env_node **env_lst, char *str)
 	t_env_node	*new;
 
 	brk_idx = get_idx_separator(str);
-	ft_printf("brk_idx: %s\n", brk_idx);
-	ft_printf("Strlen: %i\n", ft_strlen(str));
-	// if (!brk_idx)
-	// 	return ;
 	if (brk_idx)
 		name = ft_substr(str, 0, brk_idx);
 	else
 		name = ft_substr(str, 0, ft_strlen(str));
-	ft_printf("Name: %s\n", name);
 	value = NULL;
 	if (brk_idx)
 		value = ft_substr(str, brk_idx + 1, ft_strlen(str) - brk_idx - 1);
@@ -156,7 +151,7 @@ void	print_env(t_env_node **env_lst, int with_declare)
 			ft_printf("%s", tmp->name);
 			if (tmp->value)
 			{
-				ft_printf("=\"%s%i\"\n", tmp->value, tmp->value);
+				ft_printf("=\"%s\"\n", tmp->value);
 			}
 			else
 				ft_printf("\n");

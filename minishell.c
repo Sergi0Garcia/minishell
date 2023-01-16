@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/09 11:32:38 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/16 11:07:32 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,11 @@ int	main(int argc, char **argv, char **envp)
 	t_env_node	*env_lst;
 	env_lst = NULL;
 	set_env(envp, &env_lst);
-	echo_test(env_lst);
+	printf("\n\n");
+	ft_env(NULL, &env_lst);
+	printf("\n\n");
+	ft_export(NULL, &env_lst);
+	// echo_test(env_lst);
 	// echo -n functio
 
 	// ----------------------

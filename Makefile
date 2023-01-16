@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2022/12/08 14:08:05 by segarcia         ###   ########.fr        #
+#    Updated: 2023/01/16 10:26:18 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
