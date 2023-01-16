@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 00:50:29 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/12 22:48:30 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/16 09:24:11 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_b	is_edges_good(t_w *word, t_wt key, t_kvp *kvp, int begin)
 	else if (is_next_exist && !begin)
 		return (true);
 	else
-		parser_error(char_of_sep(word->next->wi.sep));
+		parser_error(char_of_sep(word->wi.sep));
 	return (false);
 }
 
