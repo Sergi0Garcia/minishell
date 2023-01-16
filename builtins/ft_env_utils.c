@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 09:33:02 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/09 11:45:04 by segarcia         ###   ########.fr       */
+/*   Created: 2023/01/15 12:22:12 by segarcia          #+#    #+#             */
+/*   Updated: 2023/01/15 12:22:15 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
