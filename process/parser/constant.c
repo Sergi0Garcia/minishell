@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 00:55:13 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/12 22:18:46 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/17 04:22:51 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_word_type_constant
 	t_wt	*end;
 }	t_wtc;
 
-t_wtc	get_next_word_type_consts(t_wtc *wtc)
+t_wtc	get_curr_word_type_consts(t_wtc *wtc)
 {
 	wtc->begining = alloc(&wtc->begining, 8);
 	ft_cpywt((void *)wtc->begining, (const void *)(t_wt[]){DLESS, LESS, \
@@ -42,11 +42,13 @@ t_wtc	get_next_word_type_consts(t_wtc *wtc)
 	wtc->cparenthesis = alloc(&wtc->cparenthesis, 10);
 	ft_cpywt((void *)wtc->cparenthesis, (const void *)(t_wt[]){DLESS, LESS, \
 	GREAT, DGREAT, WORD, PIPE, ORIF, ANDIF, CPARENTHESIS, END}, 10);
-	wtc->end = NULL;
+	wtc->end = alloc(&wtc->end, 3);
+	ft_cpywt((void *)wtc->end, (const void *)(t_wt[]){WORD, \
+	CPARENTHESIS, BEGINING}, 3);
 	return (*wtc);
 }
 
-t_wtc	get_curr_word_type_consts(t_wtc *wtc)
+t_wtc	get_next_word_type_consts(t_wtc *wtc)
 {
 	wtc->begining = NULL;
 	wtc->greatorless = alloc(&wtc->greatorless, 7);
@@ -65,9 +67,7 @@ t_wtc	get_curr_word_type_consts(t_wtc *wtc)
 	wtc->cparenthesis = alloc(&wtc->cparenthesis, 2);
 	ft_cpywt((void *)wtc->cparenthesis, (const void *)(t_wt[]){OPRARENTHESIS, \
 		CPARENTHESIS}, 2);
-	wtc->end = alloc(&wtc->end, 3);
-	ft_cpywt((void *)wtc->end, (const void *)(t_wt[]){WORD, \
-	CPARENTHESIS, BEGINING}, 3);
+	wtc->end = NULL;
 	return (*wtc);
 }
 

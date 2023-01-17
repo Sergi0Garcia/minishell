@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 07:27:49 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/16 09:20:05 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/17 05:01:25 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	lexing_with_quote(t_minish *sh, t_lex *lex, t_q *quote)
 	*quote = is_which_quote(&sh->line[lex->start]);
 	lex->start++;
 	lex->end = end_quote_delimiter(sh->line, \
-				lex, *quote);
+				lex, sh->line[lex->start - 1]);
 	if (lex->is_format_ok == false)
 	{
 		recursive_rl(sh, lex, ">");

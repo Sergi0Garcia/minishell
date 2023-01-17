@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/16 08:50:22 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/17 04:57:39 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,7 +259,7 @@ t_b			is_multi(char *str, char c, t_sep *next);
 
 /* process/quoting/check */
 void		recursive_rl(t_minish *sh, t_lex *lex, char *title);
-int			end_quote_delimiter(char *str, t_lex *lex, t_q qtype);
+int			end_quote_delimiter(char *str, t_lex *lex, char c);
 t_b			is_begin_with_quote(char *str);
 t_q			is_which_quote(char *str);
 
@@ -268,9 +268,9 @@ t_b			is_wt_between_values(t_wt word_type, t_wt *list);
 t_wt		is_which_wt(char *s1);
 
 /* process/parser/parser.c */
-void		parser(t_minish *sh);
-t_b			is_edges_good(t_w *word, t_wt key, t_kvp *kvp, int begin);
-t_b			is_between_good(t_w *word, t_kvp *kvp);
+t_b			parser(t_minish *sh);
+t_b			is_edges_good(t_w *word, t_wt key, t_kvp *kvp, t_b *can_continue);
+t_b			is_between_good(t_w *word, t_kvp *kvp, t_b *can_continue);
 
 /* process/parser/error.c */
 void		parser_error(char *str);

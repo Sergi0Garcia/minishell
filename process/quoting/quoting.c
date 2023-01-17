@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 22:03:31 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/16 09:09:22 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/17 04:57:40 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,31 +49,20 @@ void	recursive_rl(t_minish *sh, t_lex *lex, char *title)
 	return ;
 }
 
-int	end_quote_delimiter(char *str, t_lex *lex, t_q qtype)
+int	end_quote_delimiter(char *str, t_lex *lex, char c)
 {
 	int	end;
 
 	end = lex->start;
 	lex->is_format_ok = false;
-	if (qtype == DQUOTE)
+	while (str[end] != '\0')
 	{
-		while (str[end] != '\0')
+		if (str[end] == c)
 		{
-			if (str[end] == '\"')
-				lex->is_format_ok = true;
-			end++;
+			lex->is_format_ok = true;
+			break ;
 		}
+		end++;
 	}
-	else if (qtype == SQUOTE)
-	{
-		while (str[end] != '\0')
-		{
-			if (str[end] == '\'')
-				lex->is_format_ok = true;
-			end++;
-		}
-	}
-	else
-		return (-1);
 	return (end);
 }
