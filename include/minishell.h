@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/17 02:45:33 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/17 05:01:23 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void		non_interactive(t_minish *sh);
 
 /** testing builtins */
 void 		tester(t_env_node *env_lst);
+int			playground(void);
 
 /** built in functions */
 int			cd_valid_flag(t_c *cmd);
