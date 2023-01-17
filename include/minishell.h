@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2022/12/09 11:19:29 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/17 02:18:45 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ void		interactive(t_minish *sh);
 void		non_interactive(t_minish *sh);
 
 /** testing builtins */
-void 		echo_test(t_env_node *env_lst);
+void 		tester(t_env_node *env_lst);
 
 /** built in functions */
 int			cd_valid_flag(t_c *cmd);

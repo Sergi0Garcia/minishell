@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*   tester.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 04:15:21 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/16 11:02:44 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/17 02:20:03 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../include/minishell.h"
 
-void echo_test(t_env_node *env_lst)
+void tester(t_env_node *env_lst)
 {
 	(void) 	env_lst;
 	char	name[256];
@@ -31,8 +31,8 @@ void echo_test(t_env_node *env_lst)
 	opts_array = NULL;
 	args_array = NULL;
 
-	printf(KGRN "\n---------------------- \n" RESET);
-	printf(KGRN "COMMAND NODE TEST   \n" RESET);
+	printf(KGRN "---------------------- \n" RESET);
+	printf(KGRN "	TESTER   \n" RESET);
 	printf(KGRN "---------------------- \n" RESET);
 	printf(KCYN "---------------------- \n" RESET);
 	printf(KCYN "Enter name: " RESET);
@@ -94,20 +94,8 @@ void echo_test(t_env_node *env_lst)
 	}
 	printf(KMAG "---------------------- \n");
 	printf(KRED "---------------------- \n");
-	ft_export(command, &env_lst);
-	printf(KMAG "---------------------- \n");
-	ft_env(NULL, &env_lst);
-	printf(KGRN "---------------------- \n");
-	ft_export(NULL, &env_lst);
-	// ft_export(command, &env_lst);
-	// printf(KMAG "---------------------- \n");
-	// ft_env(NULL, &env_lst);
-	// printf(KGRN "---------------------- \n");
-	// ft_export(NULL, &env_lst);
-	// ft_echo(command);
-	// ft_cd(command, &env_lst);
-	// char	*ptr;
-	// ptr = ft_pwd(NULL);
-	// printf("[TEST]%s\n", ptr);
+	
+	if (is_same_str(command->name, "echo"))
+		ft_echo(command);
 	printf(KRED "---------------------- \n");
 }

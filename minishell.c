@@ -6,40 +6,11 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/16 11:07:32 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/17 02:19:50 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/minishell.h"
-
-// static char	**parsing_argv(char **argv)
-// {
-// 	int	len;
-// 	int	i;
-// 	int j;
-// 	char **res;
-// 	len = -1;
-// 	i = 0;
-// 	while (argv[++len]);
-// 	if (len <= 1)
-// 		exit(EXIT_FAILURE);
-// 	res = (char **)malloc(sizeof(char *) * len);
-// 	while (i < len && (argv[i + 1]))
-// 	{
-// 		len = ft_strlen(argv[i + 1]);
-// 		res[i] = (char *)malloc(sizeof(char) * (len + 1));
-// 		j = 0;
-// 		while (j < len)
-// 		{
-// 			res[i][j] = argv[i + 1][j];
-// 			j++;
-// 		}
-// 		res[i][j] = '\0';
-// 		i++;
-// 	}
-// 	res[i] = NULL;
-// 	return (res);
-// }
 
 // void	interactive(t_minish *sh)
 // {
@@ -67,35 +38,15 @@ int	main(int argc, char **argv, char **envp)
 	// init(&sh, argv, envp);
 	// check_usage(argc, argv, &sh);
 	// handler(&sh);
+	
 	// ----------------------
 	// REQUIRED
 	// ----------------------
 	t_env_node	*env_lst;
 	env_lst = NULL;
 	set_env(envp, &env_lst);
-	printf("\n\n");
-	ft_env(NULL, &env_lst);
-	printf("\n\n");
-	ft_export(NULL, &env_lst);
-	// echo_test(env_lst);
+	tester(env_lst);
 	// echo -n functio
-
-	// ----------------------
-	// ECHO
-	// ----------------------
-	// ft_printf("------- ECHO -------\n\n");
-	// char	**opt;
-	// opt = malloc(sizeof(char *) * (1 + 1));
-	// ft_echo(NULL, argv);
-	// opt[0] = ft_substr("-nnnn", 0, 5);
-	// opt[1] = NULL;
-	// ft_echo(opt, argv);
-	// opt[0] = ft_substr("-", 0, 5);
-	// ft_echo(opt, argv);
-	// opt[0] = ft_substr("-nana", 0, 5);
-	// ft_echo(opt, argv);
-	// ft_printf("\n\n");
-	// ----------------------
 
 	// ----------------------
 	// PATHNAME && CD
@@ -174,14 +125,14 @@ int	main(int argc, char **argv, char **envp)
 
 	// ----------------------
 	// ----------------------
-	// ENV PLAYGROUND
+	// ENV PLAYGROUNDs
 	// ----------------------
 	// ft_printf("------- ENV -------\n\n");
 	// char *home;
 	// home = env_value(&env_lst, "HOME");
 	// printf("Home env var: %s\n", home);
-	// print_env(&env_lst, 0);
 	// unset_env(&env_lst, "HOME");
+	// print_env(&env_lst, 0);
 	// printf("Home env var: %s\n", home);
 	// unset_env(&env_lst, "SECURITYSESSIONID");
 	// unset_env(&env_lst, "USER");
