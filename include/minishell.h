@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/17 02:18:45 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/17 02:45:33 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ int			ft_env_lst_size(t_env_node *lst);
 void		print_env(t_env_node **env_lst, int with_declare);
 char		*env_value(t_env_node **env_lst, char *name);
 void		free_env_node(t_env_node **env);
+int			exists_env(t_env_node **env_lst, char *str);
 
 /* shared/utils/error.c */
 void		ft_error(char *str);
