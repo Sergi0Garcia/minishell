@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/17 05:01:23 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/17 13:15:37 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,9 @@ void		ft_unset(t_c *cmd, t_env_node **env_lst);
 void		ft_env(t_c *cmd, t_env_node **env_lst);
 int			is_same_str(char *str1, char *str2);
 int			get_idx_separator(char *str);
+
+/** execution  */
+int			controller(t_c *cmd);
 
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);

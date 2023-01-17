@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 04:57:20 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/17 05:02:37 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/17 13:31:06 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int    playground(void)
 	// 	close(fd[0]);
 	// 	close(fd[1]);
 	// 	char	*arg[2];
+	//	// arg[0] = "/bin"
 	// 	arg[0] = "/usr/bin/sort";
 	// 	arg[1] = NULL;
 	// 	printf("execve...\n");
