@@ -6,7 +6,7 @@
 #    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/01/17 02:39:31 by segarcia         ###   ########.fr        #
+#    Updated: 2023/01/17 03:57:59 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,9 @@ SRC			= 	minishell.c						\
 				./builtins/ft_export.c  		\
 				./builtins/ft_unset.c  			\
 				./builtins_tests/tester.c		\
-				./lst_env/add_back.c			\
-				./lst_env/init.c 				\
-				./lst_env/utils.c  				\
+				./builtins_lst_env/add_back.c	\
+				./builtins_lst_env/init.c 		\
+				./builtins_lst_env/utils.c  	\
 				./shared/errors/error.c 		\
 				./shared/utils/init.c			\
 				./shared/utils/s_word_ops.c		\
