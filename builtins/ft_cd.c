@@ -3,42 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/29 01:28:11 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/17 02:26:19 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	update_paths(t_env_node **env_lst, char *path, char	*pathname)
-{
-	new_env(env_lst, ft_strjoin("PWD=", path));
-	new_env(env_lst, ft_strjoin("OLDPWD=", pathname));
-}
-
 static void	cd_back(t_env_node **env_lst)
 {
-	int		res_chdir;
+	char	*path;
 	char	*old_path;
-	char	*old_path_cp;
-	char	pathname[PATH_MAX];
 
-	old_path_cp = NULL;
+	path = ft_pwd(NULL);
 	old_path = env_value(env_lst, "OLDPWD");
 	if (!old_path)
 	{
 		ft_printf("cd: OLDPWD not set\n");
 		return ;
 	}
-	ft_pwd(pathname, PATH_MAX);
-	res_chdir = chdir(old_path);
-	if (res_chdir == -1)
-		perror("Error: ");
-	old_path_cp = ft_strdup(old_path);
-	update_paths(env_lst, old_path, pathname);
-	ft_printf("%s\n", old_path_cp);
+	if (chdir(old_path) == -1)
+		perror("");
+	new_env(env_lst, ft_strjoin("PWD=", old_path));
+	new_env(env_lst, ft_strjoin("OLDPWD=", path));
+	ft_printf("%s\n", old_path);
 }
 
 static char	*get_home_address(t_env_node **env_lst)
@@ -55,27 +45,57 @@ static char	*get_home_address(t_env_node **env_lst)
 	return (res);
 }
 
-void	ft_cd(char *str, t_env_node **env_lst)
+static char	*parse_home_dir(char *home_path, t_c *cmd)
 {
-	char	*path;
-	int		res;
 	int		i;
-	char	pathname[PATH_MAX];
+	char	*res;
+	char	*sub_str;
 
 	i = 0;
-	path = str;
-	if (str[i] == '-')
-		return (cd_back(env_lst));
-	if (str[i] == '~')
+	if (cmd && cmd->args && cmd->args[0])
 	{
-		str = ft_substr(str, 1, ft_strlen(str) - 1);
-		path = ft_strjoin(get_home_address(env_lst), str);
+		if (cmd->args[0][0] && cmd->args[0][1]
+			&& cmd->args[0][0] == '~' && cmd->args[0][1] == '/')
+		{
+			sub_str = ft_substr(cmd->args[0], 1, ft_strlen(cmd->args[0]));
+			res = ft_strjoin(home_path, sub_str);
+			return (res);
+		}
+		return (cmd->args[0]);
 	}
-	ft_pwd(pathname, PATH_MAX);
-	res = chdir(path);
-	if (res == -1)
-		perror("Error: ");
-	new_env(env_lst, ft_strjoin("PWD=", path));
-	new_env(env_lst, ft_strjoin("OLDPWD=", pathname));
+	return (home_path);
+}
+
+static void	cd_default(t_env_node **env_lst, t_c *cmd)
+{
+	char	*path;
+	char	*new_path;
+	char	*home_path;
+
+	path = ft_pwd(NULL);
+	home_path = get_home_address(env_lst);
+	new_path = parse_home_dir(home_path, cmd);
+	if (chdir(new_path) == -1)
+		perror("");
+	new_env(env_lst, ft_strjoin("PWD=", new_path));
+	new_env(env_lst, ft_strjoin("OLDPWD=", path));
+}
+
+/**
+ * Function to handle command cd
+ * @param cmd
+ * @param env_lst
+ */
+void	ft_cd(t_c *cmd, t_env_node **env_lst)
+{
+	int		valid;
+
+	valid = cd_valid_flag(cmd);
+	if (valid == 0)
+		return (cd_handle_error());
+	if (valid == 2)
+		return (cd_back(env_lst));
+	if (valid == 1)
+		return (cd_default(env_lst, cmd));
 	return ;
 }

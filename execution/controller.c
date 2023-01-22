@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   controller.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/08 14:07:34 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/17 02:38:42 by segarcia         ###   ########.fr       */
+/*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
+/*   Updated: 2023/01/17 13:31:59 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+# include "../include/minishell.h"
 
-void	ft_env(t_c *cmd, t_env_node **env_lst)
+/**
+ * Controller function to execute each cmd
+ * It executes with execve | builtin function depending the case
+ * @param cmd 
+ * @return int 
+ */
+int controller(t_c *cmd)
 {
-	(void) cmd;
-	print_env(env_lst, 0);
-	return ;
+    (void) cmd;
+    return (EXIT_SUCCESS);
 }
