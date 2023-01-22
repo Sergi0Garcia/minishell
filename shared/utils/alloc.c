@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   alloc.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 13:58:41 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/12/06 21:05:39 by rkanmado         ###   ########.fr       */
+/*   Created: 2023/01/10 06:10:16 by rkanmado          #+#    #+#             */
+/*   Updated: 2023/01/21 02:26:30 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	init(t_minish *sh, char **argv)
+t_wt	*alloc(t_wt	**wt, int mem_nbr)
 {
-	int		i;
-	pid_t	pid;
-	char	*str;
-
-	i = 0;
-	sh->argv = argv;
-	pid = getpid();
-	sh->interactive = false;
-	str = ft_itoa(pid);
-	sh->pid = str;
-	sh->line = NULL;
-	return ;
+	*wt = malloc(sizeof(t_wt) * mem_nbr);
+	if (*wt == NULL)
+		error("Memory allocation failed");
+	return (*wt);
 }
 
-void	init_twsb(t_wsb *wsb)
+void	*ft_cpywt(void *dst, const void *src, size_t n)
 {
-	wsb->head = NULL;
-	wsb->tail = NULL;
-	wsb->size = 0;
-	return ;
+	const t_wt	*s;
+	t_wt		*d;
+
+	s = src;
+	d = dst;
+	if (dst == NULL && src == NULL)
+		return (NULL);
+	while (n--)
+		*d++ = *s++;
+	return (dst);
 }

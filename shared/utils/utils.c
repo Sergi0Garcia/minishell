@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 20:45:57 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/29 12:36:21 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/12 22:45:44 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,37 +24,37 @@ int	ft_strcmp(char *s1, char *s2)
 
 int	end_of_sep(char *str, int start)
 {
-	while (is_sep(str[start]) != NEIN)
+	while (is_sep(str[start]) == NEIN)
 		start++;
 	return (start);
 }
 
 t_b	is_sep_type(t_wt wt)
 {
-	if (wt == WORD || wt == DIREDIRECT || wt == SIREDIRECT || wt == SOREDIRECT \
-		|| wt == DOREDIRECT || wt == SPACE || wt == PIPE)
+	if (wt == WORD || wt == DLESS || wt == LESS || wt == GREAT \
+		|| wt == DGREAT || wt == SPACE || wt == PIPE)
 		return (true);
 	return (false);
 }
 
-t_wt	is_which_sep(char *s1)
+char	*char_of_sep(t_wt wt)
 {
-	if (strcmp(s1, "|") == 0)
-		return (PIPE);
-	else if (strcmp(s1, ">") == 0)
-		return (SOREDIRECT);
-	else if (strcmp(s1, ">>") == 0)
-		return (DOREDIRECT);
-	else if (strcmp(s1, " ") == 0)
-		return (SPACE);
-	else if (strcmp(s1, "<") == 0)
-		return (SIREDIRECT);
-	else if (strcmp(s1, "<<") == 0)
-		return (DIREDIRECT);
-	else if (strcmp(s1, "&") == 0)
-		return (AND);
+	if (wt == PIPE)
+		return ("|");
+	else if (wt == GREAT)
+		return (">");
+	else if (wt == DGREAT)
+		return (">>");
+	else if (wt == SPACE)
+		return (" ");
+	else if (wt == LESS)
+		return ("<");
+	else if (wt == DLESS)
+		return ("<<");
+	else if (wt == ANDIF)
+		return ("&");
 	else
-		return (NEIN);
+		return (" ");
 }
 
 t_wt	is_sep(char s1)
@@ -62,11 +62,13 @@ t_wt	is_sep(char s1)
 	if (s1 == '|')
 		return (PIPE);
 	else if (s1 == '>')
-		return (SOREDIRECT);
+		return (GREAT);
 	else if (s1 == '<')
-		return (SIREDIRECT);
+		return (LESS);
+	else if (s1 == '&')
+		return (ANDIF);
 	else if (s1 == ' ')
 		return (SPACE);
 	else
-		return (NEIN);
+		return (WORD);
 }

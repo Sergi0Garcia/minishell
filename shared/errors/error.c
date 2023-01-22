@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 11:01:44 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/29 10:19:06 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/11 00:56:39 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ char	*joinstrs(char *s1, char *s2)
 	free(s1);
 	return (result);
 }
-
-
 
 void	error(char *str)
 {

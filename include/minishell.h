@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/18 03:19:59 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/22 06:16:29 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,36 +44,74 @@ typedef struct s_redirect
 
 typedef enum s_word_type
 {
-	COMMAND,
+	BEGINING,
 	WORD,
-	DIREDIRECT,
-	SIREDIRECT,
-	SOREDIRECT,
-	DOREDIRECT,
+	DLESS,
+	LESS,
+	DGREAT,
+	GREAT,
 	SPACE,
 	PIPE,
-	AND,
+	ANDIF,
+	ORIF,
+	OPRARENTHESIS,
+	CPARENTHESIS,
+	END,
 	NEIN
 }	t_wt;
 
+typedef struct s_current_and_next_probable_word_type
+{
+	t_wt	*curr;
+	t_wt	*next;
+}	t_cn;
+
+typedef struct s_key_value_pair
+{
+	t_wt	key;
+	t_cn	values;
+}	t_kvp;
+
+typedef enum s_quote {
+	SQUOTE,
+	DQUOTE,
+	NONE,
+}	t_q;
+
 typedef struct s_separator
 {
-	int		end;
-	t_wt	word_type;
+	t_wt	type;
 	char	*word;
+	t_q		qtype;
 }	t_sep;
 
+typedef struct s_command
+{
+	char	*name;
+	char	**args;
+	char	**opts;
+}	t_c;
 
 typedef enum s_bool
 {
+	false,
 	true,
-	false
 }	t_b;
+
+typedef struct s_lexing
+{
+	size_t		start;
+	size_t		end;
+	t_b			is_format_ok;
+	t_sep		sep;
+}	t_lex;
 
 typedef struct s_wordinfo
 {
-	char				*word;
-	t_wt				sep;
+	char	*word;
+	t_wt	sep;
+	t_q		quote;
+	t_b		can_expand;
 }	t_wi;
 
 typedef struct s_word
@@ -130,6 +168,7 @@ typedef struct s_minishell
 	char	*pid;
 	char	*line;
 	t_b		interactive;
+	t_wsb	wsb;
 	int		status;
 }	t_minish;
 
@@ -194,13 +233,12 @@ void		errormsg(char *command, char *text);
 char		*joinstrs(char *s1, char *s2);
 void		error(char *str);
 
-
 /* shared/check/check.c */
 void		check_usage(int argc, char **argv, t_minish *sh);
 void		usage(void);
 
 /* shared/utils/init.c */
-void		init(t_minish *sh, char **argv, char **env);
+void		init(t_minish *sh, char **argv);
 
 /* shared/utils/word_ops.c */
 void		ft_wunshift(t_wsb *stack, t_wi info);
@@ -214,9 +252,9 @@ void		read_line(t_minish *sh);
 
 /* shared/utils/utils */
 int			ft_strcmp(char *s1, char *s2);
-int			end_of_sep(char * str, int start);
+int			end_of_sep(char *str, int start);
 t_b			is_sep_type(t_wt wt);
-t_wt		is_which_sep(char *s1);
+char		*char_of_sep(t_wt wt);
 t_wt		is_sep(char s1);
 
 /* shared/utils/handling */
@@ -234,12 +272,69 @@ void		no_interactive_mode_sig(void);
 /* process/lexer/lexer.c */
 t_b			can_hspace(int start, char *str, t_sep *next);
 t_b			can_switch(char *substr, t_sep *next);
-t_sep		next_sep(char *str, int start);
 t_wi		set_winfo(t_sep sep);
 void		lexing(t_minish *sh);
+void		lexing_with_quote(t_minish *sh, t_lex *lex, t_q *quote);
+void		lexing_without_quote(t_minish *sh, t_lex *lex, t_b *is_quoted);
+void		add_new_word(t_lex *lex, t_minish *sh);
 
+/* process/lexer/utils */
+void		remove_spaces(t_minish *sh);
+void		check_greatorless(t_wt *last, char *str);
+void		end_token_delimiter(char *str, t_lex *lex);
+void		escape_spaces(char *str, t_lex *lex);
 
 /* shared/display/display.c */
 void		display_words(t_w *w);
+void		init_twsb(t_wsb *wsb);
+
+/* process/lexer/handle_cases */
+int			h_bestcase(int start, char *str, t_sep *next);
+t_b			is_multi(char *str, char c, t_sep *next);
+
+/* process/quoting/check */
+void		recursive_rl(t_minish *sh, t_lex *lex, char *title);
+int			end_quote_delimiter(char *str, t_lex *lex, char c);
+t_b			is_begin_with_quote(char *str);
+t_q			is_which_quote(char *str);
+
+/* process/parser/check.c */
+t_b			is_wt_between_values(t_wt word_type, t_wt *list);
+t_wt		is_which_wt(char *s1);
+
+/* process/parser/parser.c */
+t_b			parser(t_minish *sh);
+t_b			is_begin_good(t_w *word, t_kvp *kvp, t_b *can_continue);
+t_b			is_end_good(t_w *word, t_kvp *kvp, t_b *can_continue);
+t_b			is_between_good(t_w *word, t_kvp *kvp, t_b *can_continue);
+
+/* process/parser/error.c */
+void		parser_error(char *str);
+
+/* process/shared/utils/constants.c */
+t_cn		get_according_values(t_wt key);
+t_kvp		*get_kv_pairs(void);
+t_cn		set_wt_values(t_wt *curr, t_wt *next, t_cn *cn);
+t_cn		get_values_of_index(t_wt key, t_kvp *key_values);
+
+/* process/shared/utils/alloc.c */
+t_wt		*alloc(t_wt	**wt, int mem_nbr);
+void		*ft_cpywt(void *dst, const void *src, size_t n);
+
+/* process/expansion/expansion.c */
+void		expansion(t_minish *sh);
+void		expansion_process(char **str);
+void		expand_var(char **str, size_t start);
+void		end_of_expandation(char *str, size_t *end);
+
+/* process/expansion/utils.c */
+void		replace_str(char **str, char *to_replace_with, t_lex *lex);
+t_b			can_apply_expansion(char **str);
+size_t		end_length(t_lex *lex, size_t strlen);
+char		*retrieve_env(char *str);
+
+/* process/utils/free.c */
+void		free_str(char **str);
+void		free_stack(t_w **head, t_w **tail);
 
 #endif

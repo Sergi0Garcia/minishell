@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 07:27:49 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/29 12:35:52 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/21 03:15:27 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,85 +19,84 @@
  * echo "Hello Word"
  */
 
-t_b	can_hspace(int start, char *str, t_sep *next)
+/* Adding new data into the stack */
+void	add_new_word(t_lex *lex, t_minish *sh)
 {
-	printf("can_hspace is the line %s, %d\n", str, next->end);
-	while (str[start] && str[start] == ' ')
-		start++;
-	next->end = start;
-	next->word_type = SPACE;
-	next->word = " ";
-	return (1);
+	lex->sep.word = ft_substr(sh->line, lex->start, lex->end - lex->start);
+	lex->sep.type = is_which_wt(lex->sep.word);
+	ft_wunshift(&sh->wsb, set_winfo(lex->sep));
+	return ;
 }
 
-t_b	can_switch(char *substr, t_sep *next)
-{
-	t_wt	wt;
-
-	printf("can_switch is the line %s, %d\n", substr, next->end);
-	wt = is_which_sep(substr);
-	if (wt != NEIN)
-	{
-		next->word = substr;
-		next->word_type = wt;
-		return (true);
-	}
-	return (false);
-}
-
-t_sep	next_sep(char *str, int start)
-{
-	t_sep	next;
-	char	*sub;
-
-	next.end = start;
-	while (str[next.end])
-	{
-		// if (is_sep(str[next.end]) != NEIN)
-		// {
-			next.end = end_of_sep(str, next.end);
-			printf("this is the line %s and the end became %d\n", &str[start], next.end);
-			sub = ft_substr(str, start, next.end);
-			next.word_type = is_which_sep(sub);
-			if (can_hspace(start, str, &next))
-				return (next);
-			else if (can_switch(sub, &next))
-				return (next);
-			else
-			{
-				next.word = sub;
-				next.word_type = WORD;
-				return (next);
-			}
-		// }
-		next.end += 1;;
-	}
-	return (next);
-}
-
+/* Set word informations */
 t_wi	set_winfo(t_sep sep)
 {
 	t_wi	tw;
 
-	tw.sep = sep.word_type;
+	tw.sep = sep.type;
 	tw.word = sep.word;
+	if (sep.qtype == DQUOTE)
+	{
+		tw.can_expand = true;
+		tw.quote = sep.qtype;
+	}
+	else
+	{
+		tw.can_expand = false;
+		tw.quote = sep.qtype;
+	}
 	return (tw);
 }
 
+/* separate string by word */
 void	lexing(t_minish *sh)
 {
-	int		start;
-	t_sep	sep;
-	t_wsb	*wsb;
+	t_lex	lex;
+	t_q		quote;
+	t_b		is_quoted;
 
-	wsb = NULL;
-	start = 0;
-	while (sh->line[start] != '\0')
+	init_twsb(&sh->wsb);
+	quote = NONE;
+	is_quoted = 1;
+	lex.end = 0;
+	lex.start = 0;
+	while (sh->line[lex.start] != '\0')
 	{
-		sep = next_sep(sh->line, start);
-		ft_wunshift(wsb, set_winfo(sep));
-		start = sep.end;
-		printf("lexing is the line %s, %d\n", sh->line, start);
+		if (is_begin_with_quote(&sh->line[lex.start]) && is_quoted)
+			lexing_with_quote(sh, &lex, &quote);
+		else
+			lexing_without_quote(sh, &lex, &is_quoted);
 	}
+	return ;
+}
+
+void	lexing_with_quote(t_minish *sh, t_lex *lex, t_q *quote)
+{
+	*quote = is_which_quote(&sh->line[lex->start]);
+	lex->start++;
+	lex->end = end_quote_delimiter(sh->line, \
+				lex, sh->line[lex->start - 1]);
+	if (lex->is_format_ok == false)
+	{
+		recursive_rl(sh, lex, ">");
+		return ;
+	}
+	lex->sep.qtype = *quote;
+	if (lex->start != lex->end)
+		add_new_word(lex, sh);
+	lex->start++;
+	lex->end++;
+	escape_spaces(sh->line, lex);
+	return ;
+}
+
+void	lexing_without_quote(t_minish *sh, t_lex *lex, t_b *is_quoted)
+{
+	*is_quoted = 0;
+	end_token_delimiter(sh->line, lex);
+	lex->sep.qtype = NONE;
+	add_new_word(lex, sh);
+	escape_spaces(sh->line, lex);
+	*is_quoted = 1;
 	return ;
 }

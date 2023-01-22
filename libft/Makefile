@@ -6,7 +6,7 @@
 #    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/20 12:49:46 by segarcia          #+#    #+#              #
-#    Updated: 2022/11/26 18:42:43 by rkanmado         ###   ########.fr        #
+#    Updated: 2023/01/11 07:11:00 by rkanmado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ BONUS_OBJS		= $(BONUS:.c=.o)
 
 CC				= gcc
 RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror -g
 NAME			= libft.a
 
 all:			$(NAME)
