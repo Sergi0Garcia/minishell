@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 04:15:21 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/17 03:04:50 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/19 08:22:58 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,17 @@ void tester(t_env_node *env_lst)
 	
 	if (is_same_str(command->name, "echo"))
 		ft_echo(command);
-	if (is_same_str(command->name, "cd"))
+	else if (is_same_str(command->name, "cd"))
 		ft_cd(command, &env_lst);
-	if (is_same_str(command->name, "pwd"))
+	else if (is_same_str(command->name, "pwd"))
 		ft_pwd(command);
-	if (is_same_str(command->name, "export"))
+	else if (is_same_str(command->name, "export"))
 	{
 		ft_export(command, &env_lst);
 		if (command->args)
 			ft_export(NULL, &env_lst);
 	}
-	if (is_same_str(command->name, "unset"))
+	else if (is_same_str(command->name, "unset"))
 	{
 		printf(KMAG "---------------------- \n");
 		ft_export(NULL, &env_lst);
@@ -117,9 +117,12 @@ void tester(t_env_node *env_lst)
 		ft_export(NULL, &env_lst);
 		printf(KRED "---------------------- \n" RESET);
 	}
-	if (is_same_str(command->name, "env"))
+	else if (is_same_str(command->name, "env"))
 	{
 		ft_env(command, &env_lst);
 	}
+	else 
+		ft_execve(&env_lst, command);
+	
 	printf(KRED "---------------------- \n");
 }

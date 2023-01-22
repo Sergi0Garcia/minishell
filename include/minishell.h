@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/17 13:15:37 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/18 03:19:59 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ int			get_idx_separator(char *str);
 
 /** execution  */
 int			controller(t_c *cmd);
+int			ft_execve(t_env_node **env_lst, t_c *cmd);
 
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);
