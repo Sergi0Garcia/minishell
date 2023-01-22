@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/17 04:57:39 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/22 06:16:29 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,7 +269,8 @@ t_wt		is_which_wt(char *s1);
 
 /* process/parser/parser.c */
 t_b			parser(t_minish *sh);
-t_b			is_edges_good(t_w *word, t_wt key, t_kvp *kvp, t_b *can_continue);
+t_b			is_begin_good(t_w *word, t_kvp *kvp, t_b *can_continue);
+t_b			is_end_good(t_w *word, t_kvp *kvp, t_b *can_continue);
 t_b			is_between_good(t_w *word, t_kvp *kvp, t_b *can_continue);
 
 /* process/parser/error.c */
@@ -284,6 +285,21 @@ t_cn		get_values_of_index(t_wt key, t_kvp *key_values);
 /* process/shared/utils/alloc.c */
 t_wt		*alloc(t_wt	**wt, int mem_nbr);
 void		*ft_cpywt(void *dst, const void *src, size_t n);
-void		ft_free_stack(t_w **head, t_w **tail);
+
+/* process/expansion/expansion.c */
+void		expansion(t_minish *sh);
+void		expansion_process(char **str);
+void		expand_var(char **str, size_t start);
+void		end_of_expandation(char *str, size_t *end);
+
+/* process/expansion/utils.c */
+void		replace_str(char **str, char *to_replace_with, t_lex *lex);
+t_b			can_apply_expansion(char **str);
+size_t		end_length(t_lex *lex, size_t strlen);
+char		*retrieve_env(char *str);
+
+/* process/utils/free.c */
+void		free_str(char **str);
+void		free_stack(t_w **head, t_w **tail);
 
 #endif

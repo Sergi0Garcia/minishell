@@ -6,14 +6,13 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 05:10:54 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/17 05:33:59 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/22 05:16:20 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-
-void	expansion(t_minish *sh, t_lex *lex)
+void	expansion(t_minish *sh)
 {
 	t_w		*head;
 
@@ -33,31 +32,44 @@ void	expansion_process(char **str)
 	size_t	start;
 
 	tmp = *str;
-	start == 0;
-	while (tmp[start] != NULL)
+	start = 0;
+	while (tmp[start] != '\0')
 	{
 		if (tmp[start] == '$')
-			expand_var(&tmp[start], start);
-
+		{
+			if (can_apply_expansion(str))
+				expand_var(str, start);
+		}
+		start++;
 	}
 	return ;
 }
 
-void	expand_var(char *str, int start)
+void	expand_var(char **str, size_t start)
 {
+	char	*tmp;
 	size_t	end;
+	char	*env_value;
+	t_lex	lex;
 
-	end == 0;
-	end_of_expandation(str[start], &end);
+	end = 0;
+	tmp = *str;
+	end_of_expandation(&tmp[start], &end);
+	lex.start = start;
+	lex.end = end;
+	env_value = retrieve_env(tmp + 1);
+	replace_str(str, env_value, &lex);
 	return ;
 }
 
 void	end_of_expandation(char *str, size_t *end)
 {
-	while (*str != '\0' || *str != ' ')
+	while (str != NULL)
 	{
+		if ((*str == '\0' || *str == ' ' || *str == '\"'))
+			break ;
 		str++;
-		*end++;
+		*end += 1;
 	}
 	return ;
 }

@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   back_slash.c                                       :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/04 09:40:30 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/21 02:28:41 by rkanmado         ###   ########.fr       */
+/*   Created: 2023/01/21 02:21:58 by rkanmado          #+#    #+#             */
+/*   Updated: 2023/01/21 02:28:21 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-typedef enum s_backslash
+void	free_str(char **str)
 {
-	t_b quoted;
-	t_b exist;
-}	t_slash;
+	free(*str);
+	return ;
+}
 
-t_slash	is_backslash(char *str)
+/* Function to freeze stack */
+void	free_stack(t_w **head, t_w **tail)
 {
-	t_slash	slash;
-	int		i;
+	t_w	*tmp;
 
-	slash.exist = false;
-	slash.quoted = false;
-	while (*str)
+	if (*head == NULL)
+		return ;
+	tmp = *head;
+	while (tmp->next != NULL)
 	{
-		if (*str == '\\')
-			slash.exist = true;
+		tmp = tmp->next;
+		free(tmp->prev);
 	}
-	return (slash);
+	free(tmp);
+	*head = NULL;
+	*tail = NULL;
+	return ;
 }

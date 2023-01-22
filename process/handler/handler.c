@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:14:59 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/17 04:45:41 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/21 02:42:18 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	h_interactive_mode(t_minish *sh)
 		lexing(sh);
 		if (!parser(sh))
 			continue ;
+		expansion(sh);
 	}
 	return ;
 }
@@ -42,5 +43,6 @@ void	h_noninteractive_mode(t_minish *sh)
 	lexing(sh);
 	if (!parser(sh))
 		return ;
+	expansion(sh);
 	return ;
 }

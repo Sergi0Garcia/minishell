@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 22:03:31 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/17 04:57:40 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/21 02:28:21 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	recursive_rl(t_minish *sh, t_lex *lex, char *title)
 	lex->end = 0;
 	lex->start = 0;
 	lex->is_format_ok = true;
-	ft_free_stack(&sh->wsb.head, &sh->wsb.tail);
+	free_stack(&sh->wsb.head, &sh->wsb.tail);
 	init_twsb(&sh->wsb);
 	return ;
 }
