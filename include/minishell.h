@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/22 06:16:29 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/22 20:41:53 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,6 @@ typedef struct s_separator
 	char	*word;
 	t_q		qtype;
 }	t_sep;
-
-typedef struct s_command
-{
-	char	*name;
-	char	**args;
-	char	**opts;
-}	t_c;
 
 typedef enum s_bool
 {
