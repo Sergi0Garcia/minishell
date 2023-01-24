@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/06 02:50:19 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:47:22 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	main(int argc, char **argv, char **envp)
 	// check_usage(argc, argv, &sh);
 	// init(&sh, argv, envp);
 	// check_usage(argc, argv, &sh);
-	// handler(&sh);
-	
+	handler(&sh);
+
 	t_env_node	*env_lst;
 	env_lst = NULL;
 	set_env(envp, &env_lst);
