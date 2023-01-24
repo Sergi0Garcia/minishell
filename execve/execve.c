@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
 /*   Updated: 2023/01/27 14:49:41 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/minishell.h"
+#include "../include/minishell.h"
 
-char    **split_paths(char *path)
+char	**split_paths(char *path)
 {
-	char **paths;
+	char	**paths;
 
 	paths = ft_split(path, ':');
 	if (!paths)
@@ -22,9 +22,9 @@ char    **split_paths(char *path)
 	return (paths);
 }
 
-char    *correct_path(char **paths, char *cmd)
+char	*correct_path(char **paths, char *cmd)
 {
-	int     access_val;
+	int		access_val;
 	char	*complete_path;
 	int		i;
 
@@ -39,7 +39,7 @@ char    *correct_path(char **paths, char *cmd)
 	}
 	if (access_val == -1)
 		return (NULL);
-	else 
+	else
 		return (complete_path);
 }
 

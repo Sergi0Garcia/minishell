@@ -1,46 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 13:58:41 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/24 11:23:51 by rkanmado         ###   ########.fr       */
+/*   Created: 2023/01/24 11:36:25 by rkanmado          #+#    #+#             */
+/*   Updated: 2023/01/24 15:36:45 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	init(t_minish *sh, char **argv)
-{
-	int		i;
-	pid_t	pid;
-	char	*str;
+/* Function to check if an argument is an option */
 
-	i = 0;
-	sh->argv = argv;
-	pid = getpid();
-	sh->interactive = false;
-	str = ft_itoa(pid);
-	sh->pid = str;
-	init_twsb(&sh->wsb);
-	init_command(&sh->cmds);
-	sh->line = NULL;
-	return ;
+t_b	is_option(char *str)
+{
+	if (*str == '-')
+		return (true);
+	return (false);
 }
 
-void	init_command(t_cmd *cmds)
+t_b	is_opt_already_exits(t_wsb *wsb, char *opt)
 {
-	cmds->cmd = NULL;
-	cmds->content = NULL;
-	return ;
+	t_w	*token;
+
+	token = wsb->head;
+	while (token != NULL)
+	{
+		if (strncmp(token->wi.word, opt, ft_strlen(token->wi.word)))
+			return (true);
+	}
+	return (false);
 }
 
-void	init_twsb(t_wsb *wsb)
+int	get_fd(void)
 {
-	wsb->head = NULL;
-	wsb->tail = NULL;
-	wsb->size = 0;
-	return ;
+	return (1);
 }
