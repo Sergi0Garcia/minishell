@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 04:15:21 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/25 11:17:04 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/25 13:41:01 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@ void tester(t_env_node *env_lst)
 	t_c	*cmd2;
 	t_c *cmd3;
 
-	int fd;
-	fd = get_fd("tmp.txt", LESS);
-
-	printf("fd: %i\n", fd);
+	// int fd;
+	// fd = get_fd("tmp.txt", LESS);
+	// printf("fd: %i\n", fd);
 
 	cmd1 = malloc(sizeof(t_c));
-	cmd1->name = ft_strdup("sort");
+	cmd1->name = ft_strdup("echo");
 	cmd1->opts = NULL;
 	cmd1->args = NULL;
-	cmd1->infile = fd;
+	cmd1->infile = 0;
 	cmd1->outfile = 1;
 
 	cmd2 = malloc(sizeof(t_c));

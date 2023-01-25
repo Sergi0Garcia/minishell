@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/25 11:08:37 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/25 13:24:59 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	exec_cmd(t_c *cmd, t_env_node *env_lst)
 
 	if (pipe(fd) == -1)
         return (EXIT_FAILURE);
-	// Missing validation to fork
+	// Missing validation for paths
 	if (exec_fork(cmd, env_lst, fd) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	close(fd[FD_WRITE_END]);

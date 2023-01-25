@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/25 10:00:42 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/25 13:07:01 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int ft_execve(t_env_node **env_lst, t_c *cmd)
 	}
 	cmd_path = correct_path(all_paths, cmd->name);
 	opt_args_len = count_opts_args(cmd);
-	execve_args = execve_unifier(cmd, cmd_path, opt_args_len);
+	execve_args = execve_unifier(cmd, cmd->name, opt_args_len);
 	execve(cmd_path, execve_args, NULL);
 	return (EXIT_SUCCESS);
 }
