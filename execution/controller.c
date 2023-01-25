@@ -6,13 +6,13 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/25 09:41:34 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/25 11:08:37 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../include/minishell.h"
 
-static int	child_redir(t_c *cmd, int fd[2])
+static int	fd_redirection(t_c *cmd, int fd[2])
 {
 	if (cmd->infile && cmd->infile != STDIN_FILENO)
 	{
@@ -32,7 +32,7 @@ static int	child_redir(t_c *cmd, int fd[2])
 	return (EXIT_SUCCESS);
 }
 
-static void	child_builtin(t_c *cmd, t_env_node *env_lst)
+static int	exec_builtin(t_c *cmd, t_env_node *env_lst)
 {
     if (is_same_str(cmd->name, "echo"))
 		ft_echo(cmd);
@@ -48,14 +48,15 @@ static void	child_builtin(t_c *cmd, t_env_node *env_lst)
 		ft_env(cmd, &env_lst);
 	else 
 		ft_execve(&env_lst, cmd);
+	return (EXIT_SUCCESS);
 }
 
 static int	child_process(t_c *cmd, t_env_node *env_lst, int fd[2])
 {
-	if (child_redir(cmd, fd) == EXIT_FAILURE)
+	if (fd_redirection(cmd, fd) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	close(fd[FD_READ_END]);
-	child_builtin(cmd, env_lst);
+	exec_builtin(cmd, env_lst);
 	exit(EXIT_SUCCESS);
 }
 
@@ -79,20 +80,14 @@ int exec_fork(t_c *cmd, t_env_node *env_lst, int fd[2])
 	return (EXIT_SUCCESS);
 }
 
-int	check_to_fork(t_c *cmd, t_env_node *env_lst, int fd[2])
-{
-	if (exec_fork(cmd, env_lst, fd) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-    return (EXIT_SUCCESS);
-}
-
 int	exec_cmd(t_c *cmd, t_env_node *env_lst)
 {
 	int		fd[2];
 
 	if (pipe(fd) == -1)
         return (EXIT_FAILURE);
-	if (check_to_fork(cmd, env_lst, fd) == EXIT_FAILURE)
+	// Missing validation to fork
+	if (exec_fork(cmd, env_lst, fd) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	close(fd[FD_WRITE_END]);
 	if (cmd->next && !cmd->next->infile)

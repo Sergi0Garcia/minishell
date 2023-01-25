@@ -6,7 +6,7 @@
 #    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/01/24 11:30:52 by segarcia         ###   ########.fr        #
+#    Updated: 2023/01/25 11:08:16 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC			= 	minishell.c						\
 				./builtins_lst_env/init.c 		\
 				./builtins_lst_env/utils.c  	\
 				./execution/controller.c 		\
+				./execution/redirection.c 		\
 				./execve/execve.c 				\
 				./shared/errors/error.c 		\
 				./shared/utils/init.c			\

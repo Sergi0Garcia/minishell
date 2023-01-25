@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 04:15:21 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/25 09:40:34 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/25 11:17:04 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ void tester(t_env_node *env_lst)
 	t_c *cmd3;
 
 	int fd;
-	// fd = open("output.txt", O_CREAT | O_WRONLY | O_TRUNC, 0666);
-	fd = open("output.txt", O_RDONLY);
-	// printf("fd:%i\n", fd);
+	fd = get_fd("tmp.txt", LESS);
+
+	printf("fd: %i\n", fd);
 
 	cmd1 = malloc(sizeof(t_c));
-	cmd1->name = ft_strdup("env");
+	cmd1->name = ft_strdup("sort");
 	cmd1->opts = NULL;
 	cmd1->args = NULL;
-	cmd1->infile = 0;
+	cmd1->infile = fd;
 	cmd1->outfile = 1;
 
 	cmd2 = malloc(sizeof(t_c));
@@ -46,8 +46,8 @@ void tester(t_env_node *env_lst)
 	cmd3->infile = 0;
 	cmd3->outfile = 1;
 
-	cmd1->next = cmd2;
-	cmd2->next = cmd3;
+	cmd1->next = NULL;
+	cmd2->next = NULL;
 	cmd3->next = NULL;
 	
 	printf("Controller: %i\n", controller(cmd1, env_lst));

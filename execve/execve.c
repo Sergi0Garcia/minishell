@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/24 14:00:00 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/25 10:00:42 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,16 @@ int ft_execve(t_env_node **env_lst, t_c *cmd)
 	execve_args = NULL;
 	env_path = env_value(env_lst, "PATH");
 	if (!env_path)
+	{
+		printf("no such file or directory\n");
 		return (EXIT_FAILURE);
+	}
 	all_paths = split_paths(env_path);
 	if (!all_paths)
+	{
+		printf("no such file or directory\n");
 		return (EXIT_FAILURE);
+	}
 	cmd_path = correct_path(all_paths, cmd->name);
 	opt_args_len = count_opts_args(cmd);
 	execve_args = execve_unifier(cmd, cmd_path, opt_args_len);
