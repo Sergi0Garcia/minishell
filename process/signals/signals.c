@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 05:28:08 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/12/06 22:27:25 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/25 04:58:54 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,16 @@ void	sigreset(int sig, siginfo_t *info, void *context)
 	(void) sig;
 	(void) context;
 	if (info->si_signo == SIGINT)
+	{
 		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+	}
 	if (info->si_signo == SIGQUIT)
+	{
+		write(1, "exit\n", 6);
 		exit(EXIT_SUCCESS);
+	}
 	return ;
 }
 

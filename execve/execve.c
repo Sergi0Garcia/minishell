@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/23 03:33:17 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/25 03:03:10 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,20 @@ char	*correct_path(char **paths, char *cmd)
 
 int	count_opts_args(t_c *cmd)
 {
-	int	i;
-	int	count;
+	int		i;
+	int		count;
+	char	**opts;
+	char	**args;
 
+	opts = ft_split(cmd->ci.opts, ' ');
+	args = ft_split(cmd->ci.args, ' ');
 	i = 0;
 	count = 0;
-	while (cmd->opts && cmd->opts[i])
+	while (opts && opts[i])
 		i++;
 	count = i;
 	i = 0;
-	while (cmd->args && cmd->args[i])
+	while (args && args[i])
 		i++;
 	count += i;
 	return (count);
@@ -65,7 +69,11 @@ char	**execve_unifier(t_c *cmd, char *filename, int len)
 	int		i;
 	int		j;
 	char	**res;
+	char	**opts;
+	char	**args;
 
+	opts = ft_split(cmd->ci.opts, ' ');
+	args = ft_split(cmd->ci.args, ' ');
 	i = 0;
 	j = 1;
 	res = (char **)malloc(sizeof(char *) * (len + 2));
@@ -75,19 +83,19 @@ char	**execve_unifier(t_c *cmd, char *filename, int len)
 		res[1] = NULL;
 		return (res);
 	}
-	while (cmd->opts[i])
+	while (opts[i])
 	{
-		res[j] = cmd->opts[i];
-		ft_printf("res[%i] = %s\n", i, cmd->opts[i]);
+		res[j] = opts[i];
+		ft_printf("res[%i] = %s\n", i, opts[i]);
  		i++;
 		j++;
 	}
 	j = i;
 	i = 0;
-	while (cmd->args[i])
+	while (args[i])
 	{
-		res[j + i] = cmd->args[i];
-		ft_printf("res[%i] = %s\n", j + i,  cmd->args[i]);
+		res[j + i] = args[i];
+		ft_printf("res[%i] = %s\n", j + i,  args[i]);
 		i++;
 	}
 	res[j + i] = NULL;
@@ -102,13 +110,13 @@ char	**execve_unifier(t_c *cmd, char *filename, int len)
 	return (res);
 }
 
-int ft_execve(t_env_node **env_lst, t_c *cmd)
+int	ft_execve(t_env_node **env_lst, t_c *cmd)
 {
 	char	**execve_args;
 	char	*cmd_path;
-	char    *env_path;
+	char	*env_path;
 	char	**all_paths;
-	int     i;
+	int		i;
 	int		opt_args_len;
 
 	i = 0;
@@ -119,7 +127,7 @@ int ft_execve(t_env_node **env_lst, t_c *cmd)
 	all_paths = split_paths(env_path);
 	if (!all_paths)
 		return (EXIT_FAILURE);
-	cmd_path = correct_path(all_paths, cmd->name);
+	cmd_path = correct_path(all_paths, cmd->ci.name);
 	opt_args_len = count_opts_args(cmd);
 	execve_args = execve_unifier(cmd, cmd_path, opt_args_len);
 	execve(cmd_path, execve_args, NULL);

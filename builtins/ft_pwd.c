@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/17 02:32:07 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/25 03:28:35 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,16 @@ static int	valid_flag(t_c *cmd)
 {
 	int		i;
 	char	*option;
+	char	**opts;
 
-	if (!cmd || !cmd->opts)
+	opts = ft_split(cmd->ci.opts, ' ');
+
+	if (!cmd || !opts)
 		return (1);
 	i = 0;
-	while (cmd->opts[i])
+	while (opts[i])
 	{
-		option = cmd->opts[i];
+		option = opts[i];
 		if (!vaild_option(option))
 			return (0);
 		i++;

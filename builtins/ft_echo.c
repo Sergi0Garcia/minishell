@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:59:06 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/17 02:22:33 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/25 03:25:00 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 static int	valid_flag(t_c *cmd)
 {
 	int		i;
+	char	**opts;
 
-	if (!cmd->opts || !cmd->opts[0])
+	opts = ft_split(cmd->ci.opts, ' ');
+	if (!opts || !opts[0])
 		return (0);
-	if (cmd->opts[0][0] != '-')
+	if (opts[0][0] != '-')
 		return (0);
-	if (cmd->opts[0][1] != 'n')
+	if (opts[0][1] != 'n')
 		return (0);
 	i = 2;
-	while (cmd->opts[0][i])
+	while (opts[0][i])
 	{
-		if (cmd->opts[0][i] != 'n')
+		if (opts[0][i] != 'n')
 			return (0);
 		i++;
 	}
@@ -54,15 +56,20 @@ static void	print_nl(int nl_req)
 
 static void	handle_space(t_c *cmd, int nl_req)
 {
-	int	args_len;
-	int	opts_len;
-	int	i;
+	int		args_len;
+	int		opts_len;
+	int		i;
+	char	**opts;
+	char	**args;
+
+	opts = ft_split(cmd->ci.opts, ' ');
+	args = ft_split(cmd->ci.args, ' ');
 
 	i = -1;
-	while (cmd->args && cmd->args[++i])
+	while (args && args[++i])
 	args_len = i;
 	i = -1;
-	while (cmd->opts && cmd->opts[++i])
+	while (opts && opts[++i])
 	opts_len = i - !nl_req;
 	if (opts_len > 0 && args_len > 0)
 		ft_printf(" ");
@@ -70,13 +77,17 @@ static void	handle_space(t_c *cmd, int nl_req)
 
 void	ft_echo(t_c *cmd)
 {
-	int	nl_req;
+	int		nl_req;
+	char	**opts;
+	char	**args;
 
+	opts = ft_split(cmd->ci.opts, ' ');
+	args = ft_split(cmd->ci.args, ' ');
 	if (!cmd)
 		return ;
 	nl_req = !valid_flag(cmd);
-	print_words(cmd->opts, !nl_req);
+	print_words(opts, !nl_req);
 	handle_space(cmd, nl_req);
-	print_words(cmd->args, 0);
+	print_words(args, 0);
 	print_nl(nl_req);
 }

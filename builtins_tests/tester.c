@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tester.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 04:15:21 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/19 08:22:58 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/25 03:31:14 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,42 +72,48 @@ void tester(t_env_node *env_lst)
 	printf(KCYN "---------------------- \n" RESET);
 
 	t_c *command;
+	char	**optstr;
+	char	**argstr;
+
+
 
 	command = NULL;
 	command = malloc(sizeof(t_c));
-	command->name = name;
-	command->opts = opts_array;
-	command->args = args_array;
+	command->ci.name = name;
+	optstr = opts_array;
+	argstr = args_array;
+	// optstr = ft_split(command->ci.opts, ' ');
+	// argstr = ft_split(command->ci.args, ' ');
 	printf(KMAG "---------------------- \n");
-	printf(KMAG "L[%i] - name: %s\n", (int)ft_strlen(command->name), command->name);
+	printf(KMAG "L[%i] - name: %s\n", (int)ft_strlen(command->ci.name), command->ci.name);
 	i = 0;
-	while (command->opts && command->opts[i])
+	while (optstr && optstr[i])
 	{
-		printf("L[%i] - opts: %s\n", (int)ft_strlen( command->opts[i]), command->opts[i]);
+		printf("L[%i] - opts: %s\n", (int)ft_strlen( optstr[i]), optstr[i]);
 		i++;
 	}
 	i = 0;
-	while (command->args && command->args[i])
+	while (argstr && argstr[i])
 	{
-		printf("L[%i] - args: %s\n", (int)ft_strlen( command->args[i]), command->args[i]);
+		printf("L[%i] - args: %s\n", (int)ft_strlen( argstr[i]), argstr[i]);
 		i++;
 	}
 	printf(KMAG "---------------------- \n");
 	printf(KRED "---------------------- \n");
-	
-	if (is_same_str(command->name, "echo"))
+
+	if (is_same_str(command->ci.name, "echo"))
 		ft_echo(command);
-	else if (is_same_str(command->name, "cd"))
+	else if (is_same_str(command->ci.name, "cd"))
 		ft_cd(command, &env_lst);
-	else if (is_same_str(command->name, "pwd"))
+	else if (is_same_str(command->ci.name, "pwd"))
 		ft_pwd(command);
-	else if (is_same_str(command->name, "export"))
+	else if (is_same_str(command->ci.name, "export"))
 	{
 		ft_export(command, &env_lst);
-		if (command->args)
+		if (argstr)
 			ft_export(NULL, &env_lst);
 	}
-	else if (is_same_str(command->name, "unset"))
+	else if (is_same_str(command->ci.name, "unset"))
 	{
 		printf(KMAG "---------------------- \n");
 		ft_export(NULL, &env_lst);
@@ -117,12 +123,12 @@ void tester(t_env_node *env_lst)
 		ft_export(NULL, &env_lst);
 		printf(KRED "---------------------- \n" RESET);
 	}
-	else if (is_same_str(command->name, "env"))
+	else if (is_same_str(command->ci.name, "env"))
 	{
 		ft_env(command, &env_lst);
 	}
-	else 
+	else
 		ft_execve(&env_lst, command);
-	
+
 	printf(KRED "---------------------- \n");
 }

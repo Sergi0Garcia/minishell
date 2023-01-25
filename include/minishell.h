@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/24 15:37:22 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/25 04:51:51 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/ioctl.h>
 # include <sys/wait.h>
 
 # define KNRM  "\x1B[0m"
@@ -50,7 +51,7 @@ typedef enum s_word_type
 	LESS,
 	DGREAT,
 	GREAT,
-	SPACE,
+	SPACES,
 	PIPE,
 	ANDIF,
 	ORIF,
@@ -95,9 +96,9 @@ typedef struct s_command_info
 }	t_ci;
 typedef struct s_command
 {
-	t_ci			ci;
-	struct s_word	*next;
-	struct s_word	*prev;
+	t_ci				ci;
+	struct s_command	*next;
+	struct s_command	*prev;
 }	t_c;
 
 typedef struct s_command_bundle
@@ -177,7 +178,7 @@ typedef struct s_minishell
 	char	*line;
 	t_b		interactive;
 	t_wsb	wsb;
-	t_list	cmds;
+	t_csb	cmds;
 	int		status;
 }	t_minish;
 
@@ -248,7 +249,7 @@ void		usage(void);
 
 /* shared/utils/init.c */
 void		init(t_minish *sh, char **argv);
-void		init_command(t_list *cmds);
+void		init_tcsb(t_csb *cmds);
 void		init_twsb(t_wsb *wsb);
 
 /* shared/utils/word_ops.c */
