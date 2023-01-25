@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 04:57:20 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/17 13:31:06 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/23 13:17:40 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,58 +65,54 @@ int    playground(void)
 	// FORK PLAYGROUND
 	// ----------------------
 
-	// int	fd[2];
+	int	fd[2];
 	
-	// // initialize pipe
-	// if (pipe(fd) == -1)
-	// {
-	// 	ft_printf("Error creating pipes\n");
-	// 	exit(EXIT_FAILURE);
-	// }
-	// pid_t pid1 = fork();
-	// if (pid1 < 0)
-	// {
-	// 	ft_printf("Error for process 1\n");
-	// 	exit(EXIT_FAILURE);
-	// }
-	// if (pid1 == 0)
-	// {
-	// 	// Child process
-	// 	char *tmp = "c\nb\na\n";
-	// 	dup2(fd[1], STDOUT_FILENO);
-	// 	close(fd[0]);
-	// 	close(fd[1]);
-	// 	ft_printf("%s", tmp);
-	// 	char	*ptr;
-	// 	ptr = ft_pwd(NULL);
-	// 	printf("%s\n", ptr);
-	// 	return (EXIT_SUCCESS);
-	// }
-	// pid_t pid2 = fork();
-	// if (pid2 < 0)
-	// {
-	// 	ft_printf("Error for process 2\n");
-	// 	exit(EXIT_FAILURE);
-	// }
-	// if (pid2 == 0)
-	// {
-	// 	// Child process 2
-	// 	dup2(fd[0], STDIN_FILENO);
-	// 	close(fd[0]);
-	// 	close(fd[1]);
-	// 	char	*arg[2];
-	//	// arg[0] = "/bin"
-	// 	arg[0] = "/usr/bin/sort";
-	// 	arg[1] = NULL;
-	// 	printf("execve...\n");
-	// 	execve(arg[0], arg, NULL);
-	// 	return (EXIT_SUCCESS);
-	// }
-	// close(fd[0]);
-	// close(fd[1]);
-	// waitpid(pid1, NULL, 0);
-	// waitpid(pid2, NULL, 0);
-	// exit(0);
-    
+	// initialize pipe
+	if (pipe(fd) == -1)
+	{
+		ft_printf("Error creating pipes\n");
+		exit(EXIT_FAILURE);
+	}	
+	pid_t pid1 = fork();
+	if (pid1 < 0)
+	{
+		ft_printf("Error for process 1\n");
+		exit(EXIT_FAILURE);
+	}
+	if (pid1 == 0)
+	{
+		// Child process
+		char *tmp = "c\nb\na\n";
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		ft_printf("%s", tmp);
+		return (EXIT_SUCCESS);
+	}
+	pid_t pid2 = fork();
+	if (pid2 < 0)
+	{
+		ft_printf("Error for process 2\n");
+		exit(EXIT_FAILURE);
+	}
+	if (pid2 == 0)
+	{
+		// Child process 2
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		char	*arg[2];
+		// arg[0] = "/bin"
+		arg[0] = "/usr/bin/sort";
+		arg[1] = NULL;
+		printf("execve...\n");
+		execve(arg[0], arg, NULL);
+		return (EXIT_SUCCESS);
+	}
+	close(fd[0]);
+	close(fd[1]);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
+	exit(0);
     return (EXIT_SUCCESS);
 }

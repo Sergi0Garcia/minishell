@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/22 18:05:28 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/24 14:00:00 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,45 +60,34 @@ int	count_opts_args(t_c *cmd)
 	return (count);
 }
 
+
+int child_nbr_str(char **str)
+{
+	int i;
+
+	i = 0;
+	while (str && str[i])
+		i++;
+	return (i);
+}
+
 char	**execve_unifier(t_c *cmd, char *filename, int len)
 {
 	int		i;
-	int		j;
 	char	**res;
 
 	i = 0;
-	j = 1;
 	res = (char **)malloc(sizeof(char *) * (len + 2));
-	res[0] = filename;
-	if (len == 0)
+	res[i++] = filename;
+	while ((cmd->opts && cmd->opts[i - 1]) || (cmd->args && cmd->args[i - 1]))
 	{
-		res[1] = NULL;
-		return (res);
-	}
-	while (cmd->opts[i])
-	{
-		res[j] = cmd->opts[i];
-		ft_printf("res[%i] = %s\n", i, cmd->opts[i]);
- 		i++;
-		j++;
-	}
-	j = i;
-	i = 0;
-	while (cmd->args[i])
-	{
-		res[j + i] = cmd->args[i];
-		ft_printf("res[%i] = %s\n", j + i,  cmd->args[i]);
+		if (cmd->opts && cmd->opts[i - 1])
+			res[i] = cmd->opts[i - 1];
+		else if (cmd->args && cmd->args[i - 1])
+			res[i] = cmd->args[i - child_nbr_str(cmd->opts) - 1];	
 		i++;
 	}
-	res[j + i] = NULL;
-	ft_printf("res[%i] = %s\n", j + i, NULL);
-
-	i = 0;
-	while (res[i])
-	{
-		ft_printf(":: %s\n", res[i]);
-		i++;
-	}	
+	res[i] = NULL;
 	return (res);
 }
 

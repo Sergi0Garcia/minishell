@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/22 20:41:53 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:15:07 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/wait.h>
+# include <fcntl.h>
 
 # define KNRM  "\x1B[0m"
 # define KRED  "\x1B[31m"
@@ -34,13 +35,8 @@
 # define KWHT  "\x1B[37m"
 # define RESET "\x1B[0m"
 
-typedef struct s_redirect
-{
-	char	**s_filout;
-	char	**s_filin;
-	char	**d_filout;
-	char	**d_filin;
-}	t_redirect;
+# define FD_READ_END 0
+# define FD_WRITE_END 1
 
 typedef enum s_word_type
 {
@@ -129,9 +125,12 @@ typedef struct s_stack_info
 
 typedef struct s_command
 {
-    char    *name;
-    char    **opts;
-    char    **args;
+    char    			*name;
+    char    			**opts;
+    char    			**args;
+	int					infile;
+	int					outfile;
+	struct s_command	*next;
 }   t_c;
 
 typedef struct s_line
@@ -182,7 +181,7 @@ int			is_same_str(char *str1, char *str2);
 int			get_idx_separator(char *str);
 
 /** execution  */
-int			controller(t_c *cmd);
+int 		controller(t_c *cmd, t_env_node *env_lst);
 int			ft_execve(t_env_node **env_lst, t_c *cmd);
 
 /* shared/utils/parsing */

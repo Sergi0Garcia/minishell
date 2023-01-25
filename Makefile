@@ -6,7 +6,7 @@
 #    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/01/21 03:00:13 by rkanmado         ###   ########.fr        #
+#    Updated: 2023/01/24 11:30:52 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC			= 	minishell.c						\
 				./builtins_lst_env/add_back.c	\
 				./builtins_lst_env/init.c 		\
 				./builtins_lst_env/utils.c  	\
+				./execution/controller.c 		\
 				./execve/execve.c 				\
 				./shared/errors/error.c 		\
 				./shared/utils/init.c			\
@@ -79,6 +80,7 @@ $(GNL):
 
 $(NAME): $(LIBFT) $(PRINTF) $(GNL) $(SRC)
 	$(CC) ${DEBUGFLAG} ${RL_FLAG} $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
+	@make del
 
 clean:
 	@make clean -C $(LIBFT_PATH)
@@ -91,6 +93,9 @@ fclean: clean
 	@make fclean -C $(PRINTF_PATH)
 	@make fclean -C $(GNL_PATH)
 	rm -f $(NAME)
+
+del: 
+	rm -rf ./minishell.dSYM
 
 re: fclean all
 

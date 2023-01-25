@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/17 02:32:07 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/25 09:21:45 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,5 @@ char	*ft_pwd(t_c *cmd)
 		return (NULL);
 	}
 	res = getcwd(NULL, PATH_MAX);
-	ft_printf("%s\n", res);
 	return (res);
 }

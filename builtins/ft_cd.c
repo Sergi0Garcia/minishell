@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/17 02:26:19 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/25 09:21:34 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,13 @@ static void	cd_default(t_env_node **env_lst, t_c *cmd)
 	char	*new_path;
 	char	*home_path;
 
+	// printf("cd_def_1\n");
 	path = ft_pwd(NULL);
+	// printf("cd_def_2\n");
 	home_path = get_home_address(env_lst);
+	// printf("cd_def_3\n");
 	new_path = parse_home_dir(home_path, cmd);
+	// printf("cd_def_4\n");
 	if (chdir(new_path) == -1)
 		perror("");
 	new_env(env_lst, ft_strjoin("PWD=", new_path));
