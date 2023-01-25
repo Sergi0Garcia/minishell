@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/25 09:21:34 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/25 03:27:21 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,20 @@ static char	*parse_home_dir(char *home_path, t_c *cmd)
 	int		i;
 	char	*res;
 	char	*sub_str;
+	char	**args;
 
+	args = ft_split(cmd->ci.args, ' ');
 	i = 0;
-	if (cmd && cmd->args && cmd->args[0])
+	if (cmd && args && args[0])
 	{
-		if (cmd->args[0][0] && cmd->args[0][1]
-			&& cmd->args[0][0] == '~' && cmd->args[0][1] == '/')
+		if (args[0][0] && args[0][1]
+			&& args[0][0] == '~' && args[0][1] == '/')
 		{
-			sub_str = ft_substr(cmd->args[0], 1, ft_strlen(cmd->args[0]));
+			sub_str = ft_substr(args[0], 1, ft_strlen(args[0]));
 			res = ft_strjoin(home_path, sub_str);
 			return (res);
 		}
-		return (cmd->args[0]);
+		return (args[0]);
 	}
 	return (home_path);
 }

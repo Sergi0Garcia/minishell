@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 20:45:57 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/12 22:45:44 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/25 03:13:47 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	end_of_sep(char *str, int start)
 t_b	is_sep_type(t_wt wt)
 {
 	if (wt == WORD || wt == DLESS || wt == LESS || wt == GREAT \
-		|| wt == DGREAT || wt == SPACE || wt == PIPE)
+		|| wt == DGREAT || wt == SPACES || wt == PIPE)
 		return (true);
 	return (false);
 }
@@ -45,7 +45,7 @@ char	*char_of_sep(t_wt wt)
 		return (">");
 	else if (wt == DGREAT)
 		return (">>");
-	else if (wt == SPACE)
+	else if (wt == SPACES)
 		return (" ");
 	else if (wt == LESS)
 		return ("<");
@@ -68,7 +68,7 @@ t_wt	is_sep(char s1)
 	else if (s1 == '&')
 		return (ANDIF);
 	else if (s1 == ' ')
-		return (SPACE);
+		return (SPACES);
 	else
 		return (WORD);
 }

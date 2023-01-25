@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 02:35:07 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 01:42:32 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/25 03:17:31 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,25 @@ static int	valid_options(char *opt)
 int	cd_valid_flag(t_c *cmd)
 {
 	int		i;
+	char	**opts;
 
-	if (!cmd || !cmd ->opts)
+	opts = ft_split(cmd->ci.opts, ' ');
+
+	if (!cmd || !opts)
 		return (1);
 	i = 0;
-	while (cmd->opts[i])
+	while (opts[i])
 	{
-		if (db_back_flag(cmd->opts[i]))
+		if (db_back_flag(opts[i]))
 		{
-			if (back_flag(cmd->opts[i + 1]))
+			if (back_flag(opts[i + 1]))
 				return (2);
 			else
 				return (1);
 		}
-		if (back_flag(cmd->opts[i]))
+		if (back_flag(opts[i]))
 			return (2);
-		if (!valid_options(cmd->opts[i]))
+		if (!valid_options(opts[i]))
 			return (0);
 		i++;
 	}

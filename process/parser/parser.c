@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 00:50:29 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/22 07:12:26 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/25 05:21:03 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_b	parser(t_minish *sh)
 	can_continue = true;
 	while (word != NULL && can_continue)
 	{
-		if (word->wi.sep != SPACE)
+		if (word->wi.sep != SPACES)
 		{
 			if (i == 0)
 				is_begin_good(word, kvp, &can_continue);
@@ -94,14 +94,14 @@ t_b	is_between_good(t_w *word, t_kvp *kvp, t_b *can_continue)
 
 	cn1 = get_values_of_index(word->wi.sep, kvp);
 	cn2 = get_values_of_index(word->next->wi.sep, kvp);
-	is_curr_exist = is_wt_between_values(word->wi.sep, cn1.curr);
-	is_next_exist = is_wt_between_values(word->next->wi.sep, cn2.next);
+	is_curr_exist = is_wt_between_values(word->next->wi.sep, cn1.curr);
+	is_next_exist = is_wt_between_values(word->wi.sep, cn2.next);
 	if (is_next_exist && is_curr_exist)
 		return (true);
 	else
 	{
 		*can_continue = false;
-		parser_error(char_of_sep(word->next->wi.sep));
+		parser_error(char_of_sep(word->wi.sep));
 	}
 	return (false);
 }

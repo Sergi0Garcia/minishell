@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/27 14:49:41 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/25 03:03:10 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,20 @@ char	*correct_path(char **paths, char *cmd)
 
 int	count_opts_args(t_c *cmd)
 {
-	int	i;
-	int	count;
+	int		i;
+	int		count;
+	char	**opts;
+	char	**args;
 
+	opts = ft_split(cmd->ci.opts, ' ');
+	args = ft_split(cmd->ci.args, ' ');
 	i = 0;
 	count = 0;
-	while (cmd->opts && cmd->opts[i])
+	while (opts && opts[i])
 		i++;
 	count = i;
 	i = 0;
-	while (cmd->args && cmd->args[i])
+	while (args && args[i])
 		i++;
 	count += i;
 	return (count);
@@ -74,7 +78,11 @@ char	**execve_unifier(t_c *cmd, char *filename, int len)
 {
 	int		i;
 	char	**res;
+	char	**opts;
+	char	**args;
 
+	opts = ft_split(cmd->ci.opts, ' ');
+	args = ft_split(cmd->ci.args, ' ');
 	i = 0;
 	res = (char **)malloc(sizeof(char *) * (len + 2));
 	res[i++] = filename;

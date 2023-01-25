@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 07:45:35 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/21 02:28:21 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/25 03:13:47 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	remove_spaces(t_minish *sh)
 	init_twsb(&new);
 	while (word != NULL)
 	{
-		if (word->wi.sep != SPACE)
+		if (word->wi.sep != SPACES)
 			ft_wunshift(&new, word->wi);
 		word = word->next;
 	}

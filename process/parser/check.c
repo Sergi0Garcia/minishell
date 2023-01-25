@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 00:57:01 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/22 05:22:13 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/25 03:13:47 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_wt	is_which_wt(char *s1)
 	else if (strcmp(s1, ">>") == 0)
 		return (DGREAT);
 	else if (strcmp(s1, " ") == 0)
-		return (SPACE);
+		return (SPACES);
 	else if (strcmp(s1, "<") == 0)
 		return (LESS);
 	else if (strcmp(s1, "<<") == 0)

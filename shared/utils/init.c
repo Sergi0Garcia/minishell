@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 13:58:41 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/24 11:23:51 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/25 02:45:57 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,16 @@ void	init(t_minish *sh, char **argv)
 	str = ft_itoa(pid);
 	sh->pid = str;
 	init_twsb(&sh->wsb);
-	init_command(&sh->cmds);
+	init_tcsb(&sh->cmds);
 	sh->line = NULL;
 	return ;
 }
 
-void	init_command(t_cmd *cmds)
+void	init_tcsb(t_csb *cmds)
 {
-	cmds->cmd = NULL;
-	cmds->content = NULL;
+	cmds->head = NULL;
+	cmds->tail = NULL;
+	cmds->size = 0;
 	return ;
 }
 
