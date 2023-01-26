@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/26 13:58:01 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/26 14:56:54 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ static int	exec_builtin(t_c *cmd, t_env_node *env_lst)
 	else if (is_same_str(cmd->name, "env"))
 		ft_env(cmd, &env_lst);
 	else if (is_executable_path(cmd->name))
-		ft_path_execve(cmd);
+		ft_path_execve(cmd, &env_lst);
 	else 
-		ft_execve(&env_lst, cmd);
+		ft_execve(cmd, &env_lst);
 	return (EXIT_SUCCESS);
 }
 

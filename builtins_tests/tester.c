@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 04:15:21 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/26 13:57:32 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/26 15:01:35 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void tester(t_env_node *env_lst)
 	// printf("fd: %i\n", fd);
 
 	cmd1 = malloc(sizeof(t_c));
-	cmd1->name = ft_strdup("./script.sh");
+	cmd1->name = ft_strdup("./a.out");
 	cmd1->opts = NULL;
 	cmd1->args = NULL;
 	cmd1->infile = FD_READ_END;

@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/26 13:45:15 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/26 14:43:19 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,8 +183,8 @@ int			get_idx_separator(char *str);
 
 /** execution  */
 int 		controller(t_c *cmd, t_env_node *env_lst);
-int			ft_execve(t_env_node **env_lst, t_c *cmd);
-int			ft_path_execve(t_c *cmd);
+int			ft_execve(t_c *cmd, t_env_node **env_lst);
+int 		ft_path_execve(t_c *cmd, t_env_node **env_lst);
 int			get_fd(char *path, t_wt key);
 
 /* shared/utils/parsing */
