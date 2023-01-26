@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 04:15:21 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/25 13:41:01 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:57:32 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,30 @@ void tester(t_env_node *env_lst)
 	// printf("fd: %i\n", fd);
 
 	cmd1 = malloc(sizeof(t_c));
-	cmd1->name = ft_strdup("echo");
+	cmd1->name = ft_strdup("./script.sh");
 	cmd1->opts = NULL;
 	cmd1->args = NULL;
-	cmd1->infile = 0;
-	cmd1->outfile = 1;
+	cmd1->infile = FD_READ_END;
+	cmd1->outfile = FD_WRITE_END;
 
 	cmd2 = malloc(sizeof(t_c));
-	cmd2->name = ft_strdup("grep");
-	cmd2->opts = ft_split("segarcia", ' ');
+	cmd2->name = ft_strdup("echo");
+	cmd2->opts = NULL;
 	cmd2->args = NULL;
-	cmd2->infile = 0;
-	cmd2->outfile = 1;
+	cmd2->infile = FD_READ_END;
+	cmd2->outfile = FD_WRITE_END;
 
 	cmd3 = malloc(sizeof(t_c));
 	cmd3->name = ft_strdup("sort");
 	cmd3->opts = NULL;
 	cmd3->args = NULL;
-	cmd3->infile = 0;
-	cmd3->outfile = 1;
+	cmd3->infile = FD_READ_END;
+	cmd3->outfile = FD_WRITE_END;
 
 	cmd1->next = NULL;
 	cmd2->next = NULL;
 	cmd3->next = NULL;
-	
+
 	printf("Controller: %i\n", controller(cmd1, env_lst));
 	
 	// char	name[256];

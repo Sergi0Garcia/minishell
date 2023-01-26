@@ -6,11 +6,27 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/25 13:24:59 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:58:01 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../include/minishell.h"
+
+static int is_single_cmd(t_c *cmd)
+{
+	int i;
+
+	i = 0;
+	while (cmd)
+	{
+		i++;
+		cmd = cmd->next;
+	}
+	if (i == 1)
+		return (1);
+	else
+		return (0);
+}
 
 static int	fd_redirection(t_c *cmd, int fd[2])
 {
@@ -32,9 +48,18 @@ static int	fd_redirection(t_c *cmd, int fd[2])
 	return (EXIT_SUCCESS);
 }
 
+static int is_executable_path(char *path)
+{	
+	if (access(path, F_OK) == -1)
+		return (0);
+	return (1);
+}
+
 static int	exec_builtin(t_c *cmd, t_env_node *env_lst)
 {
-    if (is_same_str(cmd->name, "echo"))
+	if (is_same_str(cmd->name, "exit"))
+		exit(EXIT_SUCCESS);
+    else if (is_same_str(cmd->name, "echo"))
 		ft_echo(cmd);
 	else if (is_same_str(cmd->name, "cd"))
         ft_cd(cmd, &env_lst);
@@ -46,6 +71,8 @@ static int	exec_builtin(t_c *cmd, t_env_node *env_lst)
 		ft_unset(cmd, &env_lst);
 	else if (is_same_str(cmd->name, "env"))
 		ft_env(cmd, &env_lst);
+	else if (is_executable_path(cmd->name))
+		ft_path_execve(cmd);
 	else 
 		ft_execve(&env_lst, cmd);
 	return (EXIT_SUCCESS);
@@ -86,7 +113,6 @@ int	exec_cmd(t_c *cmd, t_env_node *env_lst)
 
 	if (pipe(fd) == -1)
         return (EXIT_FAILURE);
-	// Missing validation for paths
 	if (exec_fork(cmd, env_lst, fd) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	close(fd[FD_WRITE_END]);
@@ -103,10 +129,11 @@ int	exec_cmd(t_c *cmd, t_env_node *env_lst)
 
 int controller(t_c *cmd, t_env_node *env_lst)
 {
+	if (is_single_cmd(cmd))
+		return (exec_builtin(cmd, env_lst));
     while (cmd)
     {
-        if (exec_cmd(cmd, env_lst) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+        exec_cmd(cmd, env_lst);
         cmd = cmd->next;
     }
     return (EXIT_SUCCESS);

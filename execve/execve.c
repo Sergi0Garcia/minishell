@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/25 13:07:01 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:53:09 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	count_opts_args(t_c *cmd)
 	count += i;
 	return (count);
 }
-
 
 int child_nbr_str(char **str)
 {
@@ -118,5 +117,17 @@ int ft_execve(t_env_node **env_lst, t_c *cmd)
 	opt_args_len = count_opts_args(cmd);
 	execve_args = execve_unifier(cmd, cmd->name, opt_args_len);
 	execve(cmd_path, execve_args, NULL);
+	return (EXIT_SUCCESS);
+}
+
+int ft_path_execve(t_c *cmd)
+{
+	char	**execve_args;
+	int		opt_args_len;
+
+	execve_args = NULL;
+	opt_args_len = count_opts_args(cmd);
+	execve_args = execve_unifier(cmd, cmd->name, opt_args_len);
+	execve(cmd->name, execve_args, NULL);
 	return (EXIT_SUCCESS);
 }
