@@ -6,13 +6,13 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 04:15:21 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/26 15:01:35 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/27 02:29:51 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../include/minishell.h"
 
-void tester(t_env_node *env_lst)
+void tester(t_env_node **env_lst)
 {
 	(void) 	env_lst;
 	
@@ -25,14 +25,14 @@ void tester(t_env_node *env_lst)
 	// printf("fd: %i\n", fd);
 
 	cmd1 = malloc(sizeof(t_c));
-	cmd1->name = ft_strdup("./a.out");
+	cmd1->name = ft_strdup("unset");
 	cmd1->opts = NULL;
-	cmd1->args = NULL;
+	cmd1->args = ft_split("TMP=123", ' ');
 	cmd1->infile = FD_READ_END;
 	cmd1->outfile = FD_WRITE_END;
 
 	cmd2 = malloc(sizeof(t_c));
-	cmd2->name = ft_strdup("echo");
+	cmd2->name = ft_strdup("sort");
 	cmd2->opts = NULL;
 	cmd2->args = NULL;
 	cmd2->infile = FD_READ_END;
@@ -45,11 +45,12 @@ void tester(t_env_node *env_lst)
 	cmd3->infile = FD_READ_END;
 	cmd3->outfile = FD_WRITE_END;
 
-	cmd1->next = NULL;
+	cmd1->next = cmd2;
 	cmd2->next = NULL;
 	cmd3->next = NULL;
 
-	printf("Controller: %i\n", controller(cmd1, env_lst));
+	printf("minishell_out: %i\n", controller(cmd1, env_lst));
+	ft_export(NULL, env_lst);
 	
 	// char	name[256];
 	// char	options[256];

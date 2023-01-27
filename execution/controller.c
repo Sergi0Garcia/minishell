@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/26 14:56:54 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/27 02:14:38 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,30 +55,30 @@ static int is_executable_path(char *path)
 	return (1);
 }
 
-static int	exec_builtin(t_c *cmd, t_env_node *env_lst)
+static int	exec_builtin(t_c *cmd, t_env_node **env_lst)
 {
 	if (is_same_str(cmd->name, "exit"))
 		exit(EXIT_SUCCESS);
     else if (is_same_str(cmd->name, "echo"))
 		ft_echo(cmd);
 	else if (is_same_str(cmd->name, "cd"))
-        ft_cd(cmd, &env_lst);
+        ft_cd(cmd, env_lst);
 	else if (is_same_str(cmd->name, "pwd"))
         ft_pwd(cmd);
 	else if (is_same_str(cmd->name, "export"))
-		ft_export(cmd, &env_lst);
+		ft_export(cmd, env_lst);
 	else if (is_same_str(cmd->name, "unset"))
-		ft_unset(cmd, &env_lst);
+		ft_unset(cmd, env_lst);
 	else if (is_same_str(cmd->name, "env"))
-		ft_env(cmd, &env_lst);
+		ft_env(cmd, env_lst);
 	else if (is_executable_path(cmd->name))
-		ft_path_execve(cmd, &env_lst);
+		ft_path_execve(cmd, env_lst);
 	else 
-		ft_execve(cmd, &env_lst);
+		ft_execve(cmd, env_lst);
 	return (EXIT_SUCCESS);
 }
 
-static int	child_process(t_c *cmd, t_env_node *env_lst, int fd[2])
+static int	child_process(t_c *cmd, t_env_node **env_lst, int fd[2])
 {
 	if (fd_redirection(cmd, fd) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
@@ -87,7 +87,7 @@ static int	child_process(t_c *cmd, t_env_node *env_lst, int fd[2])
 	exit(EXIT_SUCCESS);
 }
 
-int exec_fork(t_c *cmd, t_env_node *env_lst, int fd[2])
+int exec_fork(t_c *cmd, t_env_node **env_lst, int fd[2])
 {
 	pid_t	pid;
 
@@ -107,7 +107,7 @@ int exec_fork(t_c *cmd, t_env_node *env_lst, int fd[2])
 	return (EXIT_SUCCESS);
 }
 
-int	exec_cmd(t_c *cmd, t_env_node *env_lst)
+int	exec_cmd(t_c *cmd, t_env_node **env_lst)
 {
 	int		fd[2];
 
@@ -127,7 +127,7 @@ int	exec_cmd(t_c *cmd, t_env_node *env_lst)
 	return (EXIT_SUCCESS);
 }
 
-int controller(t_c *cmd, t_env_node *env_lst)
+int controller(t_c *cmd, t_env_node **env_lst)
 {
 	if (is_single_cmd(cmd))
 		return (exec_builtin(cmd, env_lst));
@@ -137,4 +137,4 @@ int controller(t_c *cmd, t_env_node *env_lst)
         cmd = cmd->next;
     }
     return (EXIT_SUCCESS);
-}
+}	

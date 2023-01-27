@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/24 14:27:42 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/27 02:07:45 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char **argv, char **envp)
 	t_env_node	*env_lst;
 	env_lst = NULL;
 	set_env(envp, &env_lst);
-	tester(env_lst);
+	tester(&env_lst);
 	// playground();
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/26 14:43:19 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/27 02:08:04 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ void		interactive(t_minish *sh);
 void		non_interactive(t_minish *sh);
 
 /** testing builtins */
-void 		tester(t_env_node *env_lst);
+void 		tester(t_env_node **env_lst);
 int			playground(void);
 
 /** built in functions */
@@ -182,7 +182,7 @@ int			is_same_str(char *str1, char *str2);
 int			get_idx_separator(char *str);
 
 /** execution  */
-int 		controller(t_c *cmd, t_env_node *env_lst);
+int 		controller(t_c *cmd, t_env_node **env_lst);
 int			ft_execve(t_c *cmd, t_env_node **env_lst);
 int 		ft_path_execve(t_c *cmd, t_env_node **env_lst);
 int			get_fd(char *path, t_wt key);
