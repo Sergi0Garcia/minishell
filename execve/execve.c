@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/27 01:26:53 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/27 14:49:41 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,10 @@ int ft_execve(t_c *cmd, t_env_node **env_lst)
 	execve_args = NULL;
 	cmd_path = get_cmd_path(env_lst, cmd->name);
 	if (!cmd_path)
+	{
+		printf("command not found: %s\n", cmd->name);
 		return (EXIT_FAILURE);
+	}
 	opt_args_len = count_opts_args(cmd);
 	execve_args = execve_unifier(cmd, cmd->name, opt_args_len);
 	execve(cmd_path, execve_args, NULL);

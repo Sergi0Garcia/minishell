@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/27 02:14:38 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/27 15:00:57 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@ static int is_single_cmd(t_c *cmd)
 		return (1);
 	else
 		return (0);
+}
+
+static int	is_single_execution(t_c *cmd)
+{
+	if (is_single_cmd(cmd) 
+		&& (is_same_str(cmd->name, "exit") 
+		|| is_same_str(cmd->name, "export") 
+		|| is_same_str(cmd->name, "unset") 
+		|| is_same_str(cmd->name, "cd")))
+			return (1);
+	return (0);
 }
 
 static int	fd_redirection(t_c *cmd, int fd[2])
@@ -112,9 +123,20 @@ int	exec_cmd(t_c *cmd, t_env_node **env_lst)
 	int		fd[2];
 
 	if (pipe(fd) == -1)
+	{
+		close(fd[FD_WRITE_END]);	
         return (EXIT_FAILURE);
-	if (exec_fork(cmd, env_lst, fd) == EXIT_FAILURE)
+	}
+	if (cmd->infile == -1 || cmd->outfile == -1)
+	{
+		close(fd[FD_WRITE_END]);	
 		return (EXIT_FAILURE);
+	}
+	if (exec_fork(cmd, env_lst, fd) == EXIT_FAILURE)
+	{
+		close(fd[FD_WRITE_END]);
+		return (EXIT_FAILURE);
+	}
 	close(fd[FD_WRITE_END]);
 	if (cmd->next && !cmd->next->infile)
 		cmd->next->infile = fd[FD_READ_END];
@@ -129,7 +151,7 @@ int	exec_cmd(t_c *cmd, t_env_node **env_lst)
 
 int controller(t_c *cmd, t_env_node **env_lst)
 {
-	if (is_single_cmd(cmd))
+	if (is_single_execution(cmd))
 		return (exec_builtin(cmd, env_lst));
     while (cmd)
     {

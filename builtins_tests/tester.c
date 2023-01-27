@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 04:15:21 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/27 02:29:51 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/27 14:53:25 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void tester(t_env_node **env_lst)
 	t_c *cmd3;
 
 	// int fd;
-	// fd = get_fd("tmp.txt", LESS);
+	// fd = get_fd("./testing/output.txt", DGREAT);
 	// printf("fd: %i\n", fd);
 
 	cmd1 = malloc(sizeof(t_c));
-	cmd1->name = ft_strdup("unset");
+	cmd1->name = ft_strdup("dasfadsjkfhajsh");
 	cmd1->opts = NULL;
-	cmd1->args = ft_split("TMP=123", ' ');
+	cmd1->args = NULL;
 	cmd1->infile = FD_READ_END;
 	cmd1->outfile = FD_WRITE_END;
 
@@ -50,7 +50,6 @@ void tester(t_env_node **env_lst)
 	cmd3->next = NULL;
 
 	printf("minishell_out: %i\n", controller(cmd1, env_lst));
-	ft_export(NULL, env_lst);
 	
 	// char	name[256];
 	// char	options[256];
@@ -107,9 +106,7 @@ void tester(t_env_node **env_lst)
 	// 	args_array[i] = NULL;
 	// }
 	// printf(KCYN "---------------------- \n" RESET);
-
 	// t_c *command;
-
 	// command = NULL;
 	// command = malloc(sizeof(t_c));
 	// command->name = name;
