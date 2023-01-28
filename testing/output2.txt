@@ -1,0 +1,15 @@
+Makefile
+README.md
+builtins
+builtins_lst_env
+builtins_tests
+execution
+execve
+gnl
+include
+libft
+minishell
+minishell.c
+process
+shared
+testing

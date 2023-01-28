@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/22 20:41:53 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/28 00:49:01 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/ioctl.h>
 # include <sys/wait.h>
+# include <fcntl.h>
+# include <dirent.h>
 
 # define KNRM  "\x1B[0m"
 # define KRED  "\x1B[31m"
@@ -34,13 +37,8 @@
 # define KWHT  "\x1B[37m"
 # define RESET "\x1B[0m"
 
-typedef struct s_redirect
-{
-	char	**s_filout;
-	char	**s_filin;
-	char	**d_filout;
-	char	**d_filin;
-}	t_redirect;
+# define FD_READ_END 0
+# define FD_WRITE_END 1
 
 typedef enum s_word_type
 {
@@ -50,7 +48,7 @@ typedef enum s_word_type
 	LESS,
 	DGREAT,
 	GREAT,
-	SPACE,
+	SPACES,
 	PIPE,
 	ANDIF,
 	ORIF,
@@ -84,6 +82,28 @@ typedef struct s_separator
 	char	*word;
 	t_q		qtype;
 }	t_sep;
+
+typedef struct s_command_info
+{
+	char	*name;
+	char	*opts;
+	char	*args;
+	int		infile;
+	int		outfile;
+}	t_ci;
+typedef struct s_command
+{
+	t_ci				ci;
+	struct s_command	*next;
+	struct s_command	*prev;
+}	t_c;
+
+typedef struct s_command_bundle
+{
+	int					size;
+	struct s_command	*head;
+	struct s_command	*tail;
+}	t_csb;
 
 typedef enum s_bool
 {
@@ -127,13 +147,6 @@ typedef struct s_stack_info
 	t_wsb		lsb;
 }	t_si;
 
-typedef struct s_command
-{
-    char    *name;
-    char    **opts;
-    char    **args;
-}   t_c;
-
 typedef struct s_line
 {
 	t_si			si;
@@ -155,21 +168,21 @@ typedef struct s_env_node
 
 typedef struct s_minishell
 {
-	t_line	st;
-	char	**env;
-	char	**argv;
-	char	*pid;
-	char	*line;
-	t_b		interactive;
-	t_wsb	wsb;
-	int		status;
+	t_env_node	*env_lst;
+	char		**argv;
+	char		*pid;
+	char		*line;
+	t_b			interactive;
+	t_wsb		wsb;
+	t_csb		cmds;
+	int			status;
 }	t_minish;
 
 void		interactive(t_minish *sh);
 void		non_interactive(t_minish *sh);
 
 /** testing builtins */
-void 		tester(t_env_node *env_lst);
+void 		tester(t_env_node **env_lst);
 int			playground(void);
 
 /** built in functions */
@@ -182,8 +195,10 @@ int			is_same_str(char *str1, char *str2);
 int			get_idx_separator(char *str);
 
 /** execution  */
-int			controller(t_c *cmd);
-int			ft_execve(t_env_node **env_lst, t_c *cmd);
+int 		controller(t_c *cmd, t_env_node **env_lst);
+int			ft_execve(t_c *cmd, t_env_node **env_lst);
+int 		ft_path_execve(t_c *cmd, t_env_node **env_lst);
+int			get_fd(char *path, t_wt key);
 
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);
@@ -232,6 +247,8 @@ void		usage(void);
 
 /* shared/utils/init.c */
 void		init(t_minish *sh, char **argv);
+void		init_tcsb(t_csb *cmds);
+void		init_twsb(t_wsb *wsb);
 
 /* shared/utils/word_ops.c */
 void		ft_wunshift(t_wsb *stack, t_wi info);
@@ -279,7 +296,6 @@ void		escape_spaces(char *str, t_lex *lex);
 
 /* shared/display/display.c */
 void		display_words(t_w *w);
-void		init_twsb(t_wsb *wsb);
 
 /* process/lexer/handle_cases */
 int			h_bestcase(int start, char *str, t_sep *next);
@@ -329,5 +345,23 @@ char		*retrieve_env(char *str);
 /* process/utils/free.c */
 void		free_str(char **str);
 void		free_stack(t_w **head, t_w **tail);
+
+/* process/command/command.c */
+void		generate_cmd(t_minish *sh);
+void		add_to_chunk(t_wsb *chunk, t_wi wi);
+void		handle_pipe_found(t_csb *list, t_wsb *wsb);
+void		parse_wsb_to_cmd(t_csb *list, t_wsb *wsb);
+void		add_to_cmd(t_w **head, t_ci *ci);
+
+/* process/command/utils.c */
+t_b			is_opt_already_exits(t_wsb *wsb, char *opt);
+t_b			is_option(char *opt);
+int			get_fd(void);
+
+/* utils/s_cmd_ops.c */
+void		ft_cunshift(t_csb *stack, t_ci info);
+void		ft_cpush(t_csb *stack, t_ci info);
+t_ci		ft_cpop(t_csb *stack);
+t_ci		ft_cshift(t_csb *stack);
 
 #endif

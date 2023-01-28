@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:33:17 by segarcia          #+#    #+#              #
-#    Updated: 2022/11/23 14:38:24 by segarcia         ###   ########.fr        #
+#    Updated: 2023/01/23 12:46:28 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ OBJS			= $(SRCS:.c=.o)
 
 CC				= gcc
 RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror -D BUFFER_SIZE=10
+CFLAGS			= -Wall -Wextra -Werror -D BUFFER_SIZE=42
 
 NAME			= get_next_line.a
 

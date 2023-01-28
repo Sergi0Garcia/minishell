@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/01/21 03:00:13 by rkanmado         ###   ########.fr        #
+#    Updated: 2023/01/25 04:52:54 by rkanmado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ SRC			= 	minishell.c						\
 				./builtins_lst_env/add_back.c	\
 				./builtins_lst_env/init.c 		\
 				./builtins_lst_env/utils.c  	\
+				./execution/controller.c 		\
+				./execution/redirection.c 		\
 				./execve/execve.c 				\
 				./shared/errors/error.c 		\
 				./shared/utils/init.c			\
@@ -37,6 +39,7 @@ SRC			= 	minishell.c						\
 				./shared/utils/parsing.c		\
 				./shared/utils/alloc.c			\
 				./shared/utils/free.c			\
+				./shared/utils/s_cmd_ops.c		\
 				./shared/display/display.c		\
 				./process/handler/handler.c 	\
 				./process/signals/signals.c		\
@@ -48,7 +51,9 @@ SRC			= 	minishell.c						\
 				./process/lexer/lexer.c			\
 				./process/lexer/utils.c			\
 				./process/expansion/expansion.c \
-				./process/expansion/utils.c
+				./process/expansion/utils.c		\
+				./process/command/utils.c		\
+				./process/command/command.c
 
 OBJS		= $(SRC:.c=.o)
 
@@ -62,7 +67,7 @@ GNL_PATH	= ./gnl
 CC			= gcc
 RM			= rm -f
 CFLAGS		= -Wall -Werror -Wextra -g
-RL_FLAG		= -lreadline
+RL_FLAG		= -lreadline -L /usr/local/opt/readline/lib -I /usr/local/opt/readline/include -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include
 DEBUGFLAG	= -fsanitize=address
 INC			= /include/minishell.h
 
@@ -79,6 +84,7 @@ $(GNL):
 
 $(NAME): $(LIBFT) $(PRINTF) $(GNL) $(SRC)
 	$(CC) ${DEBUGFLAG} ${RL_FLAG} $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
+	@make del
 
 clean:
 	@make clean -C $(LIBFT_PATH)
@@ -91,6 +97,9 @@ fclean: clean
 	@make fclean -C $(PRINTF_PATH)
 	@make fclean -C $(GNL_PATH)
 	rm -f $(NAME)
+
+del: 
+	rm -rf ./minishell.dSYM
 
 re: fclean all
 
