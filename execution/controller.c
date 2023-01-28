@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controller.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 03:43:30 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/28 15:37:37 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	is_single_execution(t_c *cmd)
 	if (is_single_cmd(cmd)
 		&& (is_same_str(cmd->ci.name, "exit")
 		|| is_same_str(cmd->ci.name, "export")
-		|| is_same_str(cmd->ci.name, "un`set")
+		|| is_same_str(cmd->ci.name, "unset")
 		|| is_same_str(cmd->ci.name, "cd")))
 			return (1);
 	return (0);
@@ -66,39 +66,40 @@ static int is_executable_path(char *path)
 	return (1);
 }
 
-static int	exec_builtin(t_c *cmd, t_env_node **env_lst)
+static int	exec_builtin(t_ci cmd, t_env **env_lst)
 {
-	if (is_same_str(cmd->ci.name, "exit"))
+	(void) env_lst;
+	if (is_same_str(cmd.name, "exit"))
 		exit(EXIT_SUCCESS);
-    else if (is_same_str(cmd->ci.name, "echo"))
+    else if (is_same_str(cmd.name, "echo"))
 		ft_echo(cmd);
-	else if (is_same_str(cmd->ci.name, "cd"))
-        ft_cd(cmd, env_lst);
-	else if (is_same_str(cmd->ci.name, "pwd"))
-        ft_pwd(cmd);
-	else if (is_same_str(cmd->ci.name, "export"))
-		ft_export(cmd, env_lst);
-	else if (is_same_str(cmd->ci.name, "unset"))
-		ft_unset(cmd, env_lst);
-	else if (is_same_str(cmd->ci.name, "env"))
-		ft_env(cmd, env_lst);
-	else if (is_executable_path(cmd->ci.name))
-		ft_path_execve(cmd, env_lst);
+	// else if (is_same_str(cmd.name, "cd"))
+    //     ft_cd(cmd, env_lst);
+	// else if (is_same_str(cmd.name, "pwd"))
+    //     ft_pwd(cmd);
+	// else if (is_same_str(cmd.name, "export"))
+	// 	ft_export(cmd, env_lst);
+	// else if (is_same_str(cmd.name, "unset"))
+	// 	ft_unset(cmd, env_lst);
+	// else if (is_same_str(cmd.name, "env"))
+	// 	ft_env(cmd, env_lst);
+	else if (is_executable_path(cmd.name))
+		ft_execve(cmd, env_lst, 1);
 	else
-		ft_execve(cmd, env_lst);
+		ft_execve(cmd, env_lst, 0);
 	return (EXIT_SUCCESS);
 }
 
-static int	child_process(t_c *cmd, t_env_node **env_lst, int fd[2])
+static int	child_process(t_c *cmd, t_env **env_lst, int fd[2])
 {
 	if (fd_redirection(cmd, fd) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	close(fd[FD_READ_END]);
-	exec_builtin(cmd, env_lst);
+	exec_builtin(cmd->ci, env_lst);
 	exit(EXIT_SUCCESS);
 }
 
-int exec_fork(t_c *cmd, t_env_node **env_lst, int fd[2])
+int exec_fork(t_c *cmd, t_env **env_lst, int fd[2])
 {
 	pid_t	pid;
 
@@ -115,11 +116,11 @@ int exec_fork(t_c *cmd, t_env_node **env_lst, int fd[2])
 			return (EXIT_FAILURE);
 		return (EXIT_SUCCESS);
 	}
-	waitpid(-1, NULL, 0);
+	waitpid(pid, NULL, 0);
 	return (EXIT_SUCCESS);
 }
 
-int	exec_cmd(t_c *cmd, t_env_node **env_lst)
+int	exec_cmds(t_c *cmds, t_env **env_lst)
 {
 	int		fd[2];
 
@@ -128,41 +129,43 @@ int	exec_cmd(t_c *cmd, t_env_node **env_lst)
 		close(fd[FD_WRITE_END]);
         return (EXIT_FAILURE);
 	}
-	if (cmd->ci.infile == -1 || cmd->ci.outfile == -1)
+	if (cmds->ci.infile == -1 || cmds->ci.outfile == -1)
 	{
 		close(fd[FD_WRITE_END]);
 		return (EXIT_FAILURE);
 	}
-	if (exec_fork(cmd, env_lst, fd) == EXIT_FAILURE)
+	if (exec_fork(cmds, env_lst, fd) == EXIT_FAILURE)
 	{
 		close(fd[FD_WRITE_END]);
 		return (EXIT_FAILURE);
 	}
 	close(fd[FD_WRITE_END]);
-	if (cmd->next && !cmd->next->ci.infile)
-		cmd->next->ci.infile = fd[FD_READ_END];
+	if (cmds->next && !cmds->next->ci.infile)
+		cmds->next->ci.infile = fd[FD_READ_END];
 	else
 		close(fd[FD_READ_END]);
-	if (cmd && cmd->ci.infile > 2)
-		close(cmd->ci.infile);
-	if (cmd && cmd->ci.outfile > 2)
-		close(cmd->ci.outfile);
+	if (cmds && cmds->ci.infile > 2)
+		close(cmds->ci.infile);
+	if (cmds && cmds->ci.outfile > 2)
+		close(cmds->ci.outfile);
 	return (EXIT_SUCCESS);
 }
 
 int	controller(t_minish *sh)
 {
-	t_c			*cmd;
-	t_env_node	**env_lst;
+	t_c			*cmds;
+	t_env		**env_lst;
 
-	cmd = sh->cmds.head;
+	cmds = sh->cmds.head;
 	env_lst = &sh->env_lst;
-	if (is_single_execution(cmd))
-		return (exec_builtin(cmd, env_lst));
-	while (cmd)
+
+	if (is_single_execution(cmds))
+		return (exec_builtin(cmds->ci, env_lst));;
+	while (cmds)
 	{
-		exec_cmd(cmd, env_lst);
-		cmd = cmd->next;
+		printf("Executing cmd:%s\n", cmds->ci.name);
+		exec_cmds(cmds, env_lst);
+		cmds = cmds->next;
 	}
 	return (EXIT_SUCCESS);
 }

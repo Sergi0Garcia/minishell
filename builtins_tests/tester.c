@@ -3,41 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   tester.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 04:15:21 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 03:42:51 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/28 15:35:19 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../include/minishell.h"
 
-void tester(t_env_node **env_lst)
+void tester(t_env **env_lst)
 {
 	(void) 	env_lst;
 
-	t_c 	*cmd1;
-	t_ci	cmd1i;
-	// t_c	*cmd2;
-	// t_c *cmd3;
+	t_minish	sh;
+	t_ci		cmd1i;
+	t_ci		cmd2i;
+	t_csb		cmds;
 
 	// // int fd;
 	// // fd = get_fd("./testing/output.txt", DGREAT);
 	// // printf("fd: %i\n", fd);
 
-	cmd1 = malloc(sizeof(t_c));
-
 	cmd1i.name = ft_strdup("echo");
-	cmd1i.opts = ft_strdup("-n");
-	cmd1i.args = ft_strdup("Hello       World    2");
+	cmd1i.opts = "-n";
+	cmd1i.args = ft_strdup("Hello World");
 	cmd1i.infile = FD_READ_END;
 	cmd1i.outfile = FD_WRITE_END;
 
-	cmd1->ci = cmd1i;
-	cmd1->next = NULL;
-	cmd1->prev = NULL;
+	cmd2i.name = ft_strdup("./testing/script2.sh");
+	cmd2i.opts = NULL;
+	cmd2i.args = NULL;
+	cmd2i.infile = FD_READ_END;
+	cmd2i.outfile = FD_WRITE_END;
 
-	// controller(cmd1, env_lst);
+	init_tcsb(&cmds);
+	ft_cunshift(&cmds, cmd1i);
+	ft_cunshift(&cmds, cmd2i);
+
+	sh.env_lst = *env_lst;
+	sh.cmds = cmds;
+	controller(&sh);
 	// cmd2 = malloc(sizeof(t_c));
 	// cmd2->name = ft_strdup("sort");
 	// cmd2->opts = NULL;

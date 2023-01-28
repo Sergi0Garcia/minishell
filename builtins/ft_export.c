@@ -6,13 +6,13 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:25:31 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 02:24:05 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/28 06:22:48 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_export(t_c *cmd, t_env_node **env_lst)
+void	ft_export(t_c *cmd, t_env **env_lst)
 {
 	int		i;
 	char	**args;

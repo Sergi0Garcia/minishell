@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
+#    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/01/28 03:03:29 by rkanmado         ###   ########.fr        #
+#    Updated: 2023/01/28 15:11:19 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,7 @@ $(GNL):
 	@make -C $(GNL_PATH)
 
 $(NAME): $(LIBFT) $(PRINTF) $(GNL) $(SRC)
-	$(CC) ${DEBUGFLAG} ${RL_FLAG} $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
+	$(CC)  ${RL_FLAG} $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
 	# @make del
 
 clean:

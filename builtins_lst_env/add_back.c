@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   add_back.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:13:02 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/28 15:21:17 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/28 05:28:27 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	env_add_back(t_env_node **lst, t_env_node *new)
+void	env_add_back(t_env **lst, t_env *new)
 {
-	t_env_node	*last;
+	t_env	*last;
 
 	if (lst)
 	{

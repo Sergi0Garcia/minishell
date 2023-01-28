@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:14:35 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/17 03:56:29 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/28 05:28:54 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	get_idx_separator(char *str)
 	return (0);
 }
 
-t_env_node	*ft_env_last(t_env_node *lst)
+t_env	*ft_env_last(t_env *lst)
 {
 	while (lst)
 	{
@@ -55,7 +55,7 @@ t_env_node	*ft_env_last(t_env_node *lst)
 	return (lst);
 }
 
-int	ft_env_lst_size(t_env_node *lst)
+int	ft_env_lst_size(t_env *lst)
 {
 	size_t	i;
 
@@ -70,7 +70,7 @@ int	ft_env_lst_size(t_env_node *lst)
 	return (i);
 }
 
-void	free_env_node(t_env_node **env)
+void	free_env_node(t_env **env)
 {
 	(*env)->next = NULL;
 	free((*env)->name);

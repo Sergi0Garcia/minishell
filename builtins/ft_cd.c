@@ -6,13 +6,13 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 02:23:18 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/28 14:27:17 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	cd_back(t_env_node **env_lst)
+static void	cd_back(t_env **env_lst)
 {
 	char	*path;
 	char	*old_path;
@@ -31,7 +31,7 @@ static void	cd_back(t_env_node **env_lst)
 	ft_printf("%s\n", old_path);
 }
 
-static char	*get_home_address(t_env_node **env_lst)
+static char	*get_home_address(t_env **env_lst)
 {
 	char	*home_path;
 	char	*username;
@@ -68,7 +68,7 @@ static char	*parse_home_dir(char *home_path, t_c *cmd)
 	return (home_path);
 }
 
-static void	cd_default(t_env_node **env_lst, t_c *cmd)
+static void	cd_default(t_env **env_lst, t_c *cmd)
 {
 	char	*path;
 	char	*new_path;
@@ -92,7 +92,7 @@ static void	cd_default(t_env_node **env_lst, t_c *cmd)
  * @param cmd
  * @param env_lst
  */
-void	ft_cd(t_c *cmd, t_env_node **env_lst)
+void	ft_cd(t_c *cmd, t_env **env_lst)
 {
 	int		valid;
 
