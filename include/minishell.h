@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 00:49:01 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/28 02:37:12 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_command_info
 	int		infile;
 	int		outfile;
 }	t_ci;
+
 typedef struct s_command
 {
 	t_ci				ci;
@@ -198,7 +199,8 @@ int			get_idx_separator(char *str);
 int 		controller(t_c *cmd, t_env_node **env_lst);
 int			ft_execve(t_c *cmd, t_env_node **env_lst);
 int 		ft_path_execve(t_c *cmd, t_env_node **env_lst);
-int			get_fd(char *path, t_wt key);
+// int			get_fd(char *path, t_wt key);
+int			get_fd(void);
 
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);
@@ -356,7 +358,6 @@ void		add_to_cmd(t_w **head, t_ci *ci);
 /* process/command/utils.c */
 t_b			is_opt_already_exits(t_wsb *wsb, char *opt);
 t_b			is_option(char *opt);
-int			get_fd(void);
 
 /* utils/s_cmd_ops.c */
 void		ft_cunshift(t_csb *stack, t_ci info);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 02:35:07 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/25 03:17:31 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/28 02:23:44 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	cd_valid_flag(t_c *cmd)
 	char	**opts;
 
 	opts = ft_split(cmd->ci.opts, ' ');
-
 	if (!cmd || !opts)
 		return (1);
 	i = 0;

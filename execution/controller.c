@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/27 23:42:20 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/28 02:15:48 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,27 @@ static int is_single_cmd(t_c *cmd)
 static int	is_single_execution(t_c *cmd)
 {
 	if (is_single_cmd(cmd) 
-		&& (is_same_str(cmd->name, "exit") 
-		|| is_same_str(cmd->name, "export") 
-		|| is_same_str(cmd->name, "un`set") 
-		|| is_same_str(cmd->name, "cd")))
+		&& (is_same_str(cmd->ci.name, "exit") 
+		|| is_same_str(cmd->ci.name, "export") 
+		|| is_same_str(cmd->ci.name, "un`set") 
+		|| is_same_str(cmd->ci.name, "cd")))
 			return (1);
 	return (0);
 }
 
 static int	fd_redirection(t_c *cmd, int fd[2])
 {
-	if (cmd->infile && cmd->infile != STDIN_FILENO)
+	if (cmd->ci.infile && cmd->ci.infile != STDIN_FILENO)
 	{
-		if (dup2(cmd->infile, STDIN_FILENO) == -1)
+		if (dup2(cmd->ci.infile, STDIN_FILENO) == -1)
             return(EXIT_FAILURE);
-		close(cmd->infile);
+		close(cmd->ci.infile);
 	}
-	if (cmd->outfile && cmd->outfile != STDOUT_FILENO)
+	if (cmd->ci.outfile && cmd->ci.outfile != STDOUT_FILENO)
 	{
-		if (dup2(cmd->outfile, STDOUT_FILENO) == -1)
+		if (dup2(cmd->ci.outfile, STDOUT_FILENO) == -1)
             return(EXIT_FAILURE);
-		close(cmd->outfile);
+		close(cmd->ci.outfile);
 	}
 	else if (cmd->next && dup2(fd[FD_WRITE_END], STDOUT_FILENO) == -1)
        return(EXIT_FAILURE);
@@ -68,21 +68,21 @@ static int is_executable_path(char *path)
 
 static int	exec_builtin(t_c *cmd, t_env_node **env_lst)
 {
-	if (is_same_str(cmd->name, "exit"))
+	if (is_same_str(cmd->ci.name, "exit"))
 		exit(EXIT_SUCCESS);
-    else if (is_same_str(cmd->name, "echo"))
+    else if (is_same_str(cmd->ci.name, "echo"))
 		ft_echo(cmd);
-	else if (is_same_str(cmd->name, "cd"))
+	else if (is_same_str(cmd->ci.name, "cd"))
         ft_cd(cmd, env_lst);
-	else if (is_same_str(cmd->name, "pwd"))
+	else if (is_same_str(cmd->ci.name, "pwd"))
         ft_pwd(cmd);
-	else if (is_same_str(cmd->name, "export"))
+	else if (is_same_str(cmd->ci.name, "export"))
 		ft_export(cmd, env_lst);
-	else if (is_same_str(cmd->name, "unset"))
+	else if (is_same_str(cmd->ci.name, "unset"))
 		ft_unset(cmd, env_lst);
-	else if (is_same_str(cmd->name, "env"))
+	else if (is_same_str(cmd->ci.name, "env"))
 		ft_env(cmd, env_lst);
-	else if (is_executable_path(cmd->name))
+	else if (is_executable_path(cmd->ci.name))
 		ft_path_execve(cmd, env_lst);
 	else 
 		ft_execve(cmd, env_lst);
@@ -127,7 +127,7 @@ int	exec_cmd(t_c *cmd, t_env_node **env_lst)
 		close(fd[FD_WRITE_END]);	
         return (EXIT_FAILURE);
 	}
-	if (cmd->infile == -1 || cmd->outfile == -1)
+	if (cmd->ci.infile == -1 || cmd->ci.outfile == -1)
 	{
 		close(fd[FD_WRITE_END]);	
 		return (EXIT_FAILURE);
@@ -138,14 +138,14 @@ int	exec_cmd(t_c *cmd, t_env_node **env_lst)
 		return (EXIT_FAILURE);
 	}
 	close(fd[FD_WRITE_END]);
-	if (cmd->next && !cmd->next->infile)
-		cmd->next->infile = fd[FD_READ_END];
+	if (cmd->next && !cmd->next->ci.infile)
+		cmd->next->ci.infile = fd[FD_READ_END];
 	else
 		close(fd[FD_READ_END]);
-	if (cmd && cmd->infile > 2)
-		close(cmd->infile);
-	if (cmd && cmd->outfile > 2)
-		close(cmd->outfile);
+	if (cmd && cmd->ci.infile > 2)
+		close(cmd->ci.infile);
+	if (cmd && cmd->ci.outfile > 2)
+		close(cmd->ci.outfile);
 	return (EXIT_SUCCESS);
 }
 

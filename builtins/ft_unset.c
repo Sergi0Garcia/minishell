@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:55:56 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/25 03:15:31 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/28 02:23:02 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_unset(t_c *cmd, t_env_node **env_lst)
 	char	**args;
 
 	args = ft_split(cmd->ci.args, ' ');
-
 	i = 0;
 	if (!cmd || !args || !args[0])
 		return ;

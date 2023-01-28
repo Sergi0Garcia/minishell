@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/25 03:03:10 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/28 02:29:31 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,12 @@ char	**execve_unifier(t_c *cmd, char *filename, int len)
 	i = 0;
 	res = (char **)malloc(sizeof(char *) * (len + 2));
 	res[i++] = filename;
-	while ((cmd->opts && cmd->opts[i - 1]) || (cmd->args && cmd->args[i - 1]))
+	while ((opts && opts[i - 1]) || (args && args[i - 1]))
 	{
-		if (cmd->opts && cmd->opts[i - 1])
-			res[i] = cmd->opts[i - 1];
-		else if (cmd->args && cmd->args[i - 1])
-			res[i] = cmd->args[i - child_nbr_str(cmd->opts) - 1];	
+		if (opts && opts[i - 1])
+			res[i] = opts[i - 1];
+		else if (args && args[i - 1])
+			res[i] = args[i - child_nbr_str(opts) - 1];	
 		i++;
 	}
 	res[i] = NULL;
@@ -102,17 +102,22 @@ char	**path_execve_unifier(t_c *cmd, char *filename, int len)
 {
 	int		i;
 	char	**res;
+	char	**opts;
+	char	**args;
+
+	opts = ft_split(cmd->ci.opts, ' ');
+	args = ft_split(cmd->ci.args, ' ');
 
 	i = 0;
 	res = (char **)malloc(sizeof(char *) * (len + 3));
 	res[i++] = filename;
-	res[i++] = cmd->name;
-	while ((cmd->opts && cmd->opts[i - 1]) || (cmd->args && cmd->args[i - 1]))
+	res[i++] = cmd->ci.name;
+	while ((opts && opts[i - 1]) || (args && args[i - 1]))
 	{
-		if (cmd->opts && cmd->opts[i - 1])
-			res[i] = cmd->opts[i - 1];
-		else if (cmd->args && cmd->args[i - 1])
-			res[i] = cmd->args[i - child_nbr_str(cmd->opts) - 1];	
+		if (opts && opts[i - 1])
+			res[i] = opts[i - 1];
+		else if (args && args[i - 1])
+			res[i] = args[i - child_nbr_str(opts) - 1];	
 		i++;
 	}
 	res[i] = NULL;
@@ -143,7 +148,6 @@ static char *get_cmd_path(t_env_node **env_lst, char *str)
 	return (cmd_path);
 }
 
-
 int ft_execve(t_c *cmd, t_env_node **env_lst)
 {
 	char	**execve_args;
@@ -153,14 +157,14 @@ int ft_execve(t_c *cmd, t_env_node **env_lst)
 
 	i = 0;
 	execve_args = NULL;
-	cmd_path = get_cmd_path(env_lst, cmd->name);
+	cmd_path = get_cmd_path(env_lst, cmd->ci.name);
 	if (!cmd_path)
 	{
-		printf("command not found: %s\n", cmd->name);
+		printf("command not found: %s\n", cmd->ci.name);
 		return (EXIT_FAILURE);
 	}
 	opt_args_len = count_opts_args(cmd);
-	execve_args = execve_unifier(cmd, cmd->name, opt_args_len);
+	execve_args = execve_unifier(cmd, cmd->ci.name, opt_args_len);
 	execve(cmd_path, execve_args, NULL);
 	return (EXIT_SUCCESS);
 }
@@ -187,7 +191,7 @@ int ft_path_execve(t_c *cmd, t_env_node **env_lst)
 
 	cmd_path = NULL;
 	execve_args = NULL;
-	if (is_sh(cmd->name))
+	if (is_sh(cmd->ci.name))
 	{
 		cmd_path = get_cmd_path(env_lst, "bash");
 		if (!cmd_path)
@@ -200,7 +204,7 @@ int ft_path_execve(t_c *cmd, t_env_node **env_lst)
 	{
 		opt_args_len = count_opts_args(cmd);
 		execve_args = path_execve_unifier(cmd, cmd_path, opt_args_len);
-		execve(cmd->name, execve_args, NULL);
+		execve(cmd->ci.name, execve_args, NULL);
 	}
 	return (EXIT_SUCCESS);
 }
