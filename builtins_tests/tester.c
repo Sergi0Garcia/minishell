@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tester.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 04:15:21 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 02:45:55 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/28 03:42:51 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void tester(t_env_node **env_lst)
 {
 	(void) 	env_lst;
-	
+
 	t_c 	*cmd1;
 	t_ci	cmd1i;
 	// t_c	*cmd2;
@@ -37,7 +37,7 @@ void tester(t_env_node **env_lst)
 	cmd1->next = NULL;
 	cmd1->prev = NULL;
 
-	controller(cmd1, env_lst);
+	// controller(cmd1, env_lst);
 	// cmd2 = malloc(sizeof(t_c));
 	// cmd2->name = ft_strdup("sort");
 	// cmd2->opts = NULL;

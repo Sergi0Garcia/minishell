@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 03:36:22 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/28 03:43:30 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,8 +155,8 @@ int	controller(t_minish *sh)
 	t_c			*cmd;
 	t_env_node	**env_lst;
 
-	cmd = &sh->cmds;
-	env_lst = sh->env_lst;
+	cmd = sh->cmds.head;
+	env_lst = &sh->env_lst;
 	if (is_single_execution(cmd))
 		return (exec_builtin(cmd, env_lst));
 	while (cmd)
