@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/27 15:00:57 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/27 23:42:20 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	is_single_execution(t_c *cmd)
 	if (is_single_cmd(cmd) 
 		&& (is_same_str(cmd->name, "exit") 
 		|| is_same_str(cmd->name, "export") 
-		|| is_same_str(cmd->name, "unset") 
+		|| is_same_str(cmd->name, "un`set") 
 		|| is_same_str(cmd->name, "cd")))
 			return (1);
 	return (0);
