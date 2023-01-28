@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:36:25 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/24 15:36:45 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/28 00:18:50 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_b	is_opt_already_exits(t_wsb *wsb, char *opt)
 	token = wsb->head;
 	while (token != NULL)
 	{
-		if (strncmp(token->wi.word, opt, ft_strlen(token->wi.word)))
+		if (is_same_str(token->wi.word, opt))
 			return (true);
 	}
 	return (false);
