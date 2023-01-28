@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:03:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/25 05:02:54 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/27 22:43:26 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,19 @@ void	generate_cmd(t_minish *sh)
 
 	token = sh->wsb.head;
 	init_twsb(&chunk);
+	init_tcsb(&list);
 	while (token != NULL)
 	{
-		add_to_chunk(&chunk, token->wi);
-		if (is_which_wt(token->wi.word) == PIPE || token != NULL)
+		if (is_which_wt(token->wi.word) == PIPE || token->next == NULL)
+		{
+			if (token->next == NULL)
+				add_to_chunk(&chunk, token->wi);
 			handle_pipe_found(&list, &chunk);
+			if (token->next == NULL)
+				break ;
+			token = token->next;
+		}
+		add_to_chunk(&chunk, token->wi);
 		token = token->next;
 	}
 	return ;
@@ -34,12 +42,15 @@ void	add_to_chunk(t_wsb *chunk, t_wi wi)
 {
 	if (is_option(wi.word) && !is_opt_already_exits(chunk, wi.word))
 		ft_wunshift(chunk, wi);
+	else if (!is_option(wi.word))
+		ft_wunshift(chunk, wi);
 	return ;
 }
 
 void	handle_pipe_found(t_csb *list, t_wsb *wsb)
 {
 	parse_wsb_to_cmd(list, wsb);
+	wsb->size = 0;
 	free_stack(&wsb->head, &wsb->tail);
 	return ;
 }
@@ -47,26 +58,29 @@ void	handle_pipe_found(t_csb *list, t_wsb *wsb)
 void	parse_wsb_to_cmd(t_csb *list, t_wsb *wsb)
 {
 	t_w		*head;
-	int		counter;
 	t_ci	ci;
 
 	head = wsb->head;
-	counter = 0;
-	while (head == NULL)
+	ci.args = "";
+	ci.outfile = 0;
+	ci.opts = "";
+	ci.infile = 0;
+	ci.name = "";
+	while (head != NULL)
 	{
-		add_to_cmd(&head, counter, &ci);
+		add_to_cmd(&head, &ci);
 		head = head->next;
 	}
 	ft_cunshift(list, ci);
 	return ;
 }
 
-void	add_to_cmd(t_w **head, int counter, t_ci *ci)
+void	add_to_cmd(t_w **head, t_ci *ci)
 {
 	t_w	*tmp;
 
 	tmp = *head;
-	if (counter == 0)
+	if (tmp->prev == NULL)
 		ci->name = tmp->wi.word;
 	else if (*tmp->wi.word == '-')
 	{
@@ -85,7 +99,8 @@ void	add_to_cmd(t_w **head, int counter, t_ci *ci)
 	}
 	else
 	{
+		if (ft_strlen(ci->args) != 0)
+			ci->args = ft_strjoin(ci->args, " ");
 		ci->args = ft_strjoin(ci->args, tmp->wi.word);
-		ci->args = ft_strjoin(ci->args, " ");
 	}
 }

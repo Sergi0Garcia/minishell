@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/25 04:51:51 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/28 00:49:01 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,15 +168,14 @@ typedef struct s_env_node
 
 typedef struct s_minishell
 {
-	t_line	st;
-	char	**env;
-	char	**argv;
-	char	*pid;
-	char	*line;
-	t_b		interactive;
-	t_wsb	wsb;
-	t_csb	cmds;
-	int		status;
+	t_env_node	*env_lst;
+	char		**argv;
+	char		*pid;
+	char		*line;
+	t_b			interactive;
+	t_wsb		wsb;
+	t_csb		cmds;
+	int			status;
 }	t_minish;
 
 void		interactive(t_minish *sh);
@@ -352,7 +351,7 @@ void		generate_cmd(t_minish *sh);
 void		add_to_chunk(t_wsb *chunk, t_wi wi);
 void		handle_pipe_found(t_csb *list, t_wsb *wsb);
 void		parse_wsb_to_cmd(t_csb *list, t_wsb *wsb);
-void		add_to_cmd(t_w **head, int counter, t_ci *ci);
+void		add_to_cmd(t_w **head, t_ci *ci);
 
 /* process/command/utils.c */
 t_b			is_opt_already_exits(t_wsb *wsb, char *opt);
