@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 15:41:25 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/28 15:51:44 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,6 @@ char	**split_paths(char *path)
 	if (!paths)
 		return (NULL);
 	return (paths);
-}
-
-static int is_sh(char *str)
-{
-	int len;
-
-	len = ft_strlen(str);
-	if (len < 0 || len < 2)
-		return (0);
-	if (str[len - 1] == 'h' 
-		&& str[len - 2] == 's' 
-		&& str[len - 3] == '.')
-			return (1);
-	return (0);
 }
 
 char	*correct_path(char **paths, char *cmd)
@@ -115,37 +101,35 @@ static char **execve_cmd(t_ci cmd, char *cmd_path)
 	return (res);
 }
 
-int ft_execve(t_ci cmd, t_env **env_lst, int path_exec)
+int ft_execve(t_ci cmd, t_env **env_lst)
 {
 	char	*cmd_path;
 	int     i;
 
 	i = 0;
 	cmd_path = get_cmd_path(env_lst, cmd.name);
-	if (!cmd_path && path_exec)
-	{
-		if (is_sh(cmd.name))
-			cmd_path = get_cmd_path(env_lst, "bash");
-		else
-			cmd_path = cmd.name;
-	}
-	else if (!cmd_path && !path_exec)
+	if (!cmd_path)
 	{
 		printf("command not found: %s\n", cmd.name);
 		return (EXIT_FAILURE);
 	}
-	ft_printf("cmd_path:%s\n", cmd_path);
-	char **tmp;
-	tmp = execve_cmd(cmd, cmd_path, 0);
-
-	while(tmp[i])
-	{
-		printf("%s\n", tmp[i]);
-		i++;
-	}
-	execve(cmd_path, execve_cmd(cmd, cmd_path, 0), NULL);
+	execve(cmd_path, execve_cmd(cmd, cmd_path), NULL);
 	return (EXIT_SUCCESS);
 }
+
+// static int is_sh(char *str)
+// {
+// 	int len;
+
+// 	len = ft_strlen(str);
+// 	if (len < 0 || len < 2)
+// 		return (0);
+// 	if (str[len - 1] == 'h' 
+// 		&& str[len - 2] == 's' 
+// 		&& str[len - 3] == '.')
+// 			return (1);
+// 	return (0);
+// }
 
 // int ft_path_execve(t_c *cmd, t_env **env_lst)
 // {

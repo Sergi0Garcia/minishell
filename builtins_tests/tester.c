@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 04:15:21 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 15:35:19 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/28 16:06:26 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void tester(t_env **env_lst)
 	// // fd = get_fd("./testing/output.txt", DGREAT);
 	// // printf("fd: %i\n", fd);
 
-	cmd1i.name = ft_strdup("echo");
-	cmd1i.opts = "-n";
-	cmd1i.args = ft_strdup("Hello World");
+	cmd1i.name = ft_strdup("cd");
+	cmd1i.opts = NULL;
+	cmd1i.args = NULL;
 	cmd1i.infile = FD_READ_END;
 	cmd1i.outfile = FD_WRITE_END;
 
@@ -39,11 +39,12 @@ void tester(t_env **env_lst)
 
 	init_tcsb(&cmds);
 	ft_cunshift(&cmds, cmd1i);
-	ft_cunshift(&cmds, cmd2i);
+	// ft_cunshift(&cmds, cmd2i);
 
 	sh.env_lst = *env_lst;
 	sh.cmds = cmds;
 	controller(&sh);
+	ft_env(sh.cmds.head->ci, &sh.env_lst);
 	// cmd2 = malloc(sizeof(t_c));
 	// cmd2->name = ft_strdup("sort");
 	// cmd2->opts = NULL;

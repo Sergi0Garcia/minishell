@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 15:37:37 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/28 16:52:21 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,27 +66,27 @@ static int is_executable_path(char *path)
 	return (1);
 }
 
-static int	exec_builtin(t_ci cmd, t_env **env_lst)
+static int	exec_builtin(t_c *cmd, t_env **env_lst)
 {
 	(void) env_lst;
-	if (is_same_str(cmd.name, "exit"))
+	if (is_same_str(cmd->ci.name, "exit"))
 		exit(EXIT_SUCCESS);
-    else if (is_same_str(cmd.name, "echo"))
-		ft_echo(cmd);
-	// else if (is_same_str(cmd.name, "cd"))
-    //     ft_cd(cmd, env_lst);
+    else if (is_same_str(cmd->ci.name, "echo"))
+		ft_echo(cmd->ci);
+	else if (is_same_str(cmd->ci.name, "cd"))
+        ft_cd(cmd, env_lst);
 	// else if (is_same_str(cmd.name, "pwd"))
     //     ft_pwd(cmd);
-	// else if (is_same_str(cmd.name, "export"))
-	// 	ft_export(cmd, env_lst);
-	// else if (is_same_str(cmd.name, "unset"))
-	// 	ft_unset(cmd, env_lst);
-	// else if (is_same_str(cmd.name, "env"))
-	// 	ft_env(cmd, env_lst);
-	else if (is_executable_path(cmd.name))
-		ft_execve(cmd, env_lst, 1);
+	else if (is_same_str(cmd->ci.name, "export"))
+		ft_export(cmd->ci, env_lst);
+	else if (is_same_str(cmd->ci.name, "unset"))
+		ft_unset(cmd->ci, env_lst);
+	else if (is_same_str(cmd->ci.name, "env"))
+		ft_env(cmd->ci, env_lst);
+	else if (is_executable_path(cmd->ci.name))
+		ft_execve(cmd->ci, env_lst);
 	else
-		ft_execve(cmd, env_lst, 0);
+		ft_execve(cmd->ci, env_lst);
 	return (EXIT_SUCCESS);
 }
 
@@ -95,7 +95,7 @@ static int	child_process(t_c *cmd, t_env **env_lst, int fd[2])
 	if (fd_redirection(cmd, fd) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	close(fd[FD_READ_END]);
-	exec_builtin(cmd->ci, env_lst);
+	exec_builtin(cmd, env_lst);
 	exit(EXIT_SUCCESS);
 }
 
@@ -160,10 +160,9 @@ int	controller(t_minish *sh)
 	env_lst = &sh->env_lst;
 
 	if (is_single_execution(cmds))
-		return (exec_builtin(cmds->ci, env_lst));;
+		return (exec_builtin(cmds, env_lst));;
 	while (cmds)
 	{
-		printf("Executing cmd:%s\n", cmds->ci.name);
 		exec_cmds(cmds, env_lst);
 		cmds = cmds->next;
 	}

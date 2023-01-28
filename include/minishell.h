@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 15:31:56 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/28 16:06:35 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,15 +189,15 @@ int			playground(void);
 /** built in functions */
 int			cd_valid_flag(t_c *cmd);
 void		cd_handle_error(void);
-void		ft_export(t_c *cmd, t_env **env_lst);
-void		ft_unset(t_c *cmd, t_env **env_lst);
-void		ft_env(t_c *cmd, t_env **env_lst);
+void		ft_export(t_ci cmd, t_env **env_lst);
+void		ft_unset(t_ci cmd, t_env **env_lst);
+void		ft_env(t_ci cmd, t_env **env_lst);
 int			is_same_str(char *str1, char *str2);
 int			get_idx_separator(char *str);
 
 /** execution  */
 int			controller(t_minish *sh);
-int 		ft_execve(t_ci cmd, t_env **env_lst, int path_exec);
+int 		ft_execve(t_ci cmd, t_env **env_lst);
 int			ft_path_execve(t_c *cmd, t_env **env_lst);
 // int			get_fd(char *path, t_wt key);
 int			get_fd(void);
