@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:14:59 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/24 15:41:54 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/28 03:38:03 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ void	h_interactive_mode(t_minish *sh)
 	while (1)
 	{
 		interactive_mode_sig();
-		sh->line = readline("---sh---");
+		sh->line = readline("---sh2---");
 		sh->line = ft_strtrim(sh->line, " ");
 		lexing(sh);
 		if (!parser(sh))
 			continue ;
 		expansion(sh);
 		generate_cmd(sh);
+		controller(sh);
 	}
 	return ;
 }

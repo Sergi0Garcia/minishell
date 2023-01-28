@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:03:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/27 22:43:26 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/28 03:08:49 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,18 @@
 void	generate_cmd(t_minish *sh)
 {
 	t_w		*token;
-	t_csb	list;
 	t_wsb	chunk;
 
 	token = sh->wsb.head;
 	init_twsb(&chunk);
-	init_tcsb(&list);
+	init_tcsb(&sh->cmds);
 	while (token != NULL)
 	{
 		if (is_which_wt(token->wi.word) == PIPE || token->next == NULL)
 		{
 			if (token->next == NULL)
 				add_to_chunk(&chunk, token->wi);
-			handle_pipe_found(&list, &chunk);
+			handle_pipe_found(&sh->cmds, &chunk);
 			if (token->next == NULL)
 				break ;
 			token = token->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controller.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 02:15:48 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/28 03:36:22 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static int is_single_cmd(t_c *cmd)
 
 static int	is_single_execution(t_c *cmd)
 {
-	if (is_single_cmd(cmd) 
-		&& (is_same_str(cmd->ci.name, "exit") 
-		|| is_same_str(cmd->ci.name, "export") 
-		|| is_same_str(cmd->ci.name, "un`set") 
+	if (is_single_cmd(cmd)
+		&& (is_same_str(cmd->ci.name, "exit")
+		|| is_same_str(cmd->ci.name, "export")
+		|| is_same_str(cmd->ci.name, "un`set")
 		|| is_same_str(cmd->ci.name, "cd")))
 			return (1);
 	return (0);
@@ -60,7 +60,7 @@ static int	fd_redirection(t_c *cmd, int fd[2])
 }
 
 static int is_executable_path(char *path)
-{	
+{
 	if (access(path, F_OK) == -1)
 		return (0);
 	return (1);
@@ -84,7 +84,7 @@ static int	exec_builtin(t_c *cmd, t_env_node **env_lst)
 		ft_env(cmd, env_lst);
 	else if (is_executable_path(cmd->ci.name))
 		ft_path_execve(cmd, env_lst);
-	else 
+	else
 		ft_execve(cmd, env_lst);
 	return (EXIT_SUCCESS);
 }
@@ -115,6 +115,7 @@ int exec_fork(t_c *cmd, t_env_node **env_lst, int fd[2])
 			return (EXIT_FAILURE);
 		return (EXIT_SUCCESS);
 	}
+	waitpid(-1, NULL, 0);
 	return (EXIT_SUCCESS);
 }
 
@@ -124,12 +125,12 @@ int	exec_cmd(t_c *cmd, t_env_node **env_lst)
 
 	if (pipe(fd) == -1)
 	{
-		close(fd[FD_WRITE_END]);	
+		close(fd[FD_WRITE_END]);
         return (EXIT_FAILURE);
 	}
 	if (cmd->ci.infile == -1 || cmd->ci.outfile == -1)
 	{
-		close(fd[FD_WRITE_END]);	
+		close(fd[FD_WRITE_END]);
 		return (EXIT_FAILURE);
 	}
 	if (exec_fork(cmd, env_lst, fd) == EXIT_FAILURE)
@@ -149,14 +150,19 @@ int	exec_cmd(t_c *cmd, t_env_node **env_lst)
 	return (EXIT_SUCCESS);
 }
 
-int controller(t_c *cmd, t_env_node **env_lst)
+int	controller(t_minish *sh)
 {
+	t_c			*cmd;
+	t_env_node	**env_lst;
+
+	cmd = &sh->cmds;
+	env_lst = sh->env_lst;
 	if (is_single_execution(cmd))
 		return (exec_builtin(cmd, env_lst));
-    while (cmd)
-    {
-        exec_cmd(cmd, env_lst);
-        cmd = cmd->next;
-    }
-    return (EXIT_SUCCESS);
-}	
+	while (cmd)
+	{
+		exec_cmd(cmd, env_lst);
+		cmd = cmd->next;
+	}
+	return (EXIT_SUCCESS);
+}

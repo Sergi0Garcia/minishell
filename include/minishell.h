@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 02:37:12 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/28 03:37:46 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,9 +196,9 @@ int			is_same_str(char *str1, char *str2);
 int			get_idx_separator(char *str);
 
 /** execution  */
-int 		controller(t_c *cmd, t_env_node **env_lst);
+int			controller(t_minish *sh);
 int			ft_execve(t_c *cmd, t_env_node **env_lst);
-int 		ft_path_execve(t_c *cmd, t_env_node **env_lst);
+int			ft_path_execve(t_c *cmd, t_env_node **env_lst);
 // int			get_fd(char *path, t_wt key);
 int			get_fd(void);
 

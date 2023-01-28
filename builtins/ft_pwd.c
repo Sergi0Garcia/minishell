@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 02:44:41 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/28 03:28:16 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ char	*ft_pwd(t_c *cmd)
 		return (NULL);
 	}
 	res = getcwd(NULL, PATH_MAX);
+	printf("%s\n", res);
 	return (res);
 }
