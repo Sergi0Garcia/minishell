@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:14:59 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/29 13:55:43 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/29 19:01:50 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	h_interactive_mode(t_minish *sh)
 	while (1)
 	{
 		interactive_mode_sig();
-		sh->line = readline("---sh2---");
+		sh->line = readline("@minishell-1.0$ ");
 		sh->line = ft_strtrim(sh->line, " ");
 		lexing(sh);
 		if (parser(sh))

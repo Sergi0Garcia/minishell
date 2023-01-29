@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 17:53:21 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:04:04 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	exec_builtin(t_c *cmd, t_env **env_lst)
 	else if (is_same_str(cmd->ci.name, "cd"))
         ft_cd(cmd, env_lst);
 	else if (is_same_str(cmd->ci.name, "pwd"))
-        ft_pwd(cmd);
+        ft_pwd(cmd, 1);
 	else if (is_same_str(cmd->ci.name, "export"))
 		ft_export(cmd->ci, env_lst);
 	else if (is_same_str(cmd->ci.name, "unset"))
@@ -84,9 +84,9 @@ static int	exec_builtin(t_c *cmd, t_env **env_lst)
 	else if (is_same_str(cmd->ci.name, "env"))
 		ft_env(cmd->ci, env_lst);
 	else if (is_executable_path(cmd->ci.name))
-		ft_execve(cmd->ci, env_lst);
+		ft_execve(cmd->ci, env_lst, 1);
 	else
-		ft_execve(cmd->ci, env_lst);
+		ft_execve(cmd->ci, env_lst, 0);
 	return (EXIT_SUCCESS);
 }
 
@@ -159,6 +159,10 @@ int	controller(t_minish *sh)
 	cmds = sh->cmds.head;
 	env_lst = &sh->env_lst;
 
+	printf("cmd.name =%s\n", cmds->ci.name);
+	printf("cmd.opts =%s\n", cmds->ci.opts);
+	printf("cmd.args =%s\n", cmds->ci.args);
+	
 	if (is_single_execution(cmds))
 		return (exec_builtin(cmds, env_lst));;
 	while (cmds)

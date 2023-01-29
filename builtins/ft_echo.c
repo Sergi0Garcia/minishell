@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:59:06 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 17:51:45 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/29 19:10:38 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,25 @@
 static int	valid_flag(t_ci cmd)
 {
 	int	len;
+	int i;
 
 	if (!cmd.opts)
 		return (0);
 	len = ft_strlen(cmd.opts);
-	if (!len)
+	if (!len || len < 2)
 		return (0);
-	if (len != 2)
+	if (cmd.opts[0] != '-')
 		return (0);
-	if (cmd.opts[0] == '-' && cmd.opts[1] == 'n')
-		return (1);
-	return (0);
+	if (cmd.opts[1] != 'n')
+		return (0);
+	i = 2;
+	while (i < len)
+	{
+		if (cmd.opts[i] != 'n')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 static void	print_words(t_ci cmd, int new_line)
@@ -33,7 +41,7 @@ static void	print_words(t_ci cmd, int new_line)
 	int	i;
 
 	i = 0;
-	if (cmd.opts && new_line)
+	if (cmd.opts && ft_strlen(cmd.opts) && new_line)
 	{
 		ft_printf("%s", cmd.opts);
 		if (cmd.args)
