@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 19:50:38 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:32:34 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,8 +198,7 @@ int			get_idx_separator(char *str);
 /** execution  */
 int			controller(t_minish *sh);
 int			ft_execve(t_ci cmd, t_env **env_lst, int path_exec);
-// int			get_fd(char *path, t_wt key);
-int			get_fd(void);
+int			get_fd(char *path, t_wt key);
 
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);

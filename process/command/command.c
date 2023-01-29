@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:03:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/28 14:31:34 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:39:08 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,15 @@ t_b	can_add_to_cmd(t_w **head, t_ci *ci)
 		ci->opts = add_arg_or_opt(ci->opts, tmp->wi.word);
 	else if (tmp->wi.sep == DLESS || tmp->wi.sep == LESS)
 	{
-		ci->infile = get_fd();
+		ci->infile = get_fd(tmp->next->wi.word, tmp->wi.sep);
+		printf("infile %d\n", ci->infile);
 		if (!can_increment_word(head))
 			return (false);
 	}
 	else if (tmp->wi.sep == DGREAT || tmp->wi.sep == GREAT)
 	{
-		ci->outfile = get_fd();
+		ci->outfile = get_fd(tmp->next->wi.word, tmp->wi.sep);
+		printf("outfile %s\n", (*head)->next->wi.word);
 		if (!can_increment_word(head))
 			return (false);
 	}

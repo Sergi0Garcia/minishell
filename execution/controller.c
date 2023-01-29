@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controller.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 20:04:04 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:34:19 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,13 +158,8 @@ int	controller(t_minish *sh)
 
 	cmds = sh->cmds.head;
 	env_lst = &sh->env_lst;
-
-	printf("cmd.name =%s\n", cmds->ci.name);
-	printf("cmd.opts =%s\n", cmds->ci.opts);
-	printf("cmd.args =%s\n", cmds->ci.args);
-	
 	if (is_single_execution(cmds))
-		return (exec_builtin(cmds, env_lst));;
+		return (exec_builtin(cmds, env_lst));
 	while (cmds)
 	{
 		exec_cmds(cmds, env_lst);
