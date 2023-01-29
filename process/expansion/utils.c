@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 05:08:15 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/22 07:13:40 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:10:28 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,11 @@ char	*get_env(char *str)
 }
 
 /* Retrieve recursively the variable name if the result is variable */
-char	*retrieve_env(char *str)
+char	*retrieve_env(char *str, t_env *env_lst)
 {
 	char	*res1;
 
-	res1 = get_env(str);
-	while (*res1 == '$')
-	{
-		res1 = getenv(res1);
-	}
+	res1 = env_value(&env_lst, str);
 	return (res1);
 }
 

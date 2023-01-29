@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 00:50:29 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/29 14:03:32 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/29 19:03:52 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_b	parser(t_minish *sh)
 			if (i == 0)
 				is_begin_good(word, kvp, &can_continue);
 			else if (i == sh->wsb.size - 1)
-				break ;
+				is_end_good(word, kvp, &can_continue);
 			else
 				is_between_good(word, kvp, &can_continue);
 		}
@@ -54,48 +54,34 @@ void	handle_parser_err(t_w *word, t_b is_curr, t_b is_next, \
 t_b	is_begin_good(t_w *word, t_kvp *kvp, t_b *can_continue)
 {
 	t_b		is_curr;
-	t_b		is_next;
 	t_cn	cn1;
-	t_cn	cn2;
 
 	cn1 = get_values_of_index(BEGINING, kvp);
-	is_next = false;
 	is_curr = is_wt_between_values(word->wi.sep, cn1.curr);
-	if (is_curr && word->next == NULL)
+	if (is_curr)
 		return (true);
-	else if (word->next != NULL)
-	{
-		cn2 = get_values_of_index(word->next->wi.sep, kvp);
-		is_next = is_wt_between_values(word->next->wi.sep, cn2.next);
-		if (is_curr && is_next)
-			return (true);
-	}
-	handle_parser_err(word, is_curr, is_next, can_continue);
+	handle_parser_err(word, is_curr, true, can_continue);
 	return (false);
 }
 
-// t_b	is_end_good(t_w *word, t_kvp *kvp, t_b *can_continue)
-// {
-// 	t_b		is_curr;
-// 	t_cn	cn;
-
-// 	cn = get_values_of_index(END, kvp);
-// 	is_curr = is_wt_between_values(word->wi.sep, cn.curr);
-// 	if (is_curr)
-// 		return (true);
-// 	else
-// 	{
-// 		*can_continue = false;
-// 		parser_error(char_of_sep(word->wi.sep));
-// 	}
-// 	return (false);
-// }
-
-t_cn	set_wt_values(t_wt *curr, t_wt *next, t_cn *cn)
+t_b	is_end_good(t_w *word, t_kvp *kvp, t_b *can_continue)
 {
-	cn->curr = curr;
-	cn->next = next;
-	return (*cn);
+	t_b		is_curr;
+	t_cn	cn;
+
+	if (word->wi.sep == GREAT || word->wi.sep == DGREAT \
+		|| word->wi.sep == LESS || word->wi.sep == DLESS)
+		return (true);
+	cn = get_values_of_index(END, kvp);
+	is_curr = is_wt_between_values(word->wi.sep, cn.next);
+	if (is_curr)
+		return (true);
+	else
+	{
+		*can_continue = false;
+		parser_error(char_of_sep(word->wi.sep));
+	}
+	return (false);
 }
 
 t_b	is_between_good(t_w *word, t_kvp *kvp, t_b *can_continue)

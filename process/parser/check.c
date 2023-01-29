@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 00:57:01 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/28 05:08:54 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/29 18:54:59 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,11 @@ t_wt	is_which_wt(char *s1)
 		return (ORIF);
 	else
 		return (WORD);
+}
+
+t_cn	set_wt_values(t_wt *curr, t_wt *next, t_cn *cn)
+{
+	cn->curr = curr;
+	cn->next = next;
+	return (*cn);
 }

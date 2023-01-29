@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 05:10:54 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/22 05:16:20 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:01:31 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	expansion(t_minish *sh)
 	head = sh->wsb.head;
 	while (head != NULL)
 	{
-		if (head->wi.quote == DQUOTE)
-			expansion_process(&head->wi.word);
+		if (head->wi.quote == DQUOTE || head->wi.quote == NONE)
+			expansion_process(&head->wi.word, sh->env_lst);
 		head = head->next;
 	}
 	return ;
 }
 
-void	expansion_process(char **str)
+void	expansion_process(char **str, t_env *env_lst)
 {
 	char	*tmp;
 	size_t	start;
@@ -38,14 +38,14 @@ void	expansion_process(char **str)
 		if (tmp[start] == '$')
 		{
 			if (can_apply_expansion(str))
-				expand_var(str, start);
+				expand_var(str, start, env_lst);
 		}
 		start++;
 	}
 	return ;
 }
 
-void	expand_var(char **str, size_t start)
+void	expand_var(char **str, size_t start, t_env *env_lst)
 {
 	char	*tmp;
 	size_t	end;
@@ -57,7 +57,7 @@ void	expand_var(char **str, size_t start)
 	end_of_expandation(&tmp[start], &end);
 	lex.start = start;
 	lex.end = end;
-	env_value = retrieve_env(tmp + 1);
+	env_value = retrieve_env(tmp + 1, env_lst);
 	replace_str(str, env_value, &lex);
 	return ;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 03:42:49 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/29 19:50:38 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,15 +334,15 @@ void		*ft_cpywt(void *dst, const void *src, size_t n);
 
 /* process/expansion/expansion.c */
 void		expansion(t_minish *sh);
-void		expansion_process(char **str);
-void		expand_var(char **str, size_t start);
+void		expansion_process(char **str, t_env *env_lst);
+void		expand_var(char **str, size_t start, t_env *env_lst);
 void		end_of_expandation(char *str, size_t *end);
 
 /* process/expansion/utils.c */
 void		replace_str(char **str, char *to_replace_with, t_lex *lex);
 t_b			can_apply_expansion(char **str);
 size_t		end_length(t_lex *lex, size_t strlen);
-char		*retrieve_env(char *str);
+char		*retrieve_env(char *str, t_env *env_lst);
 
 /* process/utils/free.c */
 void		free_str(char **str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:22:12 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 18:07:09 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:02:44 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*env_value(t_env **env_lst, char *name)
 			tmp = tmp->next;
 		}
 	}
-	return (NULL);
+	return ("");
 }
 
 void	print_env(t_env **env_lst, int with_declare)

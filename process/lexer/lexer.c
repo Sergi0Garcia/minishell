@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 07:27:49 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/28 15:59:20 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/29 19:56:39 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_wi	set_winfo(t_sep sep)
 
 	tw.sep = sep.type;
 	tw.word = sep.word;
-	if (sep.qtype == DQUOTE)
+	if (sep.qtype == DQUOTE || sep.qtype == NONE)
 	{
 		tw.can_expand = true;
 		tw.quote = sep.qtype;
