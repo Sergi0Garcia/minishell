@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 18:18:58 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/29 19:12:21 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	handle_error(void)
 	return (EXIT_FAILURE);
 }
 
-char	*ft_pwd(t_c *cmd)
+char	*ft_pwd(t_c *cmd, int print)
 {
 	char	*res;
 
@@ -72,5 +72,7 @@ char	*ft_pwd(t_c *cmd)
 		return (NULL);
 	}
 	res = getcwd(NULL, PATH_MAX);
+	if (print)
+		ft_printf("%s\n", res);
 	return (res);
 }
