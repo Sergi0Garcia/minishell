@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 04:15:21 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 16:06:26 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/28 17:11:22 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void tester(t_env **env_lst)
 
 	cmd1i.name = ft_strdup("cd");
 	cmd1i.opts = NULL;
-	cmd1i.args = NULL;
+	cmd1i.args = "~/Documents";
 	cmd1i.infile = FD_READ_END;
 	cmd1i.outfile = FD_WRITE_END;
 
