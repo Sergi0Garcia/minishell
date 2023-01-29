@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:22:12 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 06:21:12 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/29 18:07:09 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	exists_env(t_env **env_lst, char *str)
 {
-	int			found;
+	int		found;
 	t_env	*tmp;
 
 	found = 0;

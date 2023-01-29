@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 04:15:21 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 17:11:22 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/29 18:05:50 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void tester(t_env **env_lst)
 	// // fd = get_fd("./testing/output.txt", DGREAT);
 	// // printf("fd: %i\n", fd);
 
-	cmd1i.name = ft_strdup("cd");
-	cmd1i.opts = NULL;
-	cmd1i.args = "~/Documents";
+	cmd1i.name = ft_strdup("echo");
+	cmd1i.opts = "-";
+	cmd1i.args = "../";
 	cmd1i.infile = FD_READ_END;
 	cmd1i.outfile = FD_WRITE_END;
 
-	cmd2i.name = ft_strdup("./testing/script2.sh");
+	cmd2i.name = ft_strdup("env");
 	cmd2i.opts = NULL;
 	cmd2i.args = NULL;
 	cmd2i.infile = FD_READ_END;
@@ -44,7 +44,8 @@ void tester(t_env **env_lst)
 	sh.env_lst = *env_lst;
 	sh.cmds = cmds;
 	controller(&sh);
-	ft_env(sh.cmds.head->ci, &sh.env_lst);
+	ft_printf("%s\n", ft_pwd(NULL));
+	// ft_env(sh.cmds.head->ci, &sh.env_lst);
 	// cmd2 = malloc(sizeof(t_c));
 	// cmd2->name = ft_strdup("sort");
 	// cmd2->opts = NULL;

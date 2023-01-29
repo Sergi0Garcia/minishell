@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 16:52:21 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/29 17:53:21 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ static int	exec_builtin(t_c *cmd, t_env **env_lst)
 		ft_echo(cmd->ci);
 	else if (is_same_str(cmd->ci.name, "cd"))
         ft_cd(cmd, env_lst);
-	// else if (is_same_str(cmd.name, "pwd"))
-    //     ft_pwd(cmd);
+	else if (is_same_str(cmd->ci.name, "pwd"))
+        ft_pwd(cmd);
 	else if (is_same_str(cmd->ci.name, "export"))
 		ft_export(cmd->ci, env_lst);
 	else if (is_same_str(cmd->ci.name, "unset"))
