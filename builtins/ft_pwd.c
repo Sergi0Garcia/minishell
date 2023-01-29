@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 17:34:43 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/29 18:17:43 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	valid_flag(t_c *cmd)
 	char	**opts;
 
 	opts = NULL;
-	if (!cmd || !opts)
+	if (!cmd || !cmd->ci.opts)
 		return (1);
 	if (cmd->ci.opts)
 		opts = ft_split(cmd->ci.opts, ' ');
