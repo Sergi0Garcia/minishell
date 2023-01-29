@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 02:35:07 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 18:03:06 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/29 19:27:09 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static int	db_back_flag(char *opt)
 	int	len;
 
 	len = ft_strlen(opt);
+	if (len < 2)
+		return (0);
 	if (len == 2 && opt[0] == '-' && opt[1] == '-')
 		return (1);
 	return (0);

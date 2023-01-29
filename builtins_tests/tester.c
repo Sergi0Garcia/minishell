@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 04:15:21 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 18:17:33 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/29 18:49:32 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void tester(t_env **env_lst)
 	sh.env_lst = *env_lst;
 	sh.cmds = cmds;
 	controller(&sh);
-	ft_printf("%s\n", ft_pwd(NULL));
+	// ft_printf("%s\n", ft_pwd(NULL));
 	
 	// ft_env(sh.cmds.head->ci, &sh.env_lst);
 	// cmd2 = malloc(sizeof(t_c));

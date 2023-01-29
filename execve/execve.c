@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 09:12:57 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:12:43 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ static char **execve_cmd(t_ci cmd, char *cmd_path)
 	opts = 0;
 	args = 0;
 	i = 0;
-	if (cmd.opts)
+	if (cmd.opts && ft_strlen(cmd.opts))
 		opts = 1;
-	if (cmd.args)
+	if (cmd.args && ft_strlen(cmd.args))
 		args = 1;
 	res = malloc(sizeof(char * ) * (2 + opts + args));
 	res[i++] = cmd_path;
@@ -101,19 +101,24 @@ static char **execve_cmd(t_ci cmd, char *cmd_path)
 	return (res);
 }
 
-int ft_execve(t_ci cmd, t_env **env_lst)
+int ft_execve(t_ci cmd, t_env **env_lst, int path_exec)
 {
+	char	**args_str;	
 	char	*cmd_path;
 	int     i;
 
 	i = 0;
+	args_str = NULL;
 	cmd_path = get_cmd_path(env_lst, cmd.name);
-	if (!cmd_path)
+	if (!cmd_path && !path_exec)
 	{
 		printf("command not found: %s\n", cmd.name);
 		return (EXIT_FAILURE);
 	}
-	execve(cmd_path, execve_cmd(cmd, cmd_path), NULL);
+	if (path_exec)
+		cmd_path = cmd.name;
+	args_str = execve_cmd(cmd, cmd_path);
+	execve(cmd_path, args_str, NULL);
 	return (EXIT_SUCCESS);
 }
 

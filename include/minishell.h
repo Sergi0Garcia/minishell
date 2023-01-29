@@ -197,8 +197,7 @@ int			get_idx_separator(char *str);
 
 /** execution  */
 int			controller(t_minish *sh);
-int 		ft_execve(t_ci cmd, t_env **env_lst);
-int			ft_path_execve(t_c *cmd, t_env **env_lst);
+int			ft_execve(t_ci cmd, t_env **env_lst, int path_exec);
 // int			get_fd(char *path, t_wt key);
 int			get_fd(void);
 
@@ -210,7 +209,7 @@ void		p_interactive_mode(t_minish *sh);
 void		p_noninteractive_mode(t_minish *sh);
 void		parse(t_minish *sh);
 
-char		*ft_pwd(t_c *cmd);
+char		*ft_pwd(t_c *cmd, int print);
 void		set_env(char **envp, t_env **env_lst);
 void		ft_cd(t_c *cmd, t_env **env_lst);
 void		ft_echo(t_ci cmd);
