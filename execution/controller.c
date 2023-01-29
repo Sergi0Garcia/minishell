@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   controller.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 20:34:19 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/29 21:59:48 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../include/minishell.h"
+
+extern int	g_status;
 
 static int is_single_cmd(t_c *cmd)
 {
@@ -68,7 +70,6 @@ static int is_executable_path(char *path)
 
 static int	exec_builtin(t_c *cmd, t_env **env_lst)
 {
-	(void) env_lst;
 	if (is_same_str(cmd->ci.name, "exit"))
 		exit(EXIT_SUCCESS);
     else if (is_same_str(cmd->ci.name, "echo"))
