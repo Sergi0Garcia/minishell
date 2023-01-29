@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 22:51:15 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/28 03:42:49 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,11 +165,11 @@ typedef struct s_env_node
 	char				*name;
 	char				*value;
 	struct s_env_node	*next;
-}	t_env_node;
+}	t_env;
 
 typedef struct s_minishell
 {
-	t_env_node	*env_lst;
+	t_env		*env_lst;
 	char		**argv;
 	char		*pid;
 	char		*line;
@@ -183,22 +183,22 @@ void		interactive(t_minish *sh);
 void		non_interactive(t_minish *sh);
 
 /** testing builtins */
-void 		tester(t_env_node **env_lst);
+void 		tester(t_env **env_lst);
 int			playground(void);
 
 /** built in functions */
 int			cd_valid_flag(t_c *cmd);
 void		cd_handle_error(void);
-void		ft_export(t_c *cmd, t_env_node **env_lst);
-void		ft_unset(t_c *cmd, t_env_node **env_lst);
-void		ft_env(t_c *cmd, t_env_node **env_lst);
+void		ft_export(t_ci cmd, t_env **env_lst);
+void		ft_unset(t_ci cmd, t_env **env_lst);
+void		ft_env(t_ci cmd, t_env **env_lst);
 int			is_same_str(char *str1, char *str2);
 int			get_idx_separator(char *str);
 
 /** execution  */
 int			controller(t_minish *sh);
-int			ft_execve(t_c *cmd, t_env_node **env_lst);
-int			ft_path_execve(t_c *cmd, t_env_node **env_lst);
+int 		ft_execve(t_ci cmd, t_env **env_lst);
+int			ft_path_execve(t_c *cmd, t_env **env_lst);
 // int			get_fd(char *path, t_wt key);
 int			get_fd(void);
 
@@ -211,9 +211,9 @@ void		p_noninteractive_mode(t_minish *sh);
 void		parse(t_minish *sh);
 
 char		*ft_pwd(t_c *cmd);
-void		set_env(char **envp, t_env_node **env_lst);
-void		ft_cd(t_c *cmd, t_env_node **env_lst);
-void		ft_echo(t_c *cmd);
+void		set_env(char **envp, t_env **env_lst);
+void		ft_cd(t_c *cmd, t_env **env_lst);
+void		ft_echo(t_ci cmd);
 int			is_same_str(char *str1, char *str2);
 
 /* shared/utils/handler.c */
@@ -222,19 +222,19 @@ void		h_noninteractive_mode(t_minish *sh);
 void		handler(t_minish *sh);
 
 /* lst/env */
-t_env_node	*ft_env_last(t_env_node *lst);
-t_env_node	*ft_new_env_node(char *name, char *value);
-void		new_env(t_env_node **env_lst, char *str);
-void		unset_env(t_env_node **env_lst, char *str);
-int			ft_env_lst_size(t_env_node *lst);
-void		print_env(t_env_node **env_lst, int with_declare);
-char		*env_value(t_env_node **env_lst, char *name);
-void		free_env_node(t_env_node **env);
-int			exists_env(t_env_node **env_lst, char *str);
+t_env	*ft_env_last(t_env *lst);
+t_env	*ft_new_env_node(char *name, char *value);
+void		new_env(t_env **env_lst, char *str);
+void		unset_env(t_env **env_lst, char *str);
+int			ft_env_lst_size(t_env *lst);
+void		print_env(t_env **env_lst, int with_declare);
+char		*env_value(t_env **env_lst, char *name);
+void		free_env_node(t_env **env);
+int			exists_env(t_env **env_lst, char *str);
 
 /* shared/utils/error.c */
 void		ft_error(char *str);
-void		env_add_back(t_env_node **lst, t_env_node *new);
+void		env_add_back(t_env **lst, t_env *new);
 
 /* shared/utils/error.c */
 void		error(char *str);

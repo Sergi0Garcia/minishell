@@ -6,19 +6,19 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 02:39:04 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 02:23:56 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/29 18:07:25 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	set_env(char **envp, t_env_node **env_lst)
+void	set_env(char **envp, t_env **env_lst)
 {
 	int			i;
 	int			brk_idx;
 	char		*name;
 	char		*val;
-	t_env_node	*new;
+	t_env	*new;
 
 	i = 0;
 	while (envp[i])
@@ -33,9 +33,9 @@ void	set_env(char **envp, t_env_node **env_lst)
 	return ;
 }
 
-void	update_env(t_env_node **env_lst, char *name, char *value)
+void	update_env(t_env **env_lst, char *name, char *value)
 {
-	t_env_node	*tmp;
+	t_env	*tmp;
 
 	tmp = *env_lst;
 	while (tmp)
@@ -51,12 +51,12 @@ void	update_env(t_env_node **env_lst, char *name, char *value)
 	}
 }
 
-void	new_env(t_env_node **env_lst, char *str)
+void	new_env(t_env **env_lst, char *str)
 {
 	int			brk_idx;
 	char		*name;
 	char		*value;
-	t_env_node	*new;
+	t_env	*new;
 
 	brk_idx = get_idx_separator(str);
 	if (brk_idx)
@@ -73,11 +73,11 @@ void	new_env(t_env_node **env_lst, char *str)
 	return ;
 }
 
-void	unset_env(t_env_node **env_lst, char *str)
+void	unset_env(t_env **env_lst, char *str)
 {
-	t_env_node	*current;
-	t_env_node	*previous;
-	t_env_node	*delete;
+	t_env	*current;
+	t_env	*previous;
+	t_env	*delete;
 
 	current = *env_lst;
 	previous = NULL;

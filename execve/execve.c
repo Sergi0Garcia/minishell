@@ -43,27 +43,6 @@ char	*correct_path(char **paths, char *cmd)
 		return (complete_path);
 }
 
-int	count_opts_args(t_c *cmd)
-{
-	int		i;
-	int		count;
-	char	**opts;
-	char	**args;
-
-	opts = ft_split(cmd->ci.opts, ' ');
-	args = ft_split(cmd->ci.args, ' ');
-	i = 0;
-	count = 0;
-	while (opts && opts[i])
-		i++;
-	count = i;
-	i = 0;
-	while (args && args[i])
-		i++;
-	count += i;
-	return (count);
-}
-
 int child_nbr_str(char **str)
 {
 	int i;
@@ -73,59 +52,8 @@ int child_nbr_str(char **str)
 		i++;
 	return (i);
 }
-// echo hello | grep hello
 
-char	**execve_unifier(t_c *cmd, char *filename, int len)
-{
-	int		i;
-	char	**res;
-	char	**opts;
-	char	**args;
-
-	opts = ft_split(cmd->ci.opts, ' ');
-	args = ft_split(cmd->ci.args, ' ');
-	i = 0;
-	res = (char **)malloc(sizeof(char *) * (len + 2));
-	res[i++] = filename;
-	while ((opts && opts[i - 1]) || (args && args[i - 1]))
-	{
-		if (opts && opts[i - 1])
-			res[i] = opts[i - 1];
-		else if (args && args[i - 1])
-			res[i] = args[i - child_nbr_str(opts) - 1];
-		i++;
-	}
-	res[i] = NULL;
-	return (res);
-}
-
-char	**path_execve_unifier(t_c *cmd, char *filename, int len)
-{
-	int		i;
-	char	**res;
-	char	**opts;
-	char	**args;
-
-	opts = ft_split(cmd->ci.opts, ' ');
-	args = ft_split(cmd->ci.args, ' ');
-
-	i = 0;
-	res = (char **)malloc(sizeof(char *) * (len + 3));
-	res[i++] = filename;
-	res[i++] = cmd->ci.name;
-	while ((opts && opts[i - 1]) || (args && args[i - 1]))
-	{
-		if (opts && opts[i - 1])
-			res[i] = opts[i - 1];
-		else if (args && args[i - 1])
-			res[i] = args[i - child_nbr_str(opts) - 1];
-		i++;
-	}
-	res[i] = NULL;
-	return (res);
-}
-
-static char *get_cmd_path(t_env_node **env_lst, char *str)
+static char *get_cmd_path(t_env **env_lst, char *str)
 {
 	char    *env_path;
 	char	**all_paths;
@@ -135,13 +63,12 @@ static char *get_cmd_path(t_env_node **env_lst, char *str)
 	if (!env_path)
 	{
 		printf("no such file or directory\n");
-		printf("%s", str);
 		return (NULL);
 	}
 	all_paths = split_paths(env_path);
 	if (!all_paths)
 	{
-		printf("no such file or directory here\n");
+		printf("no such file or directory\n");
 		return (NULL);
 	}
 	cmd_path = correct_path(all_paths, str);
@@ -150,63 +77,82 @@ static char *get_cmd_path(t_env_node **env_lst, char *str)
 	return (cmd_path);
 }
 
-int ft_execve(t_c *cmd, t_env_node **env_lst)
+static char **execve_cmd(t_ci cmd, char *cmd_path)
 {
-	char	**execve_args;
+	char	**res;
+	int		opts;
+	int 	args;
+	int		i;
+
+	opts = 0;
+	args = 0;
+	i = 0;
+	if (cmd.opts)
+		opts = 1;
+	if (cmd.args)
+		args = 1;
+	res = malloc(sizeof(char * ) * (2 + opts + args));
+	res[i++] = cmd_path;
+	if (opts)
+		res[i++] = cmd.opts;
+	if (args)
+		res[i++] = cmd.args;
+	res[i] = NULL;
+	return (res);
+}
+
+int ft_execve(t_ci cmd, t_env **env_lst)
+{
 	char	*cmd_path;
 	int     i;
-	int		opt_args_len;
 
 	i = 0;
-	execve_args = NULL;
-	cmd_path = get_cmd_path(env_lst, cmd->ci.name);
+	cmd_path = get_cmd_path(env_lst, cmd.name);
 	if (!cmd_path)
 	{
-		printf("command not found: %s\n", cmd->ci.name);
+		printf("command not found: %s\n", cmd.name);
 		return (EXIT_FAILURE);
 	}
-	opt_args_len = count_opts_args(cmd);
-	execve_args = execve_unifier(cmd, cmd->ci.name, opt_args_len);
-	execve(cmd_path, execve_args, NULL);
+	execve(cmd_path, execve_cmd(cmd, cmd_path), NULL);
 	return (EXIT_SUCCESS);
 }
 
-static int is_sh(char *str)
-{
-	int len;
+// static int is_sh(char *str)
+// {
+// 	int len;
 
-	len = ft_strlen(str);
-	if (len < 0 || len < 2)
-		return (0);
-	if (str[len - 1] == 'h'
-		&& str[len - 2] == 's'
-		&& str[len - 3] == '.')
-			return (1);
-	return (0);
-}
+// 	len = ft_strlen(str);
+// 	if (len < 0 || len < 2)
+// 		return (0);
+// 	if (str[len - 1] == 'h'
+// 		&& str[len - 2] == 's'
+// 		&& str[len - 3] == '.')
+// 			return (1);
+// 	return (0);
+// }
 
-int ft_path_execve(t_c *cmd, t_env_node **env_lst)
-{
-	char	**execve_args;
-	char	*cmd_path;
-	int		opt_args_len;
+// int ft_path_execve(t_c *cmd, t_env **env_lst)
+// {
+// 	char	**execve_args;
+// 	char	*cmd_path;
+// 	int		opt_args_len;
 
-	cmd_path = NULL;
-	execve_args = NULL;
-	if (is_sh(cmd->ci.name))
-	{
-		cmd_path = get_cmd_path(env_lst, "bash");
-		if (!cmd_path)
-			return (EXIT_FAILURE);
-		opt_args_len = count_opts_args(cmd);
-		execve_args = path_execve_unifier(cmd, cmd_path, opt_args_len);
-		execve(cmd_path, execve_args, NULL);
-	}
-	else
-	{
-		opt_args_len = count_opts_args(cmd);
-		execve_args = path_execve_unifier(cmd, cmd_path, opt_args_len);
-		execve(cmd->ci.name, execve_args, NULL);
-	}
-	return (EXIT_SUCCESS);
-}
+// 	cmd_path = NULL;
+// 	execve_args = NULL;
+// 	if (is_sh(cmd->ci.name))
+// 	{
+// 		cmd_path = get_cmd_path(env_lst, "bash");
+// 		if (!cmd_path)
+// 			return (EXIT_FAILURE);
+// 		opt_args_len = count_opts_args(cmd);
+// 		execve_args = path_execve_unifier(cmd, cmd_path, opt_args_len);
+// 		execve(cmd_path, execve_args, NULL);
+// 	}
+// 	else
+// 	{
+// 		opt_args_len = count_opts_args(cmd);
+// 		execve_args = path_execve_unifier(cmd, cmd_path, opt_args_len);
+// 		execve(cmd->ci.name, execve_args, NULL);
+// 	}
+// 	return (EXIT_SUCCESS);
+// }

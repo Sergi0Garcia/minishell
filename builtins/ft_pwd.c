@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 03:28:16 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/29 18:18:58 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ static int	valid_flag(t_c *cmd)
 	char	*option;
 	char	**opts;
 
-	opts = ft_split(cmd->ci.opts, ' ');
-	if (!cmd || !opts)
+	opts = NULL;
+	if (!cmd || !cmd->ci.opts)
 		return (1);
+	if (cmd->ci.opts)
+		opts = ft_split(cmd->ci.opts, ' ');
 	i = 0;
 	while (opts[i])
 	{
@@ -70,6 +72,5 @@ char	*ft_pwd(t_c *cmd)
 		return (NULL);
 	}
 	res = getcwd(NULL, PATH_MAX);
-	printf("%s\n", res);
 	return (res);
 }

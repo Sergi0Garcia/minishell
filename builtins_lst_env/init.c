@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:57:53 by segarcia          #+#    #+#             */
-/*   Updated: 2022/11/28 15:21:03 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/28 05:28:38 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-t_env_node	*ft_new_env_node(char *name, char *value)
+t_env	*ft_new_env_node(char *name, char *value)
 {
-	t_env_node	*new;
+	t_env	*new;
 
-	new = (t_env_node *)malloc(sizeof(t_env_node));
+	new = (t_env *)malloc(sizeof(t_env));
 	if (!new)
 		return (NULL);
 	new->name = name;

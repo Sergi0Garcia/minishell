@@ -6,16 +6,16 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:22:12 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/17 02:44:49 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/29 18:07:09 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	exists_env(t_env_node **env_lst, char *str)
+int	exists_env(t_env **env_lst, char *str)
 {
-	int			found;
-	t_env_node	*tmp;
+	int		found;
+	t_env	*tmp;
 
 	found = 0;
 	tmp = *env_lst;
@@ -28,9 +28,9 @@ int	exists_env(t_env_node **env_lst, char *str)
 	return (0);
 }
 
-char	*env_value(t_env_node **env_lst, char *name)
+char	*env_value(t_env **env_lst, char *name)
 {
-	t_env_node	*tmp;
+	t_env	*tmp;
 
 	tmp = *env_lst;
 	if (exists_env(env_lst, name))
@@ -45,9 +45,9 @@ char	*env_value(t_env_node **env_lst, char *name)
 	return (NULL);
 }
 
-void	print_env(t_env_node **env_lst, int with_declare)
+void	print_env(t_env **env_lst, int with_declare)
 {
-	t_env_node	*tmp;
+	t_env	*tmp;
 
 	tmp = *env_lst;
 	while (tmp)
