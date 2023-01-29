@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 00:57:01 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/25 03:13:47 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/28 05:08:54 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_b	is_wt_between_values(t_wt word_type, t_wt *list)
 		return (false);
 	while (list[i])
 	{
+		if (!list[i])
+			break ;
 		if (word_type == list[i])
 			return (true);
 		i++;

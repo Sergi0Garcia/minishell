@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 03:42:49 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/28 22:51:15 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,7 +277,7 @@ void		non_interactive(t_minish *sh);
 /* process/signals/signals.c */
 void		h_quit(void);
 void		sigreset(int sig, siginfo_t *info, void *context);
-void		quit(int sig, siginfo_t *info, void *context);
+void		sigquit(int sig, siginfo_t *info, void *context);
 void		interactive_mode_sig(void);
 void		no_interactive_mode_sig(void);
 
@@ -349,15 +349,17 @@ void		free_str(char **str);
 void		free_stack(t_w **head, t_w **tail);
 
 /* process/command/command.c */
-void		generate_cmd(t_minish *sh);
+t_b			generate_cmd(t_minish *sh);
 void		add_to_chunk(t_wsb *chunk, t_wi wi);
-void		handle_pipe_found(t_csb *list, t_wsb *wsb);
-void		parse_wsb_to_cmd(t_csb *list, t_wsb *wsb);
-void		add_to_cmd(t_w **head, t_ci *ci);
+t_b			can_handle_pipe_found(t_csb *list, t_wsb *wsb);
+t_b			can_parse_wsb_to_cmd(t_csb *list, t_wsb *wsb);
+t_b			can_add_to_cmd(t_w **head, t_ci *ci);
 
 /* process/command/utils.c */
 t_b			is_opt_already_exits(t_wsb *wsb, char *opt);
 t_b			is_option(char *opt);
+char		*add_arg_or_opt(char *arg_or_opt, char *word);
+t_b			can_increment_word(t_w **word);
 
 /* utils/s_cmd_ops.c */
 void		ft_cunshift(t_csb *stack, t_ci info);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 02:29:31 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/29 09:12:57 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int child_nbr_str(char **str)
 		i++;
 	return (i);
 }
+// echo hello | grep hello
 
 char	**execve_unifier(t_c *cmd, char *filename, int len)
 {
@@ -91,7 +92,7 @@ char	**execve_unifier(t_c *cmd, char *filename, int len)
 		if (opts && opts[i - 1])
 			res[i] = opts[i - 1];
 		else if (args && args[i - 1])
-			res[i] = args[i - child_nbr_str(opts) - 1];	
+			res[i] = args[i - child_nbr_str(opts) - 1];
 		i++;
 	}
 	res[i] = NULL;
@@ -117,7 +118,7 @@ char	**path_execve_unifier(t_c *cmd, char *filename, int len)
 		if (opts && opts[i - 1])
 			res[i] = opts[i - 1];
 		else if (args && args[i - 1])
-			res[i] = args[i - child_nbr_str(opts) - 1];	
+			res[i] = args[i - child_nbr_str(opts) - 1];
 		i++;
 	}
 	res[i] = NULL;
@@ -134,12 +135,13 @@ static char *get_cmd_path(t_env_node **env_lst, char *str)
 	if (!env_path)
 	{
 		printf("no such file or directory\n");
+		printf("%s", str);
 		return (NULL);
 	}
 	all_paths = split_paths(env_path);
 	if (!all_paths)
 	{
-		printf("no such file or directory\n");
+		printf("no such file or directory here\n");
 		return (NULL);
 	}
 	cmd_path = correct_path(all_paths, str);
@@ -176,8 +178,8 @@ static int is_sh(char *str)
 	len = ft_strlen(str);
 	if (len < 0 || len < 2)
 		return (0);
-	if (str[len - 1] == 'h' 
-		&& str[len - 2] == 's' 
+	if (str[len - 1] == 'h'
+		&& str[len - 2] == 's'
 		&& str[len - 3] == '.')
 			return (1);
 	return (0);
@@ -200,7 +202,7 @@ int ft_path_execve(t_c *cmd, t_env_node **env_lst)
 		execve_args = path_execve_unifier(cmd, cmd_path, opt_args_len);
 		execve(cmd_path, execve_args, NULL);
 	}
-	else 
+	else
 	{
 		opt_args_len = count_opts_args(cmd);
 		execve_args = path_execve_unifier(cmd, cmd_path, opt_args_len);
