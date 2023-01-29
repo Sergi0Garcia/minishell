@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:22:12 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 20:02:44 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/29 22:12:14 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	print_env(t_env **env_lst, int with_declare)
 {
 	t_env	*tmp;
 
+	if (!env_lst)
+		return ;
 	tmp = *env_lst;
 	while (tmp)
 	{
