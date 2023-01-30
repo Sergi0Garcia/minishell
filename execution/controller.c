@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/30 01:20:50 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/30 03:49:02 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ static int is_single_cmd(t_c *cmd)
 static int	is_single_execution(t_c *cmd)
 {
 	if (is_single_cmd(cmd)
-		&& (is_same_str(cmd->ci.name, "exit")
-		|| is_same_str(cmd->ci.name, "export")
-		|| is_same_str(cmd->ci.name, "unset")
-		|| is_same_str(cmd->ci.name, "cd")))
-			return (1);
+	&& (is_same_str(cmd->ci.name, "exit")
+	|| is_same_str(cmd->ci.name, "export")
+	|| is_same_str(cmd->ci.name, "unset")
+	|| is_same_str(cmd->ci.name, "cd")))
+		return (1);
 	return (0);
 }
 
@@ -94,19 +94,19 @@ static int	exec_builtin(t_c *cmd, t_env **env_lst)
 		g_status = ft_execve(cmd->ci, env_lst, 1);
 	else
 		g_status = ft_execve(cmd->ci, env_lst, 0);
-	return (EXIT_SUCCESS);
+	return (g_status);
 }
 
 static int	child_process(t_c *cmd, t_env **env_lst, int fd[2])
 {
 	if (fd_redirection(cmd, fd) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (1);
 	close(fd[FD_READ_END]);
 	exec_builtin(cmd, env_lst);
-	exit(EXIT_SUCCESS);
+	exit (EXIT_SUCCESS);
 }
 
-int exec_fork(t_c *cmd, t_env **env_lst, int fd[2])
+int	 exec_fork(t_c *cmd, t_env **env_lst, int fd[2])
 {
 	pid_t	pid;
 
@@ -115,28 +115,32 @@ int exec_fork(t_c *cmd, t_env **env_lst, int fd[2])
 	{
 		close(fd[FD_READ_END]);
 		close(fd[FD_WRITE_END]);
-		return (ci_error(ERR_FORK, 1));
+		ci_error(ERR_FORK, 1);
+		return (EXIT_FAILURE);
 	}
 	else if (pid == 0)
 		child_process(cmd, env_lst, fd);
-	waitpid(pid, NULL, 0);
+	printf("after child\n");
 	return (EXIT_SUCCESS);
 }
 
-int	exec_cmds(t_c *cmds, t_env **env_lst)
+void	exec_cmds(t_c *cmds, t_env **env_lst)
 {
 	int		fd[2];
 	t_ci	cmd;
 
 	cmd = cmds->ci;
 	if (pipe(fd) == -1)
-		return (ci_error(ERR_PIPE, 1));
+		ci_error(ERR_PIPE, 1);
 	if (cmd.infile == -1 || cmd.outfile == -1)
-		return (ci_error(ERR_NONE, 1));
+	{
+		close(fd[FD_WRITE_END]);
+		ci_error(ERR_NONE, 1);
+	}
 	if (exec_fork(cmds, env_lst, fd) == EXIT_FAILURE)
 	{
 		close(fd[FD_WRITE_END]);
-		return (EXIT_FAILURE);
+		return ;
 	}
 	close(fd[FD_WRITE_END]);
 	if (cmds->next && !cmds->next->ci.infile)
@@ -147,7 +151,7 @@ int	exec_cmds(t_c *cmds, t_env **env_lst)
 		close(cmds->ci.infile);
 	if (cmds && cmds->ci.outfile > 2)
 		close(cmds->ci.outfile);
-	return (EXIT_SUCCESS);
+	return ;
 }
 
 int	controller(t_minish *sh)
@@ -157,15 +161,15 @@ int	controller(t_minish *sh)
 
 	cmds = sh->cmds.head;
 	env_lst = &sh->env_lst;
-	// printf("cmd.name:%s\n", cmds->ci.name);
-	// printf("cmd.opts:%s\n", cmds->ci.opts);
-	// printf("cmd.args:%s\n", cmds->ci.args);
 	if (is_single_execution(cmds))
-		return (exec_builtin(cmds, env_lst));
+	{
+		g_status = exec_builtin(cmds, env_lst);
+		return (g_status);
+	}
 	while (cmds)
 	{
 		exec_cmds(cmds, env_lst);
 		cmds = cmds->next;
 	}
-	return (EXIT_SUCCESS);
+	return (g_status);
 }

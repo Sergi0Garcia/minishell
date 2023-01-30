@@ -6,11 +6,13 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:14:59 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/30 00:34:40 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/30 03:43:33 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+extern int	g_status;
 
 void	handler(t_minish *sh)
 {
@@ -23,6 +25,7 @@ void	handler(t_minish *sh)
 
 void	h_interactive_mode(t_minish *sh)
 {
+	
 	while (1)
 	{
 		interactive_mode_sig();
@@ -33,9 +36,16 @@ void	h_interactive_mode(t_minish *sh)
 		{
 			expansion(sh);
 			if (generate_cmd(sh))
-				controller(sh);
+			{
+				g_status = controller(sh);
+				waitpid(-1, &g_status, 0);
+				waitpid(-1, &g_status, 0);
+				if (g_status > 255)
+					g_status = g_status / 255;
+			}
 		}
 		add_history(sh->line);
+		printf("g_status:%i\n", g_status);
 	}
 	return ;
 }
