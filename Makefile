@@ -6,7 +6,7 @@
 #    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/01/29 21:55:57 by segarcia         ###   ########.fr        #
+#    Updated: 2023/01/29 23:37:58 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC			= 	minishell.c						\
 				./builtins_lst_env/utils.c  	\
 				./execution/controller.c 		\
 				./execution/redirection.c 		\
+				./execution/error.c 			\
 				./execve/execve.c 				\
 				./shared/errors/error.c 		\
 				./shared/utils/init.c			\
@@ -83,7 +84,7 @@ $(GNL):
 	@make -C $(GNL_PATH)
 
 $(NAME): $(LIBFT) $(PRINTF) $(GNL) $(SRC)
-	$(CC) $(DEBUGFLAG) ${RL_FLAG} $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
+	$(CC) ${RL_FLAG} $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
 	# @make del
 
 clean:

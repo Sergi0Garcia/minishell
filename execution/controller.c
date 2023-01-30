@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 21:59:48 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/30 01:03:49 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	exec_builtin(t_c *cmd, t_env **env_lst)
 	if (is_same_str(cmd->ci.name, "exit"))
 		exit(EXIT_SUCCESS);
     else if (is_same_str(cmd->ci.name, "echo"))
-		ft_echo(cmd->ci);
+		g_status = ft_echo(cmd->ci);
 	else if (is_same_str(cmd->ci.name, "cd"))
         ft_cd(cmd, env_lst);
 	else if (is_same_str(cmd->ci.name, "pwd"))
@@ -83,11 +83,11 @@ static int	exec_builtin(t_c *cmd, t_env **env_lst)
 	else if (is_same_str(cmd->ci.name, "unset"))
 		ft_unset(cmd->ci, env_lst);
 	else if (is_same_str(cmd->ci.name, "env"))
-		ft_env(cmd->ci, env_lst);
+		g_status = ft_env(cmd->ci, env_lst);
 	else if (is_executable_path(cmd->ci.name))
-		ft_execve(cmd->ci, env_lst, 1);
+		g_status = ft_execve(cmd->ci, env_lst, 1);
 	else
-		ft_execve(cmd->ci, env_lst, 0);
+		g_status = ft_execve(cmd->ci, env_lst, 0);
 	return (EXIT_SUCCESS);
 }
 
@@ -109,7 +109,7 @@ int exec_fork(t_c *cmd, t_env **env_lst, int fd[2])
 	{
 		close(fd[FD_READ_END]);
 		close(fd[FD_WRITE_END]);
-		return (EXIT_FAILURE);
+		return (ci_error(ERR_FORK, 1));
 	}
 	else if (pid == 0)
 	{
@@ -124,17 +124,13 @@ int exec_fork(t_c *cmd, t_env **env_lst, int fd[2])
 int	exec_cmds(t_c *cmds, t_env **env_lst)
 {
 	int		fd[2];
+	t_ci	cmd;
 
+	cmd = cmds->ci;
 	if (pipe(fd) == -1)
-	{
-		close(fd[FD_WRITE_END]);
-        return (EXIT_FAILURE);
-	}
-	if (cmds->ci.infile == -1 || cmds->ci.outfile == -1)
-	{
-		close(fd[FD_WRITE_END]);
-		return (EXIT_FAILURE);
-	}
+		return (ci_error(ERR_PIPE, 1));
+	if (cmd.infile == -1 || cmd.outfile == -1)
+		return (ci_error(ERR_NONE, 1));
 	if (exec_fork(cmds, env_lst, fd) == EXIT_FAILURE)
 	{
 		close(fd[FD_WRITE_END]);
@@ -159,6 +155,9 @@ int	controller(t_minish *sh)
 
 	cmds = sh->cmds.head;
 	env_lst = &sh->env_lst;
+	// printf("cmd.name:%s\n", cmds->ci.name);
+	// printf("cmd.opts:%s\n", cmds->ci.opts);
+	// printf("cmd.args:%s\n", cmds->ci.args);
 	if (is_single_execution(cmds))
 		return (exec_builtin(cmds, env_lst));
 	while (cmds)

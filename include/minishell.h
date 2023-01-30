@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 21:50:21 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/30 00:58:12 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,15 @@ typedef enum s_word_type
 	END,
 	NEIN
 }	t_wt;
+
+typedef enum s_error_type
+{
+	ERR_NONE,
+	ERR_PIPE,
+	ERR_FORK,
+	ERR_PATH,
+	ERR_CMD_FOUND
+} t_err;
 
 typedef struct s_current_and_next_probable_word_type
 {
@@ -191,7 +200,7 @@ int			cd_valid_flag(t_c *cmd);
 void		cd_handle_error(void);
 void		ft_export(t_ci cmd, t_env **env_lst);
 void		ft_unset(t_ci cmd, t_env **env_lst);
-void		ft_env(t_ci cmd, t_env **env_lst);
+int			ft_env(t_ci cmd, t_env **env_lst);
 int			is_same_str(char *str1, char *str2);
 int			get_idx_separator(char *str);
 
@@ -199,6 +208,8 @@ int			get_idx_separator(char *str);
 int			controller(t_minish *sh);
 int			ft_execve(t_ci cmd, t_env **env_lst, int path_exec);
 int			get_fd(char *path, t_wt key);
+int 		ci_error(t_err type, int err);
+char		*cs_error(t_err type, int err);
 
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);
@@ -211,7 +222,7 @@ void		parse(t_minish *sh);
 char		*ft_pwd(t_c *cmd, int print);
 void		set_env(char **envp, t_env **env_lst);
 void		ft_cd(t_c *cmd, t_env **env_lst);
-void		ft_echo(t_ci cmd);
+int			ft_echo(t_ci cmd);
 int			is_same_str(char *str1, char *str2);
 
 /* shared/utils/handler.c */

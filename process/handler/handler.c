@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:14:59 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/29 21:50:07 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/30 00:34:40 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	h_interactive_mode(t_minish *sh)
 	while (1)
 	{
 		interactive_mode_sig();
-		sh->line = readline("@minishell-1.0$ ");
+		sh->line = readline("minishell$ ");
 		sh->line = ft_strtrim(sh->line, " ");
 		lexing(sh);
 		if (parser(sh))
