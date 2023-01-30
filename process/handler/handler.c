@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:14:59 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/30 11:50:31 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/30 12:42:44 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ void	h_interactive_mode(t_minish *sh)
 			if (generate_cmd(sh))
 			{
 				g_status = controller(sh);
+				waitpid(-1, &g_status, 0);
+				waitpid(-1, &g_status, 0);
+				waitpid(-1, &g_status, 0);
 				if (g_status > 255)
 					g_status = g_status / 255;
 			}

@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/30 12:01:17 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/30 12:44:08 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,10 @@ static char *check_to_fork(t_c *cmds, t_env **env_lst, int fd[2])
 		return (NULL);
 	if (!cmd_path)
 	{
-		// ci_error(ERR_CMD_FOUND, 127);
-		// return ("");
+		ci_error(ERR_CMD_FOUND, 127);
+		return ("");
 	}
 	exec_fork(cmds, env_lst, fd);
-	waitpid(-1, NULL, 0);
 	return ("");	
 }
 
