@@ -6,11 +6,13 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:59:06 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/30 01:03:10 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/30 11:53:25 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+extern int	g_status;
 
 static int	valid_flag(t_ci cmd)
 {
@@ -65,5 +67,6 @@ int	ft_echo(t_ci cmd)
 
 	new_line = !valid_flag(cmd);
 	print_words(cmd, new_line);
+	g_status = 0;
 	return (EXIT_SUCCESS);
 }

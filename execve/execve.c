@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/30 01:46:43 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/30 11:33:53 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int child_nbr_str(char **str)
 	return (i);
 }
 
-static char *get_cmd_path(t_env **env_lst, char *str)
+char *get_cmd_path(t_env **env_lst, char *str)
 {
 	char    *env_path;
 	char	**all_paths;
@@ -121,8 +121,6 @@ int ft_execve(t_ci cmd, t_env **env_lst, int path_exec)
 	if (path_exec)
 		cmd_path = cmd.name;
 	args_str = execve_cmd(cmd, cmd_path);
-	printf("to execute \n");
 	execve(cmd_path, args_str, NULL);
-	printf("after execution \n");
 	return (EXIT_SUCCESS);
 }

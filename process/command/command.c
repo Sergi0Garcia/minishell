@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:03:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/29 20:39:08 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/30 11:14:53 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_b	can_parse_wsb_to_cmd(t_csb *list, t_wsb *wsb)
 
 	head = wsb->head;
 	ci.args = "";
-	ci.outfile = 0;
+	ci.outfile = 1;
 	ci.opts = "";
 	ci.infile = 0;
 	ci.name = "";

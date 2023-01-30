@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 22:03:04 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/30 01:25:04 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/30 12:01:17 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void print_message(t_err type)
     else if (type == ERR_PATH)
         ft_printf("minishell: no such file or directory\n");
     else if (type == ERR_CMD_FOUND)
-        ft_printf("minishell: command not found\n"); 
+        write(2, "minishell: command not found\n", 29); 
     else if (type == ERR_DUP2)
         ft_printf("minishell: error in dup2\n");  
 }

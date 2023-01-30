@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/30 01:53:48 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/30 11:33:32 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ int			ft_execve(t_ci cmd, t_env **env_lst, int path_exec);
 int			get_fd(char *path, t_wt key);
 int 		ci_error(t_err type, int err);
 char		*cs_error(t_err type, int err);
+char		*get_cmd_path(t_env **env_lst, char *str);
 
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);
