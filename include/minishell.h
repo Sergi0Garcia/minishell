@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/30 00:58:12 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/30 01:11:53 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ typedef enum s_error_type
 	ERR_PIPE,
 	ERR_FORK,
 	ERR_PATH,
-	ERR_CMD_FOUND
+	ERR_CMD_FOUND,
+	ERR_DUP2
 } t_err;
 
 typedef struct s_current_and_next_probable_word_type

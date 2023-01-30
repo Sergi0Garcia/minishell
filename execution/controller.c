@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/30 01:03:49 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/30 01:20:50 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,28 @@ static int	is_single_execution(t_c *cmd)
 	return (0);
 }
 
-static int	fd_redirection(t_c *cmd, int fd[2])
+static int	fd_redirection(t_c *cmds, int fd[2])
 {
-	if (cmd->ci.infile && cmd->ci.infile != STDIN_FILENO)
+	t_ci	cmd;
+
+	cmd = cmds->ci;
+	if (cmd.infile && cmd.infile != STDIN_FILENO)
 	{
-		if (dup2(cmd->ci.infile, STDIN_FILENO) == -1)
-            return(EXIT_FAILURE);
-		close(cmd->ci.infile);
+		if (dup2(cmd.infile, STDIN_FILENO) == -1)
+            return (ci_error(ERR_DUP2, 1));
+		close(cmd.infile);
 	}
-	if (cmd->ci.outfile && cmd->ci.outfile != STDOUT_FILENO)
+	if (cmd.outfile && cmd.outfile != STDOUT_FILENO)
 	{
-		if (dup2(cmd->ci.outfile, STDOUT_FILENO) == -1)
-            return(EXIT_FAILURE);
-		close(cmd->ci.outfile);
+		if (dup2(cmd.outfile, STDOUT_FILENO) == -1)
+            return (ci_error(ERR_DUP2, 1));
+		close(cmd.outfile);
 	}
-	else if (cmd->next && dup2(fd[FD_WRITE_END], STDOUT_FILENO) == -1)
-       return(EXIT_FAILURE);
+	else if (cmds->next)
+	{
+		if (dup2(fd[FD_WRITE_END], STDOUT_FILENO) == -1)
+	 		return (ci_error(ERR_DUP2, 1));
+	}
 	close(fd[FD_WRITE_END]);
 	return (EXIT_SUCCESS);
 }
@@ -112,11 +118,7 @@ int exec_fork(t_c *cmd, t_env **env_lst, int fd[2])
 		return (ci_error(ERR_FORK, 1));
 	}
 	else if (pid == 0)
-	{
-		if (child_process(cmd, env_lst, fd) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
-		return (EXIT_SUCCESS);
-	}
+		child_process(cmd, env_lst, fd);
 	waitpid(pid, NULL, 0);
 	return (EXIT_SUCCESS);
 }
