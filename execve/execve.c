@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/31 14:09:39 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/31 14:54:38 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ int	ft_execve(t_ci cmd, t_env **env_lst, int path_exec)
 {
 	char	**args_str;
 	char	*cmd_path;
+	int		res_execve;
 
 	args_str = NULL;
 	cmd_path = get_cmd_path(env_lst, cmd.name);
@@ -144,8 +145,8 @@ int	ft_execve(t_ci cmd, t_env **env_lst, int path_exec)
 	if (path_exec)
 		cmd_path = cmd.name;
 	args_str = execve_cmd(cmd, cmd_path);
-	execve(cmd_path, args_str, custom_envp(env_lst));
-	return (EXIT_SUCCESS);
+	res_execve = execve(cmd_path, args_str, custom_envp(env_lst));
+	return (res_execve);
 }
 
 // static int is_sh(char *str)
