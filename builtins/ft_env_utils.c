@@ -6,11 +6,13 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:22:12 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/30 02:34:29 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/31 13:35:25 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+extern int g_status;
 
 int	exists_env(t_env **env_lst, char *str)
 {
@@ -28,10 +30,26 @@ int	exists_env(t_env **env_lst, char *str)
 	return (0);
 }
 
+static char	*get_special_env(char *name)
+{
+	char	*res;
+
+	res = ft_strdup("");
+	if (*name == '$')
+		res = ft_itoa(getpid());
+	else if (*name == '?')
+		res = ft_itoa(g_status);
+	return (res);
+}
+
 char	*env_value(t_env **env_lst, char *name)
 {
 	t_env	*tmp;
+	char	*res;
 
+	res = get_special_env(name);
+	if (ft_strlen(res) > 0)
+		return (res);
 	tmp = *env_lst;
 	if (env_lst == NULL)
 		return ("");
@@ -44,7 +62,7 @@ char	*env_value(t_env **env_lst, char *name)
 			tmp = tmp->next;
 		}
 	}
-	return ("");
+	return (res);
 }
 
 void	print_env(t_env **env_lst, int with_declare)

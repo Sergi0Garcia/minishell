@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/31 11:07:58 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/31 14:54:20 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -359,6 +359,7 @@ t_b			is_opt_already_exits(t_wsb *wsb, char *opt);
 t_b			is_option(char *opt);
 char		*add_arg_or_opt(char *arg_or_opt, char *word);
 t_b			can_increment_word(t_w **word);
+t_b			handle_redirect(t_w **head, int i, int *infile);
 
 /* utils/s_cmd_ops.c */
 void		ft_cunshift(t_csb *stack, t_ci info);

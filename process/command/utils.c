@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:36:25 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/29 20:32:39 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/31 14:54:21 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,18 @@ t_b	can_increment_word(t_w **word)
 		return (false);
 	}
 	*word = (*word)->next;
+	return (true);
+}
+
+t_b	handle_redirect(t_w **head, int i, int *infile)
+{
+	t_w	*tmp;
+
+	tmp = *head;
+	if (!can_increment_word(head))
+		return (false);
+	*infile = get_fd(tmp->next->wi.word, tmp->wi.sep, i);
+	if (*infile == -1)
+		return (false);
 	return (true);
 }
