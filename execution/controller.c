@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/31 15:01:12 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/31 15:27:17 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	 exec_fork(t_c *cmd, t_env **env_lst, int fd[2])
 	}
 	else if (!pid)
 		child_process(cmd, env_lst, fd);
+	// waitpid(pid, &g_status, 0);
 }
 
 static char *check_to_fork(t_c *cmds, t_env **env_lst, int fd[2])
@@ -130,6 +131,7 @@ static char *check_to_fork(t_c *cmds, t_env **env_lst, int fd[2])
 	if (!cmd_path && !is_executable)
 	{
 		ci_error(ERR_CMD_FOUND, 127);
+		g_status = 127;
 		return ("");
 	}
 	exec_fork(cmds, env_lst, fd);
@@ -147,7 +149,6 @@ void	exec_cmds(t_c *cmds, t_env **env_lst)
 		ci_error(ERR_PIPE, 1);
 	if (!check_to_fork(cmds, env_lst, fd))
 	{
-		printf("not executing\n");
 		return ;
 	}
 	close(fd[FD_WRITE_END]);
