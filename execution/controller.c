@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/31 14:27:42 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/31 14:33:10 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ static int	exec_builtin(t_c *cmd, t_env **env_lst)
 		g_status = ft_execve(cmd->ci, env_lst, 1);
 	else
 		g_status = ft_execve(cmd->ci, env_lst, 0);
-	printf("g_status_exec: %i\n", g_status);
 	return (g_status);
 }
 
