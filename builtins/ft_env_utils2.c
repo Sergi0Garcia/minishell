@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 02:39:04 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 18:07:25 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/30 00:48:25 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ void	set_env(char **envp, t_env **env_lst)
 	int			brk_idx;
 	char		*name;
 	char		*val;
-	t_env	*new;
+	t_env		*new;
 
 	i = 0;
+	if (!envp)
+		return ;
 	while (envp[i])
 	{
 		brk_idx = get_idx_separator(envp[i]);
