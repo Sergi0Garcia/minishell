@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:14:59 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/30 12:42:44 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/31 11:30:17 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	handler(t_minish *sh)
 
 void	h_interactive_mode(t_minish *sh)
 {
-	
+	int i;
+
 	while (1)
 	{
 		interactive_mode_sig();
@@ -37,10 +38,13 @@ void	h_interactive_mode(t_minish *sh)
 			expansion(sh);
 			if (generate_cmd(sh))
 			{
+				i = 0;
 				g_status = controller(sh);
-				waitpid(-1, &g_status, 0);
-				waitpid(-1, &g_status, 0);
-				waitpid(-1, &g_status, 0);
+				while (i < sh->cmds.size)
+				{
+					waitpid(-1, &g_status, 0);
+					i++;
+				}
 				if (g_status > 255)
 					g_status = g_status / 255;
 			}

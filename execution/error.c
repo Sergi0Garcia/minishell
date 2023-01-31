@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 22:03:04 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/30 12:01:17 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/31 11:03:23 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ static void print_message(t_err type)
     else if (type == ERR_CMD_FOUND)
         write(2, "minishell: command not found\n", 29); 
     else if (type == ERR_DUP2)
-        ft_printf("minishell: error in dup2\n");  
+        ft_printf("minishell: error in dup2\n"); 
+    else if (type == ERR_PERMISSION)
+        ft_printf("minishell: error permission denied\n");
 }
 
 int ci_error(t_err type, int err)
