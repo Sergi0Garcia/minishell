@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:10:03 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/31 10:58:56 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/31 10:33:34 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int	get_fd(char *path, t_wt key, int i)
 		if (access(path, F_OK) == -1)
 			return (-1);
 		if (access(path, R_OK) == -1)
+		{
+			ci_error(ERR_PERMISSION, 1);
 			return (-1);
+		}
 		fd = open(path, O_RDONLY);
 	}
 	else if (key == DLESS)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/31 09:17:51 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/30 11:33:53 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,43 +61,51 @@ static char	*get_cmd_path(t_env **env_lst, char *str)
 
 	env_path = env_value(env_lst, "PATH");
 	if (!env_path)
-	{
-		printf("no such file or directory\n");
-		return (NULL);
-	}
+		return (cs_error(ERR_PATH, 127));
 	all_paths = split_paths(env_path);
 	if (!all_paths)
-	{
-		printf("no such file or directory\n");
-		return (NULL);
-	}
+		return (cs_error(ERR_CMD_FOUND, 127));
 	cmd_path = correct_path(all_paths, str);
 	if (!cmd_path)
 		return (NULL);
 	return (cmd_path);
 }
 
-static char	**execve_cmd(t_ci cmd, char *cmd_path)
+static int	c_child(char **str)
+{
+	int i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+		i++;
+	return (i);
+}
+
+static char **execve_cmd(t_ci cmd, char *cmd_path)
 {
 	char	**res;
-	int		opts;
-	int		args;
+	char	**opts;
+	char	**args;
 	int		i;
 
-	opts = 0;
-	args = 0;
 	i = 0;
-	if (cmd.opts && ft_strlen(cmd.opts))
-		opts = 1;
-	if (cmd.args && ft_strlen(cmd.args))
-		args = 1;
-	res = malloc(sizeof(char *) * (2 + opts + args));
-	res[i++] = cmd_path;
-	if (opts)
-		res[i++] = cmd.opts;
-	if (args)
-		res[i++] = cmd.args;
-	res[i] = NULL;
+	opts = ft_split(cmd.opts, ' ');
+	args = ft_split(cmd.args, ' ');
+	res = malloc(sizeof(char *) * (2 + c_child(opts) + c_child(args)));
+	res[0] = cmd_path;
+	while (opts && opts[i])
+	{
+		res[i + 1] = opts[i];
+		i++;
+	}
+	while (args && args[i])
+	{
+		res[i + 1] = args[i];
+		i++;
+	}
+	res[i + 1] = NULL;
 	return (res);
 }
 
@@ -105,20 +113,14 @@ int	ft_execve(t_ci cmd, t_env **env_lst, int path_exec)
 {
 	char	**args_str;
 	char	*cmd_path;
-	int		i;
 
-	i = 0;
 	args_str = NULL;
 	cmd_path = get_cmd_path(env_lst, cmd.name);
 	if (!cmd_path && !path_exec)
-	{
-		printf("command not found: %s\n", cmd.name);
-		return (EXIT_FAILURE);
-	}
+		return (ci_error(ERR_CMD_FOUND, 127));
 	if (path_exec)
 		cmd_path = cmd.name;
 	args_str = execve_cmd(cmd, cmd_path);
-	printf("command found: %s\n", cmd.name);
 	execve(cmd_path, args_str, NULL);
 	return (EXIT_SUCCESS);
 }
