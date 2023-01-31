@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/31 11:51:44 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/31 14:09:39 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,29 @@ static char **execve_cmd(t_ci cmd, char *cmd_path)
 	return (res);
 }
 
+char **custom_envp(t_env **env_lst)
+{
+	int i;
+	int len;
+	char **res;
+	t_env	*tmp;
+
+	tmp = *env_lst;
+
+	i = 0;
+	len = ft_env_lst_size(*env_lst);
+	res = (char **)malloc(sizeof(char *) * (len + 1));
+	while (tmp)
+	{
+		res[i] = ft_strjoin(tmp->name, "=");
+		res[i] = ft_strjoin(res[i], tmp->value);
+		tmp = tmp->next;
+		i++;
+	}
+	res[i] = NULL;
+	return (res);
+}
+
 int	ft_execve(t_ci cmd, t_env **env_lst, int path_exec)
 {
 	char	**args_str;
@@ -121,7 +144,7 @@ int	ft_execve(t_ci cmd, t_env **env_lst, int path_exec)
 	if (path_exec)
 		cmd_path = cmd.name;
 	args_str = execve_cmd(cmd, cmd_path);
-	execve(cmd_path, args_str, NULL);
+	execve(cmd_path, args_str, custom_envp(env_lst));
 	return (EXIT_SUCCESS);
 }
 

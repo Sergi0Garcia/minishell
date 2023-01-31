@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:03:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/30 11:14:53 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/31 13:46:02 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ t_b	can_add_to_cmd(t_w **head, t_ci *ci, int i)
 		if (!can_increment_word(head))
 			return (false);
 		ci->infile = get_fd(tmp->next->wi.word, tmp->wi.sep, i);
-		printf("ci->infile:fd:%i\n", ci->infile);
 	}
 	else if (tmp->wi.sep == DGREAT || tmp->wi.sep == GREAT)
 	{

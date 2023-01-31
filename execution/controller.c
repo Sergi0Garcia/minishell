@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/31 11:11:16 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/31 14:27:42 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	fd_redirection(t_c *cmds, int fd[2])
 
 static int	is_executable_path(char *path)
 {
-	if (access(path, F_OK) == -1)
+	if (access(path, X_OK) == -1)
 		return (0);
 	return (1);
 }
@@ -91,6 +91,7 @@ static int	exec_builtin(t_c *cmd, t_env **env_lst)
 		g_status = ft_execve(cmd->ci, env_lst, 1);
 	else
 		g_status = ft_execve(cmd->ci, env_lst, 0);
+	printf("g_status_exec: %i\n", g_status);
 	return (g_status);
 }
 
@@ -99,7 +100,7 @@ void	*child_process(t_c *cmd, t_env **env_lst, int fd[2])
 	close(fd[FD_READ_END]);
 	fd_redirection(cmd, fd);
 	exec_builtin(cmd, env_lst);
-	exit (EXIT_SUCCESS);
+	exit (g_status);
 }
 
 void	 exec_fork(t_c *cmd, t_env **env_lst, int fd[2])
@@ -121,11 +122,13 @@ void	 exec_fork(t_c *cmd, t_env **env_lst, int fd[2])
 static char *check_to_fork(t_c *cmds, t_env **env_lst, int fd[2])
 {
 	char	*cmd_path;
+	int		is_executable;
 
 	cmd_path = get_cmd_path(env_lst, cmds->ci.name);
+	is_executable = is_executable_path(cmds->ci.name);
 	if (cmds->ci.infile == -1 || cmds->ci.outfile == -1)
 	    return ("");
-	if (!cmd_path)
+	if (!cmd_path && !is_executable)
 	{
 		ci_error(ERR_CMD_FOUND, 127);
 		return ("");
@@ -149,11 +152,11 @@ void	exec_cmds(t_c *cmds, t_env **env_lst)
 	if (cmds->next && !cmds->next->ci.infile)
 		cmds->next->ci.infile = fd[FD_READ_END];
 	else
-		close(fd[FD_READ_END]);
+		close (fd[FD_READ_END]);
 	if (cmd.infile > 2)
-		close(cmd.infile);
+		close (cmd.infile);
 	if (cmd.outfile > 2)
-		close(cmd.outfile);
+		close (cmd.outfile);
 	return ;
 }
 
