@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 00:57:01 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/29 18:54:59 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/30 01:45:54 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_wt	is_which_wt(char *s1)
 	else if (strcmp(s1, "<") == 0)
 		return (LESS);
 	else if (strcmp(s1, "<<") == 0)
-		return (LESS);
+		return (DLESS);
 	else if (strcmp(s1, "&") == 0)
 		return (ANDIF);
 	else if (strcmp(s1, "||") == 0)

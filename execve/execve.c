@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 20:12:43 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/31 09:17:51 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int child_nbr_str(char **str)
 	return (i);
 }
 
-static char *get_cmd_path(t_env **env_lst, char *str)
+static char	*get_cmd_path(t_env **env_lst, char *str)
 {
-	char    *env_path;
+	char	*env_path;
 	char	**all_paths;
 	char	*cmd_path;
 
@@ -77,11 +77,11 @@ static char *get_cmd_path(t_env **env_lst, char *str)
 	return (cmd_path);
 }
 
-static char **execve_cmd(t_ci cmd, char *cmd_path)
+static char	**execve_cmd(t_ci cmd, char *cmd_path)
 {
 	char	**res;
 	int		opts;
-	int 	args;
+	int		args;
 	int		i;
 
 	opts = 0;
@@ -91,7 +91,7 @@ static char **execve_cmd(t_ci cmd, char *cmd_path)
 		opts = 1;
 	if (cmd.args && ft_strlen(cmd.args))
 		args = 1;
-	res = malloc(sizeof(char * ) * (2 + opts + args));
+	res = malloc(sizeof(char *) * (2 + opts + args));
 	res[i++] = cmd_path;
 	if (opts)
 		res[i++] = cmd.opts;
@@ -101,11 +101,11 @@ static char **execve_cmd(t_ci cmd, char *cmd_path)
 	return (res);
 }
 
-int ft_execve(t_ci cmd, t_env **env_lst, int path_exec)
+int	ft_execve(t_ci cmd, t_env **env_lst, int path_exec)
 {
-	char	**args_str;	
+	char	**args_str;
 	char	*cmd_path;
-	int     i;
+	int		i;
 
 	i = 0;
 	args_str = NULL;
@@ -118,6 +118,7 @@ int ft_execve(t_ci cmd, t_env **env_lst, int path_exec)
 	if (path_exec)
 		cmd_path = cmd.name;
 	args_str = execve_cmd(cmd, cmd_path);
+	printf("command found: %s\n", cmd.name);
 	execve(cmd_path, args_str, NULL);
 	return (EXIT_SUCCESS);
 }

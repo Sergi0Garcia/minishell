@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 05:28:08 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/29 05:51:17 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/30 04:06:17 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	sigreset(int sig, siginfo_t *info, void *context)
 	return ;
 }
 
-void	sigquit(int sig, siginfo_t *info, void *context)
+void	sigexit(int sig, siginfo_t *info, void *context)
 {
 	(void) sig;
 	(void) context;
@@ -33,12 +33,21 @@ void	sigquit(int sig, siginfo_t *info, void *context)
 	return ;
 }
 
-void	h_quit(void)
+void	ignore_sigquit(void)
+{
+	struct sigaction	act;
+
+	act.sa_handler = SIG_IGN;
+	sigaction(SIGQUIT, &act, NULL);
+}
+
+
+void	h_exit(void)
 {
 	struct sigaction	sa;
 
-	sa.sa_flags = SIGINFO;
-	sa.sa_sigaction = &sigquit;
+	sa.sa_flags = SA_SIGINFO;
+	sa.sa_sigaction = &sigexit;
 	sigaction(SIGQUIT, &sa, NULL);
 	return ;
 }
@@ -47,26 +56,11 @@ void	h_quit(void)
 void	interactive_mode_sig(void)
 {
 	struct sigaction	sa_res;
-	struct sigaction	sa_quit;
 
+	h_exit();
+	ignore_sigquit();
 	sa_res.sa_flags = SA_SIGINFO;
 	sa_res.sa_sigaction = &sigreset;
-	sa_quit.sa_flags = SA_SIGINFO;
-	sa_quit.sa_sigaction = &sigquit;
 	sigaction(SIGINT, &sa_res, NULL);
-	sigaction(SIGQUIT, &sa_quit, NULL);
-	return ;
-}
-
-/* non interactive mode signal handling */
-void	no_interactive_mode_sig(void)
-{
-	struct sigaction	sa;
-
-	ft_memset(&sa, 0, sizeof(sa));
-	sa.sa_flags = SA_SIGINFO;
-	sa.sa_handler = NULL;
-	sigaction(SIGTERM, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
 	return ;
 }

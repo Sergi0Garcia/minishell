@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:22:12 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 20:02:44 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/30 02:34:29 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*env_value(t_env **env_lst, char *name)
 	t_env	*tmp;
 
 	tmp = *env_lst;
+	if (env_lst == NULL)
+		return ("");
 	if (exists_env(env_lst, name))
 	{
 		while (tmp)

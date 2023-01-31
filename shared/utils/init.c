@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 13:58:41 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/28 02:17:09 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/01/30 03:38:32 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init(t_minish *sh, char **argv)
 	sh->argv = argv;
 	pid = getpid();
 	sh->interactive = false;
+	sh->env_lst = NULL;
 	str = ft_itoa(pid);
 	sh->pid = str;
 	init_twsb(&sh->wsb);

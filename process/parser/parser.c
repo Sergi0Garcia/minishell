@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 00:50:29 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/29 19:03:52 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/30 03:56:43 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ t_b	parser(t_minish *sh)
 		if (word->wi.sep != SPACES)
 		{
 			if (i == 0)
+			{
 				is_begin_good(word, kvp, &can_continue);
+				if (sh->wsb.size > 1)
+					is_between_good(word, kvp, &can_continue);
+			}
 			else if (i == sh->wsb.size - 1)
 				is_end_good(word, kvp, &can_continue);
 			else

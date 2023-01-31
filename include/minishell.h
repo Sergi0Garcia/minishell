@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 20:32:34 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/31 11:07:58 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ void		interactive(t_minish *sh);
 void		non_interactive(t_minish *sh);
 
 /** testing builtins */
-void 		tester(t_env **env_lst);
+void		tester(t_env **env_lst);
 int			playground(void);
 
 /** built in functions */
@@ -198,7 +198,8 @@ int			get_idx_separator(char *str);
 /** execution  */
 int			controller(t_minish *sh);
 int			ft_execve(t_ci cmd, t_env **env_lst, int path_exec);
-int			get_fd(char *path, t_wt key);
+int			get_fd(char *path, t_wt key, int i);
+void		hndle_here_doc(char *eof, int fd);
 
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);
@@ -220,8 +221,8 @@ void		h_noninteractive_mode(t_minish *sh);
 void		handler(t_minish *sh);
 
 /* lst/env */
-t_env	*ft_env_last(t_env *lst);
-t_env	*ft_new_env_node(char *name, char *value);
+t_env		*ft_env_last(t_env *lst);
+t_env		*ft_new_env_node(char *name, char *value);
 void		new_env(t_env **env_lst, char *str);
 void		unset_env(t_env **env_lst, char *str);
 int			ft_env_lst_size(t_env *lst);
@@ -273,11 +274,11 @@ void		interactive(t_minish *sh);
 void		non_interactive(t_minish *sh);
 
 /* process/signals/signals.c */
-void		h_quit(void);
+void		h_exit(void);
 void		sigreset(int sig, siginfo_t *info, void *context);
-void		sigquit(int sig, siginfo_t *info, void *context);
+void		sigexit(int sig, siginfo_t *info, void *context);
 void		interactive_mode_sig(void);
-void		no_interactive_mode_sig(void);
+void		ignore_sigquit(void);
 
 /* process/lexer/lexer.c */
 t_b			can_hspace(int start, char *str, t_sep *next);
@@ -349,9 +350,9 @@ void		free_stack(t_w **head, t_w **tail);
 /* process/command/command.c */
 t_b			generate_cmd(t_minish *sh);
 void		add_to_chunk(t_wsb *chunk, t_wi wi);
-t_b			can_handle_pipe_found(t_csb *list, t_wsb *wsb);
-t_b			can_parse_wsb_to_cmd(t_csb *list, t_wsb *wsb);
-t_b			can_add_to_cmd(t_w **head, t_ci *ci);
+t_b			can_handle_pipe_found(t_csb *list, t_wsb *wsb, int *i);
+t_b			can_parse_wsb_to_cmd(t_csb *list, t_wsb *wsb, int *i);
+t_b			can_add_to_cmd(t_w **head, t_ci *ci, int i);
 
 /* process/command/utils.c */
 t_b			is_opt_already_exits(t_wsb *wsb, char *opt);

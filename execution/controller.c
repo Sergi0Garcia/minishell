@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 20:34:19 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/01/31 10:50:12 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	is_single_execution(t_c *cmd)
 		|| is_same_str(cmd->ci.name, "export")
 		|| is_same_str(cmd->ci.name, "unset")
 		|| is_same_str(cmd->ci.name, "cd")))
-			return (1);
+	return (1);
 	return (0);
 }
 
@@ -43,23 +43,24 @@ static int	fd_redirection(t_c *cmd, int fd[2])
 {
 	if (cmd->ci.infile && cmd->ci.infile != STDIN_FILENO)
 	{
+		printf("here\n");
 		if (dup2(cmd->ci.infile, STDIN_FILENO) == -1)
-            return(EXIT_FAILURE);
+			return (EXIT_FAILURE);
 		close(cmd->ci.infile);
 	}
 	if (cmd->ci.outfile && cmd->ci.outfile != STDOUT_FILENO)
 	{
 		if (dup2(cmd->ci.outfile, STDOUT_FILENO) == -1)
-            return(EXIT_FAILURE);
+			return (EXIT_FAILURE);
 		close(cmd->ci.outfile);
 	}
 	else if (cmd->next && dup2(fd[FD_WRITE_END], STDOUT_FILENO) == -1)
-       return(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	close(fd[FD_WRITE_END]);
 	return (EXIT_SUCCESS);
 }
 
-static int is_executable_path(char *path)
+static int	is_executable_path(char *path)
 {
 	if (access(path, F_OK) == -1)
 		return (0);
@@ -71,12 +72,12 @@ static int	exec_builtin(t_c *cmd, t_env **env_lst)
 	(void) env_lst;
 	if (is_same_str(cmd->ci.name, "exit"))
 		exit(EXIT_SUCCESS);
-    else if (is_same_str(cmd->ci.name, "echo"))
+	else if (is_same_str(cmd->ci.name, "echo"))
 		ft_echo(cmd->ci);
 	else if (is_same_str(cmd->ci.name, "cd"))
-        ft_cd(cmd, env_lst);
+		ft_cd(cmd, env_lst);
 	else if (is_same_str(cmd->ci.name, "pwd"))
-        ft_pwd(cmd, 1);
+		ft_pwd(cmd, 1);
 	else if (is_same_str(cmd->ci.name, "export"))
 		ft_export(cmd->ci, env_lst);
 	else if (is_same_str(cmd->ci.name, "unset"))
@@ -94,7 +95,7 @@ static int	child_process(t_c *cmd, t_env **env_lst, int fd[2])
 {
 	if (fd_redirection(cmd, fd) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	close(fd[FD_READ_END]);
+	// close(fd[FD_READ_END]);
 	exec_builtin(cmd, env_lst);
 	exit(EXIT_SUCCESS);
 }
@@ -127,7 +128,7 @@ int	exec_cmds(t_c *cmds, t_env **env_lst)
 	if (pipe(fd) == -1)
 	{
 		close(fd[FD_WRITE_END]);
-        return (EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
 	if (cmds->ci.infile == -1 || cmds->ci.outfile == -1)
 	{
