@@ -6,11 +6,13 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/30 00:47:56 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/01 04:44:12 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+extern int	g_status;
 
 static int	vaild_option(char *opt)
 {
@@ -20,7 +22,10 @@ static int	vaild_option(char *opt)
 	while (opt[i])
 	{
 		if (i < 2 && opt[i] == '-')
+		{
 			i++;
+			continue ;
+		}
 		else
 		{
 			if (opt[i] != 'L' && opt[i] != 'P')
@@ -50,6 +55,7 @@ static int	valid_flag(t_c *cmd)
 			return (0);
 		i++;
 	}
+	free_array(opts);
 	return (1);
 }
 
@@ -59,6 +65,7 @@ static int	handle_error(void)
 	ft_printf("\n");
 	ft_printf("pwd: usage: pwd [-LP]");
 	ft_printf("\n");
+	g_status = 1;
 	return (EXIT_FAILURE);
 }
 
@@ -72,7 +79,11 @@ char	*ft_pwd(t_c *cmd, int print)
 		return (NULL);
 	}
 	res = getcwd(NULL, PATH_MAX);
+	g_status = 0;
 	if (print)
+	{
 		ft_printf("%s\n", res);
+		free(res);
+	}
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/31 15:27:17 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/01 05:01:33 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,13 @@ static int	exec_builtin(t_c *cmd, t_env **env_lst)
     else if (is_same_str(cmd->ci.name, "echo"))
 		g_status = ft_echo(cmd->ci);
 	else if (is_same_str(cmd->ci.name, "cd"))
-        ft_cd(cmd, env_lst);
+       	g_status = ft_cd(cmd, env_lst);
 	else if (is_same_str(cmd->ci.name, "pwd"))
         ft_pwd(cmd, 1);
 	else if (is_same_str(cmd->ci.name, "export"))
-		ft_export(cmd->ci, env_lst);
+		g_status = ft_export(cmd->ci, env_lst);
 	else if (is_same_str(cmd->ci.name, "unset"))
-		ft_unset(cmd->ci, env_lst);
+		g_status = ft_unset(cmd->ci, env_lst);
 	else if (is_same_str(cmd->ci.name, "env"))
 		g_status = ft_env(cmd->ci, env_lst);
 	else if (is_executable_path(cmd->ci.name))
@@ -116,7 +116,6 @@ void	 exec_fork(t_c *cmd, t_env **env_lst, int fd[2])
 	}
 	else if (!pid)
 		child_process(cmd, env_lst, fd);
-	// waitpid(pid, &g_status, 0);
 }
 
 static char *check_to_fork(t_c *cmds, t_env **env_lst, int fd[2])
@@ -167,7 +166,9 @@ int	controller(t_minish *sh)
 {
 	t_c			*cmds;
 	t_env		**env_lst;
+	int			i;
 
+	i = 0;
 	cmds = sh->cmds.head;
 	env_lst = &sh->env_lst;
 	if (is_single_execution(cmds))
@@ -177,5 +178,9 @@ int	controller(t_minish *sh)
 		exec_cmds(cmds, env_lst);
 		cmds = cmds->next;
 	}
+	while (i++ <= sh->cmds.size)
+		waitpid(-1, &g_status, 0);
+	if (g_status > 255)
+		g_status = g_status / 255;
 	return (g_status);
 }
