@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 02:39:04 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/01 06:07:46 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/01 13:15:27 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,19 @@ void	new_env(t_env **env_lst, char *str)
 	return ;
 }
 
+static void	unset_head(t_env **env_lst)
+{
+	t_env	*current;
+	t_env	*delete;
+
+	current = *env_lst;
+	delete = current;
+	current = current->next;
+	free_env_node(&delete);
+	*env_lst = current;
+	return ;
+}
+
 void	unset_env(t_env **env_lst, char *str)
 {
 	t_env	*current;
@@ -84,13 +97,7 @@ void	unset_env(t_env **env_lst, char *str)
 	current = *env_lst;
 	previous = NULL;
 	if (is_same_str((current)->name, str))
-	{
-		delete = current;
-		current = current->next;
-		free_env_node(&delete);
-		*env_lst = current;
-		return ;
-	}
+		return (unset_head(env_lst));
 	while (current)
 	{
 		if (is_same_str((current)->name, str))

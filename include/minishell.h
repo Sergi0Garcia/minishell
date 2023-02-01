@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/01 05:00:40 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:53:46 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,8 @@ int			ft_env(t_ci cmd, t_env **env_lst);
 int			is_same_str(char *str1, char *str2);
 int			get_idx_separator(char *str);
 void		free_array(char **str);
+int 		c_child(char **str);
+char		**split_paths(char *path);
 
 /** execution  */
 int			controller(t_minish *sh);

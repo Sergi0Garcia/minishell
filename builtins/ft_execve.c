@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execve.c                                           :+:      :+:    :+:   */
+/*   ft_execve.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/01 06:14:58 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:53:37 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-char	**split_paths(char *path)
-{
-	char	**paths;
-
-	paths = ft_split(path, ':');
-	if (!paths)
-		return (NULL);
-	return (paths);
-}
 
 char	*correct_path(char **paths, char *cmd)
 {
@@ -41,16 +31,6 @@ char	*correct_path(char **paths, char *cmd)
 		return (NULL);
 	else
 		return (complete_path);
-}
-
-int child_nbr_str(char **str)
-{
-	int i;
-
-	i = 0;
-	while (str && str[i])
-		i++;
-	return (i);
 }
 
 char	*get_cmd_path(t_env **env_lst, char *str)
@@ -74,24 +54,13 @@ char	*get_cmd_path(t_env **env_lst, char *str)
 	return (cmd_path);
 }
 
-static int	c_child(char **str)
-{
-	int i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
-}
-
-static char **execve_cmd(t_ci cmd, char *cmd_path)
+static char	**execve_cmd(t_ci cmd, char *cmd_path)
 {
 	char	**res;
 	char	**opts;
 	char	**args;
 	int		i;
+	int		j;
 
 	i = 0;
 	opts = ft_split(cmd.opts, ' ');
@@ -103,24 +72,24 @@ static char **execve_cmd(t_ci cmd, char *cmd_path)
 		res[i + 1] = opts[i];
 		i++;
 	}
-	while (args && args[i])
+	j = i;
+	while (args && args[i - j])
 	{
-		res[i + 1] = args[i];
+		res[i + 1] = args[i - j];
 		i++;
 	}
 	res[i + 1] = NULL;
 	return (res);
 }
 
-char **custom_envp(t_env **env_lst)
+char	**custom_envp(t_env **env_lst)
 {
-	int i;
-	int len;
-	char **res;
+	int		i;
+	int		len;
+	char	**res;
 	t_env	*tmp;
 
 	tmp = *env_lst;
-
 	i = 0;
 	len = ft_env_lst_size(*env_lst);
 	res = (char **)malloc(sizeof(char *) * (len + 1));
@@ -151,43 +120,3 @@ int	ft_execve(t_ci cmd, t_env **env_lst, int path_exec)
 	res_execve = execve(cmd_path, args_str, custom_envp(env_lst));
 	return (res_execve);
 }
-
-// static int is_sh(char *str)
-// {
-// 	int len;
-
-// 	len = ft_strlen(str);
-// 	if (len < 0 || len < 2)
-// 		return (0);
-// 	if (str[len - 1] == 'h'
-// 		&& str[len - 2] == 's'
-// 		&& str[len - 3] == '.')
-// 			return (1);
-// 	return (0);
-// }
-
-// int ft_path_execve(t_c *cmd, t_env **env_lst)
-// {
-// 	char	**execve_args;
-// 	char	*cmd_path;
-// 	int		opt_args_len;
-
-// 	cmd_path = NULL;
-// 	execve_args = NULL;
-// 	if (is_sh(cmd->ci.name))
-// 	{
-// 		cmd_path = get_cmd_path(env_lst, "bash");
-// 		if (!cmd_path)
-// 			return (EXIT_FAILURE);
-// 		opt_args_len = count_opts_args(cmd);
-// 		execve_args = path_execve_unifier(cmd, cmd_path, opt_args_len);
-// 		execve(cmd_path, execve_args, NULL);
-// 	}
-// 	else
-// 	{
-// 		opt_args_len = count_opts_args(cmd);
-// 		execve_args = path_execve_unifier(cmd, cmd_path, opt_args_len);
-// 		execve(cmd->ci.name, execve_args, NULL);
-// 	}
-// 	return (EXIT_SUCCESS);
-// }

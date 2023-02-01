@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:14:59 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/01 02:34:45 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:14:21 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	h_interactive_mode(t_minish *sh)
 				controller(sh);
 		}
 		add_history(sh->line);
-		printf("g_status: %i\n", g_status);
+		// printf("g_status: %i\n", g_status);
 	}
 	return ;
 }

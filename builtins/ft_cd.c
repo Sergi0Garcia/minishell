@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/01 05:26:53 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:32:05 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ static char	*get_home_address(t_env **env_lst)
 	char	*res;
 
 	home_path = env_value(env_lst, "HOME");
-	if (home_path)
+	if (home_path && ft_strlen(home_path))
 		return (home_path);
 	username = env_value(env_lst, "USER");
 	res = ft_strjoin("/Users/", username);
+	new_env(env_lst, ft_strjoin("HOME=", res));
 	return (res);
 }
 
