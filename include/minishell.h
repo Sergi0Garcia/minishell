@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/31 14:58:29 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/01 05:02:48 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef enum s_error_type
 	ERR_CMD_FOUND,
 	ERR_DUP2,
 	ERR_PERMISSION
-} t_err;
+}	t_err;
 
 typedef struct s_current_and_next_probable_word_type
 {
@@ -186,6 +186,7 @@ typedef struct s_minishell
 	char		*line;
 	t_b			interactive;
 	t_wsb		wsb;
+	t_wi		last;
 	t_csb		cmds;
 	int			status;
 }	t_minish;
@@ -264,6 +265,7 @@ void		usage(void);
 void		init(t_minish *sh, char **argv);
 void		init_tcsb(t_csb *cmds);
 void		init_twsb(t_wsb *wsb);
+void		init_twi(t_wi *i);
 
 /* shared/utils/word_ops.c */
 void		ft_wunshift(t_wsb *stack, t_wi info);
@@ -306,7 +308,7 @@ void		add_new_word(t_lex *lex, t_minish *sh);
 /* process/lexer/utils */
 void		remove_spaces(t_minish *sh);
 void		check_greatorless(t_wt *last, char *str);
-void		end_token_delimiter(char *str, t_lex *lex);
+void		end_token_delimiter(char *str, t_lex *lex, t_wi *last);
 void		escape_spaces(char *str, t_lex *lex);
 
 /* shared/display/display.c */
@@ -325,6 +327,8 @@ t_q			is_which_quote(char *str);
 /* process/parser/check.c */
 t_b			is_wt_between_values(t_wt word_type, t_wt *list);
 t_wt		is_which_wt(char *s1);
+t_b			can_delimitate(char *s1, t_wt last, size_t *end);
+void		inc_lex(char *s1, size_t *end);
 
 /* process/parser/parser.c */
 t_b			parser(t_minish *sh);
@@ -348,7 +352,7 @@ void		*ft_cpywt(void *dst, const void *src, size_t n);
 /* process/expansion/expansion.c */
 void		expansion(t_minish *sh);
 void		expansion_process(char **str, t_env *env_lst);
-void		expand_var(char **str, size_t start, t_env *env_lst);
+void		expand_var(char **str, size_t *start, t_env *env_lst);
 void		end_of_expandation(char *str, size_t *end);
 
 /* process/expansion/utils.c */

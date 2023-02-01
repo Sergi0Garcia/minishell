@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 07:45:35 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/25 03:13:47 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/01 05:04:15 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ void	check_greatorless(t_wt *last, char *str)
 	return ;
 }
 
-void	end_token_delimiter(char *str, t_lex *lex)
+void	end_token_delimiter(char *str, t_lex *lex, t_wi *last)
 {
-	while (str[lex->end] != '\0' && str[lex->end] != ' ')
-		lex->end++;
+	while (str[lex->end] != '\0'
+		&& last->sep == is_which_wt(&str[lex->end]))
+		inc_lex(str, &lex->end);
+	last->sep = is_which_wt(&str[lex->end]);
 	return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 07:27:49 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/29 19:56:39 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/01 05:12:24 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	lexing(t_minish *sh)
 	is_quoted = 1;
 	lex.end = 0;
 	lex.start = 0;
+	sh->last.sep = is_which_wt(&sh->line[lex.end]);
 	while (sh->line[lex.start] != '\0')
 	{
 		if (is_begin_with_quote(&sh->line[lex.start]) && is_quoted)
@@ -67,6 +68,7 @@ void	lexing(t_minish *sh)
 		else
 			lexing_without_quote(sh, &lex, &is_quoted);
 	}
+	remove_spaces(sh);
 	return ;
 }
 
@@ -86,17 +88,21 @@ void	lexing_with_quote(t_minish *sh, t_lex *lex, t_q *quote)
 		add_new_word(lex, sh);
 	lex->start++;
 	lex->end++;
-	escape_spaces(sh->line, lex);
+	lex->end = lex->end;
+	lex->start = lex->end;
+	// escape_spaces(sh->line, lex);
 	return ;
 }
 
 void	lexing_without_quote(t_minish *sh, t_lex *lex, t_b *is_quoted)
 {
 	*is_quoted = 0;
-	end_token_delimiter(sh->line, lex);
+	end_token_delimiter(sh->line, lex, &sh->last);
 	lex->sep.qtype = NONE;
 	add_new_word(lex, sh);
-	escape_spaces(sh->line, lex);
+	lex->end = lex->end;
+	lex->start = lex->end;
+	// escape_spaces(sh->line, lex);
 	*is_quoted = 1;
 	return ;
 }

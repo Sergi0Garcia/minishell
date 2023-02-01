@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/01/29 23:37:58 by segarcia         ###   ########.fr        #
+#    Updated: 2023/02/01 05:18:18 by rkanmado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ GNL_PATH	= ./gnl
 
 CC			= gcc
 RM			= rm -f
-CFLAGS		= -Wall -Werror -Wextra -g
+CFLAGS		= -Wall -Werror -Wextra -g3
 RL_FLAG		= -lreadline -L /usr/local/opt/readline/lib -I /usr/local/opt/readline/include -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include
 DEBUGFLAG	= -fsanitize=address
 INC			= /include/minishell.h
@@ -84,8 +84,7 @@ $(GNL):
 	@make -C $(GNL_PATH)
 
 $(NAME): $(LIBFT) $(PRINTF) $(GNL) $(SRC)
-	$(CC) ${RL_FLAG} $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
-	# @make del
+	$(CC) ${RL_FLAG} ${DEBUGFLAG} $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
 
 clean:
 	@make clean -C $(LIBFT_PATH)
