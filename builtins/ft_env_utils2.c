@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 02:39:04 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/30 00:48:25 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/01 06:07:46 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	new_env(t_env **env_lst, char *str)
 	int			brk_idx;
 	char		*name;
 	char		*value;
-	t_env	*new;
+	t_env		*new;
 
 	brk_idx = get_idx_separator(str);
 	if (brk_idx)

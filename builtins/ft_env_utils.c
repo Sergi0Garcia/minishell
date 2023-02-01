@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:22:12 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/31 14:58:23 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/01 05:48:31 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-extern int g_status;
+extern int	g_status;
 
 int	exists_env(t_env **env_lst, char *str)
 {

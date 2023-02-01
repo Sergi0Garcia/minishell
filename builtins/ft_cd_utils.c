@@ -6,13 +6,11 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 02:35:07 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/01 04:55:57 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/01 06:08:42 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-extern int	g_status;
 
 static int	back_flag(char *opt)
 {
@@ -72,10 +70,8 @@ int	cd_valid_flag(t_c *cmd)
 		return (1);
 	if (cmd->ci.opts)
 		opts = ft_split(cmd->ci.opts, ' ');
-	if (!opts)
-		return (1);
 	i = 0;
-	while (opts[i])
+	while (opts && opts[i])
 	{
 		if (db_back_flag(opts[i]))
 		{
