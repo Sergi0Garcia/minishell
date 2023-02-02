@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:03:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/02 04:52:01 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/02 05:48:13 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_b	can_add_to_cmd(t_w **head, t_ci *ci, int i)
 	t_w	*tmp;
 
 	tmp = *head;
-	if (tmp->prev == NULL)
+	if (tmp->prev == NULL && tmp->wi.sep != DLESS)
 		ci->name = tmp->wi.word;
 	else if (*tmp->wi.word == '-')
 		ci->opts = add_arg_or_opt(ci->opts, tmp->wi.word);

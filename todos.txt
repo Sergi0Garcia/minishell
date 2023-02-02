@@ -13,3 +13,4 @@ MISSING TODOS
 [ ] Fixing bugs in the quoting @traky
 [ ] Fixing bugs into signals @traky
 [ ] norminette errors and removing bug flag @both
+[V] handling the heredoc at the beginning of the command << he

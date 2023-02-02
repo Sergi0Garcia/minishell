@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/01 14:32:05 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/02 05:40:41 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int	ft_cd(t_c *cmd, t_env **env_lst)
 	int		valid;
 
 	valid = cd_valid_flag(cmd);
-	ft_
 	if (valid == 0)
 		return (cd_handle_error());
 	if (valid == 2)

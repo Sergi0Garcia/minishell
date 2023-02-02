@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 22:03:31 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/21 02:28:21 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/02 06:03:51 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	recursive_rl(t_minish *sh, t_lex *lex, char *title)
 	char	*str;
 
 	str = readline(title);
+	if (str == NULL)
+		return ;
 	str = ft_strjoin(str, "\n");
 	sh->line = ft_strjoin(sh->line, str);
 	lex->end = 0;

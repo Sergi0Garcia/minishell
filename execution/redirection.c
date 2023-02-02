@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:10:03 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/02 04:44:31 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/02 05:45:12 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,12 @@ void	hndle_here_doc(char *eof, int fd)
 	char	*line[2];
 
 	str = ft_strdup("");
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
 	line[0] = readline("> ");
 	while (1)
 	{
+		if (!line[0])
+			return ;
+		signal(SIGINT, SIG_DFL);
 		if (is_same_str(line[0], eof))
 			break ;
 		line[1] = readline("> ");
