@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:14:59 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/01 14:14:21 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/02 04:04:36 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	h_interactive_mode(t_minish *sh)
 			write(1, "exit\n", 6);
 			exit(EXIT_FAILURE);
 		}
+		if (ft_strlen(sh->line) > 0)
+			add_history(sh->line);
 		sh->line = ft_strtrim(sh->line, " ");
 		lexing(sh);
 		if (parser(sh))
@@ -42,8 +44,6 @@ void	h_interactive_mode(t_minish *sh)
 			if (generate_cmd(sh))
 				controller(sh);
 		}
-		add_history(sh->line);
-		// printf("g_status: %i\n", g_status);
 	}
 	return ;
 }

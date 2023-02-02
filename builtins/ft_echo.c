@@ -3,74 +3,91 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:59:06 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/01 14:02:42 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/02 04:41:42 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	valid_flag_n(char *str, int i)
+static int	valid_flag(char *str)
 {
-	if (str[i] == ' '
-		&& str[i + 1] && str[i + 1] == '-'
-		&& str[i + 2] && str[i + 2] == 'n')
-		return (1);
-	return (0);
-}
-
-static int	valid_flag(t_ci cmd)
-{
-	int	len;
 	int	i;
+	int	len;
 
-	if (!cmd.opts)
+	if (!str || !ft_strlen(str))
 		return (0);
-	len = ft_strlen(cmd.opts);
-	if (!len || len < 2)
+	len = ft_strlen(str);
+	if (len < 2)
 		return (0);
-	if (cmd.opts[0] != '-')
-		return (0);
-	if (cmd.opts[1] != 'n')
+	if (str[0] != '-' || str[1] != 'n')
 		return (0);
 	i = 2;
 	while (i < len)
 	{
-		if (cmd.opts[i] != 'n')
-		{
-			if (!valid_flag_n(cmd.opts, i))
-				return (0);
-			i++;
-		}
+		if (str[i] != 'n')
+			return (0);
 		i++;
 	}
 	return (1);
 }
 
-static void	print_words(t_ci cmd, int new_line)
+static int	needs_new_line(int i)
 {
-	int	i;
+	if (i > 0)
+		return (0);
+	else
+		return (1);
+}
+
+static void	print_c_opts(int i, int len, char **opts)
+{
+	while (i < len)
+	{
+		ft_printf("%s", opts[i]);
+		if (opts[i + 1])
+			ft_printf(" ");
+		i++;
+	}
+}
+
+static int	print_opts(char *str, char *args)
+{
+	char	**opts;
+	int		opts_len;
+	int		flag;
+	int		i;
+	int		j;
 
 	i = 0;
-	if (cmd.opts && ft_strlen(cmd.opts) && new_line)
+	flag = 0;
+	opts = ft_split(str, ' ');
+	opts_len = c_child(opts);
+	while (opts[i] && flag == 0)
 	{
-		ft_printf("%s", cmd.opts);
-		if (cmd.args)
-			ft_printf(" ");
+		flag = !valid_flag(opts[i]);
+		if (flag == 0)
+			i++;
 	}
-	if (cmd.args)
-		ft_printf("%s", cmd.args);
-	if (new_line)
-		ft_printf("\n");
+	j = i;
+	flag = needs_new_line(i);
+	print_c_opts(i, opts_len, opts);
+	if ((j != opts_len) && (args && ft_strlen(args)))
+		ft_printf(" ");
+	free(opts);
+	return (flag);
 }
 
 int	ft_echo(t_ci cmd)
 {
-	int		new_line;
+	int	new_line;
 
-	new_line = !valid_flag(cmd);
-	print_words(cmd, new_line);
+	new_line = print_opts(cmd.opts, cmd.args);
+	if (cmd.args && ft_strlen(cmd.args))
+		ft_printf("%s", cmd.args);
+	if (new_line)
+		ft_printf("\n");
 	return (EXIT_SUCCESS);
 }

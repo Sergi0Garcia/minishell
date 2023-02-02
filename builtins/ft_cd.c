@@ -101,6 +101,7 @@ int	ft_cd(t_c *cmd, t_env **env_lst)
 	int		valid;
 
 	valid = cd_valid_flag(cmd);
+	ft_
 	if (valid == 0)
 		return (cd_handle_error());
 	if (valid == 2)

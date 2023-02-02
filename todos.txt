@@ -1,0 +1,6 @@
+MISSING TODOS
+
+[V] Fix the echo function @sergio
+[V] Handling adding spaces into history. @traky
+[V] Handling signal into the blocking commands
+[ ] Fix the cd ~ for home directory

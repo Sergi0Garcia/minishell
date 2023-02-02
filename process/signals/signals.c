@@ -6,21 +6,26 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 05:28:08 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/30 04:06:17 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/02 04:38:08 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+extern int	g_status;
 
 void	sigreset(int sig, siginfo_t *info, void *context)
 {
 	(void) sig;
 	(void) context;
 	(void) info;
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	if (sig == SIGINT)
+	{
+		g_status = 130;
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		rl_replace_line("", 0);
+		rl_on_new_line();
+	}
 	return ;
 }
 
@@ -57,7 +62,6 @@ void	interactive_mode_sig(void)
 {
 	struct sigaction	sa_res;
 
-	h_exit();
 	ignore_sigquit();
 	sa_res.sa_flags = SA_SIGINFO;
 	sa_res.sa_sigaction = &sigreset;

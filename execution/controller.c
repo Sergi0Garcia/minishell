@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controller.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/02 01:09:33 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/02 04:42:31 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ static char *check_to_fork(t_c *cmds, t_env **env_lst, int fd[2])
 	cmd_path = get_cmd_path(env_lst, cmds->ci.name);
 	is_executable = is_executable_path(cmds->ci.name);
 	if (cmds->ci.infile == -1 || cmds->ci.outfile == -1)
-	    return ("");
+		return ("");
 	if (!cmd_path && !is_executable)
 	{
 		ci_error(ERR_CMD_FOUND, 127);
@@ -175,6 +175,8 @@ int	controller(t_minish *sh)
 		return (exec_builtin(cmds, env_lst));
 	while (cmds)
 	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 		exec_cmds(cmds, env_lst);
 		cmds = cmds->next;
 	}
