@@ -6,13 +6,13 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:25:31 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 15:55:00 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/01 04:53:55 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_export(t_ci cmd, t_env **env_lst)
+int	ft_export(t_ci cmd, t_env **env_lst)
 {
 	int		i;
 	char	**args;
@@ -22,11 +22,13 @@ void	ft_export(t_ci cmd, t_env **env_lst)
 	if (!args || !args[0])
 	{
 		print_env(env_lst, 1);
-		return ;
+		return (EXIT_SUCCESS);
 	}
 	while (args[i])
 	{
 		new_env(env_lst, args[i]);
 		i++;
 	}
+	free_array(args);
+	return (EXIT_SUCCESS);
 }

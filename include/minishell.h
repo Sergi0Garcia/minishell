@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/01 05:02:48 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:53:46 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,12 +200,15 @@ int			playground(void);
 
 /** built in functions */
 int			cd_valid_flag(t_c *cmd);
-void		cd_handle_error(void);
-void		ft_export(t_ci cmd, t_env **env_lst);
-void		ft_unset(t_ci cmd, t_env **env_lst);
+int			cd_handle_error(void);
+int			ft_export(t_ci cmd, t_env **env_lst);
+int			ft_unset(t_ci cmd, t_env **env_lst);
 int			ft_env(t_ci cmd, t_env **env_lst);
 int			is_same_str(char *str1, char *str2);
 int			get_idx_separator(char *str);
+void		free_array(char **str);
+int 		c_child(char **str);
+char		**split_paths(char *path);
 
 /** execution  */
 int			controller(t_minish *sh);
@@ -226,7 +229,7 @@ void		parse(t_minish *sh);
 
 char		*ft_pwd(t_c *cmd, int print);
 void		set_env(char **envp, t_env **env_lst);
-void		ft_cd(t_c *cmd, t_env **env_lst);
+int			ft_cd(t_c *cmd, t_env **env_lst);
 int			ft_echo(t_ci cmd);
 int			is_same_str(char *str1, char *str2);
 

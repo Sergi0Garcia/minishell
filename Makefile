@@ -3,16 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
+#    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/02/01 05:18:18 by rkanmado         ###   ########.fr        #
+#    Updated: 2023/02/01 14:51:53 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= 	minishell
 
 SRC			= 	minishell.c						\
+				./builtins/ft_execve.c 			\
+				./builtins/ft_execve_utils.c 	\
 				./builtins/ft_pwd.c				\
 				./builtins/ft_env.c				\
 				./builtins/ft_env_utils.c		\
@@ -27,6 +29,7 @@ SRC			= 	minishell.c						\
 				./builtins_lst_env/add_back.c	\
 				./builtins_lst_env/init.c 		\
 				./builtins_lst_env/utils.c  	\
+				./builtins/ft_utils.c 			\
 				./execution/controller.c 		\
 				./execution/redirection.c 		\
 				./execution/error.c 			\

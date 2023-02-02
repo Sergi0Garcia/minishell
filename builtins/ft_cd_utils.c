@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 02:35:07 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/29 19:27:09 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/01 06:08:42 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static int	back_flag(char *opt)
 {
 	int	len;
 
+	if (!opt)
+		return (0);
 	len = ft_strlen(opt);
 	if (len == 1 && opt[0] == '-')
 		return (1);
@@ -26,6 +28,8 @@ static int	db_back_flag(char *opt)
 {
 	int	len;
 
+	if (!opt)
+		return (0);
 	len = ft_strlen(opt);
 	if (len < 2)
 		return (0);
@@ -42,7 +46,10 @@ static int	valid_options(char *opt)
 	while (opt[i])
 	{
 		if (i < 2 && opt[i] == '-')
+		{
 			i++;
+			continue ;
+		}
 		else
 		{
 			if (opt[i] != 'L' && opt[i] != 'P')
@@ -63,10 +70,8 @@ int	cd_valid_flag(t_c *cmd)
 		return (1);
 	if (cmd->ci.opts)
 		opts = ft_split(cmd->ci.opts, ' ');
-	if (!opts)
-		return (1);
 	i = 0;
-	while (opts[i])
+	while (opts && opts[i])
 	{
 		if (db_back_flag(opts[i]))
 		{
@@ -84,11 +89,11 @@ int	cd_valid_flag(t_c *cmd)
 	return (1);
 }
 
-void	cd_handle_error(void)
+int	cd_handle_error(void)
 {
 	ft_printf("invalid option");
 	ft_printf("\n");
 	ft_printf("cd: usage: cd [-L|-P] [dir]");
 	ft_printf("\n");
-	return ;
+	return (EXIT_FAILURE);
 }

@@ -6,30 +6,33 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/30 01:03:19 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:32:05 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	cd_back(t_env **env_lst)
+extern int	g_status;
+
+static int	cd_back(t_env **env_lst)
 {
 	char	*path;
 	char	*old_path;
 
 	path = ft_pwd(NULL, 0);
 	old_path = env_value(env_lst, "OLDPWD");
-	if (!old_path)
-	{
-		ft_printf("cd: OLDPWD not set\n");
-		return ;
-	}
+	if (!old_path || !ft_strlen(old_path))
+		return (EXIT_FAILURE);
 	if (chdir(old_path) == -1)
+	{
 		perror("");
+		return (EXIT_FAILURE);
+	}
 	new_env(env_lst, ft_strjoin("PWD=", old_path));
 	new_env(env_lst, ft_strjoin("OLDPWD=", path));
 	old_path = env_value(env_lst, "OLDPWD");
 	ft_printf("%s\n", old_path);
+	return (EXIT_SUCCESS);
 }
 
 static char	*get_home_address(t_env **env_lst)
@@ -39,10 +42,11 @@ static char	*get_home_address(t_env **env_lst)
 	char	*res;
 
 	home_path = env_value(env_lst, "HOME");
-	if (home_path)
+	if (home_path && ft_strlen(home_path))
 		return (home_path);
 	username = env_value(env_lst, "USER");
 	res = ft_strjoin("/Users/", username);
+	new_env(env_lst, ft_strjoin("HOME=", res));
 	return (res);
 }
 
@@ -71,7 +75,7 @@ static char	*parse_home_dir(char *home_path, t_c *cmd)
 	return (home_path);
 }
 
-static void	cd_default(t_env **env_lst, t_c *cmd)
+static int	cd_default(t_env **env_lst, t_c *cmd)
 {
 	char	*path;
 	char	*new_path;
@@ -81,17 +85,18 @@ static void	cd_default(t_env **env_lst, t_c *cmd)
 	home_path = get_home_address(env_lst);
 	new_path = parse_home_dir(home_path, cmd);
 	if (chdir(new_path) == -1)
+	{
 		perror("");
-	new_env(env_lst, ft_strjoin("PWD=", new_path));
+		return (EXIT_FAILURE);
+	}
 	new_env(env_lst, ft_strjoin("OLDPWD=", path));
+	path = ft_pwd(NULL, 0);
+	new_env(env_lst, ft_strjoin("PWD=", path));
+	free(path);
+	return (EXIT_SUCCESS);
 }
 
-/**
- * Function to handle command cd
- * @param cmd
- * @param env_lst
- */
-void	ft_cd(t_c *cmd, t_env **env_lst)
+int	ft_cd(t_c *cmd, t_env **env_lst)
 {
 	int		valid;
 
@@ -102,5 +107,5 @@ void	ft_cd(t_c *cmd, t_env **env_lst)
 		return (cd_back(env_lst));
 	if (valid == 1)
 		return (cd_default(env_lst, cmd));
-	return ;
+	return (EXIT_SUCCESS);
 }

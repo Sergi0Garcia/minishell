@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:10:03 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/31 10:33:34 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/02 01:09:36 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,13 @@ int	get_fd(char *path, t_wt key, int i)
 	}
 	else if (key == DLESS)
 	{
+		int		fda[2];
+		pipe(fda);
 		fd = open(ft_strjoin("/tmp/heredocfile_", ft_itoa(i)), \
 			O_CREAT | O_RDWR | O_TRUNC, 0777);
-		hndle_here_doc(path, fd);
+		hndle_here_doc(path, fda[FD_WRITE_END]);
+		close(fda[FD_WRITE_END]);
+		return (fda[FD_READ_END]);
 	}
 	else if (key == GREAT)
 		fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, 0666);
