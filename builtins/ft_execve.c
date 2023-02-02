@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/01 15:05:41 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/02 02:29:05 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,7 @@ char	*get_cmd_path(t_env **env_lst, char *str)
 
 	env_path = env_value(env_lst, "PATH");
 	if (!env_path || !ft_strlen(env_path))
-	{	
-		new_env(env_lst, ft_strjoin("PATH=", \
-		"/usr/local/sbin:/usr/local/bin:/usr/bin:/bin"));
-		env_path = env_value(env_lst, "PATH");
-	}
+		return (cs_error(ERR_PATH, 127));
 	all_paths = split_paths(env_path);
 	if (!all_paths)
 		return (cs_error(ERR_CMD_FOUND, 127));

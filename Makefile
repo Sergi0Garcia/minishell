@@ -6,7 +6,7 @@
 #    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/02/01 14:51:53 by segarcia         ###   ########.fr        #
+#    Updated: 2023/02/02 02:29:38 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,6 @@ SRC			= 	minishell.c						\
 				./execution/controller.c 		\
 				./execution/redirection.c 		\
 				./execution/error.c 			\
-				./execve/execve.c 				\
 				./shared/errors/error.c 		\
 				./shared/utils/init.c			\
 				./shared/utils/s_word_ops.c		\
