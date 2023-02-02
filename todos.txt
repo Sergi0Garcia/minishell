@@ -4,13 +4,14 @@ MISSING TODOS
 [V] Handling adding spaces into history. @traky
 [V] Handling signal into the blocking commands
 [V] Fix the cd ~ for home directory
-[ ] remove path environment @sergio
-[ ] check message error @sergio
+[V] remove path environment @sergio
+[V] check message error @sergio
 [ ] Piping error handling @sergio
-[ ] Handle permission access for commands and exit status @sergio
+[V] Handle permission access for commands @sergio
 [ ] function to free all memory from sh @both
 [ ] Handle the exit of the shell @both
 [ ] Fixing bugs in the quoting @traky
 [ ] Fixing bugs into signals @traky
 [ ] norminette errors and removing bug flag @both
 [V] handling the heredoc at the beginning of the command << he
+[ ] minishell gets in infinite loop when typing ........ajdsf

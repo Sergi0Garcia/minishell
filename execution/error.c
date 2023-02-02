@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 22:03:04 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/31 11:03:23 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/02 14:01:34 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void print_message(t_err type)
         ft_printf("minishell: error in dup2\n"); 
     else if (type == ERR_PERMISSION)
         ft_printf("minishell: error permission denied\n");
+    else if (type == ERR_IS_DR)
+        ft_printf("minishell: error is directory\n");
 }
 
 int ci_error(t_err type, int err)

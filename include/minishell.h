@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/02 04:02:45 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/02 14:01:35 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ typedef enum s_error_type
 	ERR_PATH,
 	ERR_CMD_FOUND,
 	ERR_DUP2,
-	ERR_PERMISSION
+	ERR_PERMISSION,
+	ERR_IS_DR
 }	t_err;
 
 typedef struct s_current_and_next_probable_word_type
@@ -212,6 +213,10 @@ char		**split_paths(char *path);
 
 /** execution  */
 int			controller(t_minish *sh);
+int			is_single_cmd(t_c *cmd);
+int			is_single_execution(t_c *cmd);
+int			is_file(char *str);
+int			file_validation(char *path);
 int			ft_execve(t_ci cmd, t_env **env_lst, int path_exec);
 int			get_fd(char *path, t_wt key, int i);
 void		hndle_here_doc(char *eof, int fd);
