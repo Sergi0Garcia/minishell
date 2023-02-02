@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_back.c                                         :+:      :+:    :+:   */
+/*   ft_new_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/26 14:13:02 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/28 05:28:27 by segarcia         ###   ########.fr       */
+/*   Created: 2022/11/26 10:57:53 by segarcia          #+#    #+#             */
+/*   Updated: 2023/02/02 14:33:34 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	env_add_back(t_env **lst, t_env *new)
+t_env	*ft_new_env_node(char *name, char *value)
 {
-	t_env	*last;
+	t_env	*new;
 
-	if (lst)
-	{
-		if (*lst)
-		{
-			last = ft_env_last(*lst);
-			last->next = new;
-		}
-		else
-			*lst = new;
-	}
+	new = (t_env *)malloc(sizeof(t_env));
+	if (!new)
+		return (NULL);
+	new->name = name;
+	new->value = value;
+	new->next = NULL;
+	return (new);
 }

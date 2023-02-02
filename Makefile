@@ -6,29 +6,27 @@
 #    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/02/02 13:06:05 by segarcia         ###   ########.fr        #
+#    Updated: 2023/02/02 14:37:13 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= 	minishell
 
 SRC			= 	minishell.c						\
+				./builtins/ft_add_back.c 		\
+				./builtins/ft_new_node.c 		\
 				./builtins/ft_execve.c 			\
 				./builtins/ft_execve_utils.c 	\
 				./builtins/ft_pwd.c				\
 				./builtins/ft_env.c				\
 				./builtins/ft_env_utils.c		\
 				./builtins/ft_env_utils2.c		\
+				./builtins/ft_env_utils3.c		\
 				./builtins/ft_cd.c    			\
 				./builtins/ft_echo.c 			\
 				./builtins/ft_cd_utils.c 		\
 				./builtins/ft_export.c  		\
 				./builtins/ft_unset.c  			\
-				./builtins_tests/tester.c		\
-				./builtins_tests/playground.c	\
-				./builtins_lst_env/add_back.c	\
-				./builtins_lst_env/init.c 		\
-				./builtins_lst_env/utils.c  	\
 				./builtins/ft_utils.c 			\
 				./execution/controller.c 		\
 				./execution/controller_utils.c 	\
