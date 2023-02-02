@@ -6,7 +6,7 @@ MISSING TODOS
 [V] Fix the cd ~ for home directory
 [V] remove path environment @sergio
 [V] check message error @sergio
-[ ] Piping error handling @sergio
+[V] Piping error handling @sergio
 [V] Handle permission access for commands @sergio
 [ ] function to free all memory from sh @both
 [ ] Handle the exit of the shell @both
