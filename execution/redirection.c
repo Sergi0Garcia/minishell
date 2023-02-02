@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:10:03 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/02 14:04:52 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/02 14:22:11 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ int	get_fd(char *path, t_wt key, int i)
 	if (key == LESS)
 	{
 		if (access(path, F_OK) == -1)
+		{
+			ci_error(ERR_PATH, 1);
 			return (-1);
+		}
 		if (access(path, R_OK) == -1)
 		{
 			ci_error(ERR_PERMISSION, 1);
@@ -41,9 +44,23 @@ int	get_fd(char *path, t_wt key, int i)
 		return (fda[FD_READ_END]);
 	}
 	else if (key == GREAT)
+	{
+		if (access(path, F_OK) != -1 && access(path, W_OK) == -1)
+		{
+			ci_error(ERR_PERMISSION, 1);
+			return (-1);
+		}
 		fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+	}
 	else if (key == DGREAT)
+	{
+		if (access(path, F_OK) != -1 && access(path, W_OK) == -1)
+		{
+			ci_error(ERR_PERMISSION, 1);
+			return (-1);
+		}
 		fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0666);
+	}
 	return (fd);
 }
 
