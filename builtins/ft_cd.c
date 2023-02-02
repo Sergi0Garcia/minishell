@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/02 05:40:41 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/02 06:06:36 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@ static char	*parse_home_dir(char *home_path, t_c *cmd)
 	i = 0;
 	if (cmd && args && args[0])
 	{
-		if (args[0][0] && args[0][1]
-			&& args[0][0] == '~' && args[0][1] == '/')
+		if (args[0][0] && args[0][0] == '~' && ft_strlen(args[0]) == 1)
+			return (home_path);
+		if ((args[0][0] && args[0][1]
+			&& args[0][0] == '~' && args[0][1] == '/'))
 		{
 			sub_str = ft_substr(args[0], 1, ft_strlen(args[0]));
 			res = ft_strjoin(home_path, sub_str);
