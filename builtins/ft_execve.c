@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/02 13:35:34 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/02 14:46:09 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*correct_path(char **paths, char *cmd)
 		i++;
 	}
 	if (access_val == -1)
-		return (NULL);
+		return (cs_error(ERR_CMD_FOUND, 127));
 	else
 		return (complete_path);
 }
