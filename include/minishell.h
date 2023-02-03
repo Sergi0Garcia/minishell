@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/02 14:01:35 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/03 03:57:44 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,10 @@ void		hndle_here_doc(char *eof, int fd);
 int 		ci_error(t_err type, int err);
 char		*cs_error(t_err type, int err);
 char		*get_cmd_path(t_env **env_lst, char *str);
+int			valid_fork(t_c *cmds, t_env **env_lst);
+int			fd_less(char *path);
+int			fd_great(char *path);
+int			fd_dgreat(char *path);
 
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);

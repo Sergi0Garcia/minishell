@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:14:59 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/02 04:04:36 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/03 03:31:37 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	h_interactive_mode(t_minish *sh)
 	while (1)
 	{
 		interactive_mode_sig();
-		sh->line = readline("minishell$ ");
+		sh->line = readline("\033[0;36mminishell$ \033[0m");
 		if (sh->line == NULL)
 		{
 			write(1, "exit\n", 6);

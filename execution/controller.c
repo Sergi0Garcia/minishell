@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/02 14:46:34 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/03 03:43:38 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	fd_redirection(t_c *cmds, int fd[2])
 
 static int	execute_builtin(t_c *cmds, t_env **env_lst)
 {
-	t_ci cmd;
+	t_ci	cmd;
 
 	cmd = cmds->ci;
 	if (is_same_str(cmd.name, "exit"))
@@ -59,8 +59,8 @@ static int	execute_builtin(t_c *cmds, t_env **env_lst)
 		g_status = ft_unset(cmd, env_lst);
 	else if (is_same_str(cmd.name, "env"))
 		g_status = ft_env(cmd, env_lst);
-	else if (is_file(cmd.name) 
-			&& file_validation(cmd.name))
+	else if (is_file(cmd.name)
+		&& file_validation(cmd.name))
 		g_status = ft_execve(cmd, env_lst, 1);
 	else
 		g_status = ft_execve(cmd, env_lst, 0);
@@ -86,22 +86,6 @@ void	exec_fork(t_c *cmd, t_env **env_lst, int fd[2])
 		execute_builtin(cmd, env_lst);
 		exit (g_status);
 	}
-}
-
-static int	valid_fork(t_c *cmds, t_env **env_lst)
-{
-	t_ci	cmd;
-	char	*cmd_path;
-
-	cmd = cmds->ci;
-	if (cmd.infile == -1 || cmd.outfile == -1)
-		return (0);
-	if (is_file(cmd.name))
-		return (file_validation(cmd.name));
-	cmd_path = get_cmd_path(env_lst, cmd.name);
-	if (!cmd_path)
-		return (0);
-	return (1);
 }
 
 void	execute_cmd(t_c *cmds, t_env **env_lst)

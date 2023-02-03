@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:10:03 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/02 14:26:22 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/03 04:02:17 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,62 +14,33 @@
 
 int	get_fd(char *path, t_wt key, int i)
 {
-	int	fd;
+	int	fd[2];
 
-	fd = -1;
 	if (!path)
 		return (-1);
 	if (key == LESS)
-	{
-		if (access(path, F_OK) == -1)
-		{
-			ci_error(ERR_PATH, 1);
-			return (-1);
-		}
-		if (access(path, R_OK) == -1)
-		{
-			ci_error(ERR_PERMISSION, 1);
-			return (-1);
-		}
-		fd = open(path, O_RDONLY);
-	}
+		return (fd_less(path));
+	else if (key == GREAT)
+		return (fd_great(path));
+	else if (key == DGREAT)
+		fd_dgreat(path);
 	else if (key == DLESS)
 	{
-		int		fda[2];
-		
-		if (pipe(fda) == -1)
+		if (pipe(fd) == -1)
 		{
 			ci_error(ERR_PIPE, 1);
 			return (-1);
 		}
 		fd = open(ft_strjoin("/tmp/heredocfile_", ft_itoa(i)), \
 			O_CREAT | O_RDWR | O_TRUNC, 0777);
-		hndle_here_doc(path, fda[FD_WRITE_END]);
-		close(fda[FD_WRITE_END]);
-		return (fda[FD_READ_END]);
-	}
-	else if (key == GREAT)
-	{
-		if (access(path, F_OK) != -1 && access(path, W_OK) == -1)
-		{
-			ci_error(ERR_PERMISSION, 1);
-			return (-1);
-		}
-		fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-	}
-	else if (key == DGREAT)
-	{
-		if (access(path, F_OK) != -1 && access(path, W_OK) == -1)
-		{
-			ci_error(ERR_PERMISSION, 1);
-			return (-1);
-		}
-		fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0666);
+		handle_here_doc(path, fd[FD_WRITE_END]);
+		close(fd[FD_WRITE_END]);
+		return (fd[FD_READ_END]);
 	}
 	return (fd);
 }
 
-void	hndle_here_doc(char *eof, int fd)
+void	handle_here_doc(char *eof, int fd)
 {
 	char	*str;
 	char	*line[2];

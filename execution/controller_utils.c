@@ -6,15 +6,15 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:03:44 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/02 14:02:46 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/03 03:43:00 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/minishell.h"
+#include "../include/minishell.h"
 
-int is_single_cmd(t_c *cmd)
+int	is_single_cmd(t_c *cmd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (cmd)
@@ -27,22 +27,22 @@ int is_single_cmd(t_c *cmd)
 	else
 		return (0);
 }
-	
+
 int	is_single_execution(t_c *cmd)
 {
 	if (is_single_cmd(cmd)
-	&& (is_same_str(cmd->ci.name, "exit")
-	|| is_same_str(cmd->ci.name, "export")
-	|| is_same_str(cmd->ci.name, "unset")
-	|| is_same_str(cmd->ci.name, "cd")))
+		&& (is_same_str(cmd->ci.name, "exit")
+			|| is_same_str(cmd->ci.name, "export")
+			|| is_same_str(cmd->ci.name, "unset")
+			|| is_same_str(cmd->ci.name, "cd")))
 		return (1);
 	return (0);
 }
 
-int is_file(char *str)
+int	is_file(char *str)
 {
-	int len;
-	int i;
+	int	len;
+	int	i;
 
 	if (!str)
 		return (0);
@@ -64,7 +64,7 @@ int is_file(char *str)
 
 int	file_validation(char *path)
 {
-	DIR *dir;
+	DIR	*dir;
 
 	dir = opendir(path);
 	if (dir)
@@ -84,5 +84,21 @@ int	file_validation(char *path)
 		ci_error(ERR_PERMISSION, 126);
 		return (0);
 	}
+	return (1);
+}
+
+int	valid_fork(t_c *cmds, t_env **env_lst)
+{
+	t_ci	cmd;
+	char	*cmd_path;
+
+	cmd = cmds->ci;
+	if (cmd.infile == -1 || cmd.outfile == -1)
+		return (0);
+	if (is_file(cmd.name))
+		return (file_validation(cmd.name));
+	cmd_path = get_cmd_path(env_lst, cmd.name);
+	if (!cmd_path)
+		return (0);
 	return (1);
 }
