@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:10:03 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/03 04:02:17 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/03 04:39:21 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	get_fd(char *path, t_wt key, int i)
 {
 	int	fd[2];
 
+	(void) i;
 	if (!path)
 		return (-1);
 	if (key == LESS)
@@ -23,7 +24,7 @@ int	get_fd(char *path, t_wt key, int i)
 	else if (key == GREAT)
 		return (fd_great(path));
 	else if (key == DGREAT)
-		fd_dgreat(path);
+		return (fd_dgreat(path));
 	else if (key == DLESS)
 	{
 		if (pipe(fd) == -1)
@@ -31,13 +32,11 @@ int	get_fd(char *path, t_wt key, int i)
 			ci_error(ERR_PIPE, 1);
 			return (-1);
 		}
-		fd = open(ft_strjoin("/tmp/heredocfile_", ft_itoa(i)), \
-			O_CREAT | O_RDWR | O_TRUNC, 0777);
 		handle_here_doc(path, fd[FD_WRITE_END]);
 		close(fd[FD_WRITE_END]);
 		return (fd[FD_READ_END]);
 	}
-	return (fd);
+	return (-1);
 }
 
 void	handle_here_doc(char *eof, int fd)

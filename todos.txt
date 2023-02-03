@@ -15,3 +15,4 @@ MISSING TODOS
 [ ] norminette errors and removing bug flag @both
 [V] handling the heredoc at the beginning of the command << he
 [ ] minishell gets in infinite loop when typing ........ajdsf
+[ ] /bin/ls is not working

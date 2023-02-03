@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/02 13:27:54 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/03 04:07:01 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 int	g_status = 0;
 
-int	main (int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_minish	sh;
-
-	(void) envp;
 
 	init(&sh, argv);
 	check_usage(argc, argv, &sh);

@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 03:49:19 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/03 04:03:13 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/03 04:32:35 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,13 @@ int	fd_great(char *path)
 
 int	fd_dgreat(char *path)
 {
+	int	fd;
+
 	if (access(path, F_OK) != -1 && access(path, W_OK) == -1)
 	{
 		ci_error(ERR_PERMISSION, 1);
 		return (-1);
 	}
 	fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0666);
+	return (fd);
 }

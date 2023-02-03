@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/03 03:57:44 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/03 04:08:43 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,7 +219,7 @@ int			is_file(char *str);
 int			file_validation(char *path);
 int			ft_execve(t_ci cmd, t_env **env_lst, int path_exec);
 int			get_fd(char *path, t_wt key, int i);
-void		hndle_here_doc(char *eof, int fd);
+void		handle_here_doc(char *eof, int fd);
 int 		ci_error(t_err type, int err);
 char		*cs_error(t_err type, int err);
 char		*get_cmd_path(t_env **env_lst, char *str);
