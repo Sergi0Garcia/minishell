@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/04 21:37:09 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/04 22:52:33 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ static int	execute_builtin(t_env **env_lst, int single, t_minish *sh)
 
 	cmd = sh->cmds.head->ci;
 	if (is_same_str(cmd.name, "exit") && single)
-		return (ft_exit(cmd, sh));
+	{
+		exit (ft_exit(cmd, sh));
+	}
 	if (is_same_str(cmd.name, "exit") && !single)
 		return (g_status);
 	else if (is_same_str(cmd.name, "echo"))

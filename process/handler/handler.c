@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:14:59 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 22:17:05 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 22:57:03 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	handler(t_minish *sh)
 
 void static	parse_and_execute(t_minish *sh)
 {
+	init_twsb(&sh->wsb);
+	init_tcsb(&sh->cmds);
 	lexing(sh);
 	if (parser(sh))
 	{

@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:22:12 by segarcia          #+#    #+#             */
-/*   Updated: 2023/01/31 15:19:26 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 23:14:17 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static char	*get_special_env(char *name)
 	return (res);
 }
 
+
 char	*env_value(t_env **env_lst, char *name)
 {
 	t_env	*tmp;
@@ -58,7 +59,11 @@ char	*env_value(t_env **env_lst, char *name)
 		while (tmp)
 		{
 			if (is_same_str(tmp->name, name))
-				return (tmp->value);
+			{
+				if (!tmp->value || tmp->value == NULL)
+					return ("");
+				return (tmp->value);	
+			}
 			tmp = tmp->next;
 		}
 	}

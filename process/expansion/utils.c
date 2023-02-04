@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 05:08:15 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 22:33:19 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 22:59:33 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	replace_str(char **str, char *to_replace_with, t_lex *lex)
 	new_str = ft_strjoin(new_str, first_range);
 	new_str = ft_strjoin(new_str, to_replace_with);
 	new_str = ft_strjoin(new_str, second_range);
-	free(str);
+	free(*str);
 	*str = new_str;
 	lex->start += ft_strlen(to_replace_with);
 	return ;
