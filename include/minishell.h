@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/04 06:49:43 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:31:06 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ typedef struct s_minishell
 	char		*line;
 	t_b			interactive;
 	t_wsb		wsb;
+	t_wsb		cpy;
 	t_wi		last;
 	t_csb		cmds;
 	int			status;
@@ -272,6 +273,7 @@ void		error(char *str);
 /* shared/check/check.c */
 void		check_usage(int argc, char **argv, t_minish *sh);
 void		usage(void);
+t_b			can_add_opt(char *args);
 
 /* shared/utils/init.c */
 void		init(t_minish *sh, char **argv);
@@ -284,6 +286,7 @@ void		ft_wunshift(t_wsb *stack, t_wi info);
 void		ft_wpush(t_wsb *stack, t_wi info);
 t_wi		ft_wpop(t_wsb *stack);
 t_wi		ft_wshift(t_wsb *stack);
+t_wsb		duplicate_wsb(t_wsb *stack);
 
 /* shared/utils/read */
 void		parse(t_minish *sh);
@@ -350,6 +353,8 @@ t_b			is_between_good(t_w *word, t_kvp *kvp, t_b *can_continue);
 
 /* process/parser/error.c */
 void		parser_error(char *str);
+void		handle_parser_err(t_w *word, t_b is_curr, t_b is_next, \
+			t_b *can_continue);
 
 /* process/shared/utils/constants.c */
 t_cn		get_according_values(t_wt key);
@@ -387,7 +392,7 @@ t_b			can_add_to_cmd(t_w **head, t_ci *ci, int i);
 /* process/command/utils.c */
 t_b			is_opt_already_exits(t_wsb *wsb, char *opt);
 t_b			is_option(char *opt);
-char		*add_arg_or_opt(char *arg_or_opt, char *word);
+char		*add_arg_or_opt(char *arg_or_opt, t_wi wi);
 t_b			can_increment_word(t_w **word);
 t_b			handle_redirect(t_w **head, int i, int *infile);
 
@@ -396,5 +401,6 @@ void		ft_cunshift(t_csb *stack, t_ci info);
 void		ft_cpush(t_csb *stack, t_ci info);
 t_ci		ft_cpop(t_csb *stack);
 t_ci		ft_cshift(t_csb *stack);
+t_csb		duplicate_csb(t_csb *stack);
 
 #endif

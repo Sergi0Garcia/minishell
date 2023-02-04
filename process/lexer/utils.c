@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 07:45:35 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/01 05:04:15 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:10:07 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	remove_spaces(t_minish *sh)
 
 	word = sh->wsb.head;
 	init_twsb(&new);
+	sh->cpy = duplicate_wsb(&sh->wsb);
 	while (word != NULL)
 	{
 		if (word->wi.sep != SPACES)
@@ -45,10 +46,13 @@ void	check_greatorless(t_wt *last, char *str)
 
 void	end_token_delimiter(char *str, t_lex *lex, t_wi *last)
 {
-	while (str[lex->end] != '\0'
+	while (str[lex->end] != '\0' && str[lex->end] != '\''
 		&& last->sep == is_which_wt(&str[lex->end]))
+	{
 		inc_lex(str, &lex->end);
-	last->sep = is_which_wt(&str[lex->end]);
+		if (is_which_wt(&str[lex->end]) != WORD)
+			break ;
+	}
 	return ;
 }
 

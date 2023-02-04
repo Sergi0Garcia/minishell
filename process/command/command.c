@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:03:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/02 05:48:13 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:12:45 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_b	generate_cmd(t_minish *sh)
 	t_wsb	chunk;
 	int		i;
 
-	token = sh->wsb.head;
+	token = sh->cpy.head;
 	init_twsb(&chunk);
 	init_tcsb(&sh->cmds);
 	i = 1;
@@ -76,7 +76,7 @@ t_b	can_parse_wsb_to_cmd(t_csb *list, t_wsb *wsb, int *i)
 			return (false);
 		head = head->next;
 	}
-	*i +=1;
+	*i += 1;
 	ft_cunshift(list, ci);
 	return (true);
 }
@@ -88,13 +88,13 @@ t_b	can_add_to_cmd(t_w **head, t_ci *ci, int i)
 	tmp = *head;
 	if (tmp->prev == NULL && tmp->wi.sep != DLESS)
 		ci->name = tmp->wi.word;
-	else if (*tmp->wi.word == '-')
-		ci->opts = add_arg_or_opt(ci->opts, tmp->wi.word);
+	else if (*tmp->wi.word == '-' && can_add_opt(ci->args))
+		ci->opts = add_arg_or_opt(ci->opts, tmp->wi);
 	else if (tmp->wi.sep == DLESS || tmp->wi.sep == LESS)
 		return (handle_redirect(head, i, &ci->infile));
 	else if (tmp->wi.sep == DGREAT || tmp->wi.sep == GREAT)
 		return (handle_redirect(head, i, &ci->outfile));
 	else
-		ci->args = add_arg_or_opt(ci->args, tmp->wi.word);
+		ci->args = add_arg_or_opt(ci->args, tmp->wi);
 	return (true);
 }

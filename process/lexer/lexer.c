@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 07:27:49 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/01 05:12:24 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:13:05 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	add_new_word(t_lex *lex, t_minish *sh)
 	lex->sep.word = ft_substr(sh->line, lex->start, lex->end - lex->start);
 	lex->sep.type = is_which_wt(lex->sep.word);
 	ft_wunshift(&sh->wsb, set_winfo(lex->sep));
+	sh->last.sep = is_which_wt(&sh->line[lex->end]);
 	return ;
 }
 
@@ -90,7 +91,6 @@ void	lexing_with_quote(t_minish *sh, t_lex *lex, t_q *quote)
 	lex->end++;
 	lex->end = lex->end;
 	lex->start = lex->end;
-	// escape_spaces(sh->line, lex);
 	return ;
 }
 
@@ -102,7 +102,6 @@ void	lexing_without_quote(t_minish *sh, t_lex *lex, t_b *is_quoted)
 	add_new_word(lex, sh);
 	lex->end = lex->end;
 	lex->start = lex->end;
-	// escape_spaces(sh->line, lex);
 	*is_quoted = 1;
 	return ;
 }

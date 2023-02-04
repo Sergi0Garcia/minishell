@@ -6,53 +6,53 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 00:50:29 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/30 03:56:43 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:29:44 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-t_b	parser(t_minish *sh)
+typedef struct s_parser
 {
-	int		i;
-	t_w		*word;
-	t_kvp	*kvp;
-	t_b		can_continue;
+	int	i;
+	t_b	can_cont;
+}	t_p;
 
-	i = 0;
-	kvp = get_kv_pairs();
-	word = sh->wsb.head;
-	can_continue = true;
-	while (word != NULL && can_continue)
+static void	parsing_process(t_minish *sh, t_w *word, t_kvp *kvp, t_p *tp)
+{
+	if (word->wi.sep != SPACES)
 	{
-		if (word->wi.sep != SPACES)
+		if (tp->i == 0)
 		{
-			if (i == 0)
-			{
-				is_begin_good(word, kvp, &can_continue);
-				if (sh->wsb.size > 1)
-					is_between_good(word, kvp, &can_continue);
-			}
-			else if (i == sh->wsb.size - 1)
-				is_end_good(word, kvp, &can_continue);
-			else
-				is_between_good(word, kvp, &can_continue);
+			is_begin_good(word, kvp, &tp->can_cont);
+			if (sh->wsb.size > 1)
+				is_between_good(word, kvp, &tp->can_cont);
 		}
-		word = word->next;
-		i++;
+		else if (tp->i == sh->wsb.size - 1)
+			is_end_good(word, kvp, &tp->can_cont);
+		else
+			is_between_good(word, kvp, &tp->can_cont);
 	}
-	return (can_continue);
+	return ;
 }
 
-void	handle_parser_err(t_w *word, t_b is_curr, t_b is_next, \
-		t_b *can_continue)
+t_b	parser(t_minish *sh)
 {
-	*can_continue = false;
-	if (!is_next)
-		parser_error(char_of_sep(word->next->wi.sep));
-	else if (!is_curr)
-		parser_error(char_of_sep(word->wi.sep));
-	return ;
+	t_p		tp;
+	t_w		*word;
+	t_kvp	*kvp;
+
+	tp.i = 0;
+	tp.can_cont = true;
+	kvp = get_kv_pairs();
+	word = sh->wsb.head;
+	while (word != NULL && tp.can_cont)
+	{
+		parsing_process(sh, word, kvp, &tp);
+		word = word->next;
+		tp.i++;
+	}
+	return (tp.can_cont);
 }
 
 t_b	is_begin_good(t_w *word, t_kvp *kvp, t_b *can_continue)

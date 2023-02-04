@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:36:25 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/31 14:54:21 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 09:55:23 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,14 @@ t_b	is_opt_already_exits(t_wsb *wsb, char *opt)
 	return (false);
 }
 
-char	*add_arg_or_opt(char *arg_or_opt, char *word)
+char	*add_arg_or_opt(char *arg_or_opt, t_wi wi)
 {
-	if (ft_strlen(arg_or_opt) != 0)
-			arg_or_opt = ft_strjoin(arg_or_opt, " ");
-		arg_or_opt = ft_strjoin(arg_or_opt, word);
+	if (ft_strlen(arg_or_opt) == 0 && wi.sep == SPACES)
+		return ("");
+	if (wi.sep == SPACES)
+		arg_or_opt = ft_strjoin(arg_or_opt, " ");
+	else
+		arg_or_opt = ft_strjoin(arg_or_opt, wi.word);
 	return (arg_or_opt);
 }
 

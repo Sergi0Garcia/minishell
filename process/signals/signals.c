@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 05:28:08 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/02 04:38:08 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:13:32 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	sigreset(int sig, siginfo_t *info, void *context)
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		rl_replace_line("", 0);
 		rl_on_new_line();
+		rl_redisplay();
 	}
 	return ;
 }
@@ -45,7 +46,6 @@ void	ignore_sigquit(void)
 	act.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &act, NULL);
 }
-
 
 void	h_exit(void)
 {

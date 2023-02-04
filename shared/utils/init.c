@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 13:58:41 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/01 04:57:38 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 08:34:46 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init(t_minish *sh, char **argv)
 	sh->pid = str;
 	init_twi(&sh->last);
 	init_twsb(&sh->wsb);
+	init_twsb(&sh->cpy);
 	init_tcsb(&sh->cmds);
 	sh->line = NULL;
 	return ;

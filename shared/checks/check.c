@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:37:53 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/11/29 23:38:17 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:13:21 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,11 @@ void	usage(void)
 	error("Usage: ./mini_shell -c [command] \n Or \
 			\n ./mini_shell -i \n Or ./mini_shell");
 	return ;
+}
+
+t_b	can_add_opt(char *args)
+{
+	if (ft_strlen(args) > 0)
+		return (false);
+	return (true);
 }

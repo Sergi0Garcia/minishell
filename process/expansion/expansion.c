@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 05:10:54 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/31 18:15:27 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 09:22:53 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	expansion(t_minish *sh)
 {
 	t_w		*head;
 
-	head = sh->wsb.head;
+	head = sh->cpy.head;
 	while (head != NULL)
 	{
 		if (head->wi.quote == DQUOTE || head->wi.quote == NONE)

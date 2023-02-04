@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:43:12 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/24 12:54:26 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 09:16:58 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,4 +117,23 @@ t_ci	ft_cshift(t_csb *stack)
 	}
 	free(tmp);
 	return (li);
+}
+
+/* Function that duplicate a stack bundle */
+t_csb	duplicate_csb(t_csb *stack)
+{
+	t_csb	new;
+	t_c		*current;
+
+	init_tcsb(&new);
+	current = stack->head;
+	if (current == NULL)
+		return (new);
+	while (current != NULL && current->next != NULL)
+	{
+		ft_cunshift(&new, current->ci);
+		current = current->next;
+	}
+	ft_cunshift(&new, current->ci);
+	return (new);
 }

@@ -118,3 +118,22 @@ t_wi	ft_wshift(t_wsb *stack)
 	free(tmp);
 	return (li);
 }
+
+/* Function that duplicate a stack bundle */
+t_wsb	duplicate_wsb(t_wsb *stack)
+{
+	t_wsb	new;
+	t_w		*current;
+
+	init_twsb(&new);
+	current = stack->head;
+	if (current == NULL)
+		return (new);
+	while (current != NULL && current->next != NULL)
+	{
+		ft_wunshift(&new, current->wi);
+		current = current->next;
+	}
+	ft_wunshift(&new, current->wi);
+	return (new);
+}
