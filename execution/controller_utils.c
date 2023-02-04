@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:03:44 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/04 03:08:59 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/04 10:17:34 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	is_file(char *str)
 			i++;
 		else if (str[i] == '/')
 			return (1);
+		i++;
 	}
 	return (0);
 }
