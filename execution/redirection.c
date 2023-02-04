@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:10:03 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/03 04:39:21 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/04 22:01:10 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	get_fd(char *path, t_wt key, int i)
+int	get_fd(char *path, t_wt key, int *i)
 {
 	int	fd[2];
 
@@ -32,14 +32,15 @@ int	get_fd(char *path, t_wt key, int i)
 			ci_error(ERR_PIPE, 1);
 			return (-1);
 		}
-		handle_here_doc(path, fd[FD_WRITE_END]);
+		if (handle_here_doc(path, fd[FD_WRITE_END]) == false)
+			*i = -1;
 		close(fd[FD_WRITE_END]);
 		return (fd[FD_READ_END]);
 	}
 	return (-1);
 }
 
-void	handle_here_doc(char *eof, int fd)
+t_b	handle_here_doc(char *eof, int fd)
 {
 	char	*str;
 	char	*line[2];
@@ -49,8 +50,7 @@ void	handle_here_doc(char *eof, int fd)
 	while (1)
 	{
 		if (!line[0])
-			return ;
-		signal(SIGINT, SIG_DFL);
+			return (false);
 		if (is_same_str(line[0], eof))
 			break ;
 		line[1] = readline("> ");
@@ -60,5 +60,5 @@ void	handle_here_doc(char *eof, int fd)
 		line[0] = line[1];
 	}
 	free(str);
-	return ;
+	return (true);
 }

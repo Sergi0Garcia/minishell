@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/04 14:54:35 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 21:55:35 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,8 +220,8 @@ int			is_single_execution(t_c *cmd);
 int			is_file(char *str);
 int			file_validation(char *path);
 int			ft_execve(t_ci cmd, t_env **env_lst, int path_exec);
-int			get_fd(char *path, t_wt key, int i);
-void		handle_here_doc(char *eof, int fd);
+int			get_fd(char *path, t_wt key, int *i);
+t_b			handle_here_doc(char *eof, int fd);
 int			ci_error(t_err type, int err);
 char		*cs_error(t_err type, int err);
 char		*get_cmd_path(t_env **env_lst, char *str);
@@ -388,16 +388,16 @@ void		free_kvp(t_kvp *kvp);
 /* process/command/command.c */
 t_b			generate_cmd(t_minish *sh);
 void		add_to_chunk(t_wsb *chunk, t_wi wi);
-t_b			can_handle_pipe_found(t_csb *list, t_wsb *wsb, int *i);
-t_b			can_parse_wsb_to_cmd(t_csb *list, t_wsb *wsb, int *i);
-t_b			can_add_to_cmd(t_w **head, t_ci *ci, int i);
+t_b			can_handle_pipe_found(t_csb *list, t_wsb *wsb);
+t_b			can_parse_wsb_to_cmd(t_csb *list, t_wsb *wsb);
+t_b			can_add_to_cmd(t_w **head, t_ci *ci);
 
 /* process/command/utils.c */
 t_b			is_opt_already_exits(t_wsb *wsb, char *opt);
 t_b			is_option(char *opt);
 char		*add_arg_or_opt(char *arg_or_opt, t_wi wi);
 t_b			can_increment_word(t_w **word);
-t_b			handle_redirect(t_w **head, int i, int *infile);
+t_b			handle_redirect(t_w **head, int *infile);
 
 /* utils/s_cmd_ops.c */
 void		ft_cunshift(t_csb *stack, t_ci info);
