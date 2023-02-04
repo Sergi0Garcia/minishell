@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/04 15:35:37 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/04 15:38:10 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,15 @@ static int	fd_redirection(t_c *cmds, int fd[2])
 	return (EXIT_SUCCESS);
 }
 
-static int	execute_builtin(t_c *cmds, t_env **env_lst)
+static int	execute_builtin(t_c *cmds, t_env **env_lst, int single)
 {
 	t_ci	cmd;
 
 	cmd = cmds->ci;
-	if (is_same_str(cmd.name, "exit"))
-		exit(EXIT_SUCCESS);
+	if (is_same_str(cmd.name, "exit") && single)
+		g_status = ft_exit(cmd);
+	if (is_same_str(cmd.name, "exit") && !single)
+		return (g_status);
 	else if (is_same_str(cmd.name, "echo"))
 		g_status = ft_echo(cmd);
 	else if (is_same_str(cmd.name, "cd"))
@@ -83,7 +85,7 @@ void	exec_fork(t_c *cmd, t_env **env_lst, int fd[2])
 	{
 		close(fd[FD_READ_END]);
 		fd_redirection(cmd, fd);
-		execute_builtin(cmd, env_lst);
+		execute_builtin(cmd, env_lst, 0);
 		exit (g_status);
 	}
 }
@@ -121,7 +123,7 @@ int	controller(t_minish *sh)
 	cmds = sh->cmds.head;
 	env_lst = &sh->env_lst;
 	if (is_single_execution(cmds))
-		return (execute_builtin(cmds, env_lst));
+		return (execute_builtin(cmds, env_lst, 1));
 	while (cmds)
 	{
 		signal(SIGINT, SIG_IGN);
