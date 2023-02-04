@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 02:21:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 13:36:00 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 14:29:47 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	free_kvp(t_kvp *kvp)
 	i = 0;
 	while (i < 13)
 	{
+		free(&kvp[i].key);
 		free(kvp[i].values.curr);
 		free(kvp[i].values.next);
 		i++;
