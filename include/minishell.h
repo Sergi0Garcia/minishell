@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/04 14:54:35 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 15:34:46 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,6 +259,7 @@ void		print_env(t_env **env_lst, int with_declare);
 char		*env_value(t_env **env_lst, char *name);
 void		free_env_node(t_env **env);
 int			exists_env(t_env **env_lst, char *str);
+int 		ft_exit(t_ci cmd);
 
 /* shared/utils/error.c */
 void		ft_error(char *str);
