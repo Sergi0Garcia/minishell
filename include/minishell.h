@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/04 12:36:44 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/04 14:26:38 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include <dirent.h>
+# include <termios.h>
 
 # define KNRM  "\x1B[0m"
 # define KRED  "\x1B[31m"
@@ -184,6 +185,7 @@ typedef struct s_minishell
 	t_env		*env_lst;
 	char		**argv;
 	char		*pid;
+	t_kvp		*kvp;
 	char		*line;
 	t_b			interactive;
 	t_wsb		wsb;
@@ -305,11 +307,10 @@ void		interactive(t_minish *sh);
 void		non_interactive(t_minish *sh);
 
 /* process/signals/signals.c */
-void		h_exit(void);
 void		sigreset(int sig, siginfo_t *info, void *context);
-void		sigexit(int sig, siginfo_t *info, void *context);
 void		interactive_mode_sig(void);
 void		ignore_sigquit(void);
+int			remove_echoback(t_b echo_ctl_chr);
 
 /* process/lexer/lexer.c */
 t_b			can_hspace(int start, char *str, t_sep *next);
@@ -380,7 +381,10 @@ char		*retrieve_env(char *str, t_env *env_lst);
 
 /* process/utils/free.c */
 void		free_str(char **str);
-void		free_stack(t_w **head, t_w **tail);
+void		free_stack(void **head, void **tail);
+void		free_all(t_minish *sh, int nbr);
+void		free_for_next_run(t_minish *sh, int nbr);
+void		free_kvp(t_kvp *kvp);
 
 /* process/command/command.c */
 t_b			generate_cmd(t_minish *sh);

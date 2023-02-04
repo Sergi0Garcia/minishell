@@ -11,9 +11,9 @@ MISSING TODOS
 [ ] function to free all memory from sh @both
 [ ] Handle the exit of the shell @both
 [V] Fixing bugs in the quoting @traky
-[ ] Fixing bugs into signals @traky
-[ ] norminette errors and removing bug flag @both
+[V] Fixing bugs into signals @traky
+[V] norminette errors and removing bug flag @both
 [V] handling the heredoc at the beginning of the command << he
-[ ] minishell gets in infinite loop when typing ........ajdsf
+[V] minishell gets in infinite loop when typing ........ajdsf
 [V] /bin/ls is not working @sergio
 [V] echo kldasl asadhf -nn asdka (flag should come as arg not opt) @traky

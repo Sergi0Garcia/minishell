@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 05:28:08 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 12:13:32 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 14:27:59 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,28 @@ void	sigreset(int sig, siginfo_t *info, void *context)
 	if (sig == SIGINT)
 	{
 		g_status = 130;
-		ioctl(STDIN_FILENO, TIOCSTI, "\n");
-		rl_replace_line("", 0);
+		write(STDERR_FILENO, "\n", 1);
 		rl_on_new_line();
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 	return ;
 }
 
-void	sigexit(int sig, siginfo_t *info, void *context)
+int	remove_echoback(t_b echo_ctl_chr)
 {
-	(void) sig;
-	(void) context;
-	write(1, "exit\n", 6);
-	kill(info->si_pid, SIGKILL);
-	return ;
+	struct termios	terminos_p;
+	int				status;
+
+	(void)echo_ctl_chr;
+	status = tcgetattr(STDOUT_FILENO, &terminos_p);
+	if (status == -1)
+		return (1);
+	terminos_p.c_lflag &= ~(ECHOCTL);
+	status = tcsetattr(STDOUT_FILENO, TCSANOW, &terminos_p);
+	if (status == -1)
+		return (1);
+	return (0);
 }
 
 void	ignore_sigquit(void)
@@ -47,15 +54,6 @@ void	ignore_sigquit(void)
 	sigaction(SIGQUIT, &act, NULL);
 }
 
-void	h_exit(void)
-{
-	struct sigaction	sa;
-
-	sa.sa_flags = SA_SIGINFO;
-	sa.sa_sigaction = &sigexit;
-	sigaction(SIGQUIT, &sa, NULL);
-	return ;
-}
 
 /* interactive mode signal handling */
 void	interactive_mode_sig(void)

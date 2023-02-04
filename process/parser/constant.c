@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 00:55:13 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/28 14:27:40 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 13:37:43 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,6 @@ t_kvp	*get_kv_pairs(void)
 		keys_values[i].values = get_according_values(keys[i]);
 		i++;
 	}
+	free(keys);
 	return (keys_values);
 }

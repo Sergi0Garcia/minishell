@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:03:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 12:12:45 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 14:20:50 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_b	generate_cmd(t_minish *sh)
 	t_wsb	chunk;
 	int		i;
 
-	token = sh->cpy.head;
+	token = sh->wsb.head;
 	init_twsb(&chunk);
 	init_tcsb(&sh->cmds);
 	i = 1;
@@ -55,7 +55,7 @@ t_b	can_handle_pipe_found(t_csb *list, t_wsb *wsb, int *i)
 	if (!can_parse_wsb_to_cmd(list, wsb, i))
 		return (false);
 	wsb->size = 0;
-	free_stack(&wsb->head, &wsb->tail);
+	free_stack((void **) &wsb->head, (void **) &wsb->tail);
 	return (true);
 }
 
