@@ -6,38 +6,11 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:03:44 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/04 10:17:34 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/04 21:35:07 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-int	is_single_cmd(t_c *cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd)
-	{
-		i++;
-		cmd = cmd->next;
-	}
-	if (i == 1)
-		return (1);
-	else
-		return (0);
-}
-
-int	is_single_execution(t_c *cmd)
-{
-	if (is_single_cmd(cmd)
-		&& (is_same_str(cmd->ci.name, "exit")
-			|| is_same_str(cmd->ci.name, "export")
-			|| is_same_str(cmd->ci.name, "unset")
-			|| is_same_str(cmd->ci.name, "cd")))
-		return (1);
-	return (0);
-}
 
 int	is_file(char *str)
 {
@@ -60,6 +33,19 @@ int	is_file(char *str)
 			return (1);
 		i++;
 	}
+	return (0);
+}
+
+static int	is_builtin(char *str)
+{
+	if (is_same_str(str, "exit")
+		|| is_same_str(str, "echo")
+		|| is_same_str(str, "cd")
+		|| is_same_str(str, "pwd")
+		|| is_same_str(str, "export")
+		|| is_same_str(str, "unset")
+		|| is_same_str(str, "env"))
+		return (1);
 	return (0);
 }
 
@@ -94,8 +80,12 @@ int	valid_fork(t_c *cmds, t_env **env_lst)
 	char	*cmd_path;
 
 	cmd = cmds->ci;
-	if (cmd.infile == -1 || cmd.outfile == -1)
+	if ((cmd.infile == -1 || cmd.outfile == -1) && cmds->next)
+		return (1);
+	if ((cmd.infile == -1 || cmd.outfile == -1))
 		return (0);
+	if (is_builtin(cmd.name))
+		return (1);
 	if (is_file(cmd.name))
 		return (file_validation(cmd.name));
 	cmd_path = get_cmd_path(env_lst, cmd.name);

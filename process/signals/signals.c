@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 05:28:08 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 21:59:33 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 22:02:54 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	ignore_sigquit(void)
 	act.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &act, NULL);
 }
-
 
 /* interactive mode signal handling */
 void	interactive_mode_sig(void)
