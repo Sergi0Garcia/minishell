@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 07:45:35 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 13:08:55 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 14:56:08 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	remove_spaces(t_minish *sh)
 
 	word = sh->wsb.head;
 	init_twsb(&new);
-	sh->cpy = duplicate_wsb(&sh->wsb);
 	while (word != NULL)
 	{
 		if (word->wi.sep != SPACES)

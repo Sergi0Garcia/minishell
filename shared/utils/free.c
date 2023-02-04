@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 02:21:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 14:29:47 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 14:55:29 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,6 @@ void	free_all(t_minish *sh, int nbr)
 			free_stack((void **) &sh->wsb.head, \
 			(void **) &sh->wsb.tail);
 		if (i == 4)
-			free_stack((void **) &sh->cpy.head, \
-			(void **) &sh->cpy.tail);
-		if (i == 5)
 			free_stack((void **) &sh->cmds.head, \
 			(void **) &sh->cmds.tail);
 		i++;
@@ -94,9 +91,6 @@ void	free_for_next_run(t_minish *sh, int nbr)
 			free_stack((void **) &sh->wsb.head, \
 			(void **) &sh->wsb.tail);
 		if (i == 1)
-			free_stack((void **) &sh->cpy.head, \
-			(void **) &sh->cpy.tail);
-		if (i == 2)
 			free_stack((void **) &sh->cmds.head, \
 			(void **) &sh->cmds.tail);
 		i++;

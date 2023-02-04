@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/04 14:26:38 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 14:54:35 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,6 @@ typedef struct s_minishell
 	char		*line;
 	t_b			interactive;
 	t_wsb		wsb;
-	t_wsb		cpy;
 	t_wi		last;
 	t_csb		cmds;
 	int			status;
