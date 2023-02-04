@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 22:03:04 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/03 03:36:32 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/04 15:42:49 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ static void	print_message(t_err type)
 		ft_printf("minishell: error permission denied\n");
 	else if (type == ERR_IS_DR)
 		ft_printf("minishell: error is directory\n");
+	else if (type == ERR_NUM_ARG)
+		ft_printf("minishell: numeric argument required\n");
+	else if (type == ERR_EXIT_MARG)
+		ft_printf("minishell: exit: too many arguments\n");
 }
 
 int	ci_error(t_err type, int err)

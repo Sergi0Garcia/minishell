@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 05:28:08 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 14:27:59 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 21:30:38 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	ignore_sigquit(void)
 	act.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &act, NULL);
 }
-
 
 /* interactive mode signal handling */
 void	interactive_mode_sig(void)

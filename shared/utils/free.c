@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 02:21:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 14:55:29 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 21:29:57 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	free_stack(void **head, void **tail)
 	return ;
 }
 
-
 void	free_kvp(t_kvp *kvp)
 {
 	int	i;
@@ -45,7 +44,6 @@ void	free_kvp(t_kvp *kvp)
 	i = 0;
 	while (i < 13)
 	{
-		free(&kvp[i].key);
 		free(kvp[i].values.curr);
 		free(kvp[i].values.next);
 		i++;
@@ -58,7 +56,6 @@ void	free_all(t_minish *sh, int nbr)
 	int	i;
 
 	i = 0;
-
 	while (i < nbr)
 	{
 		if (i == 0)
@@ -68,14 +65,17 @@ void	free_all(t_minish *sh, int nbr)
 		if (i == 2)
 			free_kvp(sh->kvp);
 		if (i == 3)
+		{
 			free_stack((void **) &sh->wsb.head, \
 			(void **) &sh->wsb.tail);
+		}
 		if (i == 4)
+		{
 			free_stack((void **) &sh->cmds.head, \
 			(void **) &sh->cmds.tail);
+		}
 		i++;
 	}
-
 	return ;
 }
 
@@ -84,15 +84,18 @@ void	free_for_next_run(t_minish *sh, int nbr)
 	int	i;
 
 	i = 0;
-
 	while (i < nbr)
 	{
 		if (i == 0)
+		{
 			free_stack((void **) &sh->wsb.head, \
 			(void **) &sh->wsb.tail);
+		}
 		if (i == 1)
+		{
 			free_stack((void **) &sh->cmds.head, \
 			(void **) &sh->cmds.tail);
+		}
 		i++;
 	}
 	return ;

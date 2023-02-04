@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/04 15:38:49 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/04 21:36:00 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef enum s_error_type
 	ERR_CMD_FOUND,
 	ERR_DUP2,
 	ERR_PERMISSION,
-	ERR_IS_DR, 
+	ERR_IS_DR,
 	ERR_NUM_ARG,
 	ERR_EXIT_MARG,
 }	t_err;
@@ -215,6 +215,9 @@ void		free_array(char **str);
 int			c_child(char **str);
 char		**split_paths(char *path);
 
+int			is_single_cmd(t_c *cmd);
+int			is_single_execution(t_c *cmd);
+
 /** execution  */
 int			controller(t_minish *sh);
 int			is_single_cmd(t_c *cmd);
@@ -261,7 +264,7 @@ void		print_env(t_env **env_lst, int with_declare);
 char		*env_value(t_env **env_lst, char *name);
 void		free_env_node(t_env **env);
 int			exists_env(t_env **env_lst, char *str);
-int 		ft_exit(t_ci cmd);
+int			ft_exit(t_ci cmd, t_minish *sh);
 
 /* shared/utils/error.c */
 void		ft_error(char *str);
