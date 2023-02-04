@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/03 04:08:43 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/04 06:49:43 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ int			ft_env(t_ci cmd, t_env **env_lst);
 int			is_same_str(char *str1, char *str2);
 int			get_idx_separator(char *str);
 void		free_array(char **str);
-int 		c_child(char **str);
+int			c_child(char **str);
 char		**split_paths(char *path);
 
 /** execution  */
@@ -220,7 +220,7 @@ int			file_validation(char *path);
 int			ft_execve(t_ci cmd, t_env **env_lst, int path_exec);
 int			get_fd(char *path, t_wt key, int i);
 void		handle_here_doc(char *eof, int fd);
-int 		ci_error(t_err type, int err);
+int			ci_error(t_err type, int err);
 char		*cs_error(t_err type, int err);
 char		*get_cmd_path(t_env **env_lst, char *str);
 int			valid_fork(t_c *cmds, t_env **env_lst);
