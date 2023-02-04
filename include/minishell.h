@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/04 12:36:44 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:55:52 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ typedef enum s_error_type
 	ERR_CMD_FOUND,
 	ERR_DUP2,
 	ERR_PERMISSION,
-	ERR_IS_DR
+	ERR_IS_DR,
+	ERR_NUM_ARG,
+	ERR_EXIT_MARG
 }	t_err;
 
 typedef struct s_current_and_next_probable_word_type
@@ -228,6 +230,7 @@ int			valid_fork(t_c *cmds, t_env **env_lst);
 int			fd_less(char *path);
 int			fd_great(char *path);
 int			fd_dgreat(char *path);
+int			ft_exit(t_ci cmd);
 
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);
