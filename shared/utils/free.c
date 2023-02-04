@@ -3,25 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 02:21:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 21:29:57 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/04 22:36:21 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	free_str(char **str)
+/* Function to freeze stack */
+void	free_wsb(void **head, void **tail)
 {
-	free(*str);
+	t_w	*tmp;
+
+	if (*head == NULL)
+		return ;
+	tmp = *head;
+	while (tmp->next != NULL)
+	{
+		tmp = tmp->next;
+		free(tmp->prev);
+	}
+	free(tmp);
+	*head = NULL;
+	*tail = NULL;
 	return ;
 }
 
 /* Function to freeze stack */
-void	free_stack(void **head, void **tail)
+void	free_csb(void **head, void **tail)
 {
-	t_w	*tmp;
+	t_c	*tmp;
 
 	if (*head == NULL)
 		return ;
@@ -48,6 +61,7 @@ void	free_kvp(t_kvp *kvp)
 		free(kvp[i].values.next);
 		i++;
 	}
+	free(kvp);
 	return ;
 }
 
@@ -64,14 +78,14 @@ void	free_all(t_minish *sh, int nbr)
 			free_env_node(&sh->env_lst);
 		if (i == 2)
 			free_kvp(sh->kvp);
-		if (i == 3)
+		if (i == 3 && sh->wsb.size > 0)
 		{
-			free_stack((void **) &sh->wsb.head, \
+			free_wsb((void **) &sh->wsb.head, \
 			(void **) &sh->wsb.tail);
 		}
-		if (i == 4)
+		if (i == 4 && sh->cmds.size > 0)
 		{
-			free_stack((void **) &sh->cmds.head, \
+			free_wsb((void **) &sh->cmds.head, \
 			(void **) &sh->cmds.tail);
 		}
 		i++;
@@ -86,14 +100,14 @@ void	free_for_next_run(t_minish *sh, int nbr)
 	i = 0;
 	while (i < nbr)
 	{
-		if (i == 0)
+		if (i == 0 && sh->wsb.size > 0)
 		{
-			free_stack((void **) &sh->wsb.head, \
+			free_wsb((void **) &sh->wsb.head, \
 			(void **) &sh->wsb.tail);
 		}
-		if (i == 1)
+		if (i == 1 && sh->cmds.size > 0)
 		{
-			free_stack((void **) &sh->cmds.head, \
+			free_csb((void **) &sh->cmds.head, \
 			(void **) &sh->cmds.tail);
 		}
 		i++;

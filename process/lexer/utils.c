@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 07:45:35 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 14:56:08 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 22:36:41 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	remove_spaces(t_minish *sh)
 			ft_wunshift(&new, word->wi);
 		word = word->next;
 	}
-	free_stack((void **) &sh->wsb.head, (void **) &sh->wsb.head);
+	free_wsb((void **) &sh->wsb.head, (void **) &sh->wsb.head);
 	sh->wsb = new;
 	return ;
 }

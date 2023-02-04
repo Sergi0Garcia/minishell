@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:14:59 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 16:04:53 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/04 22:17:05 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void static	parse_and_execute(t_minish *sh)
 		if (generate_cmd(sh))
 		{
 			controller(sh);
-			free_for_next_run(sh, 1);
+			free_for_next_run(sh, 2);
 		}
 		else
-			free_for_next_run(sh, 1);
+			free_for_next_run(sh, 2);
 	}
 	else
 		free_for_next_run(sh, 1);
@@ -66,10 +66,6 @@ void	h_interactive_mode(t_minish *sh)
 void	h_noninteractive_mode(t_minish *sh)
 {
 	sh->line = ft_strtrim(sh->argv[2], " ");
-	lexing(sh);
-	if (!parser(sh))
-		return ;
-	expansion(sh);
-	generate_cmd(sh);
+	parse_and_execute(sh);
 	return ;
 }

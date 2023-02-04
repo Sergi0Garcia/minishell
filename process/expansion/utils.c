@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 05:08:15 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/31 18:11:24 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 22:33:19 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	replace_str(char **str, char *to_replace_with, t_lex *lex)
 	new_str = ft_strjoin(new_str, first_range);
 	new_str = ft_strjoin(new_str, to_replace_with);
 	new_str = ft_strjoin(new_str, second_range);
-	free_str(str);
+	free(str);
 	*str = new_str;
 	lex->start += ft_strlen(to_replace_with);
 	return ;

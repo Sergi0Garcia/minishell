@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:03:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 21:55:27 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 22:36:50 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_b	can_handle_pipe_found(t_csb *list, t_wsb *wsb)
 	if (!can_parse_wsb_to_cmd(list, wsb))
 		return (false);
 	wsb->size = 0;
-	free_stack((void **) &wsb->head, (void **) &wsb->tail);
+	free_wsb((void **) &wsb->head, (void **) &wsb->tail);
 	return (true);
 }
 

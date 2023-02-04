@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/04 22:02:54 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/04 22:34:51 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -385,8 +385,8 @@ size_t		end_length(t_lex *lex, size_t strlen);
 char		*retrieve_env(char *str, t_env *env_lst);
 
 /* process/utils/free.c */
-void		free_str(char **str);
-void		free_stack(void **head, void **tail);
+void		free_wsb(void **head, void **tail);
+void		free_csb(void **head, void **tail);
 void		free_all(t_minish *sh, int nbr);
 void		free_for_next_run(t_minish *sh, int nbr);
 void		free_kvp(t_kvp *kvp);
