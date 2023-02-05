@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:10:03 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/04 22:02:54 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 02:34:26 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	get_fd(char *path, t_wt key, int *i)
 			ci_error(ERR_PIPE, 1);
 			return (-1);
 		}
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		if (handle_here_doc(path, fd[FD_WRITE_END]) == false)
 			*i = -1;
 		close(fd[FD_WRITE_END]);

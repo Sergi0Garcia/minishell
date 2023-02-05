@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controller.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 02:20:58 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/05 02:55:17 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	execute_builtin(t_c *cmds, t_env **env_lst, int single, t_minish *sh)
 {
 	t_ci	cmd;
 
-	cmd = cmds->ci;	
+	cmd = cmds->ci;
 	if (is_same_str(cmd.name, "exit") && single)
 	{
 		exit (ft_exit(cmd, sh));
@@ -71,10 +71,32 @@ static int	execute_builtin(t_c *cmds, t_env **env_lst, int single, t_minish *sh)
 	return (g_status);
 }
 
+void	sig_quit_from_child(int sig, siginfo_t *info, void *context)
+{
+	(void) sig;
+	(void) context;
+	(void) info;
+	write(STDERR_FILENO, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+}
+
+void	sig_int(void)
+{
+	struct sigaction	sa_res;
+
+	sa_res.sa_flags = SA_SIGINFO;
+	sa_res.sa_sigaction = &sig_quit_from_child;
+	sigaction(SIGINT, &sa_res, NULL);
+	return ;
+}
+
 void	exec_fork(t_c *cmd, t_env **env_lst, int fd[2], t_minish *sh)
 {
 	pid_t	pid;
 
+	signal(SIGQUIT, SIG_IGN);
+	sig_int();
 	pid = fork();
 	if (pid < 0)
 	{
@@ -85,6 +107,8 @@ void	exec_fork(t_c *cmd, t_env **env_lst, int fd[2], t_minish *sh)
 	}
 	else if (!pid)
 	{
+		signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);
 		close(fd[FD_READ_END]);
 		fd_redirection(cmd, fd);
 		execute_builtin(cmd, env_lst, 0, sh);
@@ -128,8 +152,6 @@ int	controller(t_minish *sh)
 		return (execute_builtin(cmds, env_lst, 1, sh));
 	while (cmds)
 	{
-		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);
 		execute_cmd(cmds, env_lst, sh);
 		cmds = cmds->next;
 	}
