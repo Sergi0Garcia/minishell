@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 12:41:50 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 05:19:59 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 10:45:13 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static int	return_exit(int status, int err, t_minish *sh)
 {
 	if (sh && sh != NULL)
 	{
-		free_all(sh, 4);
-		system("leaks ./minishell");
+		free_all(sh, 5);
+		//system("leaks minishell");
 	}
 	if (status != -1)
 		ft_printf("exit\n");

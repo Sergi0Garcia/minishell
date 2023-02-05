@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 00:50:29 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 12:57:13 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 07:01:57 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_b	parser(t_minish *sh)
 	t_w		*word;
 
 	tp.i = 0;
+	sh->kvp = get_kv_pairs();
 	tp.can_cont = true;
 	word = sh->wsb.head;
 	while (word != NULL && tp.can_cont)
@@ -50,6 +51,7 @@ t_b	parser(t_minish *sh)
 		word = word->next;
 		tp.i++;
 	}
+	free(sh->kvp);
 	return (tp.can_cont);
 }
 

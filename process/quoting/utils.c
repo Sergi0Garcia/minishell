@@ -6,11 +6,13 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 08:14:18 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/16 08:15:18 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 10:19:16 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static char	*ft_strcat(char *s1, const char *s2)
+#include "../../include/minishell.h"
+
+char	*ft_strcat(char *s1, char *s2)
 {
 	int		counter;
 	int		source_len;
@@ -30,7 +32,7 @@ static char	*ft_strcat(char *s1, const char *s2)
 	return (result);
 }
 
-static char	*ft_strcpy(char *dst, const char *src)
+char	*ft_strcpy(char *dst, char *src)
 {
 	int		counter;
 
@@ -44,20 +46,26 @@ static char	*ft_strcpy(char *dst, const char *src)
 	return (dst);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoinsh(char *s1, char *s2)
 {
 	char	*result;
 	int		len;
 
 	if (s1 == NULL)
-		ft_strdup("");
-	if (s1 == NULL && s2 == NULL)
+	{
+		s1 = malloc(sizeof(char));
+		if (s1 == NULL)
+			return (NULL);
+		*s1 = '\0';
+	}
+	if (s2 == NULL)
 		return (NULL);
 	len = (ft_strlen(s1) + ft_strlen(s2) + 1);
-	result = (char *) malloc(len * sizeof(*s1));
+	result = malloc(len * sizeof(char));
 	if (result == NULL)
 		return (NULL);
-	ft_strcpy(result, s1);
-	ft_strcat(result, s2);
+	result = ft_strcpy(result, s1);
+	result = ft_strcat(result, s2);
+	free(s1);
 	return (result);
 }

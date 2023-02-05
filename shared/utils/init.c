@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 13:58:41 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 14:55:53 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 06:43:19 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init(t_minish *sh, char **argv)
 	i = 0;
 	sh->argv = argv;
 	pid = getpid();
+	sh->kvp = NULL;
 	sh->interactive = false;
 	sh->env_lst = NULL;
 	str = ft_itoa(pid);

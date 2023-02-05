@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:03:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/05 04:41:51 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 11:57:19 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_b	can_handle_pipe_found(t_csb *list, t_wsb *wsb)
 	if (!can_parse_wsb_to_cmd(list, wsb))
 		return (false);
 	wsb->size = 0;
-	free_wsb((void **) &wsb->head, (void **) &wsb->tail);
+	free_wsb(wsb);
 	return (true);
 }
 
@@ -63,11 +63,11 @@ t_b	can_parse_wsb_to_cmd(t_csb *list, t_wsb *wsb)
 	t_ci	ci;
 
 	head = wsb->head;
-	ci.args = "";
+	ci.args = NULL;
 	ci.outfile = 1;
-	ci.opts = "";
+	ci.opts = NULL;
 	ci.infile = 0;
-	ci.name = "";
+	ci.name = NULL;
 	while (head != NULL)
 	{
 		if (!can_add_to_cmd(&head, &ci))

@@ -15,7 +15,7 @@
 /* Function that will insert element at the end of stack */
 void	ft_wunshift(t_wsb *stack, t_wi info)
 {
-	t_w	*new;
+	t_w		*new;
 
 	new = (t_w *)malloc(sizeof(t_w));
 	if (new == NULL)
@@ -36,7 +36,6 @@ void	ft_wunshift(t_wsb *stack, t_wi info)
 		stack->tail = new;
 	}
 	stack->size++;
-	return ;
 }
 
 /* Add a new node at the top into existing double link list */

@@ -6,62 +6,62 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 02:21:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/05 05:27:20 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:33:35 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 /* Function to freeze stack */
-void	free_wsb(void **head, void **tail)
+void	free_wsb(t_wsb *wsb)
 {
-	t_w	*tmp;
+	t_w		*wtmp;
 
-	if (*head == NULL)
+	wsb->size = 0;
+	if (wsb->head == NULL)
 		return ;
-	tmp = *head;
-	while (tmp->next != NULL)
+	wtmp = wsb->head;
+	while (wtmp->next != NULL)
 	{
-		tmp = tmp->next;
-		free(tmp->prev);
+		// free(wtmp->wi.word);
+		wtmp = wtmp->next;
+		free(wtmp->prev);
 	}
-	free(tmp);
-	*head = NULL;
-	*tail = NULL;
+	free(wtmp);
+	wsb->head = NULL;
+	wsb->head = NULL;
 	return ;
 }
 
 /* Function to freeze stack */
-void	free_csb(void **head, void **tail)
+void	free_csb(t_csb *csb)
 {
-	t_c	*tmp;
+	t_c		*ctmp;
 
-	if (*head == NULL)
+	csb->size = 0;
+	if (csb->head == NULL)
 		return ;
-	tmp = *head;
-	while (tmp->next != NULL)
+	ctmp = csb->head;
+	while (ctmp->next != NULL)
 	{
-		tmp = tmp->next;
-		free(tmp->prev);
+		ctmp = ctmp->next;
+		// free(ctmp->ci.args);
+		// free(ctmp->ci.name);
+		// free(ctmp->ci.opts);
+		free(ctmp->prev);
 	}
-	free(tmp);
-	*head = NULL;
-	*tail = NULL;
+	free(ctmp);
+	csb->head = NULL;
+	csb->head = NULL;
 	return ;
 }
 
-void	free_kvp(t_kvp *kvp)
+void	free_kvp(t_kvp **kvp)
 {
-	int	i;
+	t_kvp	*tmp;
 
-	i = 0;
-	while (i < 13)
-	{
-		free(kvp[i].values.curr);
-		free(kvp[i].values.next);
-		i++;
-	}
-	free(kvp);
+	tmp = *kvp;
+	free(tmp);
 	return ;
 }
 
@@ -73,21 +73,18 @@ void	free_all(t_minish *sh, int nbr)
 	while (i < nbr)
 	{
 		if (i == 0)
+		{
 			free(sh->pid);
+			free(sh->line);
+		}
 		if (i == 1)
 			printf("feee");
 		if (i == 2)
 			printf("feee");
 		if (i == 3 && sh->wsb.size > 0)
-		{
-			free_wsb((void **) &sh->wsb.head, \
-			(void **) &sh->wsb.tail);
-		}
+			free_wsb(&sh->wsb);
 		if (i == 4 && sh->cmds.size > 0)
-		{
-			free_wsb((void **) &sh->cmds.head, \
-			(void **) &sh->cmds.tail);
-		}
+			free_csb(&sh->cmds);
 		i++;
 	}
 	return ;
@@ -100,16 +97,12 @@ void	free_for_next_run(t_minish *sh, int nbr)
 	i = 0;
 	while (i < nbr)
 	{
-		if (i == 0 && sh->wsb.size > 0)
-		{
-			free_wsb((void **) &sh->wsb.head, \
-			(void **) &sh->wsb.tail);
-		}
-		if (i == 1 && sh->cmds.size > 0)
-		{
-			free_csb((void **) &sh->cmds.head, \
-			(void **) &sh->cmds.tail);
-		}
+		if (i == 0)
+			free(sh->line);
+		if (i == 1 && sh->wsb.size > 0)
+			free_wsb(&sh->wsb);
+		if (i == 2 && sh->cmds.size > 0)
+			free_csb(&sh->cmds);
 		i++;
 	}
 	return ;

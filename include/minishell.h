@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 04:51:42 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/05 10:45:32 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -336,6 +336,7 @@ void		recursive_rl(t_minish *sh, t_lex *lex, char *title);
 int			end_quote_delimiter(char *str, t_lex *lex, char c);
 t_b			is_begin_with_quote(char *str);
 t_q			is_which_quote(char *str);
+char		*ft_strjoinsh(char *s1, char *s2);
 
 /* process/parser/check.c */
 t_b			is_wt_between_values(t_wt word_type, t_wt *list);
@@ -377,11 +378,11 @@ size_t		end_length(t_lex *lex, size_t strlen);
 char		*retrieve_env(char *str, t_env *env_lst);
 
 /* process/utils/free.c */
-void		free_wsb(void **head, void **tail);
-void		free_csb(void **head, void **tail);
+void		free_wsb(t_wsb *wsb);
+void		free_csb(t_csb *csb);
 void		free_all(t_minish *sh, int nbr);
 void		free_for_next_run(t_minish *sh, int nbr);
-void		free_kvp(t_kvp *kvp);
+void		free_kvp(t_kvp **kvp);
 
 /* process/command/command.c */
 t_b			generate_cmd(t_minish *sh);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/02 06:06:36 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/05 10:57:20 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static int	cd_back(t_env **env_lst)
 	}
 	new_env(env_lst, ft_strjoin("PWD=", old_path));
 	new_env(env_lst, ft_strjoin("OLDPWD=", path));
+	free(path);
+	free(old_path);
 	old_path = env_value(env_lst, "OLDPWD");
 	ft_printf("%s\n", old_path);
 	return (EXIT_SUCCESS);

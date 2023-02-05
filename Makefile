@@ -6,7 +6,7 @@
 #    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/02/05 05:23:13 by rkanmado         ###   ########.fr        #
+#    Updated: 2023/02/05 10:53:31 by rkanmado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,8 @@ SRC			= 	minishell.c						\
 				./process/expansion/expansion.c \
 				./process/expansion/utils.c		\
 				./process/command/utils.c		\
-				./process/command/command.c
+				./process/command/command.c		\
+				./process/quoting/utils.c
 
 OBJS		= $(SRC:.c=.o)
 
@@ -78,6 +79,9 @@ DEBUGFLAG	= -fsanitize=address
 INC			= /include/minishell.h
 
 all: $(NAME)
+
+vg:
+	valgrind --leak-check=full --track-origins=yes ./minishell
 
 $(LIBFT):
 	@make bonus -C $(LIBFT_PATH)

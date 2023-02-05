@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 05:28:08 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 22:02:54 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 11:06:52 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	ignore_sigquit(void)
 	struct sigaction	act;
 
 	act.sa_handler = SIG_IGN;
+	// sa_res.sa_mask = NULL;
 	sigaction(SIGQUIT, &act, NULL);
 }
 
@@ -61,6 +62,7 @@ void	interactive_mode_sig(void)
 
 	ignore_sigquit();
 	sa_res.sa_flags = SA_SIGINFO;
+	// sa_res.sa_mask = NULL;
 	sa_res.sa_sigaction = &sigreset;
 	sigaction(SIGINT, &sa_res, NULL);
 	return ;

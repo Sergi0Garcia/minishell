@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:36:25 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/05 02:19:23 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:41:44 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,26 @@ t_b	is_opt_already_exits(t_wsb *wsb, char *opt)
 	return (false);
 }
 
+char	*str_join(char *arg_or_opt, char *str)
+{
+	char	*tmp;
+
+	if (arg_or_opt == NULL)
+		arg_or_opt = ft_strdup("\0");
+	tmp = arg_or_opt;
+	tmp = ft_strjoin(arg_or_opt, str);
+	free(arg_or_opt);
+	return (tmp);
+}
+
 char	*add_arg_or_opt(char *arg_or_opt, t_wi wi)
 {
+	char	*tmp;
+
+	tmp = arg_or_opt;
 	if (ft_strlen(arg_or_opt) > 0)
 		arg_or_opt = ft_strjoin(arg_or_opt, " ");
-	arg_or_opt = ft_strjoin(arg_or_opt, wi.word);
+	arg_or_opt = str_join(arg_or_opt, wi.word);
 	return (arg_or_opt);
 }
 

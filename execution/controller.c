@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 05:21:14 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 07:20:00 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,6 @@ void	exec_fork(t_c *cmd, t_env **env_lst, int fd[2], t_minish *sh)
 		close(fd[FD_READ_END]);
 		fd_redirection(cmd, fd);
 		execute_builtin(cmd, env_lst, 0, sh);
-		free_all(sh, 4);
-		system("leaks ./minishell");
 		exit (g_status);
 	}
 }
