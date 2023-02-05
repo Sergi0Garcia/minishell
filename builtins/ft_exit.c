@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 12:41:50 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/04 21:49:17 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/05 04:48:14 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,5 @@ int	ft_exit(t_ci cmd, t_minish *sh)
 			return (return_exit(255, -1, sh));
 		return (return_exit(ft_atoi(c_args[0]) % 256, -1, sh));
 	}
-	return (0);
+	return (return_exit(0, -1, sh));
 }

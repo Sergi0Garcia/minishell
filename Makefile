@@ -6,7 +6,7 @@
 #    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/02/04 21:35:26 by segarcia         ###   ########.fr        #
+#    Updated: 2023/02/05 04:51:15 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC			= 	minishell.c						\
 				./builtins/ft_unset.c  			\
 				./builtins/ft_utils.c 			\
 				./execution/controller.c 		\
+				./execution/controller_signals.c \
 				./execution/controller_utils.c 	\
 				./execution/controller_utils2.c \
 				./execution/redirection.c 		\

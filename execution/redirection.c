@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:10:03 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 02:34:26 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 04:49:03 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	get_fd(char *path, t_wt key, int *i)
 {
 	int	fd[2];
 
-	(void) i;
 	if (!path)
 		return (-1);
 	if (key == LESS)

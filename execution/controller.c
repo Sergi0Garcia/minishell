@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controller.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 02:55:17 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 04:52:28 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,14 @@ static int	fd_redirection(t_c *cmds, int fd[2])
 	return (EXIT_SUCCESS);
 }
 
-static int	execute_builtin(t_c *cmds, t_env **env_lst, int single, t_minish *sh)
+static int	execute_builtin(t_c *cmds, t_env **env_lst, int sl, t_minish *sh)
 {
 	t_ci	cmd;
 
 	cmd = cmds->ci;
-	if (is_same_str(cmd.name, "exit") && single)
-	{
-		exit (ft_exit(cmd, sh));
-	}
-	if (is_same_str(cmd.name, "exit") && !single)
+	if (is_same_str(cmd.name, "exit") && sl)
+		return (ft_exit(cmd, sh));
+	if (is_same_str(cmd.name, "exit") && !sl)
 		return (g_status);
 	else if (is_same_str(cmd.name, "echo"))
 		g_status = ft_echo(cmd);
@@ -69,26 +67,6 @@ static int	execute_builtin(t_c *cmds, t_env **env_lst, int single, t_minish *sh)
 	else
 		g_status = ft_execve(cmd, env_lst, 0);
 	return (g_status);
-}
-
-void	sig_quit_from_child(int sig, siginfo_t *info, void *context)
-{
-	(void) sig;
-	(void) context;
-	(void) info;
-	write(STDERR_FILENO, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-}
-
-void	sig_int(void)
-{
-	struct sigaction	sa_res;
-
-	sa_res.sa_flags = SA_SIGINFO;
-	sa_res.sa_sigaction = &sig_quit_from_child;
-	sigaction(SIGINT, &sa_res, NULL);
-	return ;
 }
 
 void	exec_fork(t_c *cmd, t_env **env_lst, int fd[2], t_minish *sh)

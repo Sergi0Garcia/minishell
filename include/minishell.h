@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/04 22:34:51 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 04:51:42 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,6 @@
 # include <fcntl.h>
 # include <dirent.h>
 # include <termios.h>
-
-# define KNRM  "\x1B[0m"
-# define KRED  "\x1B[31m"
-# define KGRN  "\x1B[32m"
-# define KYEL  "\x1B[33m"
-# define KBLU  "\x1B[34m"
-# define KMAG  "\x1B[35m"
-# define KCYN  "\x1B[36m"
-# define KWHT  "\x1B[37m"
-# define RESET "\x1B[0m"
 
 # define FD_READ_END 0
 # define FD_WRITE_END 1
@@ -234,6 +224,8 @@ int			valid_fork(t_c *cmds, t_env **env_lst);
 int			fd_less(char *path);
 int			fd_great(char *path);
 int			fd_dgreat(char *path);
+void		sig_quit_from_child(int sig, siginfo_t *info, void *context);
+void		sig_int(void);
 
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);
