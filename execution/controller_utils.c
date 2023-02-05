@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:03:44 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 01:33:37 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/05 02:19:59 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	file_validation(char *path)
 	if (access(path, R_OK) == -1
 		|| access(path, X_OK) == -1)
 	{
+		printf("hwe\n");
 		ci_error(ERR_PERMISSION, 126);
 		return (0);
 	}
@@ -80,7 +81,7 @@ int	valid_fork(t_c *cmds, t_env **env_lst)
 	char	*cmd_path;
 
 	cmd = cmds->ci;
-	if ((cmd.infile == -1 || cmd.outfile == -1) && cmds->next)
+	if ((cmd.infile == -1 || cmd.outfile == -2) && (cmds->next))
 		return (1);
 	if ((cmd.infile == -1 || cmd.outfile == -1))
 		return (0);

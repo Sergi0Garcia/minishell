@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:36:25 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 21:53:17 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 02:19:23 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_b	handle_redirect(t_w **head, int *infile)
 	if (!can_increment_word(head))
 		return (false);
 	*infile = get_fd(tmp->next->wi.word, tmp->wi.sep, &i);
-	if (*infile == -1 || i == -1)
+	if (i == -1)
 		return (false);
 	return (true);
 }
