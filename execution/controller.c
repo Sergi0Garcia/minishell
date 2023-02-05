@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/04 22:52:33 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/05 01:42:39 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ static int	fd_redirection(t_c *cmds, int fd[2])
 	return (EXIT_SUCCESS);
 }
 
-static int	execute_builtin(t_env **env_lst, int single, t_minish *sh)
+static int	execute_builtin(t_c *cmds, t_env **env_lst, int single, t_minish *sh)
 {
 	t_ci	cmd;
 
-	cmd = sh->cmds.head->ci;
+	cmd = cmds->ci;	
 	if (is_same_str(cmd.name, "exit") && single)
 	{
 		exit (ft_exit(cmd, sh));
@@ -54,9 +54,9 @@ static int	execute_builtin(t_env **env_lst, int single, t_minish *sh)
 	else if (is_same_str(cmd.name, "echo"))
 		g_status = ft_echo(cmd);
 	else if (is_same_str(cmd.name, "cd"))
-		g_status = ft_cd(sh->cmds.head, env_lst);
+		g_status = ft_cd(cmds, env_lst);
 	else if (is_same_str(cmd.name, "pwd"))
-		ft_pwd(sh->cmds.head, 1);
+		ft_pwd(cmds, 1);
 	else if (is_same_str(cmd.name, "export"))
 		g_status = ft_export(cmd, env_lst);
 	else if (is_same_str(cmd.name, "unset"))
@@ -87,7 +87,7 @@ void	exec_fork(t_c *cmd, t_env **env_lst, int fd[2], t_minish *sh)
 	{
 		close(fd[FD_READ_END]);
 		fd_redirection(cmd, fd);
-		execute_builtin(env_lst, 0, sh);
+		execute_builtin(cmd, env_lst, 0, sh);
 		exit (g_status);
 	}
 }
@@ -125,7 +125,7 @@ int	controller(t_minish *sh)
 	cmds = sh->cmds.head;
 	env_lst = &sh->env_lst;
 	if (is_single_execution(cmds))
-		return (execute_builtin(env_lst, 1, sh));
+		return (execute_builtin(cmds, env_lst, 1, sh));
 	while (cmds)
 	{
 		signal(SIGINT, SIG_IGN);
