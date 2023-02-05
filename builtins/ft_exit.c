@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 12:41:50 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 05:19:59 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 11:12:47 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ static int	str_numeric(char *str)
 static int	return_exit(int status, int err, t_minish *sh)
 {
 	if (sh && sh != NULL)
-	{
 		free_all(sh, 4);
-		system("leaks ./minishell");
-	}
 	if (status != -1)
 		ft_printf("exit\n");
 	if (err != -1)

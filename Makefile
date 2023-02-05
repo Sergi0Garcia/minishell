@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
+#    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/02/05 05:23:13 by rkanmado         ###   ########.fr        #
+#    Updated: 2023/02/05 12:12:35 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,9 @@ DEBUGFLAG	= -fsanitize=address
 INC			= /include/minishell.h
 
 all: $(NAME)
+
+vg:
+	valgrind --leak-check=full -s --track-origins=yes ./minishell
 
 $(LIBFT):
 	@make bonus -C $(LIBFT_PATH)

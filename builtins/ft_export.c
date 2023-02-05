@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:25:31 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/01 04:53:55 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:53:09 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_export(t_ci cmd, t_env **env_lst)
 	args = ft_split(cmd.args, ' ');
 	if (!args || !args[0])
 	{
+		free_array(args);
 		print_env(env_lst, 1);
 		return (EXIT_SUCCESS);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 08:14:18 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/16 08:15:18 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:32:11 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,4 @@ static char	*ft_strcpy(char *dst, const char *src)
 	}
 	dst[counter] = '\0';
 	return (dst);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*result;
-	int		len;
-
-	if (s1 == NULL)
-		ft_strdup("");
-	if (s1 == NULL && s2 == NULL)
-		return (NULL);
-	len = (ft_strlen(s1) + ft_strlen(s2) + 1);
-	result = (char *) malloc(len * sizeof(*s1));
-	if (result == NULL)
-		return (NULL);
-	ft_strcpy(result, s1);
-	ft_strcat(result, s2);
-	return (result);
 }

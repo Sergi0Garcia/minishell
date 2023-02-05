@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 04:51:42 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:10:47 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ int			get_idx_separator(char *str);
 void		free_array(char **str);
 int			c_child(char **str);
 char		**split_paths(char *path);
-
+int			return_free(char **opts, int st);
 int			is_single_cmd(t_c *cmd);
 int			is_single_execution(t_c *cmd);
 

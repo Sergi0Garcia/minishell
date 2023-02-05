@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 02:21:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/05 05:27:20 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 11:41:59 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,21 @@ void	free_kvp(t_kvp *kvp)
 	return ;
 }
 
+void	free_env_list(t_env **env_lst)
+{
+	t_env	*tmp;
+
+	while (env_lst && *env_lst)
+	{
+		tmp = (*env_lst)->next;
+		free((*env_lst)->name);
+		free((*env_lst)->value);
+		free((*env_lst));
+		*env_lst = tmp;
+	}
+	*env_lst = NULL;
+}
+
 void	free_all(t_minish *sh, int nbr)
 {
 	int	i;
@@ -73,11 +88,17 @@ void	free_all(t_minish *sh, int nbr)
 	while (i < nbr)
 	{
 		if (i == 0)
+		{
+			printf("free pid");
 			free(sh->pid);
+		}
 		if (i == 1)
-			printf("feee");
+		{
+			printf("free env");
+			free_env_list(&sh->env_lst);
+		}
 		if (i == 2)
-			printf("feee");
+			printf("free kpv");
 		if (i == 3 && sh->wsb.size > 0)
 		{
 			free_wsb((void **) &sh->wsb.head, \
