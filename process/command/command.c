@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:03:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 22:36:50 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 04:41:51 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_b	generate_cmd(t_minish *sh)
 
 void	add_to_chunk(t_wsb *chunk, t_wi wi)
 {
-	if (is_option(wi.word) && !is_opt_already_exits(chunk, wi.word))
+	if (is_option(wi.word))
 		ft_wunshift(chunk, wi);
 	else if (!is_option(wi.word))
 		ft_wunshift(chunk, wi);
