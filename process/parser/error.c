@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:02:46 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 12:29:54 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 05:13:09 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ extern int	g_status;
 void	parser_error(char *str)
 {
 	g_status = 258;
-	printf("syntax error near unexpected token `%s'\n", str);
+	printf("minishell: syntax error near unexpected token `%s'\n", str);
 	return ;
 }
 

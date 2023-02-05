@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:14:59 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 22:57:03 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/05 05:22:33 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	h_interactive_mode(t_minish *sh)
 		{
 			write(1, "exit\n", 6);
 			free_all(sh, 2);
+			system("leaks minishell");
 			exit(EXIT_FAILURE);
 		}
 		if (ft_strlen(sh->line) > 0)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/02/05 04:51:15 by segarcia         ###   ########.fr        #
+#    Updated: 2023/02/05 05:23:13 by rkanmado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,7 @@ $(GNL):
 	@make -C $(GNL_PATH)
 
 $(NAME): $(LIBFT) $(PRINTF) $(GNL) $(SRC)
-	$(CC) ${RL_FLAG} ${DEBUGFLAG} $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
+	$(CC) ${RL_FLAG} $(CFLAGS) $(SRC) $(LIBFT) $(PRINTF) $(GNL) -o $(NAME)
 
 clean:
 	@make clean -C $(LIBFT_PATH)

@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 02:21:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 22:36:21 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 05:27:20 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void	free_all(t_minish *sh, int nbr)
 		if (i == 0)
 			free(sh->pid);
 		if (i == 1)
-			free_env_node(&sh->env_lst);
+			printf("feee");
 		if (i == 2)
-			free_kvp(sh->kvp);
+			printf("feee");
 		if (i == 3 && sh->wsb.size > 0)
 		{
 			free_wsb((void **) &sh->wsb.head, \
