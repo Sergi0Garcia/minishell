@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 02:21:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/05 11:41:59 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:30:03 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,10 @@ void	free_env_list(t_env **env_lst)
 	while (env_lst && *env_lst)
 	{
 		tmp = (*env_lst)->next;
-		free((*env_lst)->name);
-		free((*env_lst)->value);
+		if ((*env_lst)->name && (*env_lst)->name != NULL)
+			free((*env_lst)->name);
+		if ((*env_lst)->value && (*env_lst)->value != NULL)
+			free((*env_lst)->value);
 		free((*env_lst));
 		*env_lst = tmp;
 	}

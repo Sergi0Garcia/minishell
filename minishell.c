@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 12:59:50 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:55:53 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	main(int argc, char **argv, char **envp)
 	init(&sh, argv);
 	check_usage(argc, argv, &sh);
 	set_env(envp, &sh.env_lst);
-	cmd1i.name = "cd";
+	cmd1i.name = "ls";
 	cmd1i.opts = "";
-	cmd1i.args = "~/Desktop";
+	cmd1i.args = "";
 	cmd1i.infile = FD_READ_END;
 	cmd1i.outfile = FD_WRITE_END;
 	init_tcsb(&cmds);

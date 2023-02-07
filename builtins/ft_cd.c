@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 13:41:20 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:22:23 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static char	*get_home_address(t_env **env_lst)
 	char	*tmp;
 
 	home_path = env_value(env_lst, "HOME");
+	return (home_path);
 	if (home_path && ft_strlen(home_path))
 		return (home_path);
 	username = env_value(env_lst, "USER");
@@ -57,6 +58,7 @@ static char	*get_home_address(t_env **env_lst)
 	tmp =  ft_strjoin("HOME=", res);
 	new_env(env_lst, tmp);
 	free(tmp);
+	free(home_path);
 	return (res);
 }
 
@@ -114,12 +116,15 @@ static int	cd_default(t_env **env_lst, t_c *cmd)
 	new_env(env_lst, tmp);
 	free(tmp);
 	free(path);
+	path = NULL;
+	tmp = NULL;
 	path = ft_pwd(NULL, 0);
 	tmp = ft_strjoin("PWD=", path);
 	new_env(env_lst, tmp);
 	free(path);
 	free(tmp);
-	free(home_path);
+	path = NULL;
+	tmp = NULL;
 	free(new_path);
 	return (EXIT_SUCCESS);
 }
