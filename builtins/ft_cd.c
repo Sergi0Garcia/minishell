@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/07 13:21:57 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:46:07 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static char	*parse_home_dir(char *home_path, t_c *cmd)
 		free(home_path);
 		return (free_return_args(args, tmp));
 	}
-	return (home_path);
+	return (free_return_args(args, home_path));
 }
 
 static int	cd_default(t_env **env_lst, t_c *cmd)

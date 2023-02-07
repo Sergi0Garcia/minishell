@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:21:50 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 12:16:05 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:38:04 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	valid_flag(t_c *cmd)
 	{
 		option = opts[i];
 		if (!vaild_option(option))
-			return (0);
+			return (return_free(opts, 0));
 		i++;
 	}
 	return (return_free(opts, 1));

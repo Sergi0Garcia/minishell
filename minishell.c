@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:43:34 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/07 12:47:51 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:46:24 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv, char **envp)
 	init(&sh, argv);
 	check_usage(argc, argv, &sh);
 	set_env(envp, &sh.env_lst);
-	cmd1i.name = "ls";
+	cmd1i.name = "./script.sh";
 	cmd1i.opts = "";
 	cmd1i.args = "";
 	cmd1i.infile = FD_READ_END;
