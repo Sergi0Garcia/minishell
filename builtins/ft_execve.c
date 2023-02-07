@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/07 12:17:01 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:47:46 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,27 @@ char	*correct_path(char **paths, char *cmd)
 {
 	int		access_val;
 	char	*complete_path;
-	char 	*tmp;
-	char	*res;
+	char	*tmp;
 	int		i;
 
 	i = 0;
 	access_val = -1;
-	res = NULL;
+	complete_path = NULL;
 	while (paths[i] && access_val)
 	{
 		tmp = ft_strjoin("/", cmd);
 		complete_path = ft_strjoin(paths[i], tmp);
 		free(tmp);
-		tmp = NULL;
 		access_val = access(complete_path, X_OK);
 		if (access_val == 0)
-		{
-			res = ft_strdup(complete_path);
-			access_val = 0;
-		}
+			return (complete_path);
 		free(complete_path);
-		complete_path = NULL;
 		i++;
 	}
 	if (access_val == -1)
 		return (cs_error(ERR_CMD_FOUND, 127));
 	else
-		return (res);
+		return (complete_path);
 }
 
 char	*get_cmd_path(t_env **env_lst, char *str)

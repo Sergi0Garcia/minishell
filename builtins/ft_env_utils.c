@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:22:12 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/07 11:19:36 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:52:49 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,15 @@ int	exists_env(t_env **env_lst, char *str)
 static char	*get_special_env(char *name)
 {
 	if (*name == '$')
-		return(ft_itoa(getpid()));
+		return (ft_itoa(getpid()));
 	else if (*name == '?')
-		return(ft_itoa(g_status));
+		return (ft_itoa(g_status));
+	return ("");
+}
+
+static char	*free_return(char *str)
+{
+	free(str);
 	return ("");
 }
 
@@ -46,10 +52,7 @@ char	*env_value(t_env **env_lst, char *name)
 
 	res = get_special_env(name);
 	if (ft_strlen(res) > 0)
-	{
-		free(res);
-		return ("");
-	}
+		return (free_return(res));
 	tmp = *env_lst;
 	if (env_lst == NULL)
 		return ("");

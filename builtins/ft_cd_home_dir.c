@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_execve_utils.c                                  :+:      :+:    :+:   */
+/*   ft_cd_home_dir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/01 14:51:02 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/07 12:46:10 by segarcia         ###   ########.fr       */
+/*   Created: 2023/02/07 13:13:09 by segarcia          #+#    #+#             */
+/*   Updated: 2023/02/07 13:22:14 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	c_child(char **str)
+int	define_home_path(char **args)
 {
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
+	if (args[0][0] && args[0][0] == '~'
+			&& ft_strlen(args[0]) == 1)
+		return (1);
+	if ((args[0][0] && args[0][1]
+			&& args[0][0] == '~' && args[0][1] == '/'))
+		return (2);
+	return (3);
 }
 
-char	**split_paths(char *path)
+char	*free_return_args(char **args, char *res)
 {
-	char	**paths;
-
-	paths = ft_split(path, ':');
-	if (!paths)
-		return (NULL);
-	return (paths);
+	return_free(args, 0);
+	return (res);
 }

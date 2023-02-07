@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 02:35:07 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/07 11:56:05 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:19:41 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,6 @@ static int	valid_options(char *opt)
 		i++;
 	}
 	return (1);
-}
-
-int	return_free(char **opts, int st)
-{
-	int	len;
-	int	i;
-
-	i = 0;
-	len = c_child(opts);
-	while (i < len)
-	{
-		free(opts[i]);
-		i++;
-	}
-	free(opts);
-	return (st);
 }
 
 int	cd_valid_flag(t_c *cmd)

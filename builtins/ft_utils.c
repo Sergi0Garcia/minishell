@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 04:38:09 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 12:59:30 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:49:05 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,20 @@ void	free_array(char **str)
 		i--;
 	}
 	free(str);
+}
+
+int	return_free(char **opts, int st)
+{
+	int	len;
+	int	i;
+
+	i = 0;
+	len = c_child(opts);
+	while (i < len)
+	{
+		free(opts[i]);
+		i++;
+	}
+	free(opts);
+	return (st);
 }

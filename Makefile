@@ -6,7 +6,7 @@
 #    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/02/05 12:12:35 by segarcia         ###   ########.fr        #
+#    Updated: 2023/02/07 13:17:17 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ SRC			= 	minishell.c						\
 				./builtins/ft_echo.c 			\
 				./builtins/ft_exit.c 			\
 				./builtins/ft_cd_utils.c 		\
+				./builtins/ft_cd_utils2.c 		\
+				./builtins/ft_cd_home_dir.c 	\
 				./builtins/ft_export.c  		\
 				./builtins/ft_unset.c  			\
 				./builtins/ft_utils.c 			\
