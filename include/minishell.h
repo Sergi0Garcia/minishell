@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/07 13:19:38 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:26:33 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,7 @@ int			is_single_cmd(t_c *cmd);
 int			is_single_execution(t_c *cmd);
 void		cd_def_free(char *s1, char *s2, char *s3);
 int			define_home_path(char **args);
-char 		*free_return_args(char **args, char *res);
+char		*free_return_args(char **args, char *res);
 
 /** execution  */
 int			controller(t_minish *sh);
