@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 14:51:02 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/07 12:46:10 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/08 04:30:33 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,26 @@ char	**split_paths(char *path)
 	if (!paths)
 		return (NULL);
 	return (paths);
+}
+
+void	dbl_exec_free(char **opts, char **args)
+{
+	if (opts)
+		return_free(opts, 0);
+	if (args)
+		return_free(args, 0);
+}
+
+char	**set_opts_exec(t_ci cmd)
+{
+	if (cmd.opts && ft_strlen(cmd.opts))
+		return (ft_split(cmd.opts, ' '));
+	return (NULL);
+}
+
+char	**set_args_exec(t_ci cmd)
+{
+	if (cmd.args && ft_strlen(cmd.args))
+		return (ft_split(cmd.args, ' '));
+	return (NULL);
 }

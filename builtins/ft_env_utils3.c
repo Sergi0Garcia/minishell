@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:14:35 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/08 02:30:32 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/08 04:30:25 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	is_same_str(char *str1, char *str2)
 {
 	int	i;
 
-	if ((!str1 || !str2) 
+	if ((!str1 || !str2)
 		|| (!ft_strlen(str1) || !ft_strlen(str2)))
 		return (0);
 	if (ft_strlen(str1) != ft_strlen(str2))
