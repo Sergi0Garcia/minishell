@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/07 13:32:22 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/08 02:39:52 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -370,7 +370,7 @@ t_cn		get_values_of_index(t_wt key, t_kvp *key_values);
 
 /* process/shared/utils/alloc.c */
 t_wt		*alloc(t_wt	**wt, int mem_nbr);
-void		*ft_cpywt(void *dst, const void *src, size_t n);
+void		*ft_cpywt(t_wt **dst, const void *src, size_t n);
 
 /* process/expansion/expansion.c */
 void		expansion(t_minish *sh);

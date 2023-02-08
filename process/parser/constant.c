@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 00:55:13 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/07 07:05:02 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/08 03:23:01 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,36 +23,58 @@ typedef struct s_word_type_constant
 	t_wt	*end;
 }	t_wtc;
 
-t_wtc	get_curr_word_type_consts(t_wtc *wtc)
+t_wtc	get_curr_word_type_consts(void)
 {
-	wtc->begining = (t_wt[]){DLESS, LESS, GREAT, DGREAT, WORD, OPRARENTHESIS, \
-	END, NEIN};
-	wtc->greatorless = (t_wt[]){WORD, NEIN};
-	wtc->word = (t_wt[]){DLESS, LESS, GREAT, DGREAT, WORD, PIPE, ORIF, \
-	ANDIF, END, NEIN};
-	wtc->pipeorif = (t_wt[]){DLESS, LESS, GREAT, DGREAT, WORD, OPRARENTHESIS, \
-	NEIN};
-	wtc->oparenthesis = (t_wt[]){DLESS, LESS, GREAT, DGREAT, WORD, \
-	OPRARENTHESIS, CPARENTHESIS, NEIN};
-	wtc->cparenthesis = (t_wt[]){DLESS, LESS, GREAT, DGREAT, WORD, PIPE, ORIF, \
-	ANDIF, CPARENTHESIS, END, NEIN};
-	wtc->end = (t_wt[]){NEIN};
-	return (*wtc);
+	t_wtc	wtc;
+
+	wtc.begining = alloc(&wtc.begining, 8);
+	ft_cpywt(&wtc.begining, (const void *)(t_wt[]){DLESS, LESS, \
+	GREAT, DGREAT, WORD, OPRARENTHESIS, END, NEIN}, 8);
+	wtc.greatorless = alloc(&wtc.greatorless, 2);
+	ft_cpywt(&wtc.greatorless, (const void *)(t_wt[]){WORD, NEIN}, 2);
+	wtc.word = alloc(&wtc.word, 10);
+	ft_cpywt(&wtc.word, (const void *)(t_wt[]){DLESS, LESS, GREAT, \
+	DGREAT, WORD, PIPE, ORIF, ANDIF, END, NEIN}, 10);
+	wtc.pipeorif = alloc(&wtc.pipeorif, 7);
+	ft_cpywt(&wtc.pipeorif, (const void *)(t_wt[]){DLESS, LESS, GREAT, \
+	DGREAT, WORD, OPRARENTHESIS, NEIN}, 7);
+	wtc.oparenthesis = alloc(&wtc.oparenthesis, 8);
+	ft_cpywt(&wtc.oparenthesis, (const void *)(t_wt[]){DLESS, LESS, GREAT, \
+	DGREAT, WORD, OPRARENTHESIS, CPARENTHESIS, NEIN}, 8);
+	wtc.cparenthesis = alloc(&wtc.cparenthesis, 11);
+	ft_cpywt(&wtc.cparenthesis, (const void *)(t_wt[]){DLESS, LESS, GREAT, \
+	DGREAT, WORD, PIPE, ORIF, ANDIF, CPARENTHESIS, END, NEIN}, 11);
+	wtc.end = alloc(&wtc.end, 1);
+	ft_cpywt(&wtc.end, (const void *)(t_wt[]){NEIN}, 1);
+	return (wtc);
 }
 
-t_wtc	get_next_word_type_consts(t_wtc *wtc)
+t_wtc	get_next_word_type_consts(void)
 {
-	wtc->begining = (t_wt[]){NEIN};
-	wtc->greatorless = (t_wt[]){WORD, PIPE, ORIF, ANDIF, BEGINING, \
-	OPRARENTHESIS, CPARENTHESIS, NEIN};
-	wtc->word = (t_wt[]){DLESS, LESS, GREAT, DGREAT, WORD, PIPE, ORIF, \
-	ANDIF, OPRARENTHESIS, CPARENTHESIS, END, NEIN};
-	wtc->pipeorif = (t_wt[]){WORD, CPARENTHESIS, NEIN};
-	wtc->oparenthesis = (t_wt[]){PIPE, ORIF, ANDIF, OPRARENTHESIS, BEGINING, \
-	NEIN};
-	wtc->cparenthesis = (t_wt[]){OPRARENTHESIS, CPARENTHESIS, NEIN};
-	wtc->end = (t_wt[]){WORD, CPARENTHESIS, BEGINING, NEIN};
-	return (*wtc);
+	t_wtc	wtc;
+
+	wtc.begining = alloc(&wtc.begining, 1);
+	ft_cpywt(&wtc.begining, (const void *)(t_wt[]){NEIN}, 1);
+	wtc.greatorless = alloc(&wtc.greatorless, 8);
+	ft_cpywt(&wtc.greatorless, (const void *)(t_wt[]){WORD, PIPE, ORIF, \
+	ANDIF, BEGINING, OPRARENTHESIS, CPARENTHESIS, NEIN}, 8);
+	wtc.word = alloc(&wtc.word, 12);
+	ft_cpywt(&wtc.word, (const void *)(t_wt[]){DLESS, LESS, GREAT, \
+	DGREAT, WORD, PIPE, ORIF, ANDIF, OPRARENTHESIS, CPARENTHESIS, \
+	END, NEIN}, 12);
+	wtc.pipeorif = alloc(&wtc.pipeorif, 3);
+	ft_cpywt(&wtc.pipeorif, (const void *)(t_wt[]){WORD, CPARENTHESIS, \
+	NEIN}, 3);
+	wtc.oparenthesis = alloc(&wtc.oparenthesis, 6);
+	ft_cpywt(&wtc.oparenthesis, (const void *)(t_wt[]){PIPE, ORIF, ANDIF, \
+	OPRARENTHESIS, BEGINING, NEIN}, 6);
+	wtc.cparenthesis = alloc(&wtc.cparenthesis, 3);
+	ft_cpywt(&wtc.cparenthesis, (const void *)(t_wt[]){OPRARENTHESIS, \
+	CPARENTHESIS, NEIN}, 3);
+	wtc.end = alloc(&wtc.end, 4);
+	ft_cpywt(&wtc.end, (const void *)(t_wt[]){WORD, CPARENTHESIS, \
+	BEGINING, NEIN}, 4);
+	return (wtc);
 }
 
 t_cn	get_according_values(t_wt key)
@@ -61,8 +83,8 @@ t_cn	get_according_values(t_wt key)
 	t_wtc	next;
 	t_cn	v;
 
-	get_curr_word_type_consts(&curr);
-	get_next_word_type_consts(&next);
+	curr = get_curr_word_type_consts();
+	next = get_next_word_type_consts();
 	if (key == BEGINING)
 		return (set_wt_values(curr.begining, next.begining, &v));
 	else if (key == LESS || key == DLESS || key == GREAT || key == DGREAT)

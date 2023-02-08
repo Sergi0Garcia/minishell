@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 00:50:29 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/07 07:07:29 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/08 03:17:01 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_b	parser(t_minish *sh)
 		word = word->next;
 		tp.i++;
 	}
-	free(sh->kvp);
+	free_kvp(&sh->kvp);
 	return (tp.can_cont);
 }
 

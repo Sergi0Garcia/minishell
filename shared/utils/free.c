@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 02:21:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/08 01:41:01 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/08 03:21:50 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ void	free_csb(t_csb *csb)
 	return ;
 }
 
-void	free_kvp(t_kvp **kvp)
-{
-	t_kvp	*tmp;
+// void	free_kvp(t_kvp **kvp)
+// {
+// 	t_kvp	*tmp;
 
-	tmp = *kvp;
-	free(tmp);
-	return ;
-}
+// 	tmp = *kvp;
+// 	free(tmp);
+// 	return ;
+// }
 
 void	free_all(t_minish *sh, int nbr)
 {
@@ -81,8 +81,8 @@ void	free_all(t_minish *sh, int nbr)
 			free(sh->pid);
 			free(sh->line);
 		}
-		// if (i == 1)
-		// 	printf("fkdv");
+		if (i == 1)
+			printf("");
 		if (i == 2)
 			free_env_list(&sh->env_lst);
 		if (i == 3)
