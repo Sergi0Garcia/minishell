@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/07 12:47:46 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/08 04:30:01 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ static char	**execve_cmd(t_ci cmd, char *cmd_path)
 	int		j;
 
 	i = 0;
-	opts = ft_split(cmd.opts, ' ');
-	args = ft_split(cmd.args, ' ');
+	opts = set_opts_exec(cmd);
+	args = set_args_exec(cmd);
 	res = malloc(sizeof(char *) * (2 + c_child(opts) + c_child(args)));
 	res[0] = cmd_path;
 	while (opts && opts[i])
@@ -85,6 +85,7 @@ static char	**execve_cmd(t_ci cmd, char *cmd_path)
 		i++;
 	}
 	res[i + 1] = NULL;
+	dbl_exec_free(opts, args);
 	return (res);
 }
 
@@ -94,6 +95,7 @@ char	**custom_envp(t_env **env_lst)
 	int		len;
 	char	**res;
 	t_env	*tmp;
+	char	*tmp2;
 
 	tmp = *env_lst;
 	i = 0;
@@ -101,8 +103,9 @@ char	**custom_envp(t_env **env_lst)
 	res = (char **)malloc(sizeof(char *) * (len + 1));
 	while (tmp)
 	{
-		res[i] = ft_strjoin(tmp->name, "=");
-		res[i] = ft_strjoin(res[i], tmp->value);
+		tmp2 = ft_strjoin(tmp->name, "=");
+		res[i] = ft_strjoin(tmp2, tmp->value);
+		free(tmp2);
 		tmp = tmp->next;
 		i++;
 	}
@@ -114,9 +117,11 @@ int	ft_execve(t_ci cmd, t_env **env_lst, int path_exec)
 {
 	char	**args_str;
 	char	*cmd_path;
+	char	**envp_lst;
 	int		res_execve;
 
 	args_str = NULL;
+	envp_lst = NULL;
 	res_execve = 0;
 	cmd_path = get_cmd_path(env_lst, cmd.name);
 	if (!cmd_path && !path_exec)
@@ -127,7 +132,9 @@ int	ft_execve(t_ci cmd, t_env **env_lst, int path_exec)
 		cmd_path = cmd.name;
 	}
 	args_str = execve_cmd(cmd, cmd_path);
-	res_execve = execve(cmd_path, args_str, custom_envp(env_lst));
-	free(cmd_path);
+	envp_lst = custom_envp(env_lst);
+	res_execve = execve(cmd_path, args_str, envp_lst);
+	return_free(args_str, 0);
+	return_free(envp_lst, 0);
 	return (res_execve);
 }

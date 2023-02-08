@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/08 05:24:11 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/08 07:05:56 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,9 @@ int			fd_great(char *path);
 int			fd_dgreat(char *path);
 void		sig_quit_from_child(int sig, siginfo_t *info, void *context);
 void		sig_int(void);
+void		dbl_exec_free(char **opts, char **args);
+char		**set_opts_exec(t_ci cmd);
+char		**set_args_exec(t_ci cmd);
 
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);
