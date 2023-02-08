@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 00:57:01 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/08 02:41:15 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/08 05:07:48 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,14 @@ void	inc_lex(char *s1, size_t *end)
 	return ;
 }
 
-t_cn	set_wt_values(t_wt *curr, t_wt *next, t_cn *cn)
+t_cn	set_wt_values(t_wt **curr, t_wt **next, t_cn *cn)
 {
-	cn->curr = curr;
-	cn->next = next;
+	t_wt	*curr_tmp;
+	t_wt	*next_tmp;
+
+	curr_tmp = *curr;
+	next_tmp = *next;
+	cn->curr = curr_tmp;
+	cn->next = next_tmp;
 	return (*cn);
 }

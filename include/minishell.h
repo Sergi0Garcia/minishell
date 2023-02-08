@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/08 02:39:52 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/08 05:24:11 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -363,14 +363,14 @@ void		handle_parser_err(t_w *word, t_b is_curr, t_b is_next, \
 			t_b *can_continue);
 
 /* process/shared/utils/constants.c */
-t_cn		get_according_values(t_wt key);
 t_kvp		*get_kv_pairs(void);
-t_cn		set_wt_values(t_wt *curr, t_wt *next, t_cn *cn);
+t_cn		set_wt_values(t_wt **curr, t_wt **next, t_cn *cn);
 t_cn		get_values_of_index(t_wt key, t_kvp *key_values);
 
 /* process/shared/utils/alloc.c */
-t_wt		*alloc(t_wt	**wt, int mem_nbr);
+t_wt		*alloc(int mem_nbr);
 void		*ft_cpywt(t_wt **dst, const void *src, size_t n);
+t_wt		*duptwt(const t_wt *s1);
 
 /* process/expansion/expansion.c */
 void		expansion(t_minish *sh);

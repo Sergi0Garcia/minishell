@@ -6,11 +6,31 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 05:08:15 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/07 06:32:03 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/08 06:59:42 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+char	*ft_strcat2(char *s1, char *s2)
+{
+	int		counter;
+	int		source_len;
+	char	*result;
+	int		result_len;
+
+	result_len = (ft_strlen(s1) +ft_strlen(s2));
+	result = s1;
+	counter = 0;
+	source_len = ft_strlen(s1);
+	while (s2[counter] != '\0' && source_len + counter < result_len)
+	{
+		result[source_len + counter] = s2[counter];
+		counter++;
+	}
+	result[source_len + counter] = '\0';
+	return (result);
+}
 
 /* Replace a string with another one */
 void	replace_str(char **str, char *to_replace_with, t_lex *lex)
@@ -19,13 +39,15 @@ void	replace_str(char **str, char *to_replace_with, t_lex *lex)
 	char	*first_range;
 	char	*second_range;
 
-	new_str = "";
 	first_range = ft_substr(*str, 0, lex->start);
 	second_range = ft_substr(*str, (lex->end + lex->start) + 1, \
 		end_length(lex, ft_strlen(*str)));
-	new_str = ft_strjoinsh(new_str, first_range);
-	new_str = ft_strjoinsh(new_str, to_replace_with);
-	new_str = ft_strjoinsh(new_str, second_range);
+	new_str = malloc(sizeof(char) * ft_strlen(first_range) + \
+		ft_strlen(second_range) + ft_strlen(to_replace_with) + 1);
+	*new_str = '\0';
+	new_str = ft_strcat2(new_str, first_range);
+	new_str = ft_strcat2(new_str, to_replace_with);
+	new_str = ft_strcat2(new_str, second_range);
 	free(*str);
 	free(second_range);
 	free(first_range);
@@ -50,15 +72,6 @@ char	*get_env(char *str)
 {
 	(void) str;
 	return ("Traky");
-}
-
-/* Retrieve recursively the variable name if the result is variable */
-char	*retrieve_env(char *str, t_env *env_lst)
-{
-	char	*res1;
-
-	res1 = env_value(&env_lst, str);
-	return (res1);
 }
 
 /* This function checks if the expansion can be applied */

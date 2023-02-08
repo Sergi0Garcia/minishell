@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:22:12 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/08 01:38:08 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/08 07:04:24 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*env_value(t_env **env_lst, char *name)
 			tmp = tmp->next;
 		}
 	}
-	return (res);
+	return (ft_strdup(""));
 }
 
 void	print_env(t_env **env_lst, int with_declare)
