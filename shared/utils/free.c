@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 02:21:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/07 13:27:32 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/08 01:41:01 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void	free_all(t_minish *sh, int nbr)
 			free(sh->pid);
 			free(sh->line);
 		}
-		if (i == 1)
-			free_kvp(&sh->kvp);
+		// if (i == 1)
+		// 	printf("fkdv");
 		if (i == 2)
 			free_env_list(&sh->env_lst);
 		if (i == 3)

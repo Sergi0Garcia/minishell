@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:55:48 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/07 07:02:34 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/08 01:38:48 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@ char	**free_dp(char ***points)
 	return (NULL);
 }
 
-void	free_kvp(t_kvp **kvp)
-{
-	int		i;
-	t_kvp	*tmp;
+// void	free_kvp(t_kvp **kvp)
+// {
+// 	int		i;
+// 	t_kvp	*tmp;
 
-	i = 0;
-	tmp = *kvp;
-	while (i < 13)
-	{
-		free(tmp[i].values.curr);
-		free(tmp[i].values.next);
-		i++;
-	}
-	free(kvp);
-	return ;
-}
+// 	i = 0;
+// 	tmp = *kvp;
+// 	while (i < 13)
+// 	{
+// 		free(tmp[i].values.curr);
+// 		free(tmp[i].values.next);
+// 		i++;
+// 	}
+// 	free(kvp);
+// 	return ;
+// }
