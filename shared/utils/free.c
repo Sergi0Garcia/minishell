@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 02:21:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/05 12:33:35 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/07 07:01:32 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ void	free_wsb(t_wsb *wsb)
 	wtmp = wsb->head;
 	while (wtmp->next != NULL)
 	{
-		// free(wtmp->wi.word);
 		wtmp = wtmp->next;
+		free(wtmp->prev->wi.word);
 		free(wtmp->prev);
 	}
+	free(wtmp->wi.word);
 	free(wtmp);
 	wsb->head = NULL;
-	wsb->head = NULL;
+	wsb->tail = NULL;
 	return ;
 }
 
@@ -45,25 +46,28 @@ void	free_csb(t_csb *csb)
 	while (ctmp->next != NULL)
 	{
 		ctmp = ctmp->next;
-		// free(ctmp->ci.args);
-		// free(ctmp->ci.name);
-		// free(ctmp->ci.opts);
+		free(ctmp->prev->ci.args);
+		free(ctmp->prev->ci.opts);
+		free(ctmp->prev->ci.name);
 		free(ctmp->prev);
 	}
+	free(ctmp->ci.args);
+	free(ctmp->ci.opts);
+	free(ctmp->ci.name);
 	free(ctmp);
 	csb->head = NULL;
-	csb->head = NULL;
+	csb->tail = NULL;
 	return ;
 }
 
-void	free_kvp(t_kvp **kvp)
-{
-	t_kvp	*tmp;
+// void	free_kvp(t_kvp **kvp)
+// {
+// 	t_kvp	*tmp;
 
-	tmp = *kvp;
-	free(tmp);
-	return ;
-}
+// 	tmp = *kvp;
+// 	free(tmp);
+// 	return ;
+// }
 
 void	free_all(t_minish *sh, int nbr)
 {
@@ -78,12 +82,12 @@ void	free_all(t_minish *sh, int nbr)
 			free(sh->line);
 		}
 		if (i == 1)
-			printf("feee");
+			free_kvp(&sh->kvp);
 		if (i == 2)
-			printf("feee");
-		if (i == 3 && sh->wsb.size > 0)
+			printf("env");
+		if (i == 3)
 			free_wsb(&sh->wsb);
-		if (i == 4 && sh->cmds.size > 0)
+		if (i == 4)
 			free_csb(&sh->cmds);
 		i++;
 	}
@@ -99,9 +103,9 @@ void	free_for_next_run(t_minish *sh, int nbr)
 	{
 		if (i == 0)
 			free(sh->line);
-		if (i == 1 && sh->wsb.size > 0)
+		if (i == 1)
 			free_wsb(&sh->wsb);
-		if (i == 2 && sh->cmds.size > 0)
+		if (i == 2)
 			free_csb(&sh->cmds);
 		i++;
 	}

@@ -16,11 +16,14 @@
 void	ft_wunshift(t_wsb *stack, t_wi info)
 {
 	t_w		*new;
+	char	*word;
 
 	new = (t_w *)malloc(sizeof(t_w));
+	word = ft_strdup(info.word);
 	if (new == NULL)
 		error("Error \n");
 	new->wi = info;
+	new->wi.word = word;
 	if (stack->tail == NULL)
 	{
 		new->next = NULL;

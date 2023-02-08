@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:22:12 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 04:44:37 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/07 04:15:25 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*get_special_env(char *name)
 {
 	char	*res;
 
-	res = ft_strdup("");
+	res = "";
 	if (*name == '$')
 		res = ft_itoa(getpid());
 	else if (*name == '?')
@@ -52,7 +52,7 @@ char	*env_value(t_env **env_lst, char *name)
 		return (res);
 	tmp = *env_lst;
 	if (env_lst == NULL)
-		return ("");
+		return (ft_strdup(""));
 	if (exists_env(env_lst, name))
 	{
 		while (tmp)
@@ -60,8 +60,8 @@ char	*env_value(t_env **env_lst, char *name)
 			if (is_same_str(tmp->name, name))
 			{
 				if (!tmp->value || tmp->value == NULL)
-					return ("");
-				return (tmp->value);
+					return (ft_strdup(""));
+				return (ft_strdup(tmp->value));
 			}
 			tmp = tmp->next;
 		}

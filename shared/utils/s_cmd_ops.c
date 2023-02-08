@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:43:12 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 09:16:58 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/07 06:03:27 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 /* Function that cill insert element at the end of stack */
 void	ft_cunshift(t_csb *stack, t_ci info)
 {
-	t_c	*new;
+	t_c		*new;
+	char	*name;
 
 	new = (t_c *)malloc(sizeof(t_c));
+	name = ft_strdup(info.name);
 	if (new == NULL)
 		error("Error \n");
 	new->ci = info;
+	new->ci.name = name;
 	if (stack->tail == NULL)
 	{
 		new->next = NULL;

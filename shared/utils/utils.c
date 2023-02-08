@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 20:45:57 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/01/25 03:13:47 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/07 03:53:30 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-int	end_of_sep(char *str, int start)
+char	*str_joinsh(char **arg_or_opt, char *str)
 {
-	while (is_sep(str[start]) == NEIN)
-		start++;
-	return (start);
+	char	*tmp;
+
+	tmp = *arg_or_opt;
+	*arg_or_opt = ft_strjoin(tmp, str);
+	free(tmp);
+	return (*arg_or_opt);
 }
 
 t_b	is_sep_type(t_wt wt)

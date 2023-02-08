@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 05:08:15 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 22:59:33 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/07 06:32:03 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ void	replace_str(char **str, char *to_replace_with, t_lex *lex)
 	first_range = ft_substr(*str, 0, lex->start);
 	second_range = ft_substr(*str, (lex->end + lex->start) + 1, \
 		end_length(lex, ft_strlen(*str)));
-	new_str = ft_strjoin(new_str, first_range);
-	new_str = ft_strjoin(new_str, to_replace_with);
-	new_str = ft_strjoin(new_str, second_range);
+	new_str = ft_strjoinsh(new_str, first_range);
+	new_str = ft_strjoinsh(new_str, to_replace_with);
+	new_str = ft_strjoinsh(new_str, second_range);
 	free(*str);
+	free(second_range);
+	free(first_range);
 	*str = new_str;
 	lex->start += ft_strlen(to_replace_with);
 	return ;

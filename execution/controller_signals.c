@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controller_signals.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 04:49:46 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 04:50:21 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/07 06:30:34 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ void	sig_quit_from_child(int sig, siginfo_t *info, void *context)
 
 void	sig_int(void)
 {
-	struct sigaction	sa_res;
+	struct sigaction	act;
 
-	sa_res.sa_flags = SA_SIGINFO;
-	sa_res.sa_sigaction = &sig_quit_from_child;
-	sigaction(SIGINT, &sa_res, NULL);
+	ft_memset(&act, 0, sizeof(struct sigaction));
+	sigemptyset(&(act.sa_mask));
+	act.sa_flags = SA_SIGINFO;
+	act.sa_sigaction = &sig_quit_from_child;
+	sigaction(SIGINT, &act, NULL);
 	return ;
 }

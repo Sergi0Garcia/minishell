@@ -6,7 +6,7 @@
 #    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/02/05 10:53:31 by rkanmado         ###   ########.fr        #
+#    Updated: 2023/02/07 01:59:03 by rkanmado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC			= 	minishell.c						\
 				./shared/utils/parsing.c		\
 				./shared/utils/alloc.c			\
 				./shared/utils/free.c			\
+				./shared/utils/free2.c			\
 				./shared/utils/s_cmd_ops.c		\
 				./shared/display/display.c		\
 				./process/handler/handler.c 	\

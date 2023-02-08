@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 05:10:54 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/04 14:56:31 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/07 06:24:07 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,18 @@ void	expand_var(char **str, size_t *start, t_env *env_lst)
 
 	end = 0;
 	tmp = *str;
-	end_of_expandation(&tmp[*start], &end);
+	end_of_expansion(&tmp[*start], &end);
 	lex.start = *start;
 	lex.end = end;
 	tmp = ft_substr(tmp, *start + 1, end);
 	env_value = retrieve_env(tmp, env_lst);
+	free(tmp);
 	replace_str(str, env_value, &lex);
 	*start = lex.start;
 	return ;
 }
 
-void	end_of_expandation(char *str, size_t *end)
+void	end_of_expansion(char *str, size_t *end)
 {
 	int	i;
 

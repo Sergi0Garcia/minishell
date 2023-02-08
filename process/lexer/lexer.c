@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 07:27:49 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/05 09:31:32 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/07 05:40:26 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	add_new_word(t_lex *lex, t_minish *sh)
 	lex->sep.word = ft_substr(sh->line, lex->start, lex->end - lex->start);
 	lex->sep.type = is_which_wt(lex->sep.word);
 	ft_wunshift(&sh->wsb, set_winfo(lex->sep));
+	free(lex->sep.word);
 	sh->last.sep = is_which_wt(&sh->line[lex->end]);
 	return ;
 }

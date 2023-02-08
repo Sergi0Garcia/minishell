@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 00:55:13 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/05 07:17:57 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/07 07:05:02 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_cn	get_values_of_index(t_wt key, t_kvp *key_values)
 	i = 0;
 	cn.curr = NULL;
 	cn.next = NULL;
-	while (i < 13)
+	while (key_values[i].key != NEIN)
 	{
 		if (key == key_values[i].key)
 		{

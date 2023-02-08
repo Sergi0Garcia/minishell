@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 10:45:32 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/07 05:46:19 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,9 @@ void		h_interactive_mode(t_minish *sh);
 void		h_noninteractive_mode(t_minish *sh);
 void		handler(t_minish *sh);
 
+/* shared/utils/free2.c */
+char		**free_dp(char ***points);
+
 /* lst/env */
 t_env		*ft_env_last(t_env *lst);
 t_env		*ft_new_env_node(char *name, char *value);
@@ -293,7 +296,7 @@ void		read_line(t_minish *sh);
 
 /* shared/utils/utils */
 int			ft_strcmp(char *s1, char *s2);
-int			end_of_sep(char *str, int start);
+char		*str_joinsh(char **arg_or_opt, char *str);
 t_b			is_sep_type(t_wt wt);
 char		*char_of_sep(t_wt wt);
 t_wt		is_sep(char s1);
@@ -369,7 +372,7 @@ void		*ft_cpywt(void *dst, const void *src, size_t n);
 void		expansion(t_minish *sh);
 void		expansion_process(char **str, t_env *env_lst);
 void		expand_var(char **str, size_t *start, t_env *env_lst);
-void		end_of_expandation(char *str, size_t *end);
+void		end_of_expansion(char *str, size_t *end);
 
 /* process/expansion/utils.c */
 void		replace_str(char **str, char *to_replace_with, t_lex *lex);
@@ -394,7 +397,7 @@ t_b			can_add_to_cmd(t_w **head, t_ci *ci);
 /* process/command/utils.c */
 t_b			is_opt_already_exits(t_wsb *wsb, char *opt);
 t_b			is_option(char *opt);
-char		*add_arg_or_opt(char *arg_or_opt, t_wi wi);
+char		*add_arg_or_opt(char **arg_or_opt, t_wi wi);
 t_b			can_increment_word(t_w **word);
 t_b			handle_redirect(t_w **head, int *infile);
 
