@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:22:12 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/07 04:15:25 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:52:49 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ static char	*get_special_env(char *name)
 	else if (*name == '?')
 		res = ft_itoa(g_status);
 	return (res);
+}
+
+static char	*free_return(char *str)
+{
+	free(str);
+	return ("");
 }
 
 char	*env_value(t_env **env_lst, char *name)

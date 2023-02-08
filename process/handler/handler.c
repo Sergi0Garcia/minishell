@@ -37,7 +37,6 @@ void static	parse_and_execute(t_minish *sh)
 	}
 	else
 		free_for_next_run(sh, 1);
-	//system("leaks minishell");
 	return ;
 }
 
@@ -52,7 +51,6 @@ void	h_interactive_mode(t_minish *sh)
 		{
 			write(1, "exit\n", 6);
 			free_all(sh, 5);
-			//system("leaks minishell");
 			exit(EXIT_FAILURE);
 		}
 		if (ft_strlen(sh->line) > 0)

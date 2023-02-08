@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_export.c                                        :+:      :+:    :+:   */
+/*   ft_cd_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/08 13:25:31 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 12:53:09 by segarcia         ###   ########.fr       */
+/*   Created: 2023/02/07 13:05:09 by segarcia          #+#    #+#             */
+/*   Updated: 2023/02/07 13:08:19 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ft_export(t_ci cmd, t_env **env_lst)
+void	cd_def_free(char *s1, char *s2, char *s3)
 {
-	int		i;
-	char	**args;
-
-	i = 0;
-	args = ft_split(cmd.args, ' ');
-	if (!args || !args[0])
-	{
-		free_array(args);
-		print_env(env_lst, 1);
-		return (EXIT_SUCCESS);
-	}
-	while (args[i])
-	{
-		new_env(env_lst, args[i]);
-		i++;
-	}
-	free_array(args);
-	return (EXIT_SUCCESS);
+	if (s1)
+		free(s1);
+	if (s2)
+		free(s2);
+	if (s3)
+		free(s3);
 }

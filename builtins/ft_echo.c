@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:59:06 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/07 02:37:31 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:12:56 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ static int	print_opts(char *str, char *args)
 	j = i;
 	flag = needs_new_line(i);
 	print_c_opts(i, opts_len, opts);
-	free_dp(&opts);
 	if ((j != opts_len) && (args && ft_strlen(args)))
 		ft_printf(" ");
+	return_free(opts, 0);
 	return (flag);
 }
 

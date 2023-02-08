@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 02:35:07 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/01 06:08:42 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:19:41 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,17 @@ int	cd_valid_flag(t_c *cmd)
 		if (db_back_flag(opts[i]))
 		{
 			if (back_flag(opts[i + 1]))
-				return (2);
+				return (return_free(opts, 2));
 			else
-				return (1);
+				return (return_free(opts, 1));
 		}
 		if (back_flag(opts[i]))
-			return (2);
+			return (return_free(opts, 2));
 		if (!valid_options(opts[i]))
-			return (0);
+			return (return_free(opts, 0));
 		i++;
 	}
-	return (1);
+	return (return_free(opts, 1));
 }
 
 int	cd_handle_error(void)

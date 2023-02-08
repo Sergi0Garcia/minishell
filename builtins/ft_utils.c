@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 04:38:09 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/01 05:49:15 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:32:27 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,42 @@ void	free_array(char **str)
 		i++;
 	while (i >= 0)
 	{
-		free(str[i]);
+		if (str[i] && str[i] != NULL)
+			free(str[i]);
 		i--;
 	}
+	free(str);
+}
+
+int	return_free(char **opts, int st)
+{
+	int	len;
+	int	i;
+
+	i = 0;
+	len = c_child(opts);
+	while (i < len)
+	{
+		free(opts[i]);
+		i++;
+	}
+	free(opts);
+	return (st);
+}
+
+void	free_env_list(t_env **env_lst)
+{
+	t_env	*tmp;
+
+	while (env_lst && *env_lst)
+	{
+		tmp = (*env_lst)->next;
+		if ((*env_lst)->name && (*env_lst)->name != NULL)
+			free((*env_lst)->name);
+		if ((*env_lst)->value && (*env_lst)->value != NULL)
+			free((*env_lst)->value);
+		free((*env_lst));
+		*env_lst = tmp;
+	}
+	*env_lst = NULL;
 }

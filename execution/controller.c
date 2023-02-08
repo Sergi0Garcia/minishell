@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controller.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:09:01 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/07 02:39:42 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:16:59 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	exec_fork(t_c *cmd, t_env **env_lst, int fd[2], t_minish *sh)
 		close(fd[FD_READ_END]);
 		fd_redirection(cmd, fd);
 		execute_builtin(cmd, env_lst, 0, sh);
+		free_all(sh, 4);
 		exit (g_status);
 	}
 }

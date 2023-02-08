@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/07 05:46:19 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:32:22 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,9 +204,13 @@ int			get_idx_separator(char *str);
 void		free_array(char **str);
 int			c_child(char **str);
 char		**split_paths(char *path);
-
+int			return_free(char **opts, int st);
 int			is_single_cmd(t_c *cmd);
 int			is_single_execution(t_c *cmd);
+void		cd_def_free(char *s1, char *s2, char *s3);
+int			define_home_path(char **args);
+char		*free_return_args(char **args, char *res);
+void		free_env_list(t_env **env_lst);
 
 /** execution  */
 int			controller(t_minish *sh);

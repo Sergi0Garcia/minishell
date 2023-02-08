@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execve.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 02:53:21 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:47:46 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,21 @@ char	*correct_path(char **paths, char *cmd)
 {
 	int		access_val;
 	char	*complete_path;
+	char	*tmp;
 	int		i;
 
 	i = 0;
 	access_val = -1;
+	complete_path = NULL;
 	while (paths[i] && access_val)
 	{
-		complete_path = ft_strjoin("/", cmd);
-		complete_path = ft_strjoin(paths[i], complete_path);
+		tmp = ft_strjoin("/", cmd);
+		complete_path = ft_strjoin(paths[i], tmp);
+		free(tmp);
 		access_val = access(complete_path, X_OK);
+		if (access_val == 0)
+			return (complete_path);
+		free(complete_path);
 		i++;
 	}
 	if (access_val == -1)
@@ -48,6 +54,7 @@ char	*get_cmd_path(t_env **env_lst, char *str)
 	if (!all_paths)
 		return (cs_error(ERR_CMD_FOUND, 127));
 	cmd_path = correct_path(all_paths, str);
+	return_free(all_paths, 0);
 	if (!cmd_path)
 		return (NULL);
 	return (cmd_path);
@@ -110,12 +117,17 @@ int	ft_execve(t_ci cmd, t_env **env_lst, int path_exec)
 	int		res_execve;
 
 	args_str = NULL;
+	res_execve = 0;
 	cmd_path = get_cmd_path(env_lst, cmd.name);
 	if (!cmd_path && !path_exec)
 		return (ci_error(ERR_CMD_FOUND, 127));
 	if (path_exec)
+	{
+		free(cmd_path);
 		cmd_path = cmd.name;
+	}
 	args_str = execve_cmd(cmd, cmd_path);
 	res_execve = execve(cmd_path, args_str, custom_envp(env_lst));
+	free(cmd_path);
 	return (res_execve);
 }

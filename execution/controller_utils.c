@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:03:44 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 02:19:59 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:58:25 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ int	valid_fork(t_c *cmds, t_env **env_lst)
 	cmd_path = get_cmd_path(env_lst, cmd.name);
 	if (!cmd_path)
 		return (0);
+	free(cmd_path);
 	return (1);
 }

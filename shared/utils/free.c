@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 02:21:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/07 07:01:32 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:27:32 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ void	free_csb(t_csb *csb)
 	return ;
 }
 
-// void	free_kvp(t_kvp **kvp)
-// {
-// 	t_kvp	*tmp;
+void	free_kvp(t_kvp **kvp)
+{
+	t_kvp	*tmp;
 
-// 	tmp = *kvp;
-// 	free(tmp);
-// 	return ;
-// }
+	tmp = *kvp;
+	free(tmp);
+	return ;
+}
 
 void	free_all(t_minish *sh, int nbr)
 {
@@ -84,7 +84,7 @@ void	free_all(t_minish *sh, int nbr)
 		if (i == 1)
 			free_kvp(&sh->kvp);
 		if (i == 2)
-			printf("env");
+			free_env_list(&sh->env_lst);
 		if (i == 3)
 			free_wsb(&sh->wsb);
 		if (i == 4)

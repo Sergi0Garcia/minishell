@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
+#    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/02/07 01:59:03 by rkanmado         ###   ########.fr        #
+#    Updated: 2023/02/07 13:17:17 by segarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ SRC			= 	minishell.c						\
 				./builtins/ft_echo.c 			\
 				./builtins/ft_exit.c 			\
 				./builtins/ft_cd_utils.c 		\
+				./builtins/ft_cd_utils2.c 		\
+				./builtins/ft_cd_home_dir.c 	\
 				./builtins/ft_export.c  		\
 				./builtins/ft_unset.c  			\
 				./builtins/ft_utils.c 			\
@@ -82,7 +84,7 @@ INC			= /include/minishell.h
 all: $(NAME)
 
 vg:
-	valgrind --leak-check=full --track-origins=yes ./minishell
+	valgrind --leak-check=full -s --track-origins=yes ./minishell
 
 $(LIBFT):
 	@make bonus -C $(LIBFT_PATH)

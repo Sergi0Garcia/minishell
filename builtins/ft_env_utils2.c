@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 02:39:04 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/02 14:34:09 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:52:33 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,15 @@ void	new_env(t_env **env_lst, char *str)
 		name = ft_substr(str, 0, ft_strlen(str));
 	value = NULL;
 	if (brk_idx)
+	{
 		value = ft_substr(str, brk_idx + 1, ft_strlen(str) - brk_idx - 1);
+	}
 	if (exists_env(env_lst, name))
-		return (update_env(env_lst, name, value));
+	{
+		update_env(env_lst, name, value);
+		free(name);
+		return ;
+	}
 	new = ft_new_env_node(name, value);
 	env_add_back(env_lst, new);
 	return ;

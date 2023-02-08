@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 11:01:44 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/07 01:32:33 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/05 11:12:58 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ char	*joinstrs(char *s1, char *s2)
 void	error(char *str)
 {
 	write(2, str, ft_strlen(str));
-	//system("leaks minishell");
 	exit(EXIT_FAILURE);
 	return ;
 }
