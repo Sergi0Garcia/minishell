@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/07 13:46:07 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/08 07:18:29 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ static int	cd_back(t_env **env_lst)
 		return (EXIT_FAILURE);
 	if (chdir(old_path) == -1)
 	{
+		free(old_path);
 		perror("");
 		return (EXIT_FAILURE);
 	}
 	tmp = ft_strjoin("PWD=", old_path);
+	free(old_path);
 	new_env(env_lst, tmp);
 	free(tmp);
 	tmp = ft_strjoin("OLDPWD=", path);
@@ -37,7 +39,7 @@ static int	cd_back(t_env **env_lst)
 	free(tmp);
 	old_path = env_value(env_lst, "OLDPWD");
 	ft_printf("%s\n", old_path);
-	old_path = NULL;
+	free(old_path);
 	free(path);
 	return (EXIT_SUCCESS);
 }
@@ -51,13 +53,14 @@ static char	*get_home_address(t_env **env_lst)
 
 	home_path = env_value(env_lst, "HOME");
 	if (home_path && ft_strlen(home_path))
-		return (ft_strdup(home_path));
+		return (home_path);
 	username = env_value(env_lst, "USER");
 	res = ft_strjoin("/Users/", username);
 	tmp = ft_strjoin("HOME=", res);
 	new_env(env_lst, tmp);
 	free(tmp);
 	free(home_path);
+	free(username);
 	return (res);
 }
 
