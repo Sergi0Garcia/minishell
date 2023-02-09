@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/09 03:46:59 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/09 06:08:44 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ int	ft_execve(t_ci cmd, t_env **env_lst, int path_exec)
 	args_str = execve_cmd(cmd, cmd_path);
 	envp_lst = custom_envp(env_lst);
 	res_execve = execve(cmd_path, args_str, envp_lst);
-	free(cmd_path);
 	return_free(args_str, 0);
 	return_free(envp_lst, 0);
 	return (res_execve);
