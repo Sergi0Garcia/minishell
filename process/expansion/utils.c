@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 05:08:15 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/08 06:59:42 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/09 06:36:47 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,12 @@ char	*get_env(char *str)
 }
 
 /* This function checks if the expansion can be applied */
-t_b	can_apply_expansion(char **str)
+t_b	can_apply_expansion(char *str)
 {
-	char	*tmp;
 
-	tmp = *str;
-	if (ft_strlen(tmp) == 1)
+	if (ft_strlen(str) == 1)
 		return (false);
-	else if (*(tmp + 1) == '\"' || *(tmp + 1) == '\'')
+	else if (*(str + 1) == '\"' || *(str + 1) == '\'')
 		return (false);
 	return (true);
 }
