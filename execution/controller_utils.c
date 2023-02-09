@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controller_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:03:44 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/08 03:33:08 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/09 04:32:42 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	valid_fork(t_c *cmds, t_env **env_lst)
 	char	*cmd_path;
 
 	cmd = cmds->ci;
+	if (!cmd.name || !ft_strlen(cmd.name))
+		return (0);
 	if ((cmd.infile == -1 || cmd.outfile == -2) && (cmds->next))
 		return (1);
 	if ((cmd.infile == -1 || cmd.outfile == -1))

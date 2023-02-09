@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 06:10:16 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/08 04:28:38 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/09 03:52:08 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_wt	*alloc(int mem_nbr)
 		error("Memory allocation failed");
 	return (wt);
 }
-
 
 t_wt	*duptwt(const t_wt *s1)
 {

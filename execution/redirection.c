@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:10:03 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/08 07:46:12 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/09 04:47:46 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_b	handle_here_doc(char *eof, int fd)
 	char	*line[2];
 
 	line[0] = readline("> ");
+	line[1] = NULL;
 	while (1)
 	{
 		if (!line[0])
@@ -57,6 +58,7 @@ t_b	handle_here_doc(char *eof, int fd)
 		free(line[0]);
 		line[0] = line[1];
 	}
-	free(line[1]);
+	if (line[1] != NULL)
+		free(line[1]);
 	return (true);
 }

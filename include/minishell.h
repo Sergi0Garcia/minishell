@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/08 07:05:56 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/09 05:03:06 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,17 @@ typedef struct s_env_node
 	char				*value;
 	struct s_env_node	*next;
 }	t_env;
+
+typedef struct s_word_type_constant
+{
+	t_wt	*begining;
+	t_wt	*greatorless;
+	t_wt	*word;
+	t_wt	*pipeorif;
+	t_wt	*oparenthesis;
+	t_wt	*cparenthesis;
+	t_wt	*end;
+}	t_wtc;
 
 typedef struct s_minishell
 {
@@ -364,11 +375,15 @@ t_b			is_between_good(t_w *word, t_kvp *kvp, t_b *can_continue);
 void		parser_error(char *str);
 void		handle_parser_err(t_w *word, t_b is_curr, t_b is_next, \
 			t_b *can_continue);
+void		init_twc(t_wtc *twc);
+void		init_kvp(t_wtc *curr, t_wtc *next, t_kvp **kvp);
 
 /* process/shared/utils/constants.c */
 t_kvp		*get_kv_pairs(void);
 t_cn		set_wt_values(t_wt **curr, t_wt **next, t_cn *cn);
 t_cn		get_values_of_index(t_wt key, t_kvp *key_values);
+void		get_curr_word_type_consts(t_wtc *wtc);
+void		get_next_word_type_consts(t_wtc *wtc);
 
 /* process/shared/utils/alloc.c */
 t_wt		*alloc(int mem_nbr);

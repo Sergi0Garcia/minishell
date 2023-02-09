@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:55:48 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/08 07:42:32 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/09 03:52:32 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,3 @@ void	free_kvp(t_kvp **kvp)
 	free(rows);
 	return ;
 }
-
-

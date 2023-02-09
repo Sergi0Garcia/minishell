@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:03:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/08 08:00:15 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/09 04:56:59 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ t_b	can_parse_wsb_to_cmd(t_csb *list, t_wsb *wsb)
 	t_ci	ci;
 
 	head = wsb->head;
-	ci.args = strdup("");
+	ci.args = strdup("\0");
 	ci.outfile = 1;
-	ci.opts = strdup("");
+	ci.opts = strdup("\0");
 	ci.infile = 0;
-	ci.name = strdup("");
+	ci.name = strdup("\0");
 	while (head != NULL)
 	{
 		if (!can_add_to_cmd(&head, &ci))
@@ -82,7 +82,14 @@ t_b	can_add_to_cmd(t_w **head, t_ci *ci)
 	t_w	*tmp;
 
 	tmp = *head;
-	if (tmp->prev == NULL && tmp->wi.sep != DLESS)
+	if (tmp->prev == NULL && tmp->wi.sep == DLESS && tmp->wi.sep == LESS \
+			&& tmp->wi.sep == DGREAT && tmp->wi.sep == GREAT)
+	{
+		free(ci->name);
+		ci->name = "\0";
+	}
+	if (tmp->prev == NULL && tmp->wi.sep != DLESS && tmp->wi.sep != LESS \
+			&& tmp->wi.sep != DGREAT && tmp->wi.sep != GREAT)
 	{
 		free(ci->name);
 		ci->name = tmp->wi.word;

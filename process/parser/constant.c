@@ -6,33 +6,11 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 00:55:13 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/08 05:30:25 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/09 05:02:05 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-typedef struct s_word_type_constant
-{
-	t_wt	*begining;
-	t_wt	*greatorless;
-	t_wt	*word;
-	t_wt	*pipeorif;
-	t_wt	*oparenthesis;
-	t_wt	*cparenthesis;
-	t_wt	*end;
-}	t_wtc;
-
-void	init_twc(t_wtc *twc)
-{
-	twc->begining = NULL;
-	twc->greatorless = NULL;
-	twc->word = NULL;
-	twc->pipeorif = NULL;
-	twc->oparenthesis = NULL;
-	twc->cparenthesis = NULL;
-	twc->end = NULL;
-}
 
 void	get_curr_word_type_consts(t_wtc	*wtc)
 {
@@ -112,35 +90,24 @@ t_cn	get_values_of_index(t_wt key, t_kvp *key_values)
 
 t_kvp	*get_kv_pairs(void)
 {
-	t_kvp	*keys_values;
+	t_kvp	*kvp;
 	t_wt	*keys;
 	int		i;
 	t_wtc	curr;
 	t_wtc	next;
 
-	init_twc(&curr);
-	init_twc(&next);
-	get_curr_word_type_consts(&curr);
-	get_next_word_type_consts(&next);
-
-	i = 0;
 	keys = (t_wt[]){BEGINING, DLESS, LESS, GREAT, DGREAT, WORD, PIPE, \
 	ORIF, ANDIF, OPRARENTHESIS, CPARENTHESIS, END, NEIN};
-	keys_values = (t_kvp *) malloc(sizeof(t_kvp) * 12);
-	if (keys_values == NULL)
-		return (NULL);
-	while (i < 12)
-	{
-		keys_values[i].values.curr = NULL;
-		keys_values[i].values.next = NULL;
-		i++;
-	}
+	kvp = (t_kvp *) malloc(sizeof(t_kvp) * 12);
+	if (kvp == NULL)
+		error("Some allocation failled");
+	init_kvp(&curr, &next, &kvp);
 	i = 0;
 	while (keys[i] != NEIN)
 	{
-		keys_values[i].key = keys[i];
-		keys_values[i].values = get_according_values(keys[i], &curr, &next);
+		kvp[i].key = keys[i];
+		kvp[i].values = get_according_values(keys[i], &curr, &next);
 		i++;
 	}
-	return (keys_values);
+	return (kvp);
 }

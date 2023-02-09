@@ -6,38 +6,51 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:43:12 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/07 06:03:27 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/09 05:01:24 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 /* Function that cill insert element at the end of stack */
+
+void	adding_process(t_csb *stack, t_c **new)
+{
+	t_c	*newtmp;
+
+	newtmp = *new;
+	if (stack->tail == NULL)
+	{
+		newtmp->next = NULL;
+		newtmp->prev = NULL;
+		stack->tail = newtmp;
+		stack->head = newtmp;
+	}
+	else
+	{
+		newtmp->next = NULL;
+		newtmp->prev = stack->tail;
+		stack->tail->next = newtmp;
+		stack->tail = newtmp;
+	}
+}
+
 void	ft_cunshift(t_csb *stack, t_ci info)
 {
 	t_c		*new;
 	char	*name;
 
 	new = (t_c *)malloc(sizeof(t_c));
-	name = ft_strdup(info.name);
+	name = NULL;
 	if (new == NULL)
 		error("Error \n");
 	new->ci = info;
-	new->ci.name = name;
-	if (stack->tail == NULL)
+	if (ft_strlen(name) > 0)
 	{
-		new->next = NULL;
-		new->prev = NULL;
-		stack->tail = new;
-		stack->head = new;
+		name = ft_strdup(info.name);
+		new->ci.name = name;
 	}
-	else
-	{
-		new->next = NULL;
-		new->prev = stack->tail;
-		stack->tail->next = new;
-		stack->tail = new;
-	}
+	adding_process(stack, &new);
 	stack->size++;
 	return ;
 }
@@ -92,34 +105,6 @@ t_ci	ft_cpop(t_csb *stack)
 	stack->size--;
 	free(tmp);
 	return (info);
-}
-
-/* shift removes the last item into the stack  */
-t_ci	ft_cshift(t_csb *stack)
-{
-	t_ci	li;
-	t_c		*tmp;
-
-	if (stack->tail == NULL)
-		error("Error \n");
-	li = stack->tail->ci;
-	tmp = stack->tail;
-	if (stack->tail->prev != NULL)
-		stack->tail = stack->tail->prev;
-	if (stack->tail == NULL)
-		stack->head = NULL;
-	else if (stack->tail->next != NULL)
-		stack->tail->next = NULL;
-	stack->size--;
-	if (stack->size == 1)
-		stack->head = stack->tail;
-	if (stack->size == 0)
-	{
-		stack->head = NULL;
-		stack->tail = NULL;
-	}
-	free(tmp);
-	return (li);
 }
 
 /* Function that duplicate a stack bundle */
