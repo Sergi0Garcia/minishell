@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/08 07:05:56 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/09 03:54:58 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,6 +233,7 @@ void		sig_int(void);
 void		dbl_exec_free(char **opts, char **args);
 char		**set_opts_exec(t_ci cmd);
 char		**set_args_exec(t_ci cmd);
+int			cdb_fret(char *path, char *old_path);
 
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);

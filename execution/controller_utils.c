@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:03:44 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/08 03:33:08 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/09 04:11:02 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ int	valid_fork(t_c *cmds, t_env **env_lst)
 	t_ci	cmd;
 	char	*cmd_path;
 
+
 	cmd = cmds->ci;
+	
 	if ((cmd.infile == -1 || cmd.outfile == -2) && (cmds->next))
 		return (1);
 	if ((cmd.infile == -1 || cmd.outfile == -1))
