@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:03:44 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/09 05:57:24 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/09 06:23:24 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,7 @@ int	valid_fork(t_c *cmds, t_env **env_lst)
 		return (1);
 	if (is_file(cmd.name))
 		return (file_validation(cmd.name));
-	// printf("here\n");
 	cmd_path = get_cmd_path(env_lst, cmd.name);
-	// printf("cmd_path:%s\n", cmd_path);
 	if (!cmd_path)
 		return (0);
 	if (!is_same_str(cmd_path, cmd.name))

@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:22:12 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/08 07:12:55 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/09 06:47:50 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,14 @@ char	*env_value(t_env **env_lst, char *name)
 	char	*res;
 
 	res = get_special_env(name);
+	printf("res: %s\n", res);
 	if (ft_strlen(res) > 0)
 		return (res);
+	// if (!ft_strlen(res))
+	// {
+	// 	printf("freeing\n");
+	// 	free(res);
+	// }
 	tmp = *env_lst;
 	if (env_lst == NULL)
 		return (ft_strdup(""));
