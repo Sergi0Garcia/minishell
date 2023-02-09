@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/02/07 13:17:17 by segarcia         ###   ########.fr        #
+#    Updated: 2023/02/08 07:51:14 by rkanmado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,7 @@ INC			= /include/minishell.h
 all: $(NAME)
 
 vg:
-	valgrind --leak-check=full -s --track-origins=yes ./minishell
+	valgrind --leak-check=full -s  --track-origins=yes ./minishell
 
 $(LIBFT):
 	@make bonus -C $(LIBFT_PATH)

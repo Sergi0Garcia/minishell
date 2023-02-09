@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:10:03 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/05 04:49:03 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/08 07:46:12 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,8 @@ int	get_fd(char *path, t_wt key, int *i)
 
 t_b	handle_here_doc(char *eof, int fd)
 {
-	char	*str;
 	char	*line[2];
 
-	str = ft_strdup("");
 	line[0] = readline("> ");
 	while (1)
 	{
@@ -55,11 +53,10 @@ t_b	handle_here_doc(char *eof, int fd)
 		if (is_same_str(line[0], eof))
 			break ;
 		line[1] = readline("> ");
-		str = ft_strjoin(str, line[1]);
 		ft_putendl_fd(line[0], fd);
 		free(line[0]);
 		line[0] = line[1];
 	}
-	free(str);
+	free(line[1]);
 	return (true);
 }
