@@ -6,7 +6,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/minishell",
-			"args": ["-c", ">> a"],
+			"args": ["-c", "\"\"'$USER'\"\""],
 			"stopAtEntry": true,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

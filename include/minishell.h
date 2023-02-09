@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/09 05:04:30 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/09 06:36:45 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -399,7 +399,7 @@ void		end_of_expansion(char *str, size_t *end);
 
 /* process/expansion/utils.c */
 void		replace_str(char **str, char *to_replace_with, t_lex *lex);
-t_b			can_apply_expansion(char **str);
+t_b			can_apply_expansion(char *str);
 size_t		end_length(t_lex *lex, size_t strlen);
 char		*retrieve_env(char *str, t_env *env_lst);
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 14:13:35 by segarcia          #+#    #+#              #
-#    Updated: 2023/02/09 03:14:07 by segarcia         ###   ########.fr        #
+#    Updated: 2023/02/09 06:21:01 by rkanmado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,7 @@ GNL_PATH	= ./gnl
 
 CC			= gcc
 RM			= rm -f
-CFLAGS		= -Wall -Werror -Wextra
+CFLAGS		= -Wall -Werror -Wextra -g3
 RL_FLAG		= -lreadline -L /usr/local/opt/readline/lib -I /usr/local/opt/readline/include -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include
 DEBUGFLAG	= -fsanitize=address
 INC			= /include/minishell.h

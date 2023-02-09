@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 05:10:54 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/08 07:02:00 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/09 06:41:07 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	expansion_process(char **str, t_env *env_lst)
 		{
 			if (!tmp[start + 1])
 				break ;
-			if (can_apply_expansion(str))
+			if (can_apply_expansion(&tmp[start]))
 				expand_var(str, &start, env_lst);
 			tmp = *str;
 			start = 0;
@@ -86,7 +86,7 @@ void	end_of_expansion(char *str, size_t *end)
 		}
 		i++;
 		if (*str == '\0' || *str == ' ' || *str == '\"' \
-			|| *str == '$')
+			|| *str == '$' || *str == '\'')
 			break ;
 		str++;
 		*end += 1;
