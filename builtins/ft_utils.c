@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 04:38:09 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/07 13:32:27 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/08 07:32:58 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	return_free(char **opts, int st)
 	int	i;
 
 	i = 0;
+	if (!opts || opts == NULL)
+		return (st);
 	len = c_child(opts);
 	while (i < len)
 	{

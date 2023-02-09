@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 14:51:02 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/08 04:30:33 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/08 07:40:23 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	c_child(char **str)
 	int	i;
 
 	i = 0;
-	if (!str)
+	if (!str || str == NULL)
 		return (0);
 	while (str[i])
 		i++;

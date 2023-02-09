@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segarcia <segarcia@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:43:49 by segarcia          #+#    #+#             */
-/*   Updated: 2022/05/20 13:43:53 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/08 07:33:00 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
