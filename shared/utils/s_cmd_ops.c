@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:43:12 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/09 05:01:24 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/09 05:20:12 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_cunshift(t_csb *stack, t_ci info)
 	if (new == NULL)
 		error("Error \n");
 	new->ci = info;
-	if (ft_strlen(name) > 0)
+	if (ft_strlen(info.name) > 0)
 	{
 		name = ft_strdup(info.name);
 		new->ci.name = name;

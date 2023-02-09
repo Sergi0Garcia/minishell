@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:03:58 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/09 05:04:30 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/09 05:15:35 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ t_b	can_parse_wsb_to_cmd(t_csb *list, t_wsb *wsb)
 	t_ci	ci;
 
 	head = wsb->head;
-	ci.args = strdup("\0");
+	ci.args = strdup("");
 	ci.outfile = 1;
-	ci.opts = strdup("\0");
+	ci.opts = strdup("");
 	ci.infile = 0;
-	ci.name = strdup("\0");
+	ci.name = strdup("");
 	while (head != NULL)
 	{
 		if (!can_add_to_cmd(&head, &ci))
@@ -86,7 +86,7 @@ t_b	can_add_to_cmd(t_w **head, t_ci *ci)
 			&& tmp->wi.sep == DGREAT && tmp->wi.sep == GREAT)
 	{
 		free(ci->name);
-		ci->name = "\0";
+		ci->name = "";
 	}
 	if (tmp->prev == NULL && tmp->wi.sep != DLESS && tmp->wi.sep != LESS \
 			&& tmp->wi.sep != DGREAT && tmp->wi.sep != GREAT)
