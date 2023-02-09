@@ -6,7 +6,7 @@
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:16:33 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/09 05:03:06 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/09 05:04:30 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,6 +244,7 @@ void		sig_int(void);
 void		dbl_exec_free(char **opts, char **args);
 char		**set_opts_exec(t_ci cmd);
 char		**set_args_exec(t_ci cmd);
+int			cdb_fret(char *path, char *old_path);
 
 /* shared/utils/parsing */
 t_b			is_sep_type(t_wt wt);

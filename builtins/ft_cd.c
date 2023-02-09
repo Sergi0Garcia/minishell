@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:04:51 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/08 07:18:29 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/09 03:54:36 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ static int	cd_back(t_env **env_lst)
 	new_env(env_lst, tmp);
 	free(tmp);
 	old_path = env_value(env_lst, "OLDPWD");
-	ft_printf("%s\n", old_path);
-	free(old_path);
-	free(path);
-	return (EXIT_SUCCESS);
+	return (cdb_fret(path, old_path));
 }
 
 static char	*get_home_address(t_env **env_lst)

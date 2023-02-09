@@ -6,7 +6,7 @@
 /*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:06:14 by segarcia          #+#    #+#             */
-/*   Updated: 2023/02/09 02:59:55 by segarcia         ###   ########.fr       */
+/*   Updated: 2023/02/09 03:46:59 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,13 @@ static char	**execve_cmd(t_ci cmd, char *cmd_path)
 	res[0] = cmd_path;
 	while (opts && opts[i])
 	{
-		res[i + 1] = opts[i];
+		res[i + 1] = ft_strdup(opts[i]);
 		i++;
 	}
 	j = i;
 	while (args && args[i - j])
 	{
-		res[i + 1] = args[i - j];
+		res[i + 1] = ft_strdup(args[i - j]);
 		i++;
 	}
 	res[i + 1] = NULL;
@@ -134,7 +134,7 @@ int	ft_execve(t_ci cmd, t_env **env_lst, int path_exec)
 	}
 	args_str = execve_cmd(cmd, cmd_path);
 	envp_lst = custom_envp(env_lst);
-	res_execve = execve(cmd_path, args_str, NULL);
+	res_execve = execve(cmd_path, args_str, envp_lst);
 	free(cmd_path);
 	return_free(args_str, 0);
 	return_free(envp_lst, 0);
