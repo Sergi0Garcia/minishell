@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segarcia <segarcia@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 05:08:15 by rkanmado          #+#    #+#             */
-/*   Updated: 2023/02/09 06:36:47 by rkanmado         ###   ########.fr       */
+/*   Updated: 2023/02/09 06:55:39 by segarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ char	*get_env(char *str)
 /* This function checks if the expansion can be applied */
 t_b	can_apply_expansion(char *str)
 {
-
 	if (ft_strlen(str) == 1)
 		return (false);
 	else if (*(str + 1) == '\"' || *(str + 1) == '\'')
